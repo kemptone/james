@@ -1,0 +1,56 @@
+html {
+    font-size: 16px;
+    padding: 20px;
+}
+
+main>header {
+    font-size: 28px;
+}
+
+.math-problems {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 4em 1em;
+    font-size: 25px; */
+}
+
+.math-problems .problem {
+    display: block;
+    /* text-align: right; */
+    white-space: nowrap;
+    /* width: 14em; */
+    max-width: 30em;
+    margin:auto;
+    text-align: center;
+}
+
+.math-problems .problem .num1,
+.math-problems .problem .num2 {
+    display: inline-block;
+    font-size: 38px;
+    font-weight: 600;
+}
+
+.math-problems .problem .act,
+.math-problems .problem .equals {
+    display: inline-block;
+    padding: .2em;
+    margin: .2em;
+    font-size: 38px;
+    font-weight: 100;
+}
+
+.math-problems .problem input {
+    display: inline-block;
+    border: 1px dashed black;
+    width: 8em;
+    padding: .5em;
+    font-size: 2em;
+    text-align: center;
+}
+
+header {
+    border-bottom: 13px solid black;
+    padding: 1em 0;
+    margin-bottom: 3em;
+}
