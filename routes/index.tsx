@@ -17,7 +17,9 @@ export default function Home() {
         <header>
           Numbers and cool stuff like that
         </header>
-        <NumberGame />
+        <section class="math-problems">
+          <NumberGame />
+        </section>
       </main>
     </>
   );
