@@ -39,14 +39,7 @@ export default ({ children }) => {
     )
 
 
-    return children({ $menu, $nav })
+    return children({ $menu, $nav, $links, isOpen })
 
-
-    // return (
-    //     <header>
-    //         { $menu }
-    //         { $nav }
-    //     </header>
-    // )
 
 }

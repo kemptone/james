@@ -20,10 +20,9 @@ export default function NumberGame() {
             { M => (
               <header>
                 { M.$menu }
-                { M.$nav }
-              </header>
-            )}
-          </Menu>
+                <nav className={ `navigation${ M.isOpen ? " open" : "" }` }>
+                    { M.$links }
+                    
           <NumberGameActions 
             { ...{
               setStep
@@ -32,6 +31,10 @@ export default function NumberGame() {
               , step
             }}
           />
+                </nav>
+              </header>
+            )}
+          </Menu>
           <Problem { ...problem } act="÷" />
         </section>
   );
