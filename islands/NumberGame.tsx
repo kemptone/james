@@ -22,15 +22,14 @@ export default function NumberGame() {
                 { M.$menu }
                 <nav className={ `navigation${ M.isOpen ? " open" : "" }` }>
                     { M.$links }
-                    
-          <NumberGameActions 
-            { ...{
-              setStep
-              , setMultiplyBy
-              , number1MultiplyBy
-              , step
-            }}
-          />
+                    <NumberGameActions 
+                      { ...{
+                        setStep
+                        , setMultiplyBy
+                        , number1MultiplyBy
+                        , step
+                      }}
+                    />
                 </nav>
               </header>
             )}

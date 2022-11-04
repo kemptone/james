@@ -32,12 +32,12 @@ export default ({
   }
 
     return (
-      <div className="actions">
-        <Button onClick={ makeEasier }>Easier ÷ 10</Button>
-        <Button onClick={ makeHarder }>harder × 10</Button>
-        <Button onClick={ factorMinus }>factor - 1</Button>
-        <Button onClick={ factorPlus }>factor + 1</Button>
-      </div>
+      <ul>
+        <li><Button onClick={ makeEasier }>Easier ÷ 10</Button></li>
+        <li><Button onClick={ makeHarder }>harder × 10</Button></li>
+        <li><Button onClick={ factorMinus }>factor - 1</Button></li>
+        <li><Button onClick={ factorPlus }>factor + 1</Button></li>
+      </ul>
     )
 
 }
