@@ -16,7 +16,14 @@ export default function NumberGame() {
   
   return (
         <section class="math-problems">
-          <Menu />
+          <Menu>
+            { M => (
+              <header>
+                { M.$menu }
+                { M.$nav }
+              </header>
+            )}
+          </Menu>
           <NumberGameActions 
             { ...{
               setStep
