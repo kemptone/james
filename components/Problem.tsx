@@ -8,7 +8,10 @@ interface MathProblem {
 export const Problem = (props: MathProblem) => {
 
   const {
-    num1 = 0, num2 = 0, act = "÷", equals = "="
+    num1 = 0
+    , num2 = 0
+    , act = "÷"
+    , equals = "="
   } = props;
 
   return (
@@ -17,7 +20,7 @@ export const Problem = (props: MathProblem) => {
       <span class="act">{act}</span>
       <span class="num2">{num2}</span>
       <span class="equals">{equals}</span>
-      <input type="number" name="answer1" />
+      <input type="text" name="answer1" />
     </div>
   );
 };

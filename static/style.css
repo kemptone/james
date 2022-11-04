@@ -1,11 +1,42 @@
+:root {
+    --color1 :#5bccf6;
+    --color2 :#fcde67;
+    --color3 :#030e12;
+}
+
+
 html {
     font-size: 16px;
     padding: 20px;
+    font-family: CooperHewitt;
+    color: var(--color3);
+    background-color: var(--color2);
 }
 
-main>header {
-    font-size: 28px;
+a {
+    color:var(--color1);
+    text-decoration: none;
 }
+
+a:hover {
+    color:var(--color3);
+}
+
+button {
+    background-color: var(--color2);
+    border: 2px solid var(--color3);
+    user-select: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--color3);
+    color: var(--color2);
+}
+
+input {
+}
+
 
 .math-problems {
     /* display: flex;
@@ -16,9 +47,7 @@ main>header {
 
 .math-problems .problem {
     display: block;
-    /* text-align: right; */
     white-space: nowrap;
-    /* width: 14em; */
     max-width: 30em;
     margin:auto;
     text-align: center;
@@ -42,15 +71,32 @@ main>header {
 
 .math-problems .problem input {
     display: inline-block;
-    border: 1px dashed black;
-    width: 8em;
+    border: 4px dashed var(--color1);
+    width: 6em;
     padding: .5em;
     font-size: 2em;
     text-align: center;
+    background-color: transparent;
+    border-radius: .4em;
 }
 
-header {
-    border-bottom: 13px solid black;
-    padding: 1em 0;
-    margin-bottom: 3em;
+@media (max-width:450px) {
+    .math-problems .problem input {
+        display: block;
+        width: calc(100% - 40px);
+    }
+}
+
+.actions {
+    /* text-align:center; */
+    margin:1em auto;
+    display: flex;
+    gap: 0.4em;
+    width: fit-content;
+    margin-top: 5em;
+}
+
+.actions button {
+    padding: .5em;
+    font-size: 1.2em;
 }

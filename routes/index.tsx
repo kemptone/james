@@ -1,6 +1,4 @@
 import { Head } from "$fresh/runtime.ts";
-import { useEffect, useState } from "preact/hooks";
-import { Button } from '../components/Button.tsx'
 import NumberGame from '../islands/NumberGame.tsx'
 
 // ÷ × + -
@@ -10,16 +8,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>James and the Giant Peach</title>
+        <title>🂻 Number Games</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="menu.css" />
+        <link rel="stylesheet" href="fonts.css" />
       </Head>
       <main>
-        <header>
-          Numbers and cool stuff like that
-        </header>
-        <section class="math-problems">
-          <NumberGame />
-        </section>
+        <NumberGame />
       </main>
     </>
   );

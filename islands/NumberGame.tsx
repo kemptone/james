@@ -1,31 +1,31 @@
 import { useState, useEffect } from "preact/hooks";
-import { Button } from "../components/Button.tsx";
 import { Problem } from "../components/Problem.tsx";
-
-function randomInputs (num1Power = 100, num2Power = 100, divisibleBy = 1, force2 = 0) {
-  const num1 = divisibleBy * Math.floor( Math.random() * num1Power )
-  const num2 = Math.floor( Math.random() * num2Power )
-  return {
-    num1
-    , num2 : force2 || num2
-  }
-}
-
-const initial = () => randomInputs(100, 100)
+import { initial } from "../helpers/smartMathGuy.ts";
+import Menu from './Menu.jsx'
+import NumberGameActions from '../components/numberGame.actions.jsx'
 
 export default function NumberGame() {
 
-  const [ problem, setProblem ] = useState( initial() );
+  const [ number1MultiplyBy, setMultiplyBy ] = useState(100);
+  const [ problem, setProblem ] = useState( initial(number1MultiplyBy) );
   const [ step, setStep ] = useState(0);
 
   useEffect(() => {
-    setProblem(initial())
+    setProblem(initial(number1MultiplyBy))
   }, [ step ])
-
+  
   return (
-    <>
-      <Problem { ...problem } act="÷" />
-      <Button onClick={ e => setStep( step + 1 )}>Next</Button>
-    </>
+        <section class="math-problems">
+          <Menu />
+          <NumberGameActions 
+            { ...{
+              setStep
+              , setMultiplyBy
+              , number1MultiplyBy
+              , step
+            }}
+          />
+          <Problem { ...problem } act="÷" />
+        </section>
   );
 }
