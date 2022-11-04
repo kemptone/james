@@ -1,9 +1,7 @@
 import { useState, useEffect } from "preact/hooks";
 import NumberGameActions from "../components/numberGame.actions.jsx";
 
-export default ({ $top }) => {
-
-    const $dog = (<div></div>)
+export default ({ children }) => {
 
     const [ isOpen, changeIsOpen ] = useState(false)
 
@@ -11,8 +9,7 @@ export default ({ $top }) => {
         changeIsOpen( !isOpen )
     }
 
-    return (
-        <header>
+    const $menu = (
             <div 
                 id="hamburgermenu"
                 onClick={ toggle }
@@ -22,7 +19,9 @@ export default ({ $top }) => {
                 <span></span>
                 <span></span>
             </div>
-            <nav className={ `navigation${ isOpen ? " open" : "" }` }>
+    )
+
+    const $links = (
                 <ul>
                     <li>
                         <a href="/">Another game</a>
@@ -31,8 +30,23 @@ export default ({ $top }) => {
                         <a href="/">Another game 2</a>
                     </li>
                 </ul>
-            </nav>
-        </header>
     )
+
+    const $nav = (
+            <nav className={ `navigation${ isOpen ? " open" : "" }` }>
+                { $links }
+            </nav>
+    )
+
+
+    return children({ $menu, $nav })
+
+
+    // return (
+    //     <header>
+    //         { $menu }
+    //         { $nav }
+    //     </header>
+    // )
 
 }
