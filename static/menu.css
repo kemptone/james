@@ -1,7 +1,7 @@
 .navigation {
   opacity: 0;
   height: 0;
-  transition: 1s all;
+  transition: 2s all;
   overflow: hidden;
 }
 
@@ -107,4 +107,9 @@ nav {
 
 header nav ul li {
   font-weight: 600;
+}
+
+header nav a {
+  cursor:pointer;
+  user-select:none;
 }

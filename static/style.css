@@ -27,6 +27,7 @@ button {
     border: 2px solid var(--color3);
     user-select: none;
     cursor: pointer;
+    font-size: 2em;
 }
 
 button:hover {
@@ -46,11 +47,14 @@ input {
 }
 
 .math-problems .problem {
-    display: block;
+    display: flex;
+    align-items: center;
     white-space: nowrap;
-    max-width: 30em;
-    margin:auto;
     text-align: center;
+    gap: .9em;
+    justify-content: space-between;
+    max-width: 47em;
+    margin:auto;
 }
 
 .math-problems .problem .num1,
@@ -63,8 +67,8 @@ input {
 .math-problems .problem .act,
 .math-problems .problem .equals {
     display: inline-block;
-    padding: .2em;
-    margin: .2em;
+    /* padding: .2em; */
+    /* margin: .2em; */
     font-size: 38px;
     font-weight: 100;
 }
@@ -72,7 +76,7 @@ input {
 .math-problems .problem input {
     display: inline-block;
     border: 4px dashed var(--color3);
-    width: 6em;
+    width: 5em;
     padding: .5em;
     font-size: 2em;
     text-align: center;
@@ -87,9 +91,17 @@ input {
     }
 }
 
+.problem button {
+    font-size: 1.5em;
+    color: var(--color2);
+    background-color: var(--color3);
+    padding: .91em;
+    border-radius: .5em;
+}
+
 .actions {
     /* text-align:center; */
-    margin:1em auto;
+    /* margin:1em auto; */
     display: flex;
     gap: 0.4em;
     width: fit-content;
@@ -100,3 +112,4 @@ input {
     padding: .5em;
     font-size: 1.2em;
 }
+

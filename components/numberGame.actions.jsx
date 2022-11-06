@@ -33,11 +33,11 @@ export default ({
 
     return (
       <ul>
-        <li><Button onClick={ makeEasier }>Easier ÷ 10</Button></li>
-        <li><Button onClick={ makeHarder }>harder × 10</Button></li>
-        <li><Button onClick={ factorMinus }>factor - 1</Button></li>
-        <li><Button onClick={ factorPlus }>factor + 1</Button></li>
-        <li><Button onClick={ nextProblem }>random</Button></li>
+        <li><a onClick={ makeEasier }>Smaller ÷ 10</a></li>
+        <li><a onClick={ factorMinus }>Smaller - 1</a></li>
+        <li><a onClick={ makeHarder }>Bigger × 10</a></li>
+        <li><a onClick={ factorPlus }>Bigger + 1</a></li>
+        <li><a onClick={ nextProblem }>random</a></li>
       </ul>
     )
 
