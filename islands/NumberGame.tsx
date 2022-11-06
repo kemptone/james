@@ -34,6 +34,7 @@ export default function NumberGame() {
               </header>
             )}
           </Menu>
+          <span id="divisible">{ number1MultiplyBy }</span>
           <Problem { ...problem } step={ step } onSubmit={ e => setStep( step + 1 )} act="÷" />
         </section>
   );

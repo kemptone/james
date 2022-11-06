@@ -34,7 +34,7 @@ export const Problem = (props: MathProblem) => {
       <input 
         type="text" 
         name="answer" 
-        placeholder={ `${ answer }` }
+        // placeholder={ `${ answer }` }
         pattern={ `${ answer }` }
         inputMode="numeric"
         onInvalid={ e => {
@@ -43,6 +43,7 @@ export const Problem = (props: MathProblem) => {
           )
         }}
         required 
+        autoFocus
         autoComplete="off"
         autoCorrect="off"
       />

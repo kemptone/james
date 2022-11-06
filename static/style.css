@@ -4,13 +4,13 @@
     --color3 :#030e12;
 }
 
-
 html {
     font-size: 16px;
     padding: 20px;
     font-family: CooperHewitt;
     color: var(--color3);
     background-color: var(--color2);
+    background-image: url(/halftone-yellow.webp);
 }
 
 a {
@@ -54,7 +54,8 @@ input {
     gap: .9em;
     justify-content: space-between;
     max-width: 47em;
-    margin:auto;
+    margin:100px auto;
+    flex-wrap: wrap;
 }
 
 .math-problems .problem .num1,
@@ -113,3 +114,8 @@ input {
     font-size: 1.2em;
 }
 
+#divisible {
+    position: fixed;
+    top:30px;
+    right:30px;
+}
