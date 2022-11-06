@@ -21,16 +21,7 @@ export default ({ children }) => {
             </div>
     )
 
-    const $links = (
-                <ul>
-                    <li>
-                        <a href="/">Another game</a>
-                    </li>
-                    <li>
-                        <a href="/">Another game 2</a>
-                    </li>
-                </ul>
-    )
+    const $links = null
 
     const $nav = (
             <nav className={ `navigation${ isOpen ? " open" : "" }` }>

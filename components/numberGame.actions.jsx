@@ -37,6 +37,7 @@ export default ({
         <li><Button onClick={ makeHarder }>harder × 10</Button></li>
         <li><Button onClick={ factorMinus }>factor - 1</Button></li>
         <li><Button onClick={ factorPlus }>factor + 1</Button></li>
+        <li><Button onClick={ nextProblem }>random</Button></li>
       </ul>
     )
 

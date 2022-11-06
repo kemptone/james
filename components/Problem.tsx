@@ -15,12 +15,24 @@ export const Problem = (props: MathProblem) => {
   } = props;
 
   return (
-    <div class="problem">
+    <form class="problem" action={ `/` }>
       <span class="num1">{num1}</span>
       <span class="act">{act}</span>
       <span class="num2">{num2}</span>
       <span class="equals">{equals}</span>
-      <input type="text" name="answer1" />
-    </div>
+      <input 
+        type="text" 
+        name="answer" 
+        pattern="541" 
+        inputMode="numeric"
+        onInvalid={ e => {
+          e.currentTarget?.setCustomValidity(
+            `What does ${ num1 } ${ act } ${ num2 } ${ equals }`
+          )
+        }}
+        required 
+      />
+      <button type="submit">answer</button>
+    </form>
   );
 };
