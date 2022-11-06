@@ -1,5 +1,4 @@
 import { useState, useEffect } from "preact/hooks";
-import NumberGameActions from "../components/numberGame.actions.jsx";
 
 export default ({ children }) => {
 

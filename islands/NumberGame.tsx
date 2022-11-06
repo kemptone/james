@@ -34,7 +34,7 @@ export default function NumberGame() {
               </header>
             )}
           </Menu>
-          <Problem { ...problem } act="÷" />
+          <Problem { ...problem } step={ step } onSubmit={ e => setStep( step + 1 )} act="÷" />
         </section>
   );
 }

@@ -1,8 +1,11 @@
 interface MathProblem {
   num1 : number
   , num2 : number
+  , answer : number
   , act? : string
   , equals? : string
+  , onSubmit : Function
+  , step : number
 }
 
 export const Problem = (props: MathProblem) => {
@@ -10,12 +13,20 @@ export const Problem = (props: MathProblem) => {
   const {
     num1 = 0
     , num2 = 0
+    , answer = 0
     , act = "÷"
     , equals = "="
+    , onSubmit
+    , step
   } = props;
 
+  const f = new Function()
+
   return (
-    <form class="problem" action={ `/` }>
+    <form key={ step } class="problem" onSubmit={ e => {
+      e.preventDefault()
+      onSubmit(e)
+    } }>
       <span class="num1">{num1}</span>
       <span class="act">{act}</span>
       <span class="num2">{num2}</span>
@@ -23,7 +34,8 @@ export const Problem = (props: MathProblem) => {
       <input 
         type="text" 
         name="answer" 
-        pattern="541" 
+        placeholder={ `${ answer }` }
+        pattern={ `${ answer }` }
         inputMode="numeric"
         onInvalid={ e => {
           e.currentTarget?.setCustomValidity(
@@ -31,6 +43,8 @@ export const Problem = (props: MathProblem) => {
           )
         }}
         required 
+        autoComplete="off"
+        autoCorrect="off"
       />
       <button type="submit">answer</button>
     </form>
