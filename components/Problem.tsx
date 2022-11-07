@@ -4,7 +4,7 @@ interface MathProblem {
   , answer : number
   , act? : string
   , equals? : string
-  , onSubmit : Function
+  , onSubmit : () => void
   , step : number
 }
 
@@ -27,27 +27,34 @@ export const Problem = (props: MathProblem) => {
       e.preventDefault()
       onSubmit(e)
     } }>
-      <span class="num1">{num1}</span>
-      <span class="act">{act}</span>
-      <span class="num2">{num2}</span>
-      <span class="equals">{equals}</span>
-      <input 
-        type="text" 
-        name="answer" 
-        // placeholder={ `${ answer }` }
-        pattern={ `${ answer }` }
-        inputMode="numeric"
-        onInvalid={ e => {
-          e.currentTarget?.setCustomValidity(
-            `What does ${ num1 } ${ act } ${ num2 } ${ equals }`
-          )
-        }}
-        required 
-        autoFocus
-        autoComplete="off"
-        autoCorrect="off"
-      />
-      <button type="submit">answer</button>
+      <span className="group">
+        <span class="num1">{num1}</span>
+        <span class="act">{act}</span>
+        <span class="num2">{num2}</span>
+        <span class="equals">{equals}</span>
+      </span>
+      <span className="group">
+        <input 
+          type="text" 
+          name="answer" 
+          // placeholder={ `${ answer }` }
+          pattern={ `${ answer }` }
+          inputMode="numeric"
+          onChange={ e => {
+            const target = e.target as HTMLInputElement;
+            if (target?.validity?.patternMismatch) {
+              target?.setCustomValidity(`What does ${ num1 } ${ act } ${ num2 } ${ equals }`)
+            } else {
+              target?.setCustomValidity('')
+            }
+          }}
+          required 
+          autoFocus
+          autoComplete="off"
+          autoCorrect="off"
+        />
+        <button type="submit">⏵</button>
+      </span>
     </form>
   );
 };

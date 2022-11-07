@@ -7,15 +7,13 @@ export default function Home() {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>🂻 Number Games</title>
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="menu.css" />
         <link rel="stylesheet" href="fonts.css" />
-      </Head>
-      <main>
-        <NumberGame />
-      </main>
+      </Head> */}
+      <NumberGame />
     </>
   );
 }
