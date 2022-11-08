@@ -49,7 +49,6 @@ export const Problem = (props: MathProblem) => {
             }
           }}
           required 
-          autoFocus
           autoComplete="off"
           autoCorrect="off"
         />
