@@ -53,7 +53,7 @@ export const Problem = (props: MathProblem) => {
           autoComplete="off"
           autoCorrect="off"
         />
-        <button type="submit">⌫</button>
+        <button type="submit">⏎</button>
       </span>
     </form>
   );

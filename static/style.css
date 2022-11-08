@@ -67,7 +67,7 @@ button:hover {
 
 .math-problems .problem .group {
     display: flex;
-    gap: 26px;
+    gap: 18px;
     align-items: center;
     justify-content: space-between;
 }
