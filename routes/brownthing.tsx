@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <>
-      <NumberGame />
+        <Head></Head>
     </>
   );
 }
