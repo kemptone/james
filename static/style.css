@@ -137,7 +137,11 @@ button:hover {
     justify-content: center;
 }
 
-/* .animation lottie-player svg path,
-.animation lottie-player svg g {
-    background-blend-mode: multiply;
-} */
+@media (max-width:450px) {
+    .animation {
+        display: flex;
+        justify-content:flex-end;
+        position: absolute;
+        bottom: 0;
+    }
+}
