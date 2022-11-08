@@ -97,6 +97,11 @@ button:hover {
     border-radius: .4em;
 }
 
+.math-problems .problem input:focus {
+    outline: none;
+    border: 4px dashed var(--color1);
+}
+
 @media (max-width:450px) {
     .math-problems .problem input {
         display: block;
