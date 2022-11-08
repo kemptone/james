@@ -19,6 +19,27 @@ export default function NumberGame() {
   useEffect(() => {
     setProblem(initial(number1MultiplyBy))
   }, [ step ])
+
+  {/* @ts-expect-error: dugh */}
+  const $logo = (
+    <lottie-player 
+      // src={ animations[0] }
+      src={ animationSource }
+      background="transparent"  
+      speed=".25"  
+      style="width: 300px; height: 300px;"  loop autoplay 
+    />
+  )
+
+  const $logoBottom = (
+    <lottie-player 
+      // src={ animations[0] }
+      src={ animationSource }
+      background="transparent"  
+      speed=".25"  
+      style="width: 200px; height: 200px;"  loop autoplay 
+    />
+  )
   
   return (
       <div>
@@ -34,14 +55,11 @@ export default function NumberGame() {
       </section>
       <span id="divisible">{ number1MultiplyBy }</span>
 
-      <span className="animation">
-      {/* @ts-expect-error: dugh */}
-        <lottie-player 
-          // src={ animations[0] }
-          src={ animationSource }
-          background="transparent"  
-          speed=".25"  
-          style="width: 300px; height: 300px;"  loop autoplay />
+      <span className="animation top">
+      { $logo }
+      </span>
+      <span className="animation bottom">
+      { $logoBottom }
       </span>
 
         <Menu>
@@ -62,6 +80,7 @@ export default function NumberGame() {
             </header>
           )}
         </Menu>
+
         
       </div>
   );

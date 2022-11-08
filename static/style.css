@@ -131,17 +131,23 @@ button:hover {
     font-size: 38px;
 }
 
-.animation {
+.animation.top {
     padding-top: 70px;
     display: flex;
     justify-content: center;
 }
 
+.animation.bottom {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+}
+
 @media (max-width:450px) {
-    .animation {
-        display: flex;
-        justify-content:flex-end;
-        position: absolute;
-        bottom: 0;
+    .animation.top {
+        display: none;
+    }
+    .animation.bottom {
+        display: block;
     }
 }
