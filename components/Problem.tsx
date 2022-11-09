@@ -27,6 +27,7 @@ export const Problem = (props: MathProblem) => {
   return (
     <form key={ step } class="problem" onSubmit={ e => {
       e.preventDefault()
+      onFocus()
       onSubmit(e)
     } }>
       <span className="group">
