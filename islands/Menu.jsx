@@ -8,6 +8,10 @@ export default ({ children }) => {
         changeIsOpen( !isOpen )
     }
 
+    const close = () => {
+        changeIsOpen( false )
+    }
+
     const $menu = (
             <div 
                 id="hamburgermenu"
@@ -29,7 +33,7 @@ export default ({ children }) => {
     )
 
 
-    return children({ $menu, $nav, $links, isOpen })
+    return children({ $menu, $nav, $links, isOpen, close })
 
 
 }

@@ -42,28 +42,34 @@ export default function NumberGame() {
   )
   
   return (
-      <div>
-        <Head>
-          <title>🂻 Number Games</title>
-          <link rel="stylesheet" href="style.css" />
-          <link rel="stylesheet" href="menu.css" />
-          <link rel="stylesheet" href="fonts.css" />
-          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        </Head>
-      <section class="math-problems">
-        <Problem { ...problem } step={ step } onSubmit={ () => setStep( step + 1 )} act="÷" />
-      </section>
-      <span id="divisible">{ number1MultiplyBy }</span>
+    <div>
+      <Head>
+        <title>🂻 Number Games</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="menu.css" />
+        <link rel="stylesheet" href="fonts.css" />
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+      </Head>
 
-      <span className="animation top">
-      { $logo }
-      </span>
-      <span className="animation bottom">
-      { $logoBottom }
-      </span>
+      <Menu>
+        { M => (
+          <div>
+            <section class="math-problems">
+              <Problem 
+                { ...problem } 
+                step={ step } 
+                onSubmit={ () => setStep( step + 1 )} act="÷" 
+                onFocus={ M.close }
+              />
+            </section>
+            <span id="divisible">{ number1MultiplyBy }</span>
+            <span className="animation top">
+            { $logo }
+            </span>
+            <span className="animation bottom">
+            { $logoBottom }
+            </span>
 
-        <Menu>
-          { M => (
             <header>
               { M.$menu }
               <nav className={ `navigation${ M.isOpen ? " open" : "" }` }>
@@ -78,10 +84,11 @@ export default function NumberGame() {
                   />
               </nav>
             </header>
-          )}
-        </Menu>
+            
+          </div>
+        )}
+      </Menu>
 
-        
-      </div>
+    </div>
   );
 }

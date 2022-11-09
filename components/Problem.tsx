@@ -6,6 +6,7 @@ interface MathProblem {
   , equals? : string
   , onSubmit : () => void
   , step : number
+  , onFocus : () => null
 }
 
 export const Problem = (props: MathProblem) => {
@@ -18,6 +19,7 @@ export const Problem = (props: MathProblem) => {
     , equals = "="
     , onSubmit
     , step
+    , onFocus
   } = props;
 
   const f = new Function()
@@ -40,7 +42,9 @@ export const Problem = (props: MathProblem) => {
           // placeholder={ `${ answer }` }
           pattern={ `${ answer }` }
           inputMode="numeric"
+          onFocus={ onFocus }
           onChange={ e => {
+            onFocus()
             const target = e.target as HTMLInputElement;
             if (target?.validity?.patternMismatch) {
               target?.setCustomValidity(`What does ${ num1 } ${ act } ${ num2 } ${ equals }`)
