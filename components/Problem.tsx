@@ -40,7 +40,6 @@ export const Problem = (props: MathProblem) => {
         <input 
           type="text" 
           name="answer" 
-          // placeholder={ `${ answer }` }
           pattern={ `${ answer }` }
           inputMode="numeric"
           onFocus={ onFocus }

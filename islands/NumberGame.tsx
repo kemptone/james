@@ -1,33 +1,17 @@
-import { useState, useEffect } from "preact/hooks";
 import { Problem } from "../components/Problem.tsx";
-import { initial } from "../helpers/smartMathGuy.ts";
-import Menu from './Menu.jsx'
-import NumberGameActions from '../components/numberGame.actions.jsx'
 import { Head } from "$fresh/runtime.ts";
-import localStorage from '../helpers/localStorage.js'
-import Letters from '../data/Letters.ts'
+import { Number1MultiplyBy, MenuOpen, CurrentMathProblem, Step, CurrentAnimation } from '../data/State.ts'
 import Animations from '../data/Animations.ts'
-import { useSignal } from '@preact/signals'
-import { Number1MultiplyBy, MenuOpen, CurrentMathProblem, Step } from '../data/State.ts'
 
 const animationSource = Animations[ 0 ]
 
 export default function NumberGame() {
 
-  const number1MultiplyBy = Number1MultiplyBy.value
-  const problem = CurrentMathProblem.value
-  const setProblem = value => CurrentMathProblem.value = value
-  const step = Step.value
-  const setStep = step => Step.value = step
-
-  useEffect(() => {
-    setProblem(initial(number1MultiplyBy))
-  }, [ step ])
-
   {/* @ts-expect-error: dugh */}
   const $logo = (
     <lottie-player 
-      src={ animationSource }
+      src={ CurrentAnimation.value }
+      key={ CurrentAnimation.value }
       background="transparent"  
       speed=".25"  
       style="width: 300px; height: 300px;"  loop autoplay 
@@ -37,7 +21,8 @@ export default function NumberGame() {
   const $logoBottom = (
     <lottie-player 
       // src={ animations[0] }
-      src={ animationSource }
+      src={ CurrentAnimation.value }
+      key={ CurrentAnimation.value }
       background="transparent"  
       speed=".25"  
       style="width: 200px; height: 200px;"  loop autoplay 
@@ -47,7 +32,7 @@ export default function NumberGame() {
   return (
     <div>
       <Head>
-        <title>🂻 Number Games</title>
+        <title>Number Deno Dev</title>
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="menu.css" />
         <link rel="stylesheet" href="fonts.css" />
@@ -57,20 +42,21 @@ export default function NumberGame() {
           <div>
             <section class="math-problems">
               <Problem 
-                { ...problem } 
-                step={ step } 
-                onSubmit={ () => setStep( step + 1 )} act="÷" 
+                { ...CurrentMathProblem.value } 
+                step={ Step.value } 
+                onSubmit={ () => Step.value += 1 } 
+                act="÷" 
                 onFocus={ e => {
                   MenuOpen.value = false
                 } }
               />
             </section>
-            <span id="divisible">{ number1MultiplyBy }</span>
+            <span id="divisible">{ Number1MultiplyBy.value }</span>
             <span className="animation top">
-            { $logo }
+              { $logo }
             </span>
             <span className="animation bottom">
-            { $logoBottom }
+              { $logoBottom }
             </span>
             
           </div>
