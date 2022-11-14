@@ -1,39 +1,31 @@
 import { useState, useEffect } from "preact/hooks";
+import { useSignal } from '@preact/signals'
+import NumberGameActions from '../components/numberGame.actions.jsx'
+import { MenuOpen } from '../data/State.ts'
 
-export default ({ children }) => {
-
-    const [ isOpen, changeIsOpen ] = useState(false)
-
-    const toggle = () => {
-        changeIsOpen( !isOpen )
-    }
-
-    const close = () => {
-        changeIsOpen( false )
-    }
+export default () => {
 
     const $menu = (
-            <div 
-                id="hamburgermenu"
-                onClick={ toggle }
-                className={ isOpen ? "open" : "" }
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <div 
+            id="hamburgermenu"
+            onClick={ e => {
+                MenuOpen.value = !MenuOpen.value
+            } }
+            className={ MenuOpen.value ? "open" : "" }
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     )
 
-    const $links = null
-
-    const $nav = (
-            <nav className={ `navigation${ isOpen ? " open" : "" }` }>
-                { $links }
+    return (
+        <header>
+            { $menu }
+            <nav class={ `navigation ${ MenuOpen.value ? "open" : "" }` }>
+                <NumberGameActions />
             </nav>
+        </header>
     )
-
-
-    return children({ $menu, $nav, $links, isOpen, close })
-
 
 }

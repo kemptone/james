@@ -8,7 +8,7 @@ import localStorage from '../helpers/localStorage.js'
 import Letters from '../data/Letters.ts'
 import Animations from '../data/Animations.ts'
 import { useSignal } from '@preact/signals'
-import { Number1MultiplyBy, CurrentMathProblem, Step } from '../data/State.ts'
+import { Number1MultiplyBy, MenuOpen, CurrentMathProblem, Step } from '../data/State.ts'
 
 const animationSource = Animations[ 0 ]
 
@@ -54,15 +54,15 @@ export default function NumberGame() {
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
       </Head>
 
-      <Menu>
-        { M => (
           <div>
             <section class="math-problems">
               <Problem 
                 { ...problem } 
                 step={ step } 
                 onSubmit={ () => setStep( step + 1 )} act="÷" 
-                onFocus={ M.close }
+                onFocus={ e => {
+                  MenuOpen.value = false
+                } }
               />
             </section>
             <span id="divisible">{ number1MultiplyBy }</span>
@@ -73,17 +73,9 @@ export default function NumberGame() {
             { $logoBottom }
             </span>
 
-            <header>
-              { M.$menu }
-              <nav className={ `navigation${ M.isOpen ? " open" : "" }` }>
-                  { M.$links }
-                  <NumberGameActions />
-              </nav>
-            </header>
+            <Menu />
             
           </div>
-        )}
-      </Menu>
 
     </div>
   );
