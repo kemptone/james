@@ -72,8 +72,6 @@ export default function NumberGame() {
             <span className="animation bottom">
             { $logoBottom }
             </span>
-
-            <Menu />
             
           </div>
 
