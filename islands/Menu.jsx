@@ -6,12 +6,12 @@ import { MenuOpen } from '../data/State.ts'
 export default () => {
 
     const $menu = (
-        <div 
+        <div
             id="hamburgermenu"
-            onClick={ e => {
+            onClick={e => {
                 MenuOpen.value = !MenuOpen.value
-            } }
-            className={ MenuOpen.value ? "open" : "" }
+            }}
+            className={MenuOpen.value ? "open" : ""}
         >
             <span></span>
             <span></span>
@@ -21,8 +21,8 @@ export default () => {
 
     return (
         <header>
-            { $menu }
-            <nav class={ `navigation ${ MenuOpen.value ? "open" : "" }` }>
+            {$menu}
+            <nav class={`navigation ${MenuOpen.value ? "open" : ""}`}>
                 <NumberGameActions />
             </nav>
         </header>
