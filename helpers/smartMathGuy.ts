@@ -1,3 +1,9 @@
+export interface MathProblem {
+  num1 : number;
+  num2 : number;
+  answer : number;
+}
+
 export function divdeBigNumber (p : {
   num1? : number
   , num2? : number
@@ -5,7 +11,7 @@ export function divdeBigNumber (p : {
   , num1MultiplyBy? : number
   , num2MultiplyBy? : number
   , num1IsRandom? : boolean
-}) : { num1 : number, num2 : number, answer : number } {
+}) : MathProblem {
 
   const rand1 = Math.ceil(Math.random() * 10)
   const rand2 = Math.ceil(Math.random() * 10)

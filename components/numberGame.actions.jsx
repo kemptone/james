@@ -1,34 +1,30 @@
 import { Button } from "./Button.tsx";
+import { Number1MultiplyBy, CurrentMathProblem, Step } from '../data/State.ts'
 
-export default ({ 
-  setStep
-  , setMultiplyBy
-  , number1MultiplyBy
-  , step
-}) => {
+export default () => {
   
   const nextProblem = () => {
-    setStep( step + 1 )
+    Step.value++
   }
   
   const factorPlus = () => {
-    setMultiplyBy( number1MultiplyBy + 1 )
-    setStep( step + 1 )
+    Number1MultiplyBy.value += 1
+    Step.value++
   }
   
   const factorMinus = () => {
-    setMultiplyBy( number1MultiplyBy - 1 )
-    setStep( step + 1 )
+    Number1MultiplyBy.value -= 1
+    Step.value++
   }
   
   const makeEasier = () => {
-    setMultiplyBy( number1MultiplyBy / 10 )
-    setStep( step + 1 )
+    Number1MultiplyBy.value = Number1MultiplyBy.value / 10
+    Step.value++
   }
 
   const makeHarder = () => {
-    setMultiplyBy( number1MultiplyBy * 10 )
-    setStep( step + 1 )
+    Number1MultiplyBy.value *= 10
+    Step.value++
   }
 
     return (

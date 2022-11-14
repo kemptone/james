@@ -7,14 +7,18 @@ import { Head } from "$fresh/runtime.ts";
 import localStorage from '../helpers/localStorage.js'
 import Letters from '../data/Letters.ts'
 import Animations from '../data/Animations.ts'
+import { useSignal } from '@preact/signals'
+import { Number1MultiplyBy, CurrentMathProblem, Step } from '../data/State.ts'
 
 const animationSource = Animations[ 0 ]
 
 export default function NumberGame() {
 
-  const [ number1MultiplyBy, setMultiplyBy ] = useState(1);
-  const [ problem, setProblem ] = useState( initial(number1MultiplyBy) );
-  const [ step, setStep ] = useState(0);
+  const number1MultiplyBy = Number1MultiplyBy.value
+  const problem = CurrentMathProblem.value
+  const setProblem = value => CurrentMathProblem.value = value
+  const step = Step.value
+  const setStep = step => Step.value = step
 
   useEffect(() => {
     setProblem(initial(number1MultiplyBy))
@@ -23,7 +27,6 @@ export default function NumberGame() {
   {/* @ts-expect-error: dugh */}
   const $logo = (
     <lottie-player 
-      // src={ animations[0] }
       src={ animationSource }
       background="transparent"  
       speed=".25"  
@@ -74,14 +77,7 @@ export default function NumberGame() {
               { M.$menu }
               <nav className={ `navigation${ M.isOpen ? " open" : "" }` }>
                   { M.$links }
-                  <NumberGameActions 
-                    { ...{
-                      setStep
-                      , setMultiplyBy
-                      , number1MultiplyBy
-                      , step
-                    }}
-                  />
+                  <NumberGameActions />
               </nav>
             </header>
             
