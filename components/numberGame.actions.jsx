@@ -37,8 +37,6 @@ export default () => {
             <li><a onClick={factorMinus}>Smaller - 1</a></li>
             <li><a onClick={makeHarder}>Bigger × 10</a></li>
             <li><a onClick={factorPlus}>Bigger + 1</a></li>
-            <li><a onClick={nextProblem}>random</a></li>
-            <li><a onClick={nextProblem}>random</a></li>
             <li><a onClick={D.openDialog}>show something</a></li>
           </ul>
           <D.Dialog ref={D.ref}>
