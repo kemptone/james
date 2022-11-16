@@ -8,8 +8,8 @@ export default function Home() {
 
   return (
     <>
-      <Menu />
       <NumberGame />
+      <Menu />
     </>
   );
 }
