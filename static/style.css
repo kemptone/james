@@ -1,6 +1,6 @@
 :root {
     --color1 :#5bccf6;
-    --color2 :#fcde67;
+    --color2 :#fed469;
     --color3 :#030e12;
 }
 
@@ -9,7 +9,7 @@ html {
     font-family: CooperHewitt;
     color: var(--color3);
     background-color: var(--color2);
-    background-image: url(/halftone-yellow.webp);
+    /* background-image: url(/halftone-yellow.webp); */
     padding: 0;
     margin: 0;
 }
@@ -49,6 +49,7 @@ button:hover {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 100%;
+    backdrop-filter: blur(4px);
 }
 
 .math-problems .problem {

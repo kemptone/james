@@ -44,6 +44,12 @@ export default function NumberGame() {
 
 
       <div>
+        <span className="animation top">
+          {$logo}
+        </span>
+        <span className="animation bottom">
+          {$logoBottom}
+        </span>
         <section class="math-problems">
           <Problem
             {...CurrentMathProblem.value}
@@ -56,12 +62,6 @@ export default function NumberGame() {
           />
         </section>
         <span id="divisible">{Number1MultiplyBy.value}</span>
-        <span className="animation top">
-          {$logo}
-        </span>
-        <span className="animation bottom">
-          {$logoBottom}
-        </span>
       </div>
 
     </div>

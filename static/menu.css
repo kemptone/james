@@ -3,6 +3,7 @@
   height: 0;
   transition: 2s all;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .navigation.open {
