@@ -2,6 +2,8 @@ import { Problem } from "../components/Problem.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { Number1MultiplyBy, MenuOpen, CurrentMathProblem, Step, CurrentAnimation } from '../data/State.ts'
 import Animations from '../data/Animations.ts'
+import Dialog from '../components/Dialog.tsx'
+import { useState } from 'preact/hooks'
 
 const animationSource = Animations[0]
 
@@ -34,10 +36,12 @@ export default function NumberGame() {
       <Head>
         <title>Number Deno Dev</title>
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="dialog.css" />
         <link rel="stylesheet" href="menu.css" />
         <link rel="stylesheet" href="fonts.css" />
         <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
       </Head>
+
 
       <div>
         <section class="math-problems">
@@ -58,7 +62,6 @@ export default function NumberGame() {
         <span className="animation bottom">
           {$logoBottom}
         </span>
-
       </div>
 
     </div>
