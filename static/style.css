@@ -50,6 +50,7 @@ button:hover {
     transform: translateY(-50%);
     width: 100%;
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .math-problems .problem {
