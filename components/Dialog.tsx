@@ -4,8 +4,8 @@ import { forwardRef } from 'preact/compat'
 const Dialog = forwardRef((args, ref) => {
   return (
     <dialog {...args} ref={ref}>
-      <form method="dialog"><button>✕</button></form>
       {args.children}
+      <form method="dialog"><button>✕</button></form>
     </dialog>
   )
 })
