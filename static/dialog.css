@@ -13,7 +13,7 @@ dialog {
 dialog {
   background-color: white;
   max-height: 80vh;
-  margin-top: 6rem;
+  /* margin-top: 6rem; */
   width: 66.6667%;
   margin-left: auto;
   margin-right: auto;
@@ -40,4 +40,13 @@ dialog > form[method=dialog] > button {
   border:none;
   background-color: transparent;
   outline: transparent;
+}
+
+@media (max-width:750px) {
+  dialog {
+    max-height: 100vh;
+    max-width: 100vh;
+    width: 100%;
+    border-radius: 0;
+  }
 }
