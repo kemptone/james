@@ -21,7 +21,7 @@ dialog {
   border-radius: 0.875rem;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   box-sizing: border-box;
   border: 0 solid #e5e7eb;
   box-shadow: 0 2px 8px 1px rgba(0,0,0,.2);
