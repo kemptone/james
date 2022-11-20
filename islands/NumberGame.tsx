@@ -1,6 +1,6 @@
 import { Problem } from "../components/Problem.tsx";
 import { Head } from "$fresh/runtime.ts";
-import { Number1MultiplyBy, MenuOpen, CurrentMathProblem, Step, CurrentAnimation } from '../data/State.ts'
+import { Number1MultiplyBy, Number2MultiplyBy, MenuOpen, CurrentMathProblem, Step, CurrentAnimation } from '../data/State.ts'
 import Animations from '../data/Animations.ts'
 import Dialog from '../components/Dialog.tsx'
 import { useState } from 'preact/hooks'
@@ -61,7 +61,14 @@ export default function NumberGame() {
             }}
           />
         </section>
-        <span id="divisible">{Number1MultiplyBy.value}</span>
+        <span id="divisible">
+          [
+          {Number2MultiplyBy.value}
+          ]
+          [
+          {Number1MultiplyBy.value}
+          ]
+        </span>
       </div>
 
     </div>

@@ -1,30 +1,16 @@
 import { Button } from "./Button.tsx";
-import { Number1MultiplyBy, CurrentMathProblem, Step } from '../data/State.ts'
+import { Number1MultiplyBy, Number2MultiplyBy, CurrentMathProblem, Step } from '../data/State.ts'
 import Dialog from '../components/Dialog.tsx'
 
 export default () => {
 
-  const nextProblem = () => {
+  const factorPlus = (val, Num) => () => {
+    Num.value += val
     Step.value++
   }
 
-  const factorPlus = () => {
-    Number1MultiplyBy.value += 1
-    Step.value++
-  }
-
-  const factorMinus = () => {
-    Number1MultiplyBy.value -= 1
-    Step.value++
-  }
-
-  const makeEasier = () => {
-    Number1MultiplyBy.value = Number1MultiplyBy.value / 10
-    Step.value++
-  }
-
-  const makeHarder = () => {
-    Number1MultiplyBy.value *= 10
+  const makeHarderBy = (by, Num) => () => {
+    Num.value *= by
     Step.value++
   }
 
@@ -33,16 +19,28 @@ export default () => {
       {D => (
         <>
           <dfl>
-            <dt>SIZE</dt>
-            <dd>( <a onClick={makeEasier}>÷ 10</a> )</dd>
-            <dd>( <a onClick={factorMinus}>- 1</a> )</dd>
-            <dd>( <a onClick={makeHarder}>× 10</a> )</dd>
-            <dd>( <a onClick={factorPlus}>+ 1</a> )</dd>
-            <dd>&nbsp;</dd>
-            <dt>MORE SETTINGS</dt>
+            <dt>SIZE A</dt>
             <dd>
-              <a onClick={D.openDialog}>more settings</a>
+              <button onClick={makeHarderBy(.1, Number1MultiplyBy)}>÷ 10</button>
+              <button onClick={makeHarderBy(10, Number1MultiplyBy)}>× 10</button>
+              <button onClick={factorPlus(-1, Number1MultiplyBy)}>- 1</button>
+              <button onClick={factorPlus(1, Number1MultiplyBy)}>+ 1</button>
             </dd>
+            <dd>&nbsp;</dd>
+            <dt>SIZE B</dt>
+            <dd>
+              <button onClick={makeHarderBy(.1, Number2MultiplyBy)}>÷ 10</button>
+              <button onClick={makeHarderBy(10, Number2MultiplyBy)}>× 10</button>
+              <button onClick={factorPlus(-1, Number2MultiplyBy)}>- 1</button>
+              <button onClick={factorPlus(1, Number2MultiplyBy)}>+ 1</button>
+            </dd>
+            <dd>&nbsp;</dd>
+            <dt>STEP</dt>
+            <dd><a onClick={e => Step.value++}>+ 1</a></dd>
+            <dd>&nbsp;</dd>
+            <dt>
+              <a onClick={D.openDialog}>more settings</a>
+            </dt>
           </dfl>
           <D.Dialog ref={D.ref}>
             <form onSubmit={e => {

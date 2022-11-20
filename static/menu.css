@@ -12,6 +12,10 @@
   opacity: 1;
 }
 
+.navigation button {
+  margin:0 5px 0 0;
+}
+
 #hamburgermenu {
   width: 60px;
   height: 45px;
@@ -108,8 +112,10 @@ nav {
 
 header {
   position: fixed;
-  top: 20px;
-  left:20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 10px;
 }
 
 header nav ul li {

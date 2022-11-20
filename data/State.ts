@@ -42,10 +42,15 @@ export const Step = signal(0)
 export const MenuOpen = signal(false)
 
 export const CurrentMathProblem = computed(() => {
+
+  // Keeps this here, to allow refresh on Step change
+  Step.value
+
   return divdeBigNumber({
     num1MultiplyBy: Number1MultiplyBy.value
     , isNum2DerivedFromNum1: IsNum2DerivedFromNum1.value
     , num1IsRandom: Number1IsRandom.value
+    , num2MultiplyBy: Number2MultiplyBy.value
   })
 })
 
