@@ -32,20 +32,23 @@ export default () => {
     <Dialog>
       {D => (
         <>
-          <ul>
-            <li><a onClick={makeEasier}>Smaller ÷ 10</a></li>
-            <li><a onClick={factorMinus}>Smaller - 1</a></li>
-            <li><a onClick={makeHarder}>Bigger × 10</a></li>
-            <li><a onClick={factorPlus}>Bigger + 1</a></li>
-            <li><a onClick={D.openDialog}>show something</a></li>
-          </ul>
+          <dfl>
+            <dt>SIZE</dt>
+            <dd>( <a onClick={makeEasier}>÷ 10</a> )</dd>
+            <dd>( <a onClick={factorMinus}>- 1</a> )</dd>
+            <dd>( <a onClick={makeHarder}>× 10</a> )</dd>
+            <dd>( <a onClick={factorPlus}>+ 1</a> )</dd>
+            <dd>&nbsp;</dd>
+            <dt>MORE SETTINGS</dt>
+            <dd>
+              <a onClick={D.openDialog}>more settings</a>
+            </dd>
+          </dfl>
           <D.Dialog ref={D.ref}>
-            <h1>Hello</h1>
-            <h1>Yes</h1>
-            <h1>Hello</h1>
-            <h1>Yes</h1>
-            <h1>Hello</h1>
-            <h1>Yes</h1>
+            <form onSubmit={e => {
+              e.preventDefault()
+            }}>
+            </form>
           </D.Dialog>
         </>
       )}
