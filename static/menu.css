@@ -14,6 +14,7 @@
 
 .navigation button {
   margin:0 5px 0 0;
+  padding: 6px;
 }
 
 #hamburgermenu {
@@ -102,7 +103,6 @@
 nav {
     font-size: 22px;
     padding: 1em 0 1em 0;
-    margin-bottom: 4em;
 }
 
 @media (max-width:450px) {
@@ -118,6 +118,10 @@ header {
   padding: 18px 10px;
 }
 
+header:has(nav.open) {
+  background-color: rgb(254 211 103 / 70%);
+}
+
 header nav ul li {
   font-weight: 600;
 }
@@ -125,4 +129,11 @@ header nav ul li {
 header nav a {
   cursor:pointer;
   user-select:none;
+}
+
+header dt {
+}
+
+header dd + dt {
+  margin-top:.5em;
 }

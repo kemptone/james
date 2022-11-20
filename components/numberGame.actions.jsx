@@ -26,7 +26,6 @@ export default () => {
               <button onClick={factorPlus(-1, Number1MultiplyBy)}>- 1</button>
               <button onClick={factorPlus(1, Number1MultiplyBy)}>+ 1</button>
             </dd>
-            <dd>&nbsp;</dd>
             <dt>SIZE B</dt>
             <dd>
               <button onClick={makeHarderBy(.1, Number2MultiplyBy)}>÷ 10</button>
@@ -34,10 +33,8 @@ export default () => {
               <button onClick={factorPlus(-1, Number2MultiplyBy)}>- 1</button>
               <button onClick={factorPlus(1, Number2MultiplyBy)}>+ 1</button>
             </dd>
-            <dd>&nbsp;</dd>
             <dt>STEP</dt>
             <dd><a onClick={e => Step.value++}>+ 1</a></dd>
-            <dd>&nbsp;</dd>
             <dt>
               <a onClick={D.openDialog}>more settings</a>
             </dt>
