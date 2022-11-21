@@ -2,6 +2,8 @@ import { useSignal, signal, effect, computed } from '@preact/signals'
 // import { initial, MathProblem } from '../helpers/smartMathGuy.ts'
 import Animations from './Animations.ts'
 
+const animationsLength = Animations.length
+
 export interface MathProblem {
   num1: number;
   num2: number;
@@ -54,8 +56,14 @@ export const CurrentMathProblem = computed(() => {
   })
 })
 
+
+
 export const CurrentAnimation = computed(() => {
-  const animation = Animations[Step.value] || Animations[0]
-  console.log(Step.value, animation)
-  return animation
+
+  let animationStep = Step.value
+
+  while (animationStep >= animationsLength)
+    animationStep = animationStep - animationsLength
+
+  return Animations[animationStep] || Animations[0]
 })
