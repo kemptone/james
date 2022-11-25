@@ -4,28 +4,32 @@
 
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/brownthing.tsx";
-import * as $3 from "./routes/calculator.tsx";
-import * as $4 from "./routes/index.tsx";
-import * as $5 from "./routes/original.index.tsx";
-import * as $$0 from "./islands/Counter.tsx";
-import * as $$1 from "./islands/Menu.jsx";
-import * as $$2 from "./islands/NumberGame.tsx";
+import * as $1 from "./routes/_app.tsx";
+import * as $2 from "./routes/api/joke.ts";
+import * as $3 from "./routes/brownthing.tsx";
+import * as $4 from "./routes/calculator.tsx";
+import * as $5 from "./routes/index.tsx";
+import * as $6 from "./routes/original.index.tsx";
+import * as $$0 from "./islands/Calculator.tsx";
+import * as $$1 from "./islands/Counter.tsx";
+import * as $$2 from "./islands/Menu.jsx";
+import * as $$3 from "./islands/NumberGame.tsx";
 
 const manifest = {
   routes: {
     "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
-    "./routes/brownthing.tsx": $2,
-    "./routes/calculator.tsx": $3,
-    "./routes/index.tsx": $4,
-    "./routes/original.index.tsx": $5,
+    "./routes/_app.tsx": $1,
+    "./routes/api/joke.ts": $2,
+    "./routes/brownthing.tsx": $3,
+    "./routes/calculator.tsx": $4,
+    "./routes/index.tsx": $5,
+    "./routes/original.index.tsx": $6,
   },
   islands: {
-    "./islands/Counter.tsx": $$0,
-    "./islands/Menu.jsx": $$1,
-    "./islands/NumberGame.tsx": $$2,
+    "./islands/Calculator.tsx": $$0,
+    "./islands/Counter.tsx": $$1,
+    "./islands/Menu.jsx": $$2,
+    "./islands/NumberGame.tsx": $$3,
   },
   baseUrl: import.meta.url,
   config,

@@ -35,6 +35,7 @@ export default function NumberGame() {
     <div>
       <Head>
         <title>Number Deno Dev</title>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
       </Head>
 
 
