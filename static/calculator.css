@@ -30,6 +30,7 @@ html {
 
   .meta-grid {
     display: block;
+    max-width:100%;
   }
 
   .meta-grid .log {
