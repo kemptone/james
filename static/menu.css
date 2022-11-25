@@ -105,6 +105,10 @@ nav {
     padding: 1em 0 1em 0;
 }
 
+nav > a {
+  display: block;
+}
+
 @media (max-width:450px) {
     header {
     }

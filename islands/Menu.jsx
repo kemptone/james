@@ -2,8 +2,9 @@ import { useState, useEffect } from "preact/hooks";
 import { useSignal } from '@preact/signals'
 import NumberGameActions from '../components/numberGame.actions.jsx'
 import { MenuOpen } from '../data/State.ts'
+import { Head } from '$fresh/runtime.ts'
 
-export default () => {
+export default args => {
 
     const $menu = (
         <div
@@ -21,10 +22,25 @@ export default () => {
 
     return (
         <header>
+
+            <Head>
+                <link rel="stylesheet" href="menu.css" />
+                <link rel="stylesheet" href="style.css" />
+                <link rel="stylesheet" href="dialog.css" />
+                <link rel="stylesheet" href="fonts.css" />
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            </Head>
+
             {$menu}
-            <nav class={`navigation ${MenuOpen.value ? "open" : ""}`}>
-                <NumberGameActions />
-            </nav>
+            <div class={`navigation ${MenuOpen.value ? "open" : ""}`}>
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/calculator">Calculator</a>
+                </nav>
+                {args.is_deno ? (
+                    <NumberGameActions />
+                ) : null}
+            </div>
         </header>
     )
 

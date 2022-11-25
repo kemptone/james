@@ -34,7 +34,7 @@ export default () => {
               <button onClick={factorPlus(1, Number2MultiplyBy)}>+ 1</button>
             </dd>
             <dt>STEP</dt>
-            <dd><a onClick={e => Step.value++}>+ 1</a></dd>
+            <dd><button onClick={e => Step.value++}>+ 1</button></dd>
             <dt>
               <a onClick={D.openDialog}>more settings</a>
             </dt>
