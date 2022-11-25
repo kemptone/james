@@ -5,7 +5,7 @@ const Action = ({ className, children }) => {
   return (
     <button
       {...{ className, children }}
-      onClick={e => {
+      onMouseDown={e => {
 
         let thing = e.currentTarget.innerText
 
