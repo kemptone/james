@@ -26,7 +26,7 @@ html {
   text-align: right;
 }
 
-@media (max-width:400px) {
+@media (max-width:430px) {
 
   .meta-grid {
     display: block;

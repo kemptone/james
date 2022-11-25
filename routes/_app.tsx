@@ -9,6 +9,7 @@ export default function App({ Component }: AppProps) {
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="dialog.css" />
         <link rel="stylesheet" href="fonts.css" />
+        <meta name="viewport" content="width=device-width" />
       </Head>
       <Component />
     </>
