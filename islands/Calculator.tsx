@@ -17,7 +17,7 @@ const Action = ({ className, children }) => {
           }
 
           case "⌫": {
-            let [last, ...most] = [...CurrentStack.value].reverse()
+            let most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
             CurrentStack.value = most
             return
           }
@@ -53,7 +53,6 @@ export default () => {
       <Head>
         <link rel="stylesheet" href="calculator.css" />
       </Head>
-      <h1>Turkey!</h1>
       <div class="meta-grid">
         <div class="log">
           <div>345 x 12 = 1230</div>
