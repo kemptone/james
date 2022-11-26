@@ -10,10 +10,83 @@ const Action = ({ className, children, onMouseDown }) => {
   )
 }
 
+const onMouseDown = e => {
+
+  let thing = e.currentTarget.innerText
+
+  switch (thing) {
+
+    case "C": {
+      CurrentStack.value = []
+      return
+    }
+
+    case "⌫": {
+      let most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
+      CurrentStack.value = most
+      return
+    }
+
+    case "⏾":
+      return
+
+    case "=": {
+      debugger
+      return
+    }
+
+  }
+
+  CurrentStack.value = [...CurrentStack.value, thing]
+
+  switch (thing) {
+    case "÷":
+    case "-":
+    case "+":
+    case "×":
+      return CurrentValue.value = CurrentStack.value
+  }
+
+}
+
+const Values = () => {
+  return (
+    <>
+      <span class="i">{CurrentValue.value.join("") || 0}</span>
+      <span class="i i2">{CurrentStack.value.join("") || 0}</span>
+    </>
+  )
+}
+
+const Buttons = () => {
+  return (
+    <>
+      <button className="g">C</button>
+      <button className="g">⌫</button>
+      <button className="g">⏾</button>
+      <button className="a">÷</button>
+      <button className="n">7</button>
+      <button className="n">8</button>
+      <button className="n">9</button>
+      <button className="a">+</button>
+      <button className="n">4</button>
+      <button className="n">5</button>
+      <button className="n">6</button>
+      <button className="a">-</button>
+      <button className="n">1</button>
+      <button className="n">2</button>
+      <button className="n">3</button>
+      <button className="a">×</button>
+      <button className="n double">0</button>
+      <button className="n">.</button>
+      <button className="a">=</button>
+    </>
+  )
+}
+
 export default () => {
 
   const gridRef = useRef(null)
-  const [dumbValue, changeDumb] = useState(0)
 
   useEffect(() => {
     const buttons = gridRef.current.querySelectorAll("button")
@@ -21,47 +94,6 @@ export default () => {
       item.addEventListener("click", onMouseDown)
     })
   }, [])
-
-  const onMouseDown = e => {
-
-    let thing = e.currentTarget.innerText
-
-    changeDumb(thing)
-
-    switch (thing) {
-
-      case "C": {
-        CurrentStack.value = []
-        return
-      }
-
-      case "⌫": {
-        let most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
-        CurrentStack.value = most
-        return
-      }
-
-      case "⏾":
-        return
-
-      case "=": {
-        debugger
-        return
-      }
-
-    }
-
-    CurrentStack.value = [...CurrentStack.value, thing]
-
-    switch (thing) {
-      case "÷":
-      case "-":
-      case "+":
-      case "×":
-        return CurrentValue.value = CurrentStack.value
-    }
-
-  }
 
   return (
     <div class="calculator">
@@ -85,28 +117,8 @@ export default () => {
           <div>345 x 12 = 1230</div>
         </div>
         <div ref={gridRef} class="calculator-grid">
-          <span class="i">{dumbValue}</span>
-          <span class="i">{CurrentValue.value.join("") || 0}</span>
-          <span class="i i2">{CurrentStack.value.join("") || 0}</span>
-          <Action className="g">C</Action>
-          <Action className="g">⌫</Action>
-          <Action className="g">⏾</Action>
-          <Action className="a">÷</Action>
-          <Action className="n">7</Action>
-          <Action className="n">8</Action>
-          <Action className="n">9</Action>
-          <Action className="a">+</Action>
-          <Action className="n">4</Action>
-          <Action className="n">5</Action>
-          <Action className="n">6</Action>
-          <Action className="a">-</Action>
-          <Action className="n">1</Action>
-          <Action className="n">2</Action>
-          <Action className="n">3</Action>
-          <Action className="a">×</Action>
-          <Action className="n double">0</Action>
-          <Action className="n">.</Action>
-          <Action className="a">=</Action>
+          <Values />
+          <Buttons />
         </div>
       </div>
     </div>
