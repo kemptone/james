@@ -90,35 +90,42 @@ export default () => {
 
   useEffect(() => {
     const buttons = gridRef.current.querySelectorAll("button")
+
+    // kill the first meta tag, ugly hack
+    const tag = document.querySelectorAll("meta[name='viewport']")[0]
+    tag.parentElement.removeChild(tag)
+
     Array.from(buttons).forEach(item => {
       item.addEventListener("click", onMouseDown)
     })
   }, [])
 
   return (
-    <div class="calculator">
-      <Head>
-        <link rel="stylesheet" href="calculator.css" />
-      </Head>
-      <div class="meta-grid">
-        <div class="log">
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-          <div>345 x 12 = 1230</div>
-        </div>
-        <div ref={gridRef} class="calculator-grid">
-          <Values />
-          <Buttons />
+    <div class="calculator-wrap">
+      <div class="calculator">
+        <Head>
+          <link rel="stylesheet" href="calculator.css" />
+        </Head>
+        <div class="meta-grid">
+          <div class="log">
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+            <div>345 x 12 = 1230</div>
+          </div>
+          <div ref={gridRef} class="calculator-grid">
+            <Values />
+            <Buttons />
+          </div>
         </div>
       </div>
     </div>
