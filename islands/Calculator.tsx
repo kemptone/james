@@ -17,7 +17,7 @@ export default () => {
   useEffect(() => {
     const buttons = gridRef.current.querySelectorAll("button")
     Array.from(buttons).forEach(item => {
-      item.addEventListener("mousedown", onMouseDown)
+      item.addEventListener("mousedown", onMouseDown, { passive: true })
     })
   }, [])
 
