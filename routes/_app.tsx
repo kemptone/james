@@ -5,6 +5,7 @@ export default function App({ Component }: AppProps) {
   return (
     <>
       <Head>
+        <link rel="stylesheet" href="reset.css" />
         <link rel="stylesheet" href="menu.css" />
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="dialog.css" />
