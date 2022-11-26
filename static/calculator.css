@@ -13,8 +13,14 @@ html {
   box-sizing: border-box;
 }
 
+.calculator-wrap {
+  padding:3px;
+  touch-action: manipulation;
+  box-sizing: border-box;
+  margin-top:100px;
+}
+
 .calculator {
-  /* margin:100px auto; */
   max-width: 800px;
 }
 
