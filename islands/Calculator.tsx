@@ -101,7 +101,7 @@ export default () => {
   }, [])
 
   return (
-    <div class="calculator-wrap">
+    <div class="main">
       <div class="calculator">
         <Head>
           <link rel="stylesheet" href="calculator.css" />

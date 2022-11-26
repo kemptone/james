@@ -5,12 +5,12 @@
 }
 
 html {
-  background-color: white !important;
 }
 
-.calculator-wrap {
-  padding:15px;
+.main {
+  padding:3px;
   touch-action: manipulation;
+  box-sizing: border-box;
 }
 
 .calculator {
@@ -51,16 +51,16 @@ html {
 }
 
 .calculator-grid button.a {
-  background-color: var(--colora);
+  background-color: var(--color1);
 }
 
 .calculator-grid button.n {
-  background-color: var(--colorb);
+  background-color: var(--color4);
 }
 
 .calculator-grid button.g {
-  background-color: var(--colorc);
-  color: white;
+  background-color: var(--color3);
+  color: var(--color4);
 }
 
 .calculator-grid button.double {
@@ -91,6 +91,10 @@ html {
   .meta-grid .log {
     display: none;
   }
+
+.calculator-grid {
+  grid-gap:7px;
+}
 
   .calculator-grid button {
     font-size: 35px;

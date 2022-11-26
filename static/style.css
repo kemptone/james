@@ -2,6 +2,7 @@
     --color1 :#5bccf6;
     --color2 :#fed469;
     --color3 :#030e12;
+    --color4 :#fff;
 }
 
 html {
@@ -42,6 +43,7 @@ button:hover {
     color: var(--color2);
 }
 
+.main,
 .math-problems {
     margin: 0;
     position: absolute;
