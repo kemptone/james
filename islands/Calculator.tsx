@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { useRef, useEffect } from 'preact/hooks'
+import { useRef, useEffect, useState } from 'preact/hooks'
 import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
 
 const Action = ({ className, children, onMouseDown }) => {
@@ -13,17 +13,20 @@ const Action = ({ className, children, onMouseDown }) => {
 export default () => {
 
   const gridRef = useRef(null)
+  const [dumbValue, changeDumb] = useState(0)
 
   useEffect(() => {
     const buttons = gridRef.current.querySelectorAll("button")
     Array.from(buttons).forEach(item => {
-      item.addEventListener("mousedown", onMouseDown, { passive: true })
+      item.addEventListener("click", onMouseDown)
     })
   }, [])
 
   const onMouseDown = e => {
 
     let thing = e.currentTarget.innerText
+
+    changeDumb(thing)
 
     switch (thing) {
 
@@ -82,6 +85,7 @@ export default () => {
           <div>345 x 12 = 1230</div>
         </div>
         <div ref={gridRef} class="calculator-grid">
+          <span class="i">{dumbValue}</span>
           <span class="i">{CurrentValue.value.join("") || 0}</span>
           <span class="i i2">{CurrentStack.value.join("") || 0}</span>
           <Action className="g">C</Action>
