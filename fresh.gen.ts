@@ -14,6 +14,10 @@ import * as $$0 from "./islands/Calculator.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/Menu.jsx";
 import * as $$3 from "./islands/NumberGame.tsx";
+import * as $$4 from "./islands/_CalculatorButtons.tsx";
+import * as $$5 from "./islands/_CalculatorLog.tsx";
+import * as $$6 from "./islands/_CalculatorOnMouseDown.tsx";
+import * as $$7 from "./islands/_CalculatorValues.tsx";
 
 const manifest = {
   routes: {
@@ -30,6 +34,10 @@ const manifest = {
     "./islands/Counter.tsx": $$1,
     "./islands/Menu.jsx": $$2,
     "./islands/NumberGame.tsx": $$3,
+    "./islands/_CalculatorButtons.tsx": $$4,
+    "./islands/_CalculatorLog.tsx": $$5,
+    "./islands/_CalculatorOnMouseDown.tsx": $$6,
+    "./islands/_CalculatorValues.tsx": $$7,
   },
   baseUrl: import.meta.url,
   config,

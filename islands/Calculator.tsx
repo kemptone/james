@@ -1,106 +1,11 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "$fresh/runtime.ts"
 import { useRef, useEffect, useState } from 'preact/hooks'
-import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
-
-const Action = ({ className, children, onMouseDown }) => {
-  return (
-    <button
-      {...{ className, children, onMouseDown }}
-    />
-  )
-}
-
-const onMouseDown = e => {
-
-  let thing = e.currentTarget.innerText
-
-  switch (thing) {
-
-    case "C": {
-      CurrentStack.value = []
-      return
-    }
-
-    case "⌫": {
-      let most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
-      CurrentStack.value = most
-      return
-    }
-
-    case "⏾":
-      return
-
-    case "=": {
-      debugger
-      return
-    }
-
-  }
-
-  CurrentStack.value = [...CurrentStack.value, thing]
-
-  switch (thing) {
-    case "÷":
-    case "-":
-    case "+":
-    case "×":
-      return CurrentValue.value = CurrentStack.value
-  }
-
-}
-
-const Values = () => {
-  return (
-    <>
-      <div class="i">
-        <div>{CurrentValue.value.join("") || 0}</div>
-        <div class="i2">{CurrentStack.value.join("") || 0}</div>
-      </div>
-    </>
-  )
-}
-
-const Buttons = () => {
-  return (
-    <>
-      <button className="g">C</button>
-      <button className="g">⌫</button>
-      <button className="g">⏾</button>
-      <button className="a">÷</button>
-      <button className="n">7</button>
-      <button className="n">8</button>
-      <button className="n">9</button>
-      <button className="a">+</button>
-      <button className="n">4</button>
-      <button className="n">5</button>
-      <button className="n">6</button>
-      <button className="a">-</button>
-      <button className="n">1</button>
-      <button className="n">2</button>
-      <button className="n">3</button>
-      <button className="a">×</button>
-      <button className="n double">0</button>
-      <button className="n">.</button>
-      <button className="a">=</button>
-    </>
-  )
-}
+import { CurrentStack, CurrentValue } from '../data/Calculations.ts'
+import Buttons from './_CalculatorButtons.tsx'
+import Values from './_CalculatorValues.tsx'
+import Log from './_CalculatorLog.tsx'
 
 export default () => {
-
-  const gridRef = useRef(null)
-
-  useEffect(() => {
-    const buttons = gridRef.current.querySelectorAll("button")
-
-    // kill the first meta tag, ugly hack
-    const tag = document.querySelectorAll("meta[name='viewport']")[0]
-    tag.parentElement.removeChild(tag)
-
-    Array.from(buttons).forEach(item => {
-      item.addEventListener("click", onMouseDown)
-    })
-  }, [])
 
   return (
     <div class="main">
@@ -109,22 +14,8 @@ export default () => {
           <link rel="stylesheet" href="calculator.css" />
         </Head>
         <div class="meta-grid">
-          <div class="log">
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-            <div>345 x 12 = 1230</div>
-          </div>
-          <div ref={gridRef} class="calculator-grid">
+          <Log />
+          <div class="calculator-grid">
             <Values />
             <Buttons />
           </div>
