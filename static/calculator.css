@@ -26,18 +26,6 @@ html {
   text-align: right;
 }
 
-@media (max-width:430px) {
-
-  .meta-grid {
-    display: block;
-    max-width:100%;
-  }
-
-  .meta-grid .log {
-    display: none;
-  }
-
-}
 
 .calculator-grid {
   display: grid;
@@ -85,4 +73,25 @@ html {
   padding: 10px;
   text-align: right;
   border: 1px solid black;
+}
+
+
+@media (max-width:430px) {
+
+  .meta-grid {
+    display: block;
+    max-width:100%;
+    margin:14px;
+  }
+
+  .meta-grid .log {
+    display: none;
+  }
+
+  .calculator-grid button {
+    font-size: 35px;
+    border-radius: 100px;
+    border: none;
+  }
+
 }

@@ -52,7 +52,6 @@ export default () => {
     <div class="calculator">
       <Head>
         <link rel="stylesheet" href="calculator.css" />
-        <meta name="viewport" content="width=device-width" />
       </Head>
       <div class="meta-grid">
         <div class="log">
