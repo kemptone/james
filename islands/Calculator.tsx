@@ -1,4 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
+import { useRef, useEffect } from 'preact/hooks'
 import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
 
 const Action = ({ className, children, onMouseDown }) => {
@@ -10,6 +11,15 @@ const Action = ({ className, children, onMouseDown }) => {
 }
 
 export default () => {
+
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    const buttons = gridRef.current.querySelectorAll("button")
+    Array.from(buttons).forEach(item => {
+      item.addEventListener("click", onMouseDown)
+    })
+  }, [])
 
   const onMouseDown = e => {
 
@@ -71,28 +81,28 @@ export default () => {
           <div>345 x 12 = 1230</div>
           <div>345 x 12 = 1230</div>
         </div>
-        <div class="calculator-grid">
+        <div ref={gridRef} class="calculator-grid">
           <span class="i">{CurrentValue.value.join("") || 0}</span>
           <span class="i i2">{CurrentStack.value.join("") || 0}</span>
-          <Action onMouseDown={onMouseDown} className="g">C</Action>
-          <Action onMouseDown={onMouseDown} className="g">⌫</Action>
-          <Action onMouseDown={onMouseDown} className="g">⏾</Action>
-          <Action onMouseDown={onMouseDown} className="a">÷</Action>
-          <Action onMouseDown={onMouseDown} className="n">7</Action>
-          <Action onMouseDown={onMouseDown} className="n">8</Action>
-          <Action onMouseDown={onMouseDown} className="n">9</Action>
-          <Action onMouseDown={onMouseDown} className="a">+</Action>
-          <Action onMouseDown={onMouseDown} className="n">4</Action>
-          <Action onMouseDown={onMouseDown} className="n">5</Action>
-          <Action onMouseDown={onMouseDown} className="n">6</Action>
-          <Action onMouseDown={onMouseDown} className="a">-</Action>
-          <Action onMouseDown={onMouseDown} className="n">1</Action>
-          <Action onMouseDown={onMouseDown} className="n">2</Action>
-          <Action onMouseDown={onMouseDown} className="n">3</Action>
-          <Action onMouseDown={onMouseDown} className="a">×</Action>
-          <Action onMouseDown={onMouseDown} className="n double">0</Action>
-          <Action onMouseDown={onMouseDown} className="n">.</Action>
-          <Action onMouseDown={onMouseDown} className="a">=</Action>
+          <Action className="g">C</Action>
+          <Action className="g">⌫</Action>
+          <Action className="g">⏾</Action>
+          <Action className="a">÷</Action>
+          <Action className="n">7</Action>
+          <Action className="n">8</Action>
+          <Action className="n">9</Action>
+          <Action className="a">+</Action>
+          <Action className="n">4</Action>
+          <Action className="n">5</Action>
+          <Action className="n">6</Action>
+          <Action className="a">-</Action>
+          <Action className="n">1</Action>
+          <Action className="n">2</Action>
+          <Action className="n">3</Action>
+          <Action className="a">×</Action>
+          <Action className="n double">0</Action>
+          <Action className="n">.</Action>
+          <Action className="a">=</Action>
         </div>
       </div>
     </div>
