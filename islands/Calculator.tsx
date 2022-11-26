@@ -52,8 +52,10 @@ const onMouseDown = e => {
 const Values = () => {
   return (
     <>
-      <span class="i">{CurrentValue.value.join("") || 0}</span>
-      <span class="i i2">{CurrentStack.value.join("") || 0}</span>
+      <div class="i">
+        <div>{CurrentValue.value.join("") || 0}</div>
+        <div class="i2">{CurrentStack.value.join("") || 0}</div>
+      </div>
     </>
   )
 }

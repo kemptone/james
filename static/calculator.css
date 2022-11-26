@@ -14,7 +14,7 @@ html {
 }
 
 .calculator {
-  margin:100px auto;
+  /* margin:100px auto; */
   max-width: 800px;
 }
 
@@ -22,7 +22,7 @@ html {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap:9px;
-  min-height:550px;
+  min-height:500px;
 }
 
 .meta-grid .log {
@@ -40,7 +40,7 @@ html {
 
 .calculator-grid button {
   font-size: 42px;
-  border-radius: 90px;
+  border-radius: 2em;
   border: none;
   touch-action: manipulation;
 }
@@ -83,6 +83,10 @@ html {
   background-color: var(--color4);
   /* justify-self: center; */
   /* align-self: center; */
+}
+
+.calculator-grid .i2 {
+  font-size: 20px;
 }
 
 
