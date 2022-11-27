@@ -1,23 +1,18 @@
-import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
+import { CurrentStack, AllStacks, CurrentValue } from '../data/Calculations.ts';
 
 export default e => {
 
   return (
     <>
       <div class="log">
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
-        <div>345 x 12 = 1230</div>
+        {AllStacks.value.map((item, index) => {
+          console.log(item)
+          return (
+            <div key={index}>
+              {item.join("")}
+            </div>
+          )
+        })}
       </div>
     </>
   )

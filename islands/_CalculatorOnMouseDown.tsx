@@ -1,4 +1,4 @@
-import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
+import { CurrentStack, CurrentValue, AllStacks } from '../data/Calculations.ts';
 
 export default e => {
 
@@ -21,7 +21,43 @@ export default e => {
       return
 
     case "=": {
-      debugger
+      let normalized = [""]
+      let values = CurrentStack.value
+
+      CurrentStack.value.forEach(item => {
+        if (Number.isInteger(Number.parseInt(item)))
+          normalized[normalized.length - 1] += item
+        else
+          normalized.push(item, "")
+      })
+
+      let a = 0
+      let operand = "+"
+
+      let doToNumber = (number) => {
+        switch (operand) {
+          case "÷":
+            return a = a / number
+          case "-":
+            return a = a - number
+          case "+":
+            return a = a + number
+          case "×":
+            return a = a * number
+        }
+      }
+
+      normalized.forEach(item => {
+        if (Number.isInteger(Number.parseInt(item)))
+          doToNumber(Number.parseInt(item))
+        else
+          operand = item
+      })
+
+      a
+      operand
+      AllStacks.value = [...AllStacks.value, [...CurrentStack.value, "=", a]]
+      CurrentStack.value = [a, ""]
       return
     }
 
@@ -29,12 +65,12 @@ export default e => {
 
   CurrentStack.value = [...CurrentStack.value, thing]
 
-  switch (thing) {
-    case "÷":
-    case "-":
-    case "+":
-    case "×":
-      return CurrentValue.value = CurrentStack.value
-  }
+  // switch (thing) {
+  //   case "÷":
+  //   case "-":
+  //   case "+":
+  //   case "×":
+  //     return CurrentValue.value = CurrentStack.value
+  // }
 
 }
