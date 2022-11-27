@@ -54,23 +54,18 @@ export default e => {
           operand = item
       })
 
-      a
-      operand
       AllStacks.value = [...AllStacks.value, [...CurrentStack.value, "=", a]]
-      CurrentStack.value = [a, ""]
+      CurrentStack.value = [a, "END"]
       return
     }
 
   }
 
-  CurrentStack.value = [...CurrentStack.value, thing]
+  if (CurrentStack.value[CurrentStack.value.length - 1] === "END") {
+    if (Number.isInteger(Number.parseInt(thing)))
+      return CurrentStack.value = [thing]
+  }
 
-  // switch (thing) {
-  //   case "÷":
-  //   case "-":
-  //   case "+":
-  //   case "×":
-  //     return CurrentValue.value = CurrentStack.value
-  // }
+  CurrentStack.value = [...CurrentStack.value, thing]
 
 }

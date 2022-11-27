@@ -1,4 +1,5 @@
 import { CurrentStack, AllStacks, CurrentValue } from '../data/Calculations.ts';
+import { SmartJoin } from './_CalculatorValues.tsx'
 
 export default e => {
 
@@ -6,10 +7,9 @@ export default e => {
     <>
       <div class="log">
         {AllStacks.value.map((item, index) => {
-          console.log(item)
           return (
             <div key={index}>
-              {item.join("")}
+              {SmartJoin(item)}
             </div>
           )
         })}
