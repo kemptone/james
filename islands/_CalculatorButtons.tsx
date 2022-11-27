@@ -1,6 +1,6 @@
-import onMouseDown from './_CalculatorOnMouseDown.tsx'
+import _onMouseDown from './_CalculatorOnMouseDown.tsx'
 
-const Action = ({ className, children }) => {
+const Action = ({ className, children, onMouseDown = _onMouseDown }) => {
   return (
     <button
       {...{ className, children, onMouseDown }}
@@ -8,12 +8,12 @@ const Action = ({ className, children }) => {
   )
 }
 
-export default () => {
+export default ({ D }) => {
   return (
     <>
       <Action className="g">C</Action>
       <Action className="g">⌫</Action>
-      <Action className="g">⏾</Action>
+      <Action className="g" onMouseDown={D.openDialog}>⏾</Action>
       <Action className="a">÷</Action>
       <Action className="n">7</Action>
       <Action className="n">8</Action>
