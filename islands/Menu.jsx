@@ -27,6 +27,7 @@ export default args => {
                 <nav>
                     <a href="/">Home</a>
                     <a href="/calculator">Calculator</a>
+                    <a href="/sound">Sound</a>
                 </nav>
                 {args.is_deno ? (
                     <NumberGameActions />
