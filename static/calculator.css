@@ -1,5 +1,5 @@
 :root {
-    --colora :rgba(255,255,255,.6);
+  --colora :rgba(255,255,255,.6);
 }
 
 html {
@@ -50,7 +50,7 @@ html {
 }
 
 .calculator-grid button {
-  font-size: 42px;
+  font-size: 2.6rem;
   border-radius: 2em;
   border: none;
   touch-action: manipulation;
@@ -86,7 +86,7 @@ html {
 .calculator-grid .i {
     grid-column: span 4;
     grid-row: span 1;
-    font-size: 45px;
+    font-size: 4rem;
     /* padding: 10px; */
     box-sizing: border-box;
     text-align: right;
@@ -111,7 +111,7 @@ html {
 }
 
 .calculator-grid .i2 {
-  font-size: 20px;
+  font-size: 1.5rem;
 }
 
 
@@ -134,8 +134,8 @@ html {
   }
 
   .calculator-grid button {
-    font-size: 29px;
-    border-radius: 1em;
+    font-size: 2.2rem;
+    border-radius: 2rem;
     border: none;
   }
 

@@ -1,5 +1,3 @@
-
-
 :root {
     --color1 :#5bccf6;
     --color2 :#fed469;
@@ -8,13 +6,19 @@
 }
 
 html {
-    font-size: 16px;
     font-family: CooperHewitt;
+    /* font-size:62.5%; */
+    font-size:100%;
     color: var(--color3);
     background-color: var(--color2);
     /* background-image: url(/halftone-yellow.webp); */
     padding: 0;
     margin: 0;
+}
+
+input,
+select {
+    font-size: 1rem;
 }
 
 body {
@@ -37,7 +41,6 @@ button {
     border: 2px solid var(--color3);
     user-select: none;
     cursor: pointer;
-    /* font-size: 2em; */
 }
 
 button:hover {
@@ -81,26 +84,26 @@ button:hover {
 .math-problems .problem .num1,
 .math-problems .problem .num2 {
     display: inline-block;
-    font-size: 38px;
+    font-size: 3.0rem;
     font-weight: 600;
 }
 
 .math-problems .problem .act,
 .math-problems .problem .equals {
     display: inline-block;
-    font-size: 38px;
+    font-size: 3.0rem;
     font-weight: 100;
 }
 
 .math-problems .problem input {
     display: inline-block;
     border: 4px dashed var(--color3);
-    width: 3em;
-    padding: .5em;
-    font-size: 2em;
+    width: 8rem;
+    padding: 1rem;
+    font-size: 3.5rem;
     text-align: center;
     background-color: transparent;
-    border-radius: .4em;
+    border-radius: 0.4rem;
 }
 
 .math-problems .problem input:focus {
@@ -115,10 +118,10 @@ button:hover {
 }
 
 .problem button {
-    font-size: 1.5em;
+    font-size: 2.3rem;
     color: var(--color2);
     background-color: var(--color3);
-    padding: .94em;
+    padding: 1.8rem;
     border-radius: .5em;
     display: block;
 }
@@ -131,7 +134,7 @@ button:hover {
 
 .actions button {
     padding: .5em;
-    font-size: 1.2em;
+    font-size: 1rem;
 }
 
 #divisible {
@@ -139,7 +142,7 @@ button:hover {
     bottom:20px;
     right:30px;
     opacity: .1;
-    font-size: 38px;
+    font-size: 3.0rem;
 }
 
 .animation.top {

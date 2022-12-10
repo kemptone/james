@@ -1,0 +1,9 @@
+fieldset {
+    border-style: solid;
+    border-color: rgba(0,0,0,.2);
+    border-radius: 8px;
+    padding-inline-start: 1em;
+    padding-inline-end: 1em;
+    padding-block-start: 0.8em;
+    padding-block-end: 1.4em;
+}

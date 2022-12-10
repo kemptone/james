@@ -1,15 +1,20 @@
+header:has( .navigation.open ) {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: .2s all;
+}
+
 .navigation {
   opacity: 0;
   height: 0;
   transition: 2s all;
   overflow: hidden;
+  font-size: 2em;
 }
 
 .navigation.open {
   height: fit-content;
   opacity: 1;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .navigation button {

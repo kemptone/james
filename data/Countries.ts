@@ -1,4 +1,4 @@
-export default [
+const Countries = [
   { "name": "Afghanistan", "code": "AF" },
   { "name": "Åland Islands", "code": "AX" },
   { "name": "Albania", "code": "AL" },
@@ -243,3 +243,11 @@ export default [
   { "name": "Zambia", "code": "ZM" },
   { "name": "Zimbabwe", "code": "ZW" }
 ]
+
+const CountryKeys = {}
+
+Countries.forEach(({ name, code }) => {
+  CountryKeys[code] = name
+})
+
+export { CountryKeys }
