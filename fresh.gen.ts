@@ -15,11 +15,12 @@ import * as $$0 from "./islands/Calculator.tsx";
 import * as $$1 from "./islands/Counter.tsx";
 import * as $$2 from "./islands/Menu.jsx";
 import * as $$3 from "./islands/NumberGame.tsx";
-import * as $$4 from "./islands/VoiceMaker.jsx";
-import * as $$5 from "./islands/_CalculatorButtons.tsx";
-import * as $$6 from "./islands/_CalculatorLog.tsx";
-import * as $$7 from "./islands/_CalculatorOnMouseDown.tsx";
-import * as $$8 from "./islands/_CalculatorValues.tsx";
+import * as $$4 from "./islands/VoiceMaker.effect.jsx";
+import * as $$5 from "./islands/VoiceMaker.jsx";
+import * as $$6 from "./islands/_CalculatorButtons.tsx";
+import * as $$7 from "./islands/_CalculatorLog.tsx";
+import * as $$8 from "./islands/_CalculatorOnMouseDown.tsx";
+import * as $$9 from "./islands/_CalculatorValues.tsx";
 
 const manifest = {
   routes: {
@@ -37,11 +38,12 @@ const manifest = {
     "./islands/Counter.tsx": $$1,
     "./islands/Menu.jsx": $$2,
     "./islands/NumberGame.tsx": $$3,
-    "./islands/VoiceMaker.jsx": $$4,
-    "./islands/_CalculatorButtons.tsx": $$5,
-    "./islands/_CalculatorLog.tsx": $$6,
-    "./islands/_CalculatorOnMouseDown.tsx": $$7,
-    "./islands/_CalculatorValues.tsx": $$8,
+    "./islands/VoiceMaker.effect.jsx": $$4,
+    "./islands/VoiceMaker.jsx": $$5,
+    "./islands/_CalculatorButtons.tsx": $$6,
+    "./islands/_CalculatorLog.tsx": $$7,
+    "./islands/_CalculatorOnMouseDown.tsx": $$8,
+    "./islands/_CalculatorValues.tsx": $$9,
   },
   baseUrl: import.meta.url,
   config,
