@@ -4,7 +4,6 @@ import Voice, { iOSVoiceNames } from '../helpers/voice.js'
 import Languages from '../data/Languages.ts'
 
 function loadAllVoiceList() {
-
   const synth = window.speechSynthesis
 
   const voices = synth.getVoices().sort(function (a, b) {
