@@ -23,7 +23,7 @@
 .calculator .log {
   background-color: var(--colora);
   border-radius: .4em;
-  padding:1em;
+  padding: 2rem;
 }
 
 .meta-grid {
