@@ -6,13 +6,11 @@ html {
 }
 
 .main {
-  padding:3px;
   touch-action: manipulation;
   box-sizing: border-box;
 }
 
 .calculator-wrap {
-  padding:3px;
   touch-action: manipulation;
   box-sizing: border-box;
   margin-top:100px;
@@ -87,7 +85,6 @@ html {
     grid-column: span 4;
     grid-row: span 1;
     font-size: 4rem;
-    /* padding: 10px; */
     box-sizing: border-box;
     text-align: right;
     /* border: 1px solid black; */
@@ -120,7 +117,6 @@ html {
   .meta-grid {
     /* display: block; */
     max-width:initial;
-    padding:14px;
     grid-gap: 0;
     grid-template-columns: 1fr;
     box-sizing: border-box;
