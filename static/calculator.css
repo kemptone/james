@@ -123,6 +123,7 @@ html {
     padding:14px;
     grid-gap: 0;
     grid-template-columns: 1fr;
+    box-sizing: border-box;
   }
 
   .meta-grid .log {

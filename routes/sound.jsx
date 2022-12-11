@@ -15,7 +15,7 @@ export default function Home() {
         <h1>Text to Speech</h1>
         <VoiceMaker />
       </div>
-      <Menu is_deno={true} />
+      <Menu is_deno={false} />
     </>
   );
 }
