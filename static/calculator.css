@@ -116,7 +116,7 @@ html {
 
   .meta-grid {
     /* display: block; */
-    max-width:initial;
+    /* max-width:initial; */
     grid-gap: 0;
     grid-template-columns: 1fr;
     box-sizing: border-box;

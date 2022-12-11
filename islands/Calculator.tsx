@@ -11,7 +11,7 @@ export default () => {
   return (
     <Dialog>
       {D => (
-        <div class="main">
+        <div class="main2">
           <Head>
             <link rel="stylesheet" href="calculator.css" />
           </Head>
