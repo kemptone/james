@@ -1,4 +1,11 @@
 .voice-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap:9px;
+  /* min-height:500px; */
+  height: calc(100vh - 80px);
+  max-width: calc(100vw - 20px);
+  margin:auto;
 }
 
 .voice-page h1 {
@@ -13,4 +20,36 @@ fieldset {
     padding-inline-end: 1em;
     padding-block-start: 0.8em;
     padding-block-end: 1.4em;
+}
+
+.say-this {
+    display: flex;
+    justify-content: stretch;
+    justify-items: stretch;
+    gap: 8px;
+}
+
+.say-this textarea {
+    width: 100%;
+    height:8rem;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.say-this button {
+    height: 100%;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    background-color: var(--color1);
+    color: var(--color3);
+    border: none;
+    user-select: none;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.say-this button:hover,
+.say-this button:focus {
+    background-color: var(--color3);
+    color: var(--color4);
 }

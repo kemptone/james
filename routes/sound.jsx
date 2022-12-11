@@ -11,7 +11,7 @@ export default function Home() {
       <Head>
         <link rel="stylesheet" href="voice.css" />
       </Head>
-      <div class="voice-page">
+      <div className="voice-page">
         <h1>Text to Speech</h1>
         <VoiceMaker />
       </div>

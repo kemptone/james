@@ -35,6 +35,13 @@ export default args => {
           English only
         </label>
       </fieldset>
+      <fieldset class="say-this">
+        <legend>Say This</legend>
+        <textarea></textarea>
+        <div>
+          <button>Say this!</button>
+        </div>
+      </fieldset>
     </div>
   )
 }
