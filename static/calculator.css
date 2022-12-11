@@ -31,7 +31,7 @@
   grid-template-columns: 4fr 5fr;
   grid-gap:9px;
   /* min-height:500px; */
-  height: calc(100vh - 20px);
+  height: calc(100vh - 80px);
 }
 
 .meta-grid .log {
