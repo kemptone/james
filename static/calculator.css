@@ -4,7 +4,10 @@
 
 .main2 {
   touch-action: manipulation;
-  margin-top:80px;
+  margin-top: 10px;
+  max-width: calc(100vw - 19px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .calculator-wrap {
@@ -14,7 +17,7 @@
 }
 
 .calculator {
-  max-width: 100vw;
+  /* max-width: 100vw; */
 }
 
 .calculator .log {
@@ -27,7 +30,8 @@
   display: grid;
   grid-template-columns: 4fr 5fr;
   grid-gap:9px;
-  min-height:500px;
+  /* min-height:500px; */
+  height: calc(100vh - 20px);
 }
 
 .meta-grid .log {
