@@ -5,11 +5,9 @@ import Languages from '../data/Languages.ts'
 
 function loadAllVoiceList() {
   const synth = window.speechSynthesis
-
   const voices = synth.getVoices().sort(function (a, b) {
     const aname = a.lang
     const bname = b.lang
-
     if (aname < bname) {
       return -1
     } else if (aname == bname) {
@@ -18,31 +16,37 @@ function loadAllVoiceList() {
       return +1
     }
   })
-
   return voices
 }
 
-export default (addVoices) => e => {
-
-  // const [voices, addVoices] = useState([])
+export default (addVoices, englishOnly) => e => {
 
   const allVoices = loadAllVoiceList()
   const flatlist = []
 
-  allVoices.forEach(voice => {
-    const [langKey, countryKey] = voice.lang.split("-")
-    flatlist.push({
-      name: voice.name
-      , localService: voice.localService
-      , voiceURI: voice.voiceURI
-      , lang: {
-        countryKey
-        , langKey
-        , countryName: CountryKeys[countryKey]
-        , ...Languages[langKey]
+
+  allVoices
+    .filter(voice => {
+      if (englishOnly) {
+        let [lang, region] = voice?.lang?.split("-") ?? ["fard", "FARD"]
+        return lang === "en"
       }
+      return true
     })
-  })
+    .forEach(voice => {
+      const [langKey, countryKey] = voice.lang.split("-")
+      flatlist.push({
+        name: voice.name
+        , localService: voice.localService
+        , voiceURI: voice.voiceURI
+        , lang: {
+          countryKey
+          , langKey
+          , countryName: CountryKeys[countryKey]
+          , ...Languages[langKey]
+        }
+      })
+    })
 
   const languages_set = new Set(allVoices.map(i => i.lang))
   addVoices(flatlist)

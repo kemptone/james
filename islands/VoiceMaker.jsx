@@ -8,10 +8,10 @@ export default args => {
 
   const [voices, addVoices] = useState([])
   const [englishOnly, changeEnglishOnly] = useState(true)
-  useEffect(VoiceMakerEffect(addVoices, englishOnly), [])
+  useEffect(VoiceMakerEffect(addVoices, englishOnly), [englishOnly])
 
   return (
-    <div style="max-width:800px; margin:0 auto;">
+    <div class="voice-maker">
       <fieldset>
         <legend>Pick Voice</legend>
         <select>
@@ -34,7 +34,6 @@ export default args => {
           ></input>
           English only
         </label>
-        <code style="margin-left:40px">{englishOnly ? "US" : ""}</code>
       </fieldset>
     </div>
   )
