@@ -8,6 +8,10 @@
   margin:auto;
 }
 
+.voice-page label {
+    white-space: nowrap;
+}
+
 .voice-page h1 {
     text-align: right;
 }
