@@ -54,8 +54,12 @@ export default e => {
           operand = item
       })
 
-      AllStacks.value = [...AllStacks.value, [...CurrentStack.value, "=", a]]
-      CurrentStack.value = [a, "END"]
+      let value = a.toString().split("")
+
+      AllStacks.value = [...AllStacks.value, [...CurrentStack.value, "=", ...value]]
+
+      // CurrentStack.value = [a, "END"]
+      CurrentStack.value = [...value, "END"]
       return
     }
 

@@ -6,12 +6,19 @@ export const AllStacks = signal([])
 // [ "2", "1", "x", "5" ]
 export const CurrentStack = signal([])
 
+effect(() => {
+  console.log({
+    CurrentStack: CurrentStack.value
+  })
+})
+
 // "0"
 export const CurrentValue = computed(() => {
 
   const normalized = [""]
 
   CurrentStack.value.forEach(item => {
+    console.log(item)
     if (Number.isInteger(Number.parseInt(item)))
       normalized[normalized.length - 1] += item
     else
