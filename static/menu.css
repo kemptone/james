@@ -115,6 +115,7 @@ nav {
 
 nav > a {
   display: block;
+  line-height: 2rem;
 }
 
 @media (max-width:450px) {

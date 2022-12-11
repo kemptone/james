@@ -11,7 +11,7 @@ export default args => {
   useEffect(VoiceMakerEffect(addVoices, englishOnly), [englishOnly])
 
   return (
-    <div class="voice-maker">
+    <form class="voice-maker">
       <fieldset>
         <legend>Pick Voice</legend>
         <select>
@@ -38,11 +38,9 @@ export default args => {
       <fieldset class="say-this">
         <legend>Say This</legend>
         <textarea></textarea>
-        <div>
-          <button>Say this!</button>
-        </div>
+        <button type="submit">Say this ⏎</button>
       </fieldset>
-    </div>
+    </form>
   )
 }
 
