@@ -44,6 +44,7 @@ fieldset + fieldset {
     height:8rem;
     padding: 1rem;
     box-sizing: border-box;
+    font-size:16px;
 }
 
 .say-this button {
