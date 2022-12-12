@@ -47,6 +47,7 @@ export default (addVoices, englishOnly, synth) => e => {
           , countryName: CountryKeys[countryKey]
           , ...Languages[langKey]
         }
+        , voice: voice
       })
     })
 

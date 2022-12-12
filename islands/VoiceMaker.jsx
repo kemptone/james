@@ -1,13 +1,9 @@
 import { useRef, useEffect, useState } from 'preact/hooks'
-// import Voice, { iOSVoiceNames } from '../helpers/voice.js'
-// import { CountryKeys } from '../data/Countries.ts'
-// import Languages from '../data/Languages.ts'
-import VoiceMakerEffect, { loadAllVoiceList } from './VoiceMaker.effect.jsx'
+import VoiceMakerEffect from './VoiceMaker.effect.jsx'
 
 export default args => {
 
   const synth = window.speechSynthesis
-  // const [allVoices, loadVoices] = useState([])
   const [voices, addVoices] = useState([])
   const [englishOnly, changeEnglishOnly] = useState(true)
 
@@ -17,13 +13,16 @@ export default args => {
 
   function speak(e) {
 
-    const allVoices = loadAllVoiceList()
-
     const {
       read
       , voice_name
     } = Object.fromEntries(new FormData(e.currentTarget))
 
+    // alert(JSON.stringify({
+    //   read
+    //   , voice_name
+    //   , voices
+    // }))
 
     if (synth.speaking) {
       console.error("speechSynthesis.speaking")
@@ -41,9 +40,9 @@ export default args => {
         console.error("SpeechSynthesisUtterance.onerror")
       }
 
-      const selected_voice = allVoices.find(item => item.name === voice_name)
+      const selected_voice = voices.find(item => item.name === voice_name)
 
-      utterThis.voice = selected_voice
+      utterThis.voice = selected_voice.voice
 
       // const selectedOption =
       //   voiceSelect.selectedOptions[0].getAttribute("data-name")
@@ -64,8 +63,6 @@ export default args => {
     <form class="voice-maker" onSubmit={e => {
       e.preventDefault()
       speak(e)
-      // const Form = Object.fromEntries(new FormData(e.currentTarget))
-      // debugger
     }}>
       <fieldset>
         <legend>Pick Voice</legend>
@@ -77,7 +74,7 @@ export default args => {
             , voiceURI
           }) => (
             <option
-              value={voiceURI}
+              value={name}
               children={`${name} : ${lang.countryName} : ${lang.name}`}
             />
           ))}
