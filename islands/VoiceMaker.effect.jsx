@@ -3,7 +3,7 @@ import { CountryKeys } from '../data/Countries.ts'
 import Voice, { iOSVoiceNames } from '../helpers/voice.js'
 import Languages from '../data/Languages.ts'
 
-function loadAllVoiceList() {
+export function loadAllVoiceList() {
   const synth = window.speechSynthesis
   const voices = synth.getVoices().sort(function (a, b) {
     const aname = a.lang
@@ -19,11 +19,13 @@ function loadAllVoiceList() {
   return voices
 }
 
-export default (addVoices, englishOnly) => e => {
+export default (addVoices, englishOnly, synth) => e => {
 
+  // const synth = window.speechSynthesis
   const allVoices = loadAllVoiceList()
   const flatlist = []
 
+  // loadVoices(allVoices)
 
   allVoices
     .filter(voice => {
@@ -50,5 +52,6 @@ export default (addVoices, englishOnly) => e => {
 
   const languages_set = new Set(allVoices.map(i => i.lang))
   addVoices(flatlist)
+
 
 }
