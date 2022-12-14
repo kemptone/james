@@ -13,8 +13,13 @@ export default args => {
   } = VoiceMakerEffect()
 
   const clear = e => {
-    textArea.current.value = ''
-    textArea.current.focus?.()
+    const e_read = document.getElementById("read")
+    e_read.value = ''
+    e_read.click()
+    e_read.focus()
+    // document.getElementById("read").click().focus()
+    // textArea.current.value = ''
+    // textArea.current?.click?.()?.focus?.()
   }
 
   return (
@@ -45,7 +50,7 @@ export default args => {
       </fieldset>
       <fieldset class="say-this">
         <legend>Say This</legend>
-        <textarea name="read" ref={textArea}></textarea>
+        <textarea id="read" name="read"></textarea>
         <div class="action">
           <button type="submit">Say this ⏎</button>
           <button type="button" onClick={clear}>Clear</button>
