@@ -27,6 +27,10 @@ fieldset {
     padding-block-end: 1.4em;
 }
 
+fieldset legend {
+    width: fit-content;
+}
+
 fieldset + fieldset {
     margin-top:1rem;
 }
