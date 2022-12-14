@@ -1,68 +1,25 @@
-import { useRef, useEffect, useState } from 'preact/hooks'
-import VoiceMakerEffect from './VoiceMaker.effect.jsx'
+import VoiceMakerEffect, { Speak, clear } from './VoiceMaker.effect.jsx'
+import { useRef } from 'preact/hooks'
 
 export default args => {
 
-  const synth = window.speechSynthesis
-  const [voices, addVoices] = useState([])
-  const [englishOnly, changeEnglishOnly] = useState(true)
+  const textArea = useRef()
 
-  const ret = {}
+  const {
+    synth
+    , voices
+    , englishOnly
+    , changeEnglishOnly
+  } = VoiceMakerEffect()
 
-  useEffect(VoiceMakerEffect(addVoices, englishOnly, synth), [englishOnly])
-
-  function speak(e) {
-
-    const {
-      read
-      , voice_name
-    } = Object.fromEntries(new FormData(e.currentTarget))
-
-    // alert(JSON.stringify({
-    //   read
-    //   , voice_name
-    //   , voices
-    // }))
-
-    if (synth.speaking) {
-      console.error("speechSynthesis.speaking")
-      return
-    }
-
-    if (read) {
-      let utterThis = new SpeechSynthesisUtterance(read)
-
-      utterThis.onend = function (event) {
-        console.log("SpeechSynthesisUtterance.onend")
-      }
-
-      utterThis.onerror = function (event) {
-        console.error("SpeechSynthesisUtterance.onerror")
-      }
-
-      const selected_voice = voices.find(item => item.name === voice_name)
-
-      utterThis.voice = selected_voice.voice
-
-      // const selectedOption =
-      //   voiceSelect.selectedOptions[0].getAttribute("data-name")
-
-      // for (let i = 0; i < voices.length; i++) {
-      //   if (voices[i].name === selectedOption) {
-      //     utterThis.voice = voices[i]
-      //     break;
-      //   }
-      // }
-      // utterThis.pitch = pitch.value;
-      // utterThis.rate = rate.value;
-      synth.speak(utterThis)
-    }
+  const clear = e => {
+    textArea.current.value = ''
   }
 
   return (
     <form class="voice-maker" onSubmit={e => {
       e.preventDefault()
-      speak(e)
+      Speak({ synth, voices })(e)
     }}>
       <fieldset>
         <legend>Pick Voice</legend>
@@ -70,8 +27,6 @@ export default args => {
           {voices.map(({
             name
             , lang
-            , countryName
-            , voiceURI
           }) => (
             <option
               value={name}
@@ -89,8 +44,11 @@ export default args => {
       </fieldset>
       <fieldset class="say-this">
         <legend>Say This</legend>
-        <textarea name="read"></textarea>
-        <button type="submit">Say this ⏎</button>
+        <textarea name="read" ref={textArea}></textarea>
+        <div class="action">
+          <button type="submit">Say this ⏎</button>
+          <button type="button" onClick={clear}>Clear</button>
+        </div>
       </fieldset>
     </form>
   )

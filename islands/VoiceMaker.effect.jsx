@@ -3,6 +3,58 @@ import { CountryKeys } from '../data/Countries.ts'
 import Voice, { iOSVoiceNames } from '../helpers/voice.js'
 import Languages from '../data/Languages.ts'
 
+export default function () {
+
+  const synth = window.speechSynthesis
+  const [voices, addVoices] = useState([])
+  const [englishOnly, changeEnglishOnly] = useState(true)
+
+  useEffect(() => {
+
+    const allVoices = loadAllVoiceList()
+    const flatlist = []
+
+    allVoices
+      .filter(voice => {
+        if (englishOnly) {
+          let [lang, region] = voice?.lang?.split("-") ?? ["fard", "FARD"]
+          return lang === "en"
+        }
+        return true
+      })
+      .forEach(voice => {
+        const [langKey, countryKey] = voice.lang.split("-")
+        flatlist.push({
+          name: voice.name
+          , localService: voice.localService
+          , voiceURI: voice.voiceURI
+          , lang: {
+            countryKey
+            , langKey
+            , countryName: CountryKeys[countryKey]
+            , ...Languages[langKey]
+          }
+          , voice: voice
+        })
+      })
+
+    const languages_set = new Set(allVoices.map(i => i.lang))
+    addVoices(flatlist)
+
+
+
+  }, [englishOnly])
+
+  return {
+    voices
+    , addVoices
+    , englishOnly
+    , changeEnglishOnly
+    , synth
+  }
+
+}
+
 export function loadAllVoiceList() {
   const synth = window.speechSynthesis
   const voices = synth.getVoices().sort(function (a, b) {
@@ -19,40 +71,33 @@ export function loadAllVoiceList() {
   return voices
 }
 
-export default (addVoices, englishOnly, synth) => e => {
+export const Speak = ({ synth, voices }) => (e) => {
 
-  // const synth = window.speechSynthesis
-  const allVoices = loadAllVoiceList()
-  const flatlist = []
+  const {
+    read
+    , voice_name
+  } = Object.fromEntries(new FormData(e.currentTarget))
 
-  // loadVoices(allVoices)
+  if (synth.speaking) {
+    console.error("speechSynthesis.speaking")
+    return
+  }
 
-  allVoices
-    .filter(voice => {
-      if (englishOnly) {
-        let [lang, region] = voice?.lang?.split("-") ?? ["fard", "FARD"]
-        return lang === "en"
-      }
-      return true
-    })
-    .forEach(voice => {
-      const [langKey, countryKey] = voice.lang.split("-")
-      flatlist.push({
-        name: voice.name
-        , localService: voice.localService
-        , voiceURI: voice.voiceURI
-        , lang: {
-          countryKey
-          , langKey
-          , countryName: CountryKeys[countryKey]
-          , ...Languages[langKey]
-        }
-        , voice: voice
-      })
-    })
+  if (!read)
+    return
 
-  const languages_set = new Set(allVoices.map(i => i.lang))
-  addVoices(flatlist)
+  const utterThis = new SpeechSynthesisUtterance(read)
 
+  utterThis.onend = function (event) {
+    console.log("SpeechSynthesisUtterance.onend")
+  }
+
+  utterThis.onerror = function (event) {
+    console.error("SpeechSynthesisUtterance.onerror")
+  }
+
+  const selected_voice = voices.find(item => item.name === voice_name)
+  utterThis.voice = selected_voice.voice
+  synth.speak(utterThis)
 
 }
