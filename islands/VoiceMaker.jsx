@@ -1,4 +1,4 @@
-import VoiceMakerEffect, { Speak, clear } from './VoiceMaker.effect.jsx'
+import VoiceMakerEffect, { Speak } from './VoiceMaker.effect.jsx'
 import { useRef } from 'preact/hooks'
 
 export default args => {
@@ -14,6 +14,7 @@ export default args => {
 
   const clear = e => {
     textArea.current.value = ''
+    textArea.current.focus?.()
   }
 
   return (

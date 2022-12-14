@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { CountryKeys } from '../data/Countries.ts'
-import Voice, { iOSVoiceNames } from '../helpers/voice.js'
 import Languages from '../data/Languages.ts'
 
 export default function () {
@@ -38,10 +37,8 @@ export default function () {
         })
       })
 
-    const languages_set = new Set(allVoices.map(i => i.lang))
+    // const languages_set = new Set(allVoices.map(i => i.lang))
     addVoices(flatlist)
-
-
 
   }, [englishOnly])
 
