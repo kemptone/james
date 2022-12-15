@@ -1,9 +1,9 @@
-import VoiceMakerEffect, { Speak } from './VoiceMaker.effect.jsx'
-import { useRef } from 'preact/hooks'
+import VoiceMakerEffect, { Speak } from '../effects/VoiceMaker.effect.jsx'
+// import { useRef } from 'preact/hooks'
 
 export default args => {
 
-  const textArea = useRef()
+  // const textArea = useRef()
 
   const {
     synth

@@ -9,18 +9,11 @@ import * as $2 from "./routes/api/joke.ts";
 import * as $3 from "./routes/brownthing.tsx";
 import * as $4 from "./routes/calculator.tsx";
 import * as $5 from "./routes/index.tsx";
-import * as $6 from "./routes/original.index.tsx";
-import * as $7 from "./routes/sound.jsx";
+import * as $6 from "./routes/sound.jsx";
 import * as $$0 from "./islands/Calculator.tsx";
-import * as $$1 from "./islands/Counter.tsx";
-import * as $$2 from "./islands/Menu.jsx";
-import * as $$3 from "./islands/NumberGame.tsx";
-import * as $$4 from "./islands/VoiceMaker.effect.jsx";
-import * as $$5 from "./islands/VoiceMaker.jsx";
-import * as $$6 from "./islands/_CalculatorButtons.tsx";
-import * as $$7 from "./islands/_CalculatorLog.tsx";
-import * as $$8 from "./islands/_CalculatorOnMouseDown.tsx";
-import * as $$9 from "./islands/_CalculatorValues.tsx";
+import * as $$1 from "./islands/Menu.jsx";
+import * as $$2 from "./islands/NumberGame.tsx";
+import * as $$3 from "./islands/VoiceMaker.jsx";
 
 const manifest = {
   routes: {
@@ -30,20 +23,13 @@ const manifest = {
     "./routes/brownthing.tsx": $3,
     "./routes/calculator.tsx": $4,
     "./routes/index.tsx": $5,
-    "./routes/original.index.tsx": $6,
-    "./routes/sound.jsx": $7,
+    "./routes/sound.jsx": $6,
   },
   islands: {
     "./islands/Calculator.tsx": $$0,
-    "./islands/Counter.tsx": $$1,
-    "./islands/Menu.jsx": $$2,
-    "./islands/NumberGame.tsx": $$3,
-    "./islands/VoiceMaker.effect.jsx": $$4,
-    "./islands/VoiceMaker.jsx": $$5,
-    "./islands/_CalculatorButtons.tsx": $$6,
-    "./islands/_CalculatorLog.tsx": $$7,
-    "./islands/_CalculatorOnMouseDown.tsx": $$8,
-    "./islands/_CalculatorValues.tsx": $$9,
+    "./islands/Menu.jsx": $$1,
+    "./islands/NumberGame.tsx": $$2,
+    "./islands/VoiceMaker.jsx": $$3,
   },
   baseUrl: import.meta.url,
   config,
