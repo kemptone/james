@@ -148,5 +148,13 @@ header dt {
 }
 
 header dd + dt {
-  margin-top:.5em;
+  margin-top:2rem;
+}
+
+header dt + dd {
+  margin-inline-start:0;
+}
+
+header code {
+  vertical-align: top;
 }

@@ -39,7 +39,8 @@ a:hover {
 }
 
 button {
-    background-color: var(--color2);
+    /* background-color: var(--color2); */
+    background-color: transparent;
     border: 2px solid var(--color3);
     user-select: none;
     cursor: pointer;
@@ -47,7 +48,7 @@ button {
 
 button:hover {
     background-color: var(--color3);
-    color: var(--color2);
+    color: var(--color4);
 }
 
 .main,

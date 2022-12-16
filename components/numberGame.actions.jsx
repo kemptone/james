@@ -6,12 +6,12 @@ export default () => {
 
   const factorPlus = (val, Num) => () => {
     Num.value += val
-    Step.value++
+    // Step.value++
   }
 
   const makeHarderBy = (by, Num) => () => {
     Num.value *= by
-    Step.value++
+    // Step.value++
   }
 
   return (
@@ -19,14 +19,31 @@ export default () => {
       {D => (
         <>
           <dfl>
-            <dt>SIZE A</dt>
+            <dt>
+              <button onClick={D.openDialog}>more settings</button>
+            </dt>
+          </dfl>
+          <D.Dialog ref={D.ref}>
+            <form onSubmit={e => {
+              e.preventDefault()
+            }}>
+
+
+          <dfl>
+            <dt>
+              SIZE A
+              [ <code children={ Number1MultiplyBy.value } /> ]
+            </dt>
             <dd>
               <button onClick={makeHarderBy(.1, Number1MultiplyBy)}>÷ 10</button>
               <button onClick={makeHarderBy(10, Number1MultiplyBy)}>× 10</button>
               <button onClick={factorPlus(-1, Number1MultiplyBy)}>- 1</button>
               <button onClick={factorPlus(1, Number1MultiplyBy)}>+ 1</button>
             </dd>
-            <dt>SIZE B</dt>
+            <dt>
+              SIZE B
+              [ <code children={ Number2MultiplyBy.value } /> ]
+            </dt>
             <dd>
               <button onClick={makeHarderBy(.1, Number2MultiplyBy)}>÷ 10</button>
               <button onClick={makeHarderBy(10, Number2MultiplyBy)}>× 10</button>
@@ -34,15 +51,11 @@ export default () => {
               <button onClick={factorPlus(1, Number2MultiplyBy)}>+ 1</button>
             </dd>
             <dt>STEP</dt>
-            <dd><button onClick={e => Step.value++}>+ 1</button></dd>
-            <dt>
-              <a onClick={D.openDialog}>more settings</a>
-            </dt>
+            <dd>
+              <button onClick={e => Step.value++}>+ 1</button>
+            </dd>
           </dfl>
-          <D.Dialog ref={D.ref}>
-            <form onSubmit={e => {
-              e.preventDefault()
-            }}>
+
             </form>
           </D.Dialog>
         </>
