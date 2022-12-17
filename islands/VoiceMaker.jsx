@@ -1,15 +1,15 @@
 import VoiceMakerEffect, { Speak } from '../effects/VoiceMaker.effect.jsx'
-// import { useRef } from 'preact/hooks'
+import { persist, populate } from '../helpers/localStorage.js'
 
 export default args => {
-
-  // const textArea = useRef()
 
   const {
     synth
     , voices
     , englishOnly
     , changeEnglishOnly
+    , voice_name
+    , read
   } = VoiceMakerEffect()
 
   const clear = e => {
@@ -17,9 +17,8 @@ export default args => {
     e_read.value = ''
     e_read.click()
     e_read.focus()
-    // document.getElementById("read").click().focus()
-    // textArea.current.value = ''
-    // textArea.current?.click?.()?.focus?.()
+    const { voice_name, read } = populate("voice") ?? {}
+    persist("voice", { read : "", voice_name })
   }
 
   return (
@@ -29,7 +28,7 @@ export default args => {
     }}>
       <fieldset>
         <legend>Pick Voice</legend>
-        <select name="voice_name">
+        <select name="voice_name" defaultValue={ voice_name }>
           {voices.map(({
             name
             , lang
@@ -50,7 +49,7 @@ export default args => {
       </fieldset>
       <fieldset class="say-this">
         <legend>Say This</legend>
-        <textarea id="read" name="read"></textarea>
+        <textarea id="read" name="read" defaultValue={ read }></textarea>
         <div class="action">
           <button type="submit">Say this ⏎</button>
           <button type="button" onClick={clear}>Clear</button>

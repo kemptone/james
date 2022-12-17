@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'preact/hooks'
 import { CountryKeys } from '../data/Countries.ts'
 import Languages from '../data/Languages.ts'
+import { persist, populate } from '../helpers/localStorage.js'
 
 export default function () {
 
   const synth = window.speechSynthesis
+  const { voice_name, read } = populate("voice") ?? {}
   const [voices, addVoices] = useState([])
   const [englishOnly, changeEnglishOnly] = useState(true)
 
@@ -48,6 +50,8 @@ export default function () {
     , englishOnly
     , changeEnglishOnly
     , synth
+    , voice_name
+    , read
   }
 
 }
@@ -74,6 +78,8 @@ export const Speak = ({ synth, voices }) => (e) => {
     read
     , voice_name
   } = Object.fromEntries(new FormData(e.currentTarget))
+
+  persist("voice", { voice_name, read })
 
   if (synth.speaking) {
     console.error("speechSynthesis.speaking")
