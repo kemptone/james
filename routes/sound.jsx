@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="stylesheet" href="voice.css" />
       </Head>
       <div className="voice-page">
-        <h1>Text to Speech</h1>
+        <span></span>
         <VoiceMaker />
       </div>
       <Menu is_deno={false} />
