@@ -1,8 +1,8 @@
-import { CurrentStack, CurrentValue, AllStacks } from '../data/Calculations.ts';
+import { CurrentStack, AllStacks } from '../data/Calculations.ts';
 
-export default e => {
+export default (e: { currentTarget: { innerText: string; }; }) => {
 
-  let thing = e.currentTarget.innerText
+  const thing = e.currentTarget.innerText
 
   switch (thing) {
 
@@ -12,7 +12,7 @@ export default e => {
     }
 
     case "⌫": {
-      let most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
+      const most = CurrentStack.value.slice(0, CurrentStack.value.length - 1)
       CurrentStack.value = most
       return
     }
@@ -21,8 +21,7 @@ export default e => {
       return
 
     case "=": {
-      let normalized = [""]
-      let values = CurrentStack.value
+      const normalized = [""]
 
       CurrentStack.value.forEach(item => {
         if (Number.isInteger(Number.parseInt(item)))
@@ -34,7 +33,7 @@ export default e => {
       let a = 0
       let operand = "+"
 
-      let doToNumber = (number) => {
+      const doToNumber = (number: number) => {
         switch (operand) {
           case "÷":
             return a = a / number
@@ -54,7 +53,7 @@ export default e => {
           operand = item
       })
 
-      let value = a.toString().split("")
+      const value = a.toString().split("")
 
       AllStacks.value = [...AllStacks.value, [...CurrentStack.value, "=", ...value]]
 

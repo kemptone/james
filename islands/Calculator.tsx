@@ -1,6 +1,4 @@
 import { Head } from "$fresh/runtime.ts"
-import { useRef, useEffect, useState } from 'preact/hooks'
-import { CurrentStack, CurrentValue } from '../data/Calculations.ts'
 import Buttons from '../components/CalculatorButtons.tsx'
 import Values from '../components/CalculatorValues.tsx'
 import Log from '../components/CalculatorLog.tsx'

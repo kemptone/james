@@ -1,6 +1,9 @@
 import { useSignal, signal, effect, computed } from '@preact/signals'
+import _LS from '../helpers/localStorage.js'
 // import { initial, MathProblem } from '../helpers/smartMathGuy.ts'
 import Animations from './Animations.ts'
+
+const LS = _LS("Game")
 
 const animationsLength = Animations.length
 
@@ -36,11 +39,11 @@ export function divdeBigNumber(p: {
   }
 }
 
-export const Number1MultiplyBy = signal(1)
-export const Number2MultiplyBy = signal(10)
-export const Number1IsRandom = signal(true)
-export const IsNum2DerivedFromNum1 = signal(true)
-export const Step = signal(0)
+export const Number1MultiplyBy = signal(LS.populate("Number1MultiplyBy") ?? 1)
+export const Number2MultiplyBy = signal(LS.populate("Number2MultiplyBy") ?? 10)
+export const Number1IsRandom = signal(LS.populate("Number1IsRandom") ?? true)
+export const IsNum2DerivedFromNum1 = signal(LS.populate("IsNum2DerivedFromNum1") ?? true)
+export const Step = signal(LS.populate("Step") ?? 0)
 export const MenuOpen = signal(false)
 
 export const CurrentMathProblem = computed(() => {
@@ -66,4 +69,13 @@ export const CurrentAnimation = computed(() => {
     animationStep = animationStep - animationsLength
 
   return Animations[animationStep] || Animations[0]
+})
+
+effect(() => {
+  LS.persist("Number1MultiplyBy", Number1MultiplyBy.value)
+  LS.persist("Number2MultiplyBy", Number2MultiplyBy.value)
+  LS.persist("Number1IsRandom", Number1IsRandom.value)
+  LS.persist("IsNum2DerivedFromNum1", IsNum2DerivedFromNum1.value)
+  LS.persist("Step", Step.value)
+  LS.persist("MenuOpen", MenuOpen.value)
 })

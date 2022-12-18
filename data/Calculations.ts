@@ -1,16 +1,14 @@
-import { useSignal, signal, effect, computed } from '@preact/signals'
+import { signal, effect, computed } from '@preact/signals'
+import _LS from '../helpers/localStorage.js'
+
+const LS = _LS("Calculations")
 
 // [[ "2", "1", "x", "5", "=" ], [ "105" ]]
-export const AllStacks = signal([])
+export const AllStacks = signal( LS.populate("AllStacks") ?? [])
 
 // [ "2", "1", "x", "5" ]
-export const CurrentStack = signal([])
+export const CurrentStack = signal(LS.populate("CurrentStack") ?? [])
 
-effect(() => {
-  console.log({
-    CurrentStack: CurrentStack.value
-  })
-})
 
 // "0"
 export const CurrentValue = computed(() => {
@@ -28,7 +26,7 @@ export const CurrentValue = computed(() => {
   let a = 0
   let operand = "+"
 
-  let doToNumber = (number) => {
+  const doToNumber = (number: number) => {
     switch (operand) {
       case "÷":
         return a = a / number
@@ -56,4 +54,15 @@ export const CurrentValue = computed(() => {
 })
 
 // [[ "2", "1", "x", "5" ]]
-export const AllStack = signal([])
+// export const AllStack = signal(LS.populate("AllStack") ?? [])
+
+
+effect(() => {
+  // console.log({
+  //   CurrentStack: CurrentStack.value
+  // })
+  LS.persist("CurrentStack", CurrentStack.value)
+  LS.persist("AllStacks", AllStacks.value)
+  if (CurrentValue)
+    LS.persist("currentValue", CurrentValue.value)
+})

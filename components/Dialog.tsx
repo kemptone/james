@@ -1,7 +1,8 @@
+import { JSX } from 'preact'
 import { useRef, useEffect, useState } from 'preact/hooks'
 import { forwardRef } from 'preact/compat'
 
-const Dialog = forwardRef((args, ref) => {
+const Dialog = forwardRef<HTMLDialogElement>((args:JSX.HTMLAttributes<HTMLDialogElement>, ref) => {
   return (
     <dialog {...args} ref={ref}>
       {args.children}
@@ -10,15 +11,15 @@ const Dialog = forwardRef((args, ref) => {
   )
 })
 
-export default args => {
+export default (args: JSX.HTMLAttributes<HTMLDialogElement>) => {
 
-  const ref_dialog = useRef(undefined)
+  const ref_dialog = useRef<HTMLDialogElement>(null)
 
-  const openDialog = e => {
+  const openDialog = () => {
     ref_dialog?.current?.showModal()
   }
 
-  const closeDialog = e => {
+  const closeDialog = () => {
     ref_dialog?.current?.close()
   }
 

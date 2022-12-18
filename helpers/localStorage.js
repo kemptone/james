@@ -1,13 +1,13 @@
 function localStorageWrap (KEY) {
 
-    var hasLS = typeof window !== "undefined" && window.localStorage
+    const hasLS = typeof window !== "undefined" && window.localStorage
   
     function persist (key, s) {
   
-      var state = getState()
-        , save
+      const state = getState()
+      let save
   
-      s.__time = (new Date()).getTime()
+      // s.__time = (new Date()).getTime()
   
       state[key] = s
   
@@ -23,21 +23,23 @@ function localStorageWrap (KEY) {
   
     }
   
-    function populate (key, timelimit) {
+    function populate (key) {
+
+      return getState()[key]
   
-      timelimit = timelimit || Infinity
+      // timelimit = timelimit || Infinity
   
-      var state = getState()[key]
-        , now = (new Date()).getTime()
+      // var state = getState()[key]
+      //   , now = (new Date()).getTime()
   
-      if (state && state.__time > now - timelimit)
-        return state
+      // if (state && state.__time > now - timelimit)
+      //   return state
   
     }
   
     function getState() {
   
-      var state
+      let state
   
       try {
         state = JSON.parse(localStorage.getItem(KEY))

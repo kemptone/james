@@ -1,9 +1,11 @@
+import { JSX } from 'preact'
 import _onMouseDown from './CalculatorOnMouseDown.tsx'
 
-const Action = ({ className, children, onMouseDown = _onMouseDown }) => {
+function Action(props: JSX.HTMLAttributes<HTMLButtonElement>) {
+  const { className, onMouseDown = _onMouseDown, ...others } = props
   return (
     <button
-      {...{ className, children, onMouseDown }}
+      {...{ className, onMouseDown, ...others }}
     />
   )
 }

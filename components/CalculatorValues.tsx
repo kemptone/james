@@ -1,14 +1,12 @@
 import { CurrentStack, CurrentValue } from '../data/Calculations.ts';
 
-export function SmartJoin(values) {
-  let things = []
+export function SmartJoin(values: string[]) {
+  const things: string[] = []
   let str = ""
+
   values.forEach(item => {
     if (item !== "END")
       things.push(item)
-    // if (!Number.isInteger(Number.parseInt(item)))
-    //   things.push(` ${item} `)
-
   })
 
   things.forEach(th => {
@@ -16,13 +14,12 @@ export function SmartJoin(values) {
       str += ` ${th} `
     else
       str += th
-
   })
 
   return str
 }
 
-export default e => {
+export default () => {
 
   return (
     <>
