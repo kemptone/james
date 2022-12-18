@@ -15,6 +15,8 @@
 .voice-page h1 {
     text-align: right;
     font-weight: 100;
+    margin-top: max(env(safe-area-inset-top), 7px);
+    padding-top:4px;
 }
 
 fieldset {

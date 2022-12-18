@@ -28,10 +28,8 @@ export default args => {
                     <a href="/">Home</a>
                     <a href="/calculator">Calculator</a>
                     <a href="/sound">Sound</a>
-                </nav>
-                {args.is_deno ? (
                     <NumberGameActions />
-                ) : null}
+                </nav>
             </div>
         </header>
     )

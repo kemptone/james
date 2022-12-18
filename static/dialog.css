@@ -2,6 +2,7 @@ dialog:not([open]) {
   display: none;
 }
 
+
 dialog {
   position: fixed;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -19,7 +20,7 @@ dialog {
   /* display: flex;
   flex-direction: column; */
   border: 0 solid #e5e7eb;
-  top:calc(env(safe-area-inset-top, 0) + 0px);
+  padding-top:1em;
 }
 
 dialog::backdrop {
@@ -30,14 +31,14 @@ dialog::backdrop {
 
 dialog > form[method=dialog] {
   text-align: right;
-  margin-bottom: -1em;
+  /* margin-bottom: -1em; */
   position: absolute;
-  /* top:10px; */
+  top:1em;
   padding: 0;
   margin:0;
-  top:calc(env(safe-area-inset-top, 20px) + 20px);
-  right:20px;
+  right:1em;
 }
+
 dialog > form[method=dialog] > button {
   border: none;
   background-color: transparent;
@@ -56,5 +57,15 @@ dialog > form[method=dialog] > button {
     max-height:none;
     max-width: none;
     border-radius: 0;
+    padding-top:max(env(safe-area-inset-top, 0), 1em);
   }
+
+  dialog > form[method=dialog] {
+    top: max(calc(env(safe-area-inset-top, 0px)), 1em);
+  }
+
+  html:has(dialog[open]) {
+    background-color: var(--color4);
+  }
+
 }

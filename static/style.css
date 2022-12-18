@@ -9,11 +9,9 @@
 
 html {
     font-family: CooperHewitt;
-    /* font-size:62.5%; */
     font-size:100%;
     color: var(--color3);
     background-color: var(--color2);
-    /* background-image: url(/halftone-yellow.webp); */
     padding: 0;
     margin: 0;
 }

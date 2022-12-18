@@ -12,7 +12,7 @@ header:has( .navigation.open ) {
   overflow: hidden;
   font-size: 2em;
   padding-left: 25px;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 15px);
+  padding-top: 0;
 }
 
 .navigation.open {
@@ -23,6 +23,8 @@ header:has( .navigation.open ) {
 .navigation button {
   margin:0 5px 0 0;
   padding: 6px;
+  font-size:1.2rem;
+  color:var(--color3);
 }
 
 #hamburgermenu {
@@ -108,15 +110,6 @@ header:has( .navigation.open ) {
   left: 8px;
 }
 
-nav {
-    font-size: 22px;
-    padding: 1em 0 1em 0;
-}
-
-nav > a {
-  display: block;
-  line-height: 2rem;
-}
 
 @media (max-width:450px) {
     header {
@@ -129,6 +122,7 @@ header {
   left: 0;
   width: 100%;
   padding: 18px 16px;
+  padding-top: max(env(safe-area-inset-top), 18px);
 }
 
 header:has(nav.open) {
@@ -142,6 +136,8 @@ header nav ul li {
 header nav a {
   cursor:pointer;
   user-select:none;
+  font-size: 1.7rem;
+  margin-bottom:.8rem;
 }
 
 header dt {
@@ -157,4 +153,14 @@ header dt + dd {
 
 header code {
   vertical-align: top;
+}
+
+header nav {
+    font-size: 22px;
+    padding: 3rem 0 1em 0;
+}
+
+header nav > a {
+  display: block;
+  line-height: 2rem;
 }

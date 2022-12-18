@@ -18,17 +18,12 @@ export default () => {
     <Dialog>
       {D => (
         <>
-          <dfl>
-            <dt>
-              <button onClick={D.openDialog}>more settings</button>
-            </dt>
-          </dfl>
+          <a onClick={D.openDialog}>settings</a>
+
           <D.Dialog ref={D.ref}>
             <form onSubmit={e => {
               e.preventDefault()
             }}>
-
-
           <dfl>
             <dt>
               SIZE A
