@@ -15,7 +15,7 @@ export const CurrentValue = computed(() => {
 
   const normalized = [""]
 
-  CurrentStack.value.forEach(item => {
+  CurrentStack?.value?.forEach?.(item => {
     console.log(item)
     if (Number.isInteger(Number.parseInt(item)))
       normalized[normalized.length - 1] += item
