@@ -4,12 +4,12 @@ export function SmartJoin(values: string[]) {
   const things: string[] = []
   let str = ""
 
-  values.forEach(item => {
+  values?.forEach?.(item => {
     if (item !== "END")
       things.push(item)
   })
 
-  things.forEach(th => {
+  things?.forEach?.(th => {
     if (!Number.isInteger(Number.parseInt(th)))
       str += ` ${th} `
     else
