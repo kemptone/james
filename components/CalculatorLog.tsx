@@ -1,5 +1,5 @@
 import { CurrentStack, AllStacks, CurrentValue } from '../data/Calculations.ts';
-import { SmartJoin } from './_CalculatorValues.tsx'
+import { SmartJoin } from './CalculatorValues.tsx'
 
 export default e => {
 

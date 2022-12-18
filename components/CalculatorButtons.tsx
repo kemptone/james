@@ -1,4 +1,4 @@
-import _onMouseDown from './_CalculatorOnMouseDown.tsx'
+import _onMouseDown from './CalculatorOnMouseDown.tsx'
 
 const Action = ({ className, children, onMouseDown = _onMouseDown }) => {
   return (
