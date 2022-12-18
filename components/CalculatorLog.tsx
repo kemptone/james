@@ -12,7 +12,7 @@ export default e => {
         <div>
           **** PROBABLY OTHER BUGS AS WELL **** DO NOT USE FOR REAL NUMBERS
         </div>
-        {AllStacks.value.map((item, index) => {
+        {AllStacks?.value?.map?.((item, index) => {
           return (
             <div key={index}>
               {SmartJoin(item)}
