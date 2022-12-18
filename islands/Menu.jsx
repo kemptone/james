@@ -7,16 +7,18 @@ import { Head } from '$fresh/runtime.ts'
 export default args => {
 
     const $menu = (
-        <div
-            id="hamburgermenu"
-            onClick={e => {
-                MenuOpen.value = !MenuOpen.value
-            }}
-            className={MenuOpen.value ? "open" : ""}
-        >
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="menu-wrap">
+            <div
+                id="hamburgermenu"
+                onClick={e => {
+                    MenuOpen.value = !MenuOpen.value
+                }}
+                className={MenuOpen.value ? "open" : ""}
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     )
 
