@@ -1,4 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
+import Menu from '../islands/Menu.jsx'
 
 export default function Home() {
 
@@ -10,13 +11,13 @@ export default function Home() {
       </Head>
       <header></header>
       <main>
-        <h1>FARD</h1>
         <div id="wrap">
           <textarea id="readout"></textarea>
           <div id="letters" class="letters show-numbers"></div>
         </div>
       </main>
       <footer></footer>
+      <Menu />
     </>
   );
 }

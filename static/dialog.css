@@ -29,6 +29,10 @@ dialog::backdrop {
   -webkit-backdrop-filter: blur(3px);
 }
 
+dialog > form {
+  text-align: left;
+}
+
 dialog > form[method=dialog] {
   text-align: right;
   /* margin-bottom: -1em; */
