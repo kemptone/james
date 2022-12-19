@@ -3,13 +3,12 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/_app.tsx";
-import * as $2 from "./routes/api/joke.ts";
-import * as $3 from "./routes/brownthing.tsx";
-import * as $4 from "./routes/calculator.tsx";
-import * as $5 from "./routes/index.tsx";
-import * as $6 from "./routes/sound.jsx";
+import * as $0 from "./routes/_app.tsx";
+import * as $1 from "./routes/api/joke.ts";
+import * as $2 from "./routes/brownthing.tsx";
+import * as $3 from "./routes/calculator.tsx";
+import * as $4 from "./routes/index.tsx";
+import * as $5 from "./routes/sound.jsx";
 import * as $$0 from "./islands/Calculator.tsx";
 import * as $$1 from "./islands/Menu.jsx";
 import * as $$2 from "./islands/NumberGame.tsx";
@@ -17,13 +16,12 @@ import * as $$3 from "./islands/VoiceMaker.jsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/_app.tsx": $1,
-    "./routes/api/joke.ts": $2,
-    "./routes/brownthing.tsx": $3,
-    "./routes/calculator.tsx": $4,
-    "./routes/index.tsx": $5,
-    "./routes/sound.jsx": $6,
+    "./routes/_app.tsx": $0,
+    "./routes/api/joke.ts": $1,
+    "./routes/brownthing.tsx": $2,
+    "./routes/calculator.tsx": $3,
+    "./routes/index.tsx": $4,
+    "./routes/sound.jsx": $5,
   },
   islands: {
     "./islands/Calculator.tsx": $$0,

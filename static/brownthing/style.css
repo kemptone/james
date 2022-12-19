@@ -1,0 +1,100 @@
+:root {
+  --buttton-width:5em;
+}
+
+body {
+  background-color: rgb(0 0 0);
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+main {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+#wrap {
+  display:flex;
+  flex-wrap: wrap;
+  align-self: center;
+  margin: auto;
+  max-width: 41em;
+}
+
+#letters {
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.letters button {
+  font-size: 22px;
+  height: 2.7em;
+  min-width: var(--buttton-width);
+  box-sizing: border-box;
+  border: 0;
+  /* outline: 2px solid black; */
+  color:black;
+  background-color:white;
+  flex: 1;
+  margin: 8px;
+  user-select:none;
+  touch-action: manipulation;
+}
+
+.letters button.control.space {
+  min-width: calc( var(--buttton-width) * 1 );
+  flex:1;
+}
+
+/* .letters button.control.delete:after {
+  content:"⟵";
+  display:inline-block;
+} */
+
+.letters button i {
+  font-style: normal;
+}
+
+.letters .control {
+  flex:1;
+}
+
+.letters.show-numbers button b {
+  display:none;
+}
+
+.letters.show-letters button i {
+  display:none;
+}
+
+.letters.show-numbers .toggle-numbers {
+  display: none;
+}
+
+.letters.show-letters .toggle-letters {
+  display: none;
+}
+
+#readout {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  min-height: 1.5em;
+  flex: 1;
+  background-color: black;
+  border:0;
+  font-family: Arial, sans-serif;
+  /* font-family: monospace; */
+}
+
+@media (min-height:800px) {
+  #readout {
+    /* top:20%; */
+  }
+}
