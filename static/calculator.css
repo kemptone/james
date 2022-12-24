@@ -119,7 +119,7 @@
     /* box-sizing: border-box; */
   }
 
-  .meta-grid .log {
+  .meta-grid > .log {
     display: none;
   }
 
