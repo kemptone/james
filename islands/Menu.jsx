@@ -32,6 +32,20 @@ export default args => {
                     <a href="/sound">Sound</a>
                     <a href="/brownthing">Brown Thing</a>
                     <NumberGameActions />
+                    <button 
+                      id="reset-button"
+                      onClick={ e => {
+                        caches.delete("my-cache")
+
+                        navigator.serviceWorker.getRegistration().then(registration => {
+                            registration.unregister().then(() => {
+                              console.log('Service worker unregistered');
+                              location.reload()
+                            });
+                          });
+
+                      }}
+                    >Reset Site</button>
                 </nav>
             </div>
         </header>
