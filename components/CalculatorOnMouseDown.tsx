@@ -31,6 +31,7 @@ export default (e: { currentTarget: { innerText: string; }; }) => {
       })
 
       let a = 0
+      let dec = ""
       let operand = "+"
 
       const doToNumber = (number: number) => {
@@ -47,11 +48,22 @@ export default (e: { currentTarget: { innerText: string; }; }) => {
       }
 
       normalized.forEach(item => {
-        if (Number.isInteger(Number.parseInt(item)))
-          doToNumber(Number.parseInt(item))
-        else
+        if (item === ".")
+          return dec += "."
+        if (Number.isInteger(Number.parseFloat(item)))
+          doToNumber(Number.parseFloat(dec + item))
+        else {
           operand = item
+          dec = ""
+        }
       })
+
+      // normalized.forEach(item => {
+      //   if (Number.isInteger(Number.parseInt(item)))
+      //     doToNumber(Number.parseInt(item))
+      //   else
+      //     operand = item
+      // })
 
       const value = a.toString().split("")
 

@@ -1,4 +1,4 @@
-import { CurrentStack, AllStacks, CurrentValue } from '../data/Calculations.ts';
+import { AllStacks } from '../data/Calculations.ts';
 import { SmartJoin } from './CalculatorValues.tsx'
 
 export default e => {

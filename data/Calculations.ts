@@ -9,13 +9,12 @@ export const AllStacks = signal( LS.populate("AllStacks") ?? [])
 // [ "2", "1", "x", "5" ]
 export const CurrentStack = signal(LS.populate("CurrentStack") ?? [])
 
-
 // "0"
 export const CurrentValue = computed(() => {
 
   const normalized = [""]
 
-  CurrentStack?.value?.forEach?.(item => {
+  CurrentStack?.value?.forEach?.((item: string) => {
     console.log(item)
     if (Number.isInteger(Number.parseInt(item)))
       normalized[normalized.length - 1] += item
@@ -24,6 +23,7 @@ export const CurrentValue = computed(() => {
   })
 
   let a = 0
+  let dec = ""
   let operand = "+"
 
   const doToNumber = (number: number) => {
@@ -39,11 +39,17 @@ export const CurrentValue = computed(() => {
     }
   }
 
+  console.log({ normalized, operand })
+
   normalized.forEach(item => {
-    if (Number.isInteger(Number.parseInt(item)))
-      doToNumber(Number.parseInt(item))
-    else
+    if (item === ".")
+      return dec += "."
+    if (Number.isInteger(Number.parseFloat(item)))
+      doToNumber(Number.parseFloat(dec + item))
+    else {
       operand = item
+      dec = ""
+    }
   })
 
   if (normalized[normalized.length - 1] !== "")
