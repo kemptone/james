@@ -1,21 +1,14 @@
-import { AllStacks } from '../data/Calculations.ts';
-import { SmartJoin } from './CalculatorValues.tsx'
+import { Log } from '../data/Calculations2.ts';
 
 export default e => {
 
   return (
     <>
       <div class="log">
-        <div>
-          **** WARNING *** demo only, CALCULATOR IS NOT ACCURATE WITH DECIMAL
-        </div>
-        <div>
-          **** PROBABLY OTHER BUGS AS WELL **** DO NOT USE FOR REAL NUMBERS
-        </div>
-        {AllStacks?.value?.map?.((item, index) => {
+        {Log.value.map( (line, index) => {
           return (
-            <div key={index}>
-              {SmartJoin(item)}
+            <div key={line + index }>
+              { line }
             </div>
           )
         })}

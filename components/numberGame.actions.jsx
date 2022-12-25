@@ -49,6 +49,23 @@ export default () => {
             <dd>
               <button onClick={e => Step.value++}>+ 1</button>
             </dd>
+            <dt>All</dt>
+            <dd>
+              <button 
+                id="reset-button"
+                onClick={ e => {
+                  caches.delete("my-cache")
+
+                  navigator.serviceWorker.getRegistration().then(registration => {
+                      registration?.unregister().then(() => {
+                        console.log('Service worker unregistered');
+                        location.reload()
+                      });
+                    });
+
+                }}
+              >Reset Site</button>
+            </dd>
           </dfl>
 
             </form>

@@ -37,6 +37,8 @@
 
 .meta-grid .log {
   text-align: right;
+  max-height: calc(100vh - 184px);
+  overflow-y: auto;
 }
 
 .calculator-grid {
