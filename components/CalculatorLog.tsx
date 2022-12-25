@@ -5,7 +5,7 @@ export default e => {
   return (
     <>
       <div class="log">
-        {(Log.value || []).map( (line, index) => {
+        {(Log.value || [])?.map?.( (line, index) => {
           return (
             <div key={line + index }>
               { line }
