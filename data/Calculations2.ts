@@ -5,7 +5,7 @@ const { populate, persist } = LS("Calculations2")
 
 export const MainNumber = computed(() => {
   let str = CurrentCalc.value ?? ""
-  str = str.replaceAll("®", "")
+  str = str.replace("®", "")
   const [ main, second, ...others ] = str.split(/[÷×\+\-]/g).reverse()
   return main || second
 })
@@ -21,7 +21,7 @@ export const LogLine = computed(() => {
   if (str.indexOf("®") === str.length - 1)
     return Log.value[ Log.value.length - 1 ]
 
-  str = str.replaceAll("®", "")
+  str = str.replace("®", "")
   return str
 })
 
