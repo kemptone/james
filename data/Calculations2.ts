@@ -4,14 +4,14 @@ import LS from '../helpers/localStorage.js'
 const { populate, persist } = LS("Calculations2")
 
 export const MainNumber = computed(() => {
-  let str = CurrentCalc.value ?? ""
-  str = str.replace("®", "")
+  let str = String(CurrentCalc.value || "")
+  str = str.replaceAll("®", "")
   const [ main, second, ...others ] = str.split(/[÷×\+\-]/g).reverse()
   return main || second
 })
 
 export const LogLine = computed(() => {
-  let str = CurrentCalc.value ?? ""
+  let str = String(CurrentCalc.value || "")
 
   console.log({ 
     str 
@@ -21,7 +21,7 @@ export const LogLine = computed(() => {
   if (str.indexOf("®") === str.length - 1)
     return Log.value[ Log.value.length - 1 ]
 
-  str = str.replace("®", "")
+  str = str.replaceAll("®", "")
   return str
 })
 
