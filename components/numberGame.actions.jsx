@@ -49,7 +49,7 @@ export default () => {
             <dd>
               <button onClick={e => Step.value++}>+ 1</button>
             </dd>
-            <dt>All</dt>
+            <dt></dt>
             <dd>
               <button 
                 id="reset-button"
@@ -64,7 +64,7 @@ export default () => {
                     });
 
                 }}
-              >Reset Site</button>
+              >Reinstall App</button>
             </dd>
           </dfl>
 
