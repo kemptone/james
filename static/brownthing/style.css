@@ -46,6 +46,14 @@ main {
   touch-action: manipulation;
 }
 
+@media (max-width:463px) {
+
+  .letters button {
+    height: 2.0em;
+  }
+
+}
+
 .letters button.control.space {
   min-width: calc( var(--buttton-width) * 1 );
   flex:1;
