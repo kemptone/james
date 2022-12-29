@@ -11,7 +11,7 @@ import * as $4 from "./routes/index.tsx";
 import * as $5 from "./routes/sound.jsx";
 import * as $$0 from "./islands/Calculator.tsx";
 import * as $$1 from "./islands/Menu.jsx";
-import * as $$2 from "./islands/NumberGame.tsx";
+import * as $$2 from "./islands/NumberGame.jsx";
 import * as $$3 from "./islands/VoiceMaker.jsx";
 
 const manifest = {
@@ -26,7 +26,7 @@ const manifest = {
   islands: {
     "./islands/Calculator.tsx": $$0,
     "./islands/Menu.jsx": $$1,
-    "./islands/NumberGame.tsx": $$2,
+    "./islands/NumberGame.jsx": $$2,
     "./islands/VoiceMaker.jsx": $$3,
   },
   baseUrl: import.meta.url,

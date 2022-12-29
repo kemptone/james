@@ -1,15 +1,9 @@
-import { Problem } from "../components/Problem.tsx";
-import { Head } from "$fresh/runtime.ts";
+import { Problem } from "../components/Problem.tsx"
+import { Head } from "$fresh/runtime.ts"
 import { Number1MultiplyBy, Number2MultiplyBy, MenuOpen, CurrentMathProblem, Step, CurrentAnimation } from '../data/State.ts'
-import Animations from '../data/Animations.ts'
-import Dialog from '../components/Dialog.tsx'
-import { useState } from 'preact/hooks'
-
-const animationSource = Animations[0]
 
 export default function NumberGame() {
 
-  {/* @ts-expect-error: dugh */ }
   const $logo = (
     <lottie-player
       src={CurrentAnimation.value}
@@ -58,15 +52,11 @@ export default function NumberGame() {
           />
         </section>
         <span id="divisible">
-          [
-          {Number2MultiplyBy.value}
-          ]
-          [
-          {Number1MultiplyBy.value}
-          ]
+          [ {Number2MultiplyBy.value} ]
+          [ {Number1MultiplyBy.value} ]
         </span>
       </div>
 
     </div>
-  );
+  )
 }
