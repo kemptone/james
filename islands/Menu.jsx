@@ -32,6 +32,7 @@ export default args => {
                     <a href="/sound">Sound</a>
                     <a href="/brownthing">Brown Thing</a>
                     <a href="/music">Music</a>
+                    <a href="/music2">Music 2</a>
                     <NumberGameActions />
                 </nav>
             </div>
