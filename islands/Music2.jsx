@@ -1,19 +1,21 @@
 import { Head } from "$fresh/runtime.ts";
 import Menu from '../islands/Menu.jsx'
 import { useEffect, useState } from 'preact/hooks'
-
-const Mixer = [
-  [ "/music/leadguitar.mp3", "Lead Guitar" ]
-  , [ "/music/bassguitar.mp3", "Bass Guitar" ]
-  , [ "/music/drums.mp3", "Drums" ]
-  , [ "/music/horns.mp3", "Horns" ]
-  , [ "/music/clav.mp3", "Clav" ]
-]
+import MakeMixer from '../data/makeMixer.js'
 
 export default function Music () {
 
+  const Mixer = MakeMixer([
+    [ "/music/leadguitar.mp3", "Lead Guitar" ]
+    , [ "/music/bassguitar.mp3", "Bass Guitar" ]
+    , [ "/music/drums.mp3", "Drums" ]
+    , [ "/music/horns.mp3", "Horns" ]
+    , [ "/music/clav.mp3", "Clav" ]
+  ])
+
   let audioCtx = null
-  let offset = 0
+
+  const [ offset, setOffset ] = useState(0)
 
   async function getFile (filepath) {
     const response = await fetch(filepath)
@@ -22,21 +24,30 @@ export default function Music () {
     return audioBuffer
   }
 
-  function playTrack (audioBuffer) {
-    const trackSource = new AudioBufferSourceNode(
-      audioCtx
-      , { buffer: audioBuffer }
-    )
-    trackSource.connect(audioCtx.destination)
+  function loadAllTracks (e, after) {
+    if (audioCtx === null)
+      audioCtx = new AudioContext()
 
-    if (offset == 0) {
-      trackSource.start()
-      offset = audioCtx.currentTime
-    } else {
-      trackSource.start(0, audioCtx.currentTime - offset)
-    }
+    if (audioCtx.state === "suspended")
+      audioCtx.resume()
 
-    return trackSource
+    Mixer.forEach(([ item, change ]) => {
+      const [ sound, name ] = item
+      getFile(sound).then( file => {
+        const buffer = new AudioBufferSourceNode(
+          audioCtx
+          , { buffer: file }
+        )
+        buffer.loop = true
+        const gain = new GainNode(audioCtx, { gain : 0})
+        buffer.connect(gain)
+        gain.connect(audioCtx.destination)
+        buffer.start()
+
+        change([ sound, name, buffer, gain ])
+        after && after(gain)
+      })
+    })
   }
 
   return (
@@ -48,27 +59,37 @@ export default function Music () {
 
       <div>
 
+
         <div className="voice-page">
-          { Mixer.map(([ sound, name ]) => {
+          <button
+            children="LOAD ALL"
+            onClick={ loadAllTracks }
+          />
+
+          { Mixer.map(( [ item, change ] ) => {
+
+            const [ sound, name, buffer, gain, playing ] = item
+
             return (
               <button
                 children={ name }
                 key={ sound }
                 type="button"
+                class={ playing ? "playing" : "" }
                 onClick={ e => {
+
+                  if (!gain)
+                    return
 
                   if (audioCtx === null)
                     audioCtx = new AudioContext()
 
-                  getFile(sound).then( file => {
-                    console.log({ sound, file })
+                  if (playing)
+                    gain.gain.value = 0
+                  else
+                    gain.gain.value = 1
 
-                    if (audioCtx.state === "suspended")
-                      audioCtx.resume()
-
-                    playTrack( file )
-
-                  })
+                  change([ sound, name, buffer, gain, !playing ])
 
                 }}
               />
