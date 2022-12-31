@@ -3,11 +3,11 @@ import Menu from '../islands/Menu.jsx'
 import { useState } from 'preact/hooks'
 
 const OriginalMixer = [
-  [ "/music/leadguitar.mp3", "Lead Guitar" ]
+  [ "/music/drums.mp3", "Drums" ]
   , [ "/music/bassguitar.mp3", "Bass Guitar" ]
-  , [ "/music/drums.mp3", "Drums" ]
-  , [ "/music/horns.mp3", "Horns" ]
+  , [ "/music/leadguitar.mp3", "Lead Guitar" ]
   , [ "/music/clav.mp3", "Clav" ]
+  , [ "/music/horns.mp3", "Horns" ]
 ]
 
 export default function Music () {
