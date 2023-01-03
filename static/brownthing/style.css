@@ -51,6 +51,7 @@ main {
   touch-action: manipulation;
   font-family: Short_Stack;
   border-width: .07rem;
+  color: var(--color3);
 }
 
 @media (max-width:463px) {
