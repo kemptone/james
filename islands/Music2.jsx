@@ -23,7 +23,7 @@ export default function Music () {
     return audioBuffer
   }
 
-  function loadAllTracks (e, after) {
+  function loadAllTracks () {
     if (audioCtx === null)
       audioCtx = new AudioContext()
 
@@ -46,20 +46,18 @@ export default function Music () {
 
         change(mixer => ([
           ...mixer
-          , [ sound, name, buffer, gain ]
+          , { sound, name, buffer, gain }
         ]))
 
-        after && after(gain)
-
-        return [ sound, name, buffer, gain ]
+        return { sound, name, buffer, gain }
 
       }))
     })
 
     Promise.all( promises ).then( () => {
       promises.forEach( p => {
-        p.then( item => {
-          item[2].start()
+        p.then( ({ buffer }) => {
+          buffer.start()
         })
       })
     })
@@ -83,9 +81,9 @@ export default function Music () {
           />
           ) : null }
 
-          { Mixer.map(( item, index ) => {
+          { Mixer.map( item => {
 
-            const [ sound, name, buffer, gain, playing ] = item
+            const { sound, name, buffer, gain, playing } = item
 
             return (
               <button
@@ -103,7 +101,7 @@ export default function Music () {
                   change( prev => {
                     return prev.map( item => {
                       if (item[0] === sound)
-                        return [ sound, name, buffer, gain, gain.gain.value === 1 ]
+                        return { sound, name, buffer, gain, playing : gain.gain.value === 1 }
                       else
                         return item
                     })

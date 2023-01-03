@@ -38,3 +38,21 @@
     src: url(/CooperHewitt-WebFonts-public/CooperHewitt-ThinItalic.woff);
     font-style: italic;
 }
+
+
+@font-face {
+    font-family: Short_Stack;
+    src: url(/Short_Stack/ShortStack-Regular.ttf);
+}
+
+@font-face {
+    font-family: Fuzzy_Bubbles;
+    src: url(/Fuzzy_Bubbles/FuzzyBubbles-Bold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Fuzzy_Bubbles;
+    src: url(/Fuzzy_Bubbles/FuzzyBubbles-Regular.ttf);
+    font-weight: 400;
+}

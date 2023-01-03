@@ -146,6 +146,11 @@ header nav a {
   margin-bottom:.8rem;
 }
 
+header nav > span {
+  font-size: 1.7rem;
+  margin-bottom:.8rem;
+}
+
 header dt {
 }
 
@@ -167,6 +172,7 @@ header nav {
     text-align: right;
 }
 
+header nav > span,
 header nav > a {
   display: block;
   line-height: 2rem;
