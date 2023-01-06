@@ -27,6 +27,7 @@ export default () => {
         {Primary.map((item, index) => (
           <button
             children={index + 1}
+            key={ item }
             onClick={(e) => {
               setChosenColors(
                 [...chosenColors, `#${item}`],
@@ -34,6 +35,32 @@ export default () => {
             }}
           />
         ))}
+
+        <button
+          children="⟵"
+          onClick={(e) => {
+            setChosenColors(
+              [ ...chosenColors].slice(0, chosenColors.length - 1)
+            )
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenColors(
+                [...chosenColors, `transparent`]
+            )
+          }}
+        />
+
+        <button
+          children="♺"
+          onClick={(e) => {
+            setChosenColors([])
+          }}
+        />
+
       </section>
     </main>
   );
