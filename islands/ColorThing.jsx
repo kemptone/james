@@ -1,9 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
 
 const Primary = [
-  "FF0000",
-  "FF7F00",
-  "FFFF00",
+  "FF0000", // red
+  "FF7F00", // yellow
+  "FFFF00", // orange
+  "00FF00", // green
   "0000FF",
   "6A0DAD",
   "FFFFFF",
