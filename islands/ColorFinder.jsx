@@ -13,7 +13,7 @@ const def = {
 
 const Info = (data, name) => (
   <span>
-    {data && <span>{name}</span>}
+    {data !== undefined ? <span>{name}</span> : null}
     <strong>{data}</strong>
   </span>
 );
@@ -43,21 +43,22 @@ export default () => {
         }
       </section>
       <section class="picker">
-        <input
-          type="color"
-          name="color"
-          onChange={onPickerChange(allColors, setChosenColors)}
-          value={"#" + chosenColor.hex}
-        />
-        <div
+        {
+          /* <div
           class="example"
           style={chosenColor.hex
             ? {
               backgroundColor: "#" + chosenColor.hex,
             }
             : undefined}
-        >
-        </div>
+        /> */
+        }
+        <input
+          type="color"
+          onChange={onPickerChange(allColors, setChosenColors)}
+          // value={"#" + chosenColor.hex}
+          defaultValue={"#B2FFFF"}
+        />
       </section>
     </main>
   );
