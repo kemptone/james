@@ -41,6 +41,7 @@ export default (args) => {
           </span>
           <a href="/sound">Sound</a>
           <a href="/music2">Music</a>
+          <a href="/colorthing">Color Thing</a>
           <NumberGameActions />
         </nav>
       </div>
