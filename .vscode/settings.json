@@ -1,5 +1,9 @@
 {
   "deno.enable": true,
   "deno.unstable": true,
-  "editor.inlayHints.enabled": "offUnlessPressed"
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "[typescriptreact]": {
+      "editor.defaultFormatter": "denoland.vscode-deno"
+  }
 }

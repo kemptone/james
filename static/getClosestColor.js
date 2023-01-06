@@ -3,13 +3,13 @@ function colorDiff(rgb1, rgb2) {
   return Math.sqrt(
     Math.pow(rgb1.r - rgb2.r, 2) +
       Math.pow(rgb1.g - rgb2.g, 2) +
-      Math.pow(rgb1.b - rgb2.b, 2)
+      Math.pow(rgb1.b - rgb2.b, 2),
   );
 }
 function getClosestColor(RGBTo) {
   var closest = colors.reduce(function (prev, curr) {
     return Math.abs(colorDiff(curr.rgb, RGBTo)) <
-      Math.abs(colorDiff(prev.rgb, RGBTo))
+        Math.abs(colorDiff(prev.rgb, RGBTo))
       ? curr
       : prev;
   });
@@ -39,8 +39,8 @@ function createPickr() {
     },
   });
   pickr.on("change", function (color, source, instance) {
-    document.querySelector("div.color-square").style.background =
-      "#" + color.toHEXA(color).join("");
+    document.querySelector("div.color-square").style.background = "#" +
+      color.toHEXA(color).join("");
     let RGBArr = color.toRGBA(color);
     RGBArr[0] = Math.round(RGBArr[0]);
     RGBArr[1] = Math.round(RGBArr[1]);

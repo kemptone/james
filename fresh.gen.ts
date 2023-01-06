@@ -7,17 +7,19 @@ import * as $0 from "./routes/_app.tsx";
 import * as $1 from "./routes/api/joke.ts";
 import * as $2 from "./routes/brownthing.tsx";
 import * as $3 from "./routes/calculator.tsx";
-import * as $4 from "./routes/colorthing.tsx";
-import * as $5 from "./routes/index.tsx";
-import * as $6 from "./routes/music.jsx";
-import * as $7 from "./routes/music2.jsx";
-import * as $8 from "./routes/sound.jsx";
+import * as $4 from "./routes/colorfinder.tsx";
+import * as $5 from "./routes/colorthing.tsx";
+import * as $6 from "./routes/index.tsx";
+import * as $7 from "./routes/music.jsx";
+import * as $8 from "./routes/music2.jsx";
+import * as $9 from "./routes/sound.jsx";
 import * as $$0 from "./islands/Calculator.tsx";
-import * as $$1 from "./islands/ColorThing.jsx";
-import * as $$2 from "./islands/Menu.jsx";
-import * as $$3 from "./islands/Music2.jsx";
-import * as $$4 from "./islands/NumberGame.jsx";
-import * as $$5 from "./islands/VoiceMaker.jsx";
+import * as $$1 from "./islands/ColorFinder.jsx";
+import * as $$2 from "./islands/ColorThing.jsx";
+import * as $$3 from "./islands/Menu.jsx";
+import * as $$4 from "./islands/Music2.jsx";
+import * as $$5 from "./islands/NumberGame.jsx";
+import * as $$6 from "./islands/VoiceMaker.jsx";
 
 const manifest = {
   routes: {
@@ -25,19 +27,21 @@ const manifest = {
     "./routes/api/joke.ts": $1,
     "./routes/brownthing.tsx": $2,
     "./routes/calculator.tsx": $3,
-    "./routes/colorthing.tsx": $4,
-    "./routes/index.tsx": $5,
-    "./routes/music.jsx": $6,
-    "./routes/music2.jsx": $7,
-    "./routes/sound.jsx": $8,
+    "./routes/colorfinder.tsx": $4,
+    "./routes/colorthing.tsx": $5,
+    "./routes/index.tsx": $6,
+    "./routes/music.jsx": $7,
+    "./routes/music2.jsx": $8,
+    "./routes/sound.jsx": $9,
   },
   islands: {
     "./islands/Calculator.tsx": $$0,
-    "./islands/ColorThing.jsx": $$1,
-    "./islands/Menu.jsx": $$2,
-    "./islands/Music2.jsx": $$3,
-    "./islands/NumberGame.jsx": $$4,
-    "./islands/VoiceMaker.jsx": $$5,
+    "./islands/ColorFinder.jsx": $$1,
+    "./islands/ColorThing.jsx": $$2,
+    "./islands/Menu.jsx": $$3,
+    "./islands/Music2.jsx": $$4,
+    "./islands/NumberGame.jsx": $$5,
+    "./islands/VoiceMaker.jsx": $$6,
   },
   baseUrl: import.meta.url,
   config,
