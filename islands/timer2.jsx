@@ -132,8 +132,6 @@ export default () => {
           </select>
         </footer>
       </main>
-
-      <Menu />
     </>
   );
 };
