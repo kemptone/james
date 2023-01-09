@@ -5,47 +5,51 @@
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/_app.tsx";
 import * as $1 from "./routes/api/joke.ts";
-import * as $2 from "./routes/brownthing.tsx";
-import * as $3 from "./routes/calculator.tsx";
-import * as $4 from "./routes/colorfinder.tsx";
-import * as $5 from "./routes/colorthing.tsx";
-import * as $6 from "./routes/index.tsx";
-import * as $7 from "./routes/music.jsx";
-import * as $8 from "./routes/music2.jsx";
-import * as $9 from "./routes/sound.jsx";
-import * as $10 from "./routes/timer2.jsx";
-import * as $$0 from "./islands/Calculator.tsx";
-import * as $$1 from "./islands/ColorFinder.jsx";
-import * as $$2 from "./islands/ColorThing.jsx";
-import * as $$3 from "./islands/Menu.jsx";
-import * as $$4 from "./islands/Music2.jsx";
-import * as $$5 from "./islands/NumberGame.jsx";
-import * as $$6 from "./islands/VoiceMaker.jsx";
-import * as $$7 from "./islands/timer2.jsx";
+import * as $2 from "./routes/bignumbers.jsx";
+import * as $3 from "./routes/brownthing.tsx";
+import * as $4 from "./routes/calculator.tsx";
+import * as $5 from "./routes/colorfinder.tsx";
+import * as $6 from "./routes/colorthing.tsx";
+import * as $7 from "./routes/index.tsx";
+import * as $8 from "./routes/music.jsx";
+import * as $9 from "./routes/music2.jsx";
+import * as $10 from "./routes/sound.jsx";
+import * as $11 from "./routes/timer2.jsx";
+import * as $$0 from "./islands/BigNumbers.jsx";
+import * as $$1 from "./islands/Calculator.tsx";
+import * as $$2 from "./islands/ColorFinder.jsx";
+import * as $$3 from "./islands/ColorThing.jsx";
+import * as $$4 from "./islands/Menu.jsx";
+import * as $$5 from "./islands/Music2.jsx";
+import * as $$6 from "./islands/NumberGame.jsx";
+import * as $$7 from "./islands/VoiceMaker.jsx";
+import * as $$8 from "./islands/timer2.jsx";
 
 const manifest = {
   routes: {
     "./routes/_app.tsx": $0,
     "./routes/api/joke.ts": $1,
-    "./routes/brownthing.tsx": $2,
-    "./routes/calculator.tsx": $3,
-    "./routes/colorfinder.tsx": $4,
-    "./routes/colorthing.tsx": $5,
-    "./routes/index.tsx": $6,
-    "./routes/music.jsx": $7,
-    "./routes/music2.jsx": $8,
-    "./routes/sound.jsx": $9,
-    "./routes/timer2.jsx": $10,
+    "./routes/bignumbers.jsx": $2,
+    "./routes/brownthing.tsx": $3,
+    "./routes/calculator.tsx": $4,
+    "./routes/colorfinder.tsx": $5,
+    "./routes/colorthing.tsx": $6,
+    "./routes/index.tsx": $7,
+    "./routes/music.jsx": $8,
+    "./routes/music2.jsx": $9,
+    "./routes/sound.jsx": $10,
+    "./routes/timer2.jsx": $11,
   },
   islands: {
-    "./islands/Calculator.tsx": $$0,
-    "./islands/ColorFinder.jsx": $$1,
-    "./islands/ColorThing.jsx": $$2,
-    "./islands/Menu.jsx": $$3,
-    "./islands/Music2.jsx": $$4,
-    "./islands/NumberGame.jsx": $$5,
-    "./islands/VoiceMaker.jsx": $$6,
-    "./islands/timer2.jsx": $$7,
+    "./islands/BigNumbers.jsx": $$0,
+    "./islands/Calculator.tsx": $$1,
+    "./islands/ColorFinder.jsx": $$2,
+    "./islands/ColorThing.jsx": $$3,
+    "./islands/Menu.jsx": $$4,
+    "./islands/Music2.jsx": $$5,
+    "./islands/NumberGame.jsx": $$6,
+    "./islands/VoiceMaker.jsx": $$7,
+    "./islands/timer2.jsx": $$8,
   },
   baseUrl: import.meta.url,
   config,
