@@ -13,6 +13,7 @@ import * as $6 from "./routes/index.tsx";
 import * as $7 from "./routes/music.jsx";
 import * as $8 from "./routes/music2.jsx";
 import * as $9 from "./routes/sound.jsx";
+import * as $10 from "./routes/timer2.jsx";
 import * as $$0 from "./islands/Calculator.tsx";
 import * as $$1 from "./islands/ColorFinder.jsx";
 import * as $$2 from "./islands/ColorThing.jsx";
@@ -20,6 +21,7 @@ import * as $$3 from "./islands/Menu.jsx";
 import * as $$4 from "./islands/Music2.jsx";
 import * as $$5 from "./islands/NumberGame.jsx";
 import * as $$6 from "./islands/VoiceMaker.jsx";
+import * as $$7 from "./islands/timer2.jsx";
 
 const manifest = {
   routes: {
@@ -33,6 +35,7 @@ const manifest = {
     "./routes/music.jsx": $7,
     "./routes/music2.jsx": $8,
     "./routes/sound.jsx": $9,
+    "./routes/timer2.jsx": $10,
   },
   islands: {
     "./islands/Calculator.tsx": $$0,
@@ -42,6 +45,7 @@ const manifest = {
     "./islands/Music2.jsx": $$4,
     "./islands/NumberGame.jsx": $$5,
     "./islands/VoiceMaker.jsx": $$6,
+    "./islands/timer2.jsx": $$7,
   },
   baseUrl: import.meta.url,
   config,

@@ -43,6 +43,7 @@ export default (args) => {
           <a href="/music2">Music</a>
           <a href="/colorthing">Color Thing</a>
           <a href="/colorfinder">Color Finder</a>
+          <a href="/timer2">Timer</a>
           <NumberGameActions />
         </nav>
       </div>
