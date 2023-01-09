@@ -45,6 +45,7 @@ export default (args) => {
           <a href="/colorfinder">Color Finder</a>
           <a href="/bignumbers">Big Numbers</a>
           <a href="/timer2">Timer</a>
+          <a href="/lasko">Lasko</a>
           <NumberGameActions />
         </nav>
       </div>

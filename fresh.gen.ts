@@ -11,10 +11,11 @@ import * as $4 from "./routes/calculator.tsx";
 import * as $5 from "./routes/colorfinder.tsx";
 import * as $6 from "./routes/colorthing.tsx";
 import * as $7 from "./routes/index.tsx";
-import * as $8 from "./routes/music.jsx";
-import * as $9 from "./routes/music2.jsx";
-import * as $10 from "./routes/sound.jsx";
-import * as $11 from "./routes/timer2.jsx";
+import * as $8 from "./routes/lasko.jsx";
+import * as $9 from "./routes/music.jsx";
+import * as $10 from "./routes/music2.jsx";
+import * as $11 from "./routes/sound.jsx";
+import * as $12 from "./routes/timer2.jsx";
 import * as $$0 from "./islands/BigNumbers.jsx";
 import * as $$1 from "./islands/Calculator.tsx";
 import * as $$2 from "./islands/ColorFinder.jsx";
@@ -35,10 +36,11 @@ const manifest = {
     "./routes/colorfinder.tsx": $5,
     "./routes/colorthing.tsx": $6,
     "./routes/index.tsx": $7,
-    "./routes/music.jsx": $8,
-    "./routes/music2.jsx": $9,
-    "./routes/sound.jsx": $10,
-    "./routes/timer2.jsx": $11,
+    "./routes/lasko.jsx": $8,
+    "./routes/music.jsx": $9,
+    "./routes/music2.jsx": $10,
+    "./routes/sound.jsx": $11,
+    "./routes/timer2.jsx": $12,
   },
   islands: {
     "./islands/BigNumbers.jsx": $$0,
