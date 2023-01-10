@@ -11,7 +11,7 @@ export default (args) => {
         onClick={(e) => {
           open(!MenuOpen);
         }}
-        className={MenuOpen.value ? "open" : ""}
+        className={MenuOpen ? "open" : ""}
       >
         <span></span>
         <span></span>

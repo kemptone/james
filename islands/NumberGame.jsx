@@ -1,16 +1,21 @@
-import { Problem } from "../components/Problem.tsx"
-import { Head } from "$fresh/runtime.ts"
-import { Number1MultiplyBy, Number2MultiplyBy, MenuOpen, CurrentMathProblem, Step } from '../data/State.ts'
-import { Logo, LogoBottom } from "../components/Logos.jsx"
+import { Problem } from "../components/Problem.tsx";
+import { Head } from "$fresh/runtime.ts";
+import {
+  CurrentMathProblem,
+  // MenuOpen,
+  Number1MultiplyBy,
+  Number2MultiplyBy,
+  Step,
+} from "../data/State.ts";
+import { Logo, LogoBottom } from "../components/Logos.jsx";
 
 export default function NumberGame() {
-
   return (
     <div>
-
       <Head>
         <title>Number Deno Dev</title>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+        </script>
       </Head>
 
       <div>
@@ -26,17 +31,15 @@ export default function NumberGame() {
             step={Step.value}
             onSubmit={() => Step.value += 1}
             act="÷"
-            onFocus={e => {
-              MenuOpen.value = false
-            }}
+            // onFocus={e => {
+            //   MenuOpen.value = false
+            // }}
           />
         </section>
         <span id="divisible">
-          [ {Number2MultiplyBy.value} ]
-          [ {Number1MultiplyBy.value} ]
+          [ {Number2MultiplyBy.value} ] [ {Number1MultiplyBy.value} ]
         </span>
       </div>
-
     </div>
-  )
+  );
 }
