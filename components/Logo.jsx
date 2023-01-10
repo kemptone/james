@@ -1,5 +1,4 @@
 import { Problem } from "../components/Problem.tsx";
-import { Head } from "$fresh/runtime.ts";
 import {
   CurrentAnimation,
   CurrentMathProblem,
@@ -37,12 +36,6 @@ export default function NumberGame() {
 
   return (
     <div>
-      <Head>
-        <title>Number Deno Dev</title>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
-        </script>
-      </Head>
-
       <div>
         <span className="animation top">
           {$logo}

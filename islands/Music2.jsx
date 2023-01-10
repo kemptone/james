@@ -1,5 +1,3 @@
-import { Head } from "$fresh/runtime.ts";
-import Menu from "../islands/Menu.jsx";
 import { useState } from "preact/hooks";
 
 const OriginalMixer = [
@@ -67,11 +65,6 @@ export default function Music() {
 
   return (
     <>
-      <Head>
-        <title>Web Audio API examples: Loading audio files</title>
-        <link rel="stylesheet" href="voice.css" />
-      </Head>
-
       <div>
         <div className="voice-page">
           {Mixer.length === 0
