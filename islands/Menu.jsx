@@ -6,17 +6,17 @@ export default (args) => {
 
   const $menu = (
     <div class="menu-wrap">
-      <div
+      <button
         id="hamburgermenu"
         onClick={(e) => {
-          open(!MenuOpen);
+          open((o) => !o);
         }}
         className={MenuOpen ? "open" : ""}
       >
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   );
 

@@ -46,6 +46,7 @@ header:has( .navigation.open ) {
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   cursor: pointer;
+  border: none;
 }
 
 #hamburgermenu span {
