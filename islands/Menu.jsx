@@ -1,16 +1,15 @@
-import { useEffect, useState } from "preact/hooks";
-import { useSignal } from "@preact/signals";
 import NumberGameActions from "../components/numberGame.actions.jsx";
-import { MenuOpen } from "../data/State.ts";
-import { Head } from "$fresh/runtime.ts";
+import { useState } from "preact/hooks";
 
 export default (args) => {
+  const [MenuOpen, open] = useState(false);
+
   const $menu = (
     <div class="menu-wrap">
       <div
         id="hamburgermenu"
         onClick={(e) => {
-          MenuOpen.value = !MenuOpen.value;
+          open(!MenuOpen);
         }}
         className={MenuOpen.value ? "open" : ""}
       >
@@ -24,7 +23,7 @@ export default (args) => {
   return (
     <header>
       {$menu}
-      <div class={`navigation ${MenuOpen.value ? "open" : ""}`}>
+      <div class={`navigation ${MenuOpen ? "open" : ""}`}>
         <nav>
           <a href="/">Home</a>
           <a href="/calculator">Calculator</a>
