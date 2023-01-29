@@ -65,6 +65,24 @@ export default () => {
         />
 
         <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Bo`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Gianna`],
+            );
+          }}
+        />
+
+        <button
           children="♺"
           onClick={(e) => {
             setChosenNames([]);
