@@ -56,7 +56,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Daniel`],
@@ -65,7 +65,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Bo`],
@@ -74,7 +74,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Gianna`],
@@ -83,7 +83,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Makenzie`],
@@ -92,7 +92,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Blake`],
@@ -101,7 +101,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Merlin`],
@@ -110,7 +110,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Santa Clause`],
@@ -119,16 +119,16 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
-              [...chosenNames, `Dumpy`],
+              [...chosenNames, `Tooth Fairy`],
             );
           }}
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Audry`],
@@ -137,7 +137,7 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Braxton`],
@@ -146,10 +146,19 @@ export default () => {
         />
 
         <button
-          children=" "
+          children="🙃"
           onClick={(e) => {
             setChosenNames(
               [...chosenNames, `Adley`],
+            );
+          }}
+        />
+
+        <button
+          children="🙃"
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Crista`],
             );
           }}
         />
