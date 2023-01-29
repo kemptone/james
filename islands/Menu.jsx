@@ -45,6 +45,7 @@ export default (args) => {
           <a href="/bignumbers">Big Numbers</a>
           <a href="/timer2">Timer</a>
           <a href="/lasko">Lasko</a>
+          <a href="/kids">Kids</a>
           <NumberGameActions />
         </nav>
       </div>

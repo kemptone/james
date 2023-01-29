@@ -11,20 +11,22 @@ import * as $4 from "./routes/calculator.tsx";
 import * as $5 from "./routes/colorfinder.tsx";
 import * as $6 from "./routes/colorthing.tsx";
 import * as $7 from "./routes/index.tsx";
-import * as $8 from "./routes/lasko.jsx";
-import * as $9 from "./routes/music.jsx";
-import * as $10 from "./routes/music2.jsx";
-import * as $11 from "./routes/sound.jsx";
-import * as $12 from "./routes/timer2.jsx";
+import * as $8 from "./routes/kids.tsx";
+import * as $9 from "./routes/lasko.jsx";
+import * as $10 from "./routes/music.jsx";
+import * as $11 from "./routes/music2.jsx";
+import * as $12 from "./routes/sound.jsx";
+import * as $13 from "./routes/timer2.jsx";
 import * as $$0 from "./islands/BigNumbers.jsx";
 import * as $$1 from "./islands/Calculator.tsx";
 import * as $$2 from "./islands/ColorFinder.jsx";
 import * as $$3 from "./islands/ColorThing.jsx";
-import * as $$4 from "./islands/Menu.jsx";
-import * as $$5 from "./islands/Music2.jsx";
-import * as $$6 from "./islands/NumberGame.jsx";
-import * as $$7 from "./islands/VoiceMaker.jsx";
-import * as $$8 from "./islands/timer2.jsx";
+import * as $$4 from "./islands/KidThing.jsx";
+import * as $$5 from "./islands/Menu.jsx";
+import * as $$6 from "./islands/Music2.jsx";
+import * as $$7 from "./islands/NumberGame.jsx";
+import * as $$8 from "./islands/VoiceMaker.jsx";
+import * as $$9 from "./islands/timer2.jsx";
 
 const manifest = {
   routes: {
@@ -36,22 +38,24 @@ const manifest = {
     "./routes/colorfinder.tsx": $5,
     "./routes/colorthing.tsx": $6,
     "./routes/index.tsx": $7,
-    "./routes/lasko.jsx": $8,
-    "./routes/music.jsx": $9,
-    "./routes/music2.jsx": $10,
-    "./routes/sound.jsx": $11,
-    "./routes/timer2.jsx": $12,
+    "./routes/kids.tsx": $8,
+    "./routes/lasko.jsx": $9,
+    "./routes/music.jsx": $10,
+    "./routes/music2.jsx": $11,
+    "./routes/sound.jsx": $12,
+    "./routes/timer2.jsx": $13,
   },
   islands: {
     "./islands/BigNumbers.jsx": $$0,
     "./islands/Calculator.tsx": $$1,
     "./islands/ColorFinder.jsx": $$2,
     "./islands/ColorThing.jsx": $$3,
-    "./islands/Menu.jsx": $$4,
-    "./islands/Music2.jsx": $$5,
-    "./islands/NumberGame.jsx": $$6,
-    "./islands/VoiceMaker.jsx": $$7,
-    "./islands/timer2.jsx": $$8,
+    "./islands/KidThing.jsx": $$4,
+    "./islands/Menu.jsx": $$5,
+    "./islands/Music2.jsx": $$6,
+    "./islands/NumberGame.jsx": $$7,
+    "./islands/VoiceMaker.jsx": $$8,
+    "./islands/timer2.jsx": $$9,
   },
   baseUrl: import.meta.url,
   config,
