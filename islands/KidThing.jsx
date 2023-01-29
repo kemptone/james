@@ -83,6 +83,69 @@ export default () => {
         />
 
         <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Makenzie`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Blake`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Merlin`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Santa Clause`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Dumpy`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Audry`],
+            );
+          }}
+        />
+
+        <button
+          children=" "
+          onClick={(e) => {
+            setChosenNames(
+              [...chosenNames, `Braxton`],
+            );
+          }}
+        />
+
+        <button
           children="♺"
           onClick={(e) => {
             setChosenNames([]);
