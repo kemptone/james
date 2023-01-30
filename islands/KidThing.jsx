@@ -59,10 +59,19 @@ export default () => {
             />
 
             <button
-              children="🙃"
+              children="⏰"
               onClick={(e) => {
                 setChosenNames(
                   [...chosenNames, `Daniel`],
+                );
+              }}
+            />
+
+            <button
+              children="⏲"
+              onClick={(e) => {
+                setChosenNames(
+                  [...chosenNames, `Mia`],
                 );
               }}
             />
@@ -83,16 +92,16 @@ export default () => {
             <main className="colorthing">
               <div class="colors">
                 <button
-                  children="🙃"
+                  children="♞"
                   onClick={(e) => {
                     setChosenNames(
-                      [...chosenNames, `Bo`],
+                      [...chosenNames, `Beau`],
                     );
                   }}
                 />
 
                 <button
-                  children="🙃"
+                  children="⛱"
                   onClick={(e) => {
                     setChosenNames(
                       [...chosenNames, `Gianna`],
@@ -101,7 +110,7 @@ export default () => {
                 />
 
                 <button
-                  children="🙃"
+                  children="💃"
                   onClick={(e) => {
                     setChosenNames(
                       [...chosenNames, `Makenzie`],
@@ -110,7 +119,7 @@ export default () => {
                 />
 
                 <button
-                  children="🙃"
+                  children="🏂"
                   onClick={(e) => {
                     setChosenNames(
                       [...chosenNames, `Blake`],
@@ -119,7 +128,7 @@ export default () => {
                 />
 
                 <button
-                  children="🙃"
+                  children="🗿"
                   onClick={(e) => {
                     setChosenNames(
                       [...chosenNames, `Merlin`],
@@ -128,10 +137,10 @@ export default () => {
                 />
 
                 <button
-                  children="🙃"
+                  children="🎅"
                   onClick={(e) => {
                     setChosenNames(
-                      [...chosenNames, `Santa Clause`],
+                      [...chosenNames, `Santa Claus`],
                     );
                   }}
                 />
@@ -212,7 +221,16 @@ export default () => {
                   children="🙃"
                   onClick={(e) => {
                     setChosenNames(
-                      [...chosenNames, `Presley`],
+                      [...chosenNames, `Presly P`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="⭐"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Alexis`],
                     );
                   }}
                 />
@@ -221,7 +239,88 @@ export default () => {
                   children="🙃"
                   onClick={(e) => {
                     setChosenNames(
-                      [...chosenNames, `Alexis`],
+                      [...chosenNames, `Sophie`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Mikey`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Davey Jack`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Hazel`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Oliver`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="⚾"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Lucas`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Presly`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🏈"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Jackson`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Aubrey`],
+                    );
+                  }}
+                />
+
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Elliot`],
                     );
                   }}
                 />

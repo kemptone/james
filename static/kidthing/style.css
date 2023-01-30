@@ -37,6 +37,14 @@ main.colorthing .colors {
   padding: 20px;
 }
 
+dialog main.colorthing .colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px;
+  justify-content: space-around;
+}
+
 main.colorthing .colors button {
   padding: 13px 0;
 }
