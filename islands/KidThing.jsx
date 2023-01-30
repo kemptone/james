@@ -23,7 +23,7 @@ const Secondary =
 //   "FFC0CB",
 // ];
 
-console.log(Primary);
+console.log({ Primary, Secondary });
 
 export default () => {
   const [chosenNames, setChosenNames] = useState([]);
