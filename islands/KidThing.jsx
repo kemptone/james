@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import Dialog from "../components/Dialog.tsx";
 
 const Primary =
   "Abby  Adaliz  Aiden  Angelo  Anthony  Bailey  Benny  Briana  Chase  Cierra  Cruz  Gustavo  Hudson  Iker  James  Kenia  Leilani  Lindsey  Melanie  Merryck  Michael  Sofia V  Sophia C"
@@ -26,195 +27,209 @@ export default () => {
   // console.log({ chosenNames });
 
   return (
-    <main class="colorthing">
-      <section class="readout">
-        {chosenNames.map((name, index) => (
-          // <span class="chosen" key={index} children={{ name }} />
-          <span class="chosen" children={name} />
-        ))}
-      </section>
-      <section class="colors">
-        {Primary.map((item, index) => (
-          <button
-            children={index + 1}
-            key={item + index}
-            onClick={(e) => {
-              setChosenNames(
-                [...chosenNames, item],
-              );
-            }}
-          />
-        ))}
+    <Dialog>
+      {(D) => (
+        <main class="colorthing">
+          <section class="readout">
+            {chosenNames.map((name, index) => (
+              // <span class="chosen" key={index} children={{ name }} />
+              <span class="chosen" children={name} />
+            ))}
+          </section>
+          <section class="colors">
+            {Primary.map((item, index) => (
+              <button
+                children={index + 1}
+                key={item + index}
+                onClick={(e) => {
+                  setChosenNames(
+                    [...chosenNames, item],
+                  );
+                }}
+              />
+            ))}
 
-        <button
-          children="⟵"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames].slice(0, chosenNames.length - 1),
-            );
-          }}
-        />
+            <button
+              children="⟵"
+              onClick={(e) => {
+                setChosenNames(
+                  [...chosenNames].slice(0, chosenNames.length - 1),
+                );
+              }}
+            />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Daniel`],
-            );
-          }}
-        />
+            <button
+              children="🙃"
+              onClick={(e) => {
+                setChosenNames(
+                  [...chosenNames, `Daniel`],
+                );
+              }}
+            />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Bo`],
-            );
-          }}
-        />
+            <button
+              children="🌗"
+              onClick={D.openDialog}
+            />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Gianna`],
-            );
-          }}
-        />
+            <button
+              children="♺"
+              onClick={(e) => {
+                setChosenNames([]);
+              }}
+            />
+          </section>
+          <D.Dialog ref={D.ref}>
+            <main className="colorthing">
+              <div class="colors">
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Bo`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Makenzie`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Gianna`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Blake`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Makenzie`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Merlin`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Blake`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Santa Clause`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Merlin`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Tooth Fairy`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Santa Clause`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Audry`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Tooth Fairy`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Braxton`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Audry`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Adley`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Braxton`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Crista`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Adley`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Jake`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Crista`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Makayla`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Jake`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Atticus`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Makayla`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Presley`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Atticus`],
+                    );
+                  }}
+                />
 
-        <button
-          children="🙃"
-          onClick={(e) => {
-            setChosenNames(
-              [...chosenNames, `Alexis`],
-            );
-          }}
-        />
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Presley`],
+                    );
+                  }}
+                />
 
-        <button
-          children="♺"
-          onClick={(e) => {
-            setChosenNames([]);
-          }}
-        />
-      </section>
-    </main>
+                <button
+                  children="🙃"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames, `Alexis`],
+                    );
+                  }}
+                />
+              </div>
+            </main>
+          </D.Dialog>
+        </main>
+      )}
+    </Dialog>
   );
 };
