@@ -23,7 +23,21 @@ const Secondary =
 //   "FFC0CB",
 // ];
 
-console.log({ Primary, Secondary });
+// console.log({ Primary, Secondary });
+
+// console.log(
+//   Primary.join(" is here..."),
+// );
+
+console.log(
+  [...Primary, ...Secondary].join(" is here.\n"),
+  // Secondary.join(" is here... "),
+);
+
+console.log(
+  [...Primary, ...Secondary].join(" is absent.\n"),
+  // Secondary.join(" is here... "),
+);
 
 export default () => {
   const [chosenNames, setChosenNames] = useState([]);
