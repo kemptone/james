@@ -41,6 +41,7 @@ console.log(
 
 export default () => {
   const [chosenNames, setChosenNames] = useState([]);
+  const [showingMissing, setShowingMissing] = useState(false);
 
   // console.log({ chosenNames });
 
@@ -98,7 +99,10 @@ export default () => {
 
             <button
               children="🌗"
-              onClick={D.openDialog}
+              onClick={(e) => {
+                D.openDialog();
+                setShowingMissing(false);
+              }}
             />
 
             <button
@@ -110,7 +114,21 @@ export default () => {
           </section>
           <D.Dialog ref={D.ref}>
             <main className="colorthing">
+              {showingMissing
+                ? (
+                  <div className="readout">
+                    {Primary.filter((name) =>
+                      chosenNames.join("::").indexOf(name) === -1
+                    ).map((name) => <span className="chosen">{name}</span>)}
+                  </div>
+                )
+                : null}
               <div class="colors">
+                <button
+                  onClick={(e) => setShowingMissing(!showingMissing)}
+                >
+                  ?
+                </button>
                 {Secondary.map((item, index) => (
                   <button
                     children={index + 1}
