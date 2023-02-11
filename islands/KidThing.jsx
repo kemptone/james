@@ -76,14 +76,16 @@ export default () => {
               }}
             />
 
-            <button
+            {
+              /* <button
               children="⏰"
               onClick={(e) => {
                 setChosenNames(
                   [...chosenNames, `Cierra`],
                 );
               }}
-            />
+            /> */
+            }
 
             <button
               children="⏲"
