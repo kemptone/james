@@ -44,6 +44,7 @@ export default (args) => {
           <a href="/colorfinder">Color Finder</a>
           <a href="/bignumbers">Big Numbers</a>
           <a href="/timer2">Timer</a>
+          <a href="/timer3">Timer 3</a>
           <a href="/lasko">Lasko</a>
           <a href="/kids">Kids</a>
           <NumberGameActions />

@@ -15,77 +15,58 @@ export default () => {
   // const [startTime, setStartTime] = useState(new Date());
   const animatedImage = useRef(null);
 
-  const OnAnimationIteration = (startTime) => (e) => {
-    console.count("animation");
-    const currentTime = new Date();
-    const elapsedTime = (currentTime - startTime) / 1000;
+  let rotation = 0;
+  let baseRateOfRotation = 4;
+  let rateOfRotation = 4;
+  const baseRateOfSlowdown = 1;
+  let rateOfSlowdown = .9987;
+  let threshold = .03;
+  let animation2;
 
-    setSpinTimer((prev) => {
-      console.log({
-        elapsedTime,
-        spintimer: prev,
-        offtimer,
-      });
-
-      const stimer = prev * 1.2;
-
-      document?.body?.style?.setProperty?.("--spintimer", stimer + "s");
-      // document?.body?.style?.setProperty?.("--offtimer", offtimer + "s");
-
-      return stimer;
-    });
-
-    // setSpinTimer(spintimer * 1.2);
-  };
+  function stopAll() {
+    setTimeleft(1);
+  }
 
   function countDown() {
     if (animationState) {
       return stopAll();
     }
 
+    clearInterval(animation2);
+
     const bottom = Sounds?.bottom?.play();
     const middle = Sounds?.middle?.play();
-    // setStartTime(new Date());
-    const startTime = new Date();
+    const e_image = document.querySelector("img#spinner");
 
-    const onAnimationIteration = OnAnimationIteration(startTime, timeleft);
+    const animation = setInterval((e) => {
+      rotation += rateOfRotation;
+      e_image.style.transform = `rotate(${rotation}deg)`;
+    }, 0);
 
     const interval = setInterval((e) => {
       setTimeleft((prev) => {
         if (prev === 1 || !prev) {
+          setAnimation("");
           clearInterval(interval);
+          clearInterval(animation);
           Sounds?.middle?.fade(1, 0, 2800, middle);
           Sounds?.bottom?.fade(1, 0, 4000, bottom);
 
-          // setAnimation("spin-end");
-          // setTimeout(() => {
-          //   // setAnimation("end");
-          //   // setTimeout(() => {
-          //   setAnimation("");
-          //   // }, 3000);
-          // }, offtimer * 1000);
-
-          const e_image = document.querySelector("img#spinner");
-          e_image.removeEventListener(
-            "animationiteration",
-            onAnimationIteration,
-          );
-
-          e_image.addEventListener(
-            "animationiteration",
-            onAnimationIteration,
-          );
+          animation2 = setInterval((e) => {
+            if (rateOfRotation < threshold) {
+              return clearInterval(animation2);
+            }
+            console.count("animation2");
+            rateOfRotation *= rateOfSlowdown;
+            rotation += rateOfRotation;
+            e_image.style.transform = `rotate(${rotation}deg)`;
+          }, 0);
         }
         return Math.max(0, prev - 1);
       });
     }, 1000);
 
     setAnimation("spin");
-    // player.play();
-  }
-
-  function stopAll() {
-    setTimeleft(1);
   }
 
   useEffect(() => {
@@ -119,16 +100,6 @@ export default () => {
     alarm += Number(seconds);
     setTimeleft(alarm);
     setMaxtime(alarm);
-
-    document?.body?.style?.setProperty?.("--spintimer", spintimer + "s");
-    document?.body?.style?.setProperty?.("--offtimer", offtimer + "s");
-
-    // document.querySelector("img#spinner").addEventListener(
-    //   "animationiteration",
-    //   (e) => {
-    //     console.count("iteration");
-    //   },
-    // );
   }, [hours, minutes, seconds]);
 
   return (
@@ -146,6 +117,20 @@ export default () => {
             <div>
               <span>Go Off:&nbsp;&nbsp;</span>
               <input
+                type="range"
+                name="rate"
+                min="1"
+                max="200"
+                onChange={(e) => {
+                  const value = Number(e.currentTarget.value);
+                  clearInterval(animation2);
+                  rateOfSlowdown = baseRateOfSlowdown - (value * .0001);
+                  rateOfRotation = baseRateOfRotation;
+                  console.log({ rateOfSlowdown });
+                }}
+              />
+              {
+                /* <input
                 type="number"
                 name="tilloff"
                 onChange={(e) => {
@@ -153,7 +138,8 @@ export default () => {
                   setOffTimer(value);
                   // document?.body?.setProperty?.("--slow-down", value);
                 }}
-              />
+              /> */
+              }
             </div>
             <div>
               <span>Slow Down:&nbsp;&nbsp;</span>
