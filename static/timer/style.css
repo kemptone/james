@@ -19,12 +19,36 @@ header img {
 }
 
 footer {
-  padding: 18px;
-  display: flex;
-  justify-content: space-between;
   position:fixed;
   bottom:0;
   width:calc(100% - 36px);
+
+}
+
+footer > div.new-timer-section {
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer > div.new-timer-section input {
+  padding: 10px;
+  font-size: 20px;
+}
+
+footer > div.new-timer-section button {
+  padding: 20px;
+}
+
+footer > div > input {
+  padding: 20px;
+}
+
+footer > div {
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
 }
 
 footer select {
@@ -46,14 +70,18 @@ header img {
 
 .start header img {
   animation:start 1.3s ease-in;
+  transition-duration: var(--offtimer);
 }
 
 .end header img {
   animation:end 2s ease-out;
+  /* animation-name: end; */
+  /* animation-duration: var(--offtimer); */
 }
 
 .spin-end header img {
   animation:spin 1s linear infinite;
+  animation-duration: var(--offtimer);
 }
 
 .spin header img {
