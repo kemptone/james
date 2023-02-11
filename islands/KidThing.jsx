@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import Dialog from "../components/Dialog.tsx";
 
 const Primary =
-  "Abby  Adaliz  Aiden  Angelo  Anthony  Bailey  Benny  Briana  Chase  Cierra  Cruz  Gustavo  Hudson  Iker  James  Kenia  Leilani  Lindsey  Melanie  Merryck  Michael  Sofia V  Sophia C"
+  "Abby  Adaliz  Aiden  Angelo  Anthony  Bailey  Benny  Briana  Chase  Cierra  Cruz Daniel Gustavo  Hudson  Iker  James  Kenia  Leilani  Lindsey  Melanie  Merryck  Michael  Sofia V  Sophia C"
     .split("  ");
 
 const Secondary =
@@ -80,7 +80,7 @@ export default () => {
               children="⏰"
               onClick={(e) => {
                 setChosenNames(
-                  [...chosenNames, `Daniel`],
+                  [...chosenNames, `Cierra`],
                 );
               }}
             />
