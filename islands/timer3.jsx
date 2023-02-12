@@ -7,7 +7,7 @@ function constantRateReduction(rate, time, finalRate) {
 }
 
 const INTERVAL_SPEED = 3;
-const baseRateOfRotation = 20;
+const baseRateOfRotation = 4;
 const baseRateOfSlowdown = 1;
 const baseThreshold = .03;
 
