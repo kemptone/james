@@ -2,71 +2,89 @@ import Menu from "../islands/Menu.jsx";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { buildTimeleftHtml, max } from "../helpers/timer.js";
 
+function constantRateReduction(rate, time, finalRate) {
+  return -Math.log(finalRate / rate) / time;
+}
+
+const INTERVAL_SPEED = 3;
+const baseRateOfRotation = 20;
+const baseRateOfSlowdown = 1;
+const baseThreshold = .03;
+
 export default () => {
-  const [maxTime, setMaxtime] = useState(0);
   const [timeleft, setTimeleft] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [Sounds, setSounds] = useState(null);
   const [animationState, setAnimation] = useState("");
-  const [offtimer, setOffTimer] = useState(2);
-  const [spintimer, setSpinTimer] = useState(.5);
-  // const [startTime, setStartTime] = useState(new Date());
-  const animatedImage = useRef(null);
+  const [rateOfSlowdown, setRateOfSlowdown] = useState(.005);
 
   let rotation = 0;
-  let baseRateOfRotation = 4;
-  let rateOfRotation = 4;
-  const baseRateOfSlowdown = 1;
-  let rateOfSlowdown = .9987;
-  let threshold = .03;
-  let animation2;
+  let rateOfRotation = baseRateOfRotation;
+
+  const intervals = {
+    animation: null,
+    animation2: null,
+    interval: null,
+  };
 
   function stopAll() {
+    clearInterval(intervals.interval);
+    clearInterval(intervals.animation);
+    clearInterval(intervals.animation2);
     setTimeleft(1);
   }
 
   function countDown() {
-    if (animationState) {
-      return stopAll();
-    }
+    clearInterval(intervals.interval);
+    clearInterval(intervals.animation);
+    clearInterval(intervals.animation2);
 
-    clearInterval(animation2);
+    setAnimation("spin");
+
+    rateOfRotation = baseRateOfRotation;
+    rotation = 0;
 
     const bottom = Sounds?.bottom?.play();
     const middle = Sounds?.middle?.play();
     const e_image = document.querySelector("img#spinner");
 
-    const animation = setInterval((e) => {
-      rotation += rateOfRotation;
+    // Main rotation
+    intervals.animation = setInterval((e) => {
+      rotation += baseRateOfRotation;
       e_image.style.transform = `rotate(${rotation}deg)`;
-    }, 0);
+    }, INTERVAL_SPEED);
 
-    const interval = setInterval((e) => {
+    intervals.interval = setInterval((e) => {
+      // setTimeleft((prev) => Math.max(0, prev - 1));
       setTimeleft((prev) => {
         if (prev === 1 || !prev) {
           setAnimation("");
-          clearInterval(interval);
-          clearInterval(animation);
+          clearInterval(intervals.interval);
+          clearInterval(intervals.animation);
+          clearInterval(intervals.animation2);
           Sounds?.middle?.fade(1, 0, 2800, middle);
           Sounds?.bottom?.fade(1, 0, 4000, bottom);
 
-          animation2 = setInterval((e) => {
-            if (rateOfRotation < threshold) {
-              return clearInterval(animation2);
+          intervals.animation2 = setInterval((e) => {
+            if (rateOfRotation < baseThreshold) {
+              return clearInterval(intervals.animation2);
             }
-            console.count("animation2");
-            rateOfRotation *= rateOfSlowdown;
             rotation += rateOfRotation;
             e_image.style.transform = `rotate(${rotation}deg)`;
-          }, 0);
+            rateOfRotation = rateOfRotation - rateOfSlowdown;
+
+            console.log({
+              rotation,
+              rateOfRotation,
+            });
+          }, INTERVAL_SPEED);
         }
+
         return Math.max(0, prev - 1);
       });
     }, 1000);
-
-    setAnimation("spin");
   }
 
   useEffect(() => {
@@ -89,9 +107,9 @@ export default () => {
 
     setSounds(_sounds);
 
-    _sounds.top?.on?.("end", (e) => {
-      debugger;
-    });
+    // _sounds.top?.on?.("end", (e) => {
+    //   debugger;
+    // });
   }, []);
 
   useEffect(() => {
@@ -99,8 +117,7 @@ export default () => {
     alarm += Number(minutes) * 60;
     alarm += Number(seconds);
     setTimeleft(alarm);
-    setMaxtime(alarm);
-  }, [hours, minutes, seconds]);
+  }, [hours, minutes, seconds, rateOfSlowdown]);
 
   return (
     <>
@@ -117,37 +134,36 @@ export default () => {
             <div>
               <span>Go Off:&nbsp;&nbsp;</span>
               <input
-                type="range"
-                name="rate"
-                min="1"
-                max="200"
+                type="number"
                 onChange={(e) => {
-                  const value = Number(e.currentTarget.value);
-                  clearInterval(animation2);
-                  rateOfSlowdown = baseRateOfSlowdown - (value * .0001);
+                  const value = Number(e?.currentTarget?.value ?? 2) ?? 2;
+                  setRateOfSlowdown(
+                    constantRateReduction(
+                      baseRateOfRotation,
+                      value * (1000 / INTERVAL_SPEED),
+                      .02,
+                    ),
+                  );
+
                   rateOfRotation = baseRateOfRotation;
-                  console.log({ rateOfSlowdown });
                 }}
               />
-              {
-                /* <input
-                type="number"
-                name="tilloff"
-                onChange={(e) => {
-                  const value = e?.currentTarget?.value ?? 2;
-                  setOffTimer(value);
-                  // document?.body?.setProperty?.("--slow-down", value);
-                }}
-              /> */
-              }
             </div>
             <div>
               <span>Slow Down:&nbsp;&nbsp;</span>
               <span children={buildTimeleftHtml(timeleft)} />
             </div>
             <button
-              onClick={countDown}
-              children={animationState ? "Stop" : `Start`}
+              onClick={animationState
+                ? ((e) => {
+                  clearInterval(intervals.interval);
+                  clearInterval(intervals.animation);
+                  clearInterval(intervals.animation2);
+                  setAnimation("");
+                  rateOfRotation = baseRateOfRotation;
+                })
+                : countDown}
+              children={animationState === "spin" ? "Stop" : `Start`}
             />
           </div>
           <div>
