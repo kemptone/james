@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import Dialog from "../components/Dialog.tsx";
 
 const Primary =
-  "Abby  Adaliz  Aiden  Angelo  Anthony  Bailey  Benny  Briana  Chase  Cierra  Cruz  Daniel  Gustavo  Hudson  Iker  James  Kenia  Leilani  Lindsey  Melanie  Merryck  Michael  Sofia V  Sophia C"
+  "Abby  Adaliz  Aiden  Angelo  Anthony  Bailey  Benny  Briana  Chase  Cierra  Cruz  Daniel  Gustavo  Hudson  Iker  James  Lindsey  Leilani  Merryck  Michael  Sophia C  Sofia V  Kenia  Melanie"
     .split("  ");
 
 const Secondary =

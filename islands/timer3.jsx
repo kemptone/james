@@ -1,6 +1,6 @@
 import Menu from "../islands/Menu.jsx";
 import { useEffect, useRef, useState } from "preact/hooks";
-import { buildTimeleftHtml, max } from "../helpers/timer.js";
+// import { buildTimeleftHtml, max } from "../helpers/timer.js";
 
 function constantRateReduction(rate, time, finalRate) {
   return -Math.log(finalRate / rate) / time;
@@ -12,6 +12,7 @@ const baseRateOfSlowdown = 1;
 const baseThreshold = .03;
 
 export default () => {
+  const [resetTimeleft, setResetTimeleft] = useState(0);
   const [timeleft, setTimeleft] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -69,6 +70,7 @@ export default () => {
 
           intervals.animation2 = setInterval((e) => {
             if (rateOfRotation < baseThreshold) {
+              setTimeleft(resetTimeleft);
               return clearInterval(intervals.animation2);
             }
             rotation += rateOfRotation;
@@ -112,12 +114,12 @@ export default () => {
     // });
   }, []);
 
-  useEffect(() => {
-    let alarm = Number(hours) * 3600;
-    alarm += Number(minutes) * 60;
-    alarm += Number(seconds);
-    setTimeleft(alarm);
-  }, [hours, minutes, seconds, rateOfSlowdown]);
+  // useEffect(() => {
+  //   let alarm = Number(hours) * 3600;
+  //   alarm += Number(minutes) * 60;
+  //   alarm += Number(seconds);
+  //   setTimeleft(alarm);
+  // }, [hours, minutes, seconds, rateOfSlowdown]);
 
   return (
     <>
@@ -132,7 +134,7 @@ export default () => {
         <footer>
           <div className="new-timer-section">
             <div>
-              <span>Go Off:&nbsp;&nbsp;</span>
+              <span>Slow Down Time:&nbsp;&nbsp;</span>
               <input
                 type="number"
                 onChange={(e) => {
@@ -150,8 +152,19 @@ export default () => {
               />
             </div>
             <div>
-              <span>Slow Down:&nbsp;&nbsp;</span>
-              <span children={buildTimeleftHtml(timeleft)} />
+              <span>Motor Time:&nbsp;&nbsp;</span>
+              <input
+                type="number"
+                onChange={(e) => {
+                  const value = Number(e?.currentTarget?.value ?? 0) ?? 0;
+                  setResetTimeleft(value);
+                  setTimeleft(value);
+                }}
+              />
+            </div>
+
+            <div>
+              {/* <span children={buildTimeleftHtml(timeleft)} /> */}
             </div>
             <button
               onClick={animationState
@@ -166,7 +179,8 @@ export default () => {
               children={animationState === "spin" ? "Stop" : `Start`}
             />
           </div>
-          <div>
+          {
+            /* <div>
             <select
               onChange={(e) => {
                 setHours(e.target.value);
@@ -203,7 +217,8 @@ export default () => {
                 />
               ))}
             </select>
-          </div>
+          </div> */
+          }
         </footer>
       </main>
     </>
