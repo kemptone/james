@@ -16,8 +16,9 @@ import * as $9 from "./routes/lasko.jsx";
 import * as $10 from "./routes/music.jsx";
 import * as $11 from "./routes/music2.jsx";
 import * as $12 from "./routes/sound.jsx";
-import * as $13 from "./routes/timer2.jsx";
-import * as $14 from "./routes/timer3.jsx";
+import * as $13 from "./routes/spin.tsx";
+import * as $14 from "./routes/timer2.jsx";
+import * as $15 from "./routes/timer3.jsx";
 import * as $$0 from "./islands/BigNumbers.jsx";
 import * as $$1 from "./islands/Calculator.tsx";
 import * as $$2 from "./islands/ColorFinder.jsx";
@@ -26,9 +27,10 @@ import * as $$4 from "./islands/KidThing.jsx";
 import * as $$5 from "./islands/Menu.jsx";
 import * as $$6 from "./islands/Music2.jsx";
 import * as $$7 from "./islands/NumberGame.jsx";
-import * as $$8 from "./islands/VoiceMaker.jsx";
-import * as $$9 from "./islands/timer2.jsx";
-import * as $$10 from "./islands/timer3.jsx";
+import * as $$8 from "./islands/Spin.tsx";
+import * as $$9 from "./islands/VoiceMaker.jsx";
+import * as $$10 from "./islands/timer2.jsx";
+import * as $$11 from "./islands/timer3.jsx";
 
 const manifest = {
   routes: {
@@ -45,8 +47,9 @@ const manifest = {
     "./routes/music.jsx": $10,
     "./routes/music2.jsx": $11,
     "./routes/sound.jsx": $12,
-    "./routes/timer2.jsx": $13,
-    "./routes/timer3.jsx": $14,
+    "./routes/spin.tsx": $13,
+    "./routes/timer2.jsx": $14,
+    "./routes/timer3.jsx": $15,
   },
   islands: {
     "./islands/BigNumbers.jsx": $$0,
@@ -57,9 +60,10 @@ const manifest = {
     "./islands/Menu.jsx": $$5,
     "./islands/Music2.jsx": $$6,
     "./islands/NumberGame.jsx": $$7,
-    "./islands/VoiceMaker.jsx": $$8,
-    "./islands/timer2.jsx": $$9,
-    "./islands/timer3.jsx": $$10,
+    "./islands/Spin.tsx": $$8,
+    "./islands/VoiceMaker.jsx": $$9,
+    "./islands/timer2.jsx": $$10,
+    "./islands/timer3.jsx": $$11,
   },
   baseUrl: import.meta.url,
   config,
