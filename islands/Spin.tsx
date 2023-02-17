@@ -17,11 +17,6 @@ export default (props: {}) => {
   const [darkmode2, setDarkmode2] = useState(false);
 
   useEffect(() => {
-    document?.body?.style?.setProperty?.("--spintimer", totalTime + "s");
-    document?.body?.style?.setProperty?.(
-      "--totalrotations",
-      (360 * totalRotations) + "deg",
-    );
     if (darkmode) {
       document?.body?.classList?.add("darkmode");
     } else {
@@ -32,8 +27,16 @@ export default (props: {}) => {
     } else {
       document?.body?.classList?.remove("darkmode2");
     }
+  }, [darkmode, darkmode2]);
+
+  useEffect(() => {
+    document?.body?.style?.setProperty?.("--spintimer", totalTime + "s");
+    document?.body?.style?.setProperty?.(
+      "--totalrotations",
+      (360 * totalRotations) + "deg",
+    );
     setState("");
-  }, [totalTime, totalRotations, darkmode, darkmode2]);
+  }, [totalTime, totalRotations]);
 
   return (
     <>
