@@ -1,8 +1,9 @@
 import { useEffect, useState } from "preact/hooks";
 import Dialog from "../components/Dialog.tsx";
 
-const Fans = "Dumpy.png Fardo.png Lark.png Orange.png"
-  .split(" ");
+const Fans =
+  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png"
+    .split(" ");
 
 const OnAnimationIteration = (doThis: () => void) => (e: Event) => {
   doThis();
