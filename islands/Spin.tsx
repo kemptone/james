@@ -40,14 +40,14 @@ export default (props: {}) => {
     setState("");
   }, [totalTime, totalRotations]);
 
-  useEffect(() => {
-    if (state !== "spin") {
-      return;
-    }
+  // useEffect(() => {
+  //   if (state !== "spin") {
+  //     return;
+  //   }
 
-    runSpinSound(totalTime, totalRotations);
-    runSwooshSound(totalTime, totalRotations);
-  }, [state, totalTime, totalRotations]);
+  //   // runSpinSound(totalTime, totalRotations);
+  //   // runSwooshSound(totalTime, totalRotations);
+  // }, [state, totalTime, totalRotations]);
 
   return (
     <>
@@ -65,6 +65,9 @@ export default (props: {}) => {
               setState("");
             } else {
               setState("spin");
+
+              runSpinSound(totalTime, totalRotations);
+              runSwooshSound(totalTime, totalRotations);
             }
           }}
         />
