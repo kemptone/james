@@ -1,15 +1,10 @@
 import { useEffect, useState } from "preact/hooks";
-// import spinsounds from "../sounds/spinsounds.tsx";
 import runSpinSound from "../sounds/spinsounds.tsx";
 import runSwooshSound from "../sounds/swooshsound.tsx";
 
 const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png"
     .split(" ");
-
-const OnAnimationIteration = (doThis: () => void) => (e: Event) => {
-  doThis();
-};
 
 export default (props: {}) => {
   const [state, setState] = useState("");
@@ -38,9 +33,6 @@ export default (props: {}) => {
         );
         setSourceSwoosh(sourceSwoosh);
         sourceSwoosh.start();
-        // setSourceSwoosh(
-        //   runSpinSound(totalTime, totalRotations, context, audioBuffer),
-        // );
       });
     fetch("/spin/main_206.mp3")
       .then((response) => response.arrayBuffer())
@@ -56,41 +48,6 @@ export default (props: {}) => {
         setSourceMain(sourceMain);
       });
   }
-
-  function stopSound() {
-  }
-
-  useEffect(() => {
-    console.log("useEffect");
-    return () => {
-      // context?.close();
-    };
-  }, []);
-
-  useEffect(() => {
-    // const context = new AudioContext();
-    // setContext(context);
-
-    // if (!context) {
-    //   debugger;
-    //   return;
-    // }
-
-    // fetch("/spin/swoop_206.mp3")
-    //   .then((response) => response.arrayBuffer())
-    //   .then((buffer) => context.decodeAudioData(buffer))
-    //   .then((audioBuffer) => {
-    //     setSourceSwoosh(
-    //       runSpinSound(totalTime, totalRotations, context, audioBuffer),
-    //     );
-    //   });
-    // fetch("/spin/main_206.mp3")
-    //   .then((response) => response.arrayBuffer())
-    //   .then((buffer) => context.decodeAudioData(buffer))
-    //   .then((audioBuffer) => {
-    //     runSwooshSound(totalTime, totalRotations, context, audioBuffer);
-    //   });
-  }, [totalTime, totalRotations, context]);
 
   useEffect(() => {
     if (darkmode) {
@@ -124,22 +81,16 @@ export default (props: {}) => {
             sourceSwoosh?.stop();
             sourceMain?.stop();
             context?.close();
-            // context?.close();
             setTimeout((e) => {
               setState("");
-              // setContext(new AudioContext());
             }, 100);
           }}
           onClick={(e) => {
-            // setContext(new AudioContext());
-
             if (state) {
               setState("");
             } else {
               setState("spin");
               startSound();
-              // sourceSwoosh?.start();
-              // sourceMain?.start();
             }
           }}
         />
@@ -182,6 +133,18 @@ export default (props: {}) => {
             onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
           />
         </fieldset>
+        <button
+          onClick={(e) => {
+            if (state) {
+              setState("");
+            } else {
+              setState("spin");
+              startSound();
+            }
+          }}
+        >
+          Start
+        </button>
       </div>
     </>
   );

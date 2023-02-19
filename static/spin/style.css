@@ -55,6 +55,9 @@ html:has( body.darkmode2 ) .spinner img {
   position: absolute;
   left: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .control fieldset {
@@ -67,4 +70,11 @@ html:has( body.darkmode2 ) .spinner img {
   padding: .3rem;
   width: calc(100%);
   box-sizing: border-box;
+}
+
+.control > button {
+  margin: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex: 1;
 }
