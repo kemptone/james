@@ -1,12 +1,13 @@
 export default (
   totalTime: number,
   totalRotations: number,
+  context: AudioContext,
 ) => {
   // Create an AudioContext object
-  const context = new AudioContext();
+  // const context = new AudioContext();
 
   // Load the audio file
-  fetch("/spin/main_206.wav")
+  fetch("/spin/main_206.mp3")
     .then((response) => response.arrayBuffer())
     .then((buffer) => context.decodeAudioData(buffer))
     .then((audioBuffer) => {

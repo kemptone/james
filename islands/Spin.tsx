@@ -65,9 +65,9 @@ export default (props: {}) => {
               setState("");
             } else {
               setState("spin");
-
-              runSpinSound(totalTime, totalRotations);
-              runSwooshSound(totalTime, totalRotations);
+              const context = new AudioContext();
+              runSpinSound(totalTime, totalRotations, context);
+              runSwooshSound(totalTime, totalRotations, context);
             }
           }}
         />
