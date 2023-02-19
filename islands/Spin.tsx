@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import Dialog from "../components/Dialog.tsx";
+import runSpinSound from "../sounds/spinsounds.tsx";
+import runSwooshSound from "../sounds/swooshsound.tsx";
 
 const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png"
@@ -38,6 +39,15 @@ export default (props: {}) => {
     );
     setState("");
   }, [totalTime, totalRotations]);
+
+  useEffect(() => {
+    if (state !== "spin") {
+      return;
+    }
+
+    runSpinSound(totalTime, totalRotations);
+    runSwooshSound(totalTime, totalRotations);
+  }, [state, totalTime, totalRotations]);
 
   return (
     <>
