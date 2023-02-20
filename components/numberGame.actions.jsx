@@ -77,14 +77,19 @@ export default () => {
                       localStorage.clear();
                       caches.delete("my-cache");
 
-                      navigator.serviceWorker.getRegistration().then(
-                        (registration) => {
-                          registration?.unregister().then(() => {
-                            console.log("Service worker unregistered");
-                            location.reload();
-                          });
-                        },
-                      );
+                      setTimeout(() => {
+                        location.reload();
+                      }, 1000);
+
+                      navigator.serviceWorker.getRegistration()
+                        .then(
+                          (registration) => {
+                            registration?.unregister().then(() => {
+                              console.log("Service worker unregistered");
+                              location.reload();
+                            });
+                          },
+                        );
                     }}
                   >
                     Reinstall App
