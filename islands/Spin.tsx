@@ -132,7 +132,8 @@ export default (props: {}) => {
             onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
           />
         </fieldset>
-        <button
+        {
+          /* <button
           onClick={(e) => {
             if (state) {
               setState("");
@@ -143,7 +144,8 @@ export default (props: {}) => {
           }}
         >
           Start
-        </button>
+        </button> */
+        }
       </div>
     </>
   );
