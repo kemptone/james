@@ -69,8 +69,10 @@ export default (props: {}) => {
             setTimeout((e) => {
               setState("");
               stopSounds();
-              setInstance((prev) => prev + 1);
             }, 100);
+            setTimeout((e) => {
+              setInstance((prev) => prev + 1);
+            }, 3000);
           }}
           onClick={(e) => {
             if (state) {
