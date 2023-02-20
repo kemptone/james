@@ -12,10 +12,11 @@
 
   <script>
 
-    var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const context = audioContext
 
-    var sound1 = null;
-    var sound2 = null;
+    let sound1 = null;
+    let sound2 = null;
 
     // load the sound files
     loadSound('/spin/swoop_206.mp3', function (buffer) {
@@ -56,18 +57,61 @@
         }
       }
 
-      var source = audioContext.createBufferSource();
+      const source = audioContext.createBufferSource();
       // source.buffer = buffer;
       source.buffer = loopBuffer;
-
       source.loop = true;
 
-      source.connect(audioContext.destination);
+      // Reverb
+      const convolver = context.createConvolver();
+      const reverbTime = 1.5; // the duration of the reverb effect, in seconds
+      const reverbBufferLength = Math.ceil(reverbTime * context.sampleRate);
+      const reverbBuffer = context.createBuffer(
+        2,
+        reverbBufferLength,
+        context.sampleRate,
+      );
+      const leftChannel = reverbBuffer.getChannelData(0);
+      const rightChannel = reverbBuffer.getChannelData(1);
+      // Create an impulse response that simulates a small room
+      for (let i = 0; i < reverbBufferLength; i++) {
+        leftChannel[i] = (Math.random() * 2 - 1) *
+          Math.pow(1 - i / reverbBufferLength, 2);
+        rightChannel[i] = (Math.random() * 2 - 1) *
+          Math.pow(1 - i / reverbBufferLength, 2);
+      }
+      convolver.buffer = reverbBuffer;
+
+      source.connect(convolver)
+      convolver.connect(audioContext.destination)
+
+      const totalTime = 90
+      const totalRotations = 80
+
+      // playback rate
+      const RATE = Math.max(
+        Math.min((totalRotations / totalTime) * 1.3, 10),
+        .5,
+      );
+
+      source.playbackRate.setValueAtTime(0.0, context.currentTime);
+      source.playbackRate.linearRampToValueAtTime(RATE, totalTime / 8);
+      source.playbackRate.setValueAtTime(
+        RATE,
+        context.currentTime + ((totalTime / 2) - totalTime / 3),
+      );
+      source.playbackRate.linearRampToValueAtTime(
+        0,
+        context.currentTime + ((totalTime / 2) - totalTime / 4) +
+        (totalTime / 8),
+      );
+
+      // source.connect(audioContext.destination);
       return source;
     }
 
     function loadSound(url, callback) {
-      var request = new XMLHttpRequest();
+      const request = new XMLHttpRequest();
       request.open('GET', url, true);
       request.responseType = 'arraybuffer';
       request.onload = function () {
