@@ -18,6 +18,15 @@ export default (props: {}) => {
   const [playSounds, setPlaySounds] = useState<() => void>(() => {});
   const [stopSounds, setStopSounds] = useState<() => void>(() => {});
   const [instance, setInstance] = useState(0);
+  const [allstop, setAllStop] = useState(0);
+
+  useEffect(() => {
+    setState("return");
+    setTimeout((e) => {
+      setState("");
+      stopSounds();
+    }, 100);
+  }, [allstop]);
 
   useEffect(() => {
     const audioContext =
@@ -32,6 +41,7 @@ export default (props: {}) => {
     totalRotations,
     totalTime,
     instance,
+    allstop,
   ]);
 
   useEffect(() => {
@@ -157,6 +167,11 @@ export default (props: {}) => {
             onChange={(e) => setZoomlevel(e.currentTarget.value)}
           />
         </fieldset>
+        <button
+          onClick={(e) => setAllStop((prev) => prev + 1)}
+        >
+          STOP
+        </button>
         {
           /* <button
           onClick={(e) => {
