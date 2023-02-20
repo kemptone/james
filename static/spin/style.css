@@ -17,6 +17,11 @@ html:has( body.whitemode ) {
   color: black;
 }
 
+html:has( body.whitemode.darkmode ) {
+  background-color:gray;
+  color: white;
+}
+
 html:has( body.darkmode2 ) .spinner img {
   filter: invert(100%);
 }

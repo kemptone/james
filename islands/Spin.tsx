@@ -83,7 +83,7 @@ export default (props: {}) => {
   useEffect(() => {
     document?.body?.style?.setProperty?.(
       "--zoomlevel",
-      `${(5 * Number(zoomlevel))}%`,
+      `${(8 * Number(zoomlevel))}%`,
     );
   }, [zoomlevel]);
 
@@ -113,9 +113,9 @@ export default (props: {}) => {
         />
       </div>
       <details className="control">
-        <summary>Spin Settings</summary>
+        <summary>Settings</summary>
         <fieldset className="modes">
-          <legend>darkmode</legend>
+          <legend>modes</legend>
           <input
             type="checkbox"
             onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
@@ -165,27 +165,14 @@ export default (props: {}) => {
             type="range"
             value={zoomlevel}
             onChange={(e) => setZoomlevel(e.currentTarget.value)}
+            min=".1"
+            step="any"
           />
         </fieldset>
         <button
           onClick={(e) => setAllStop((prev) => prev + 1)}
-        >
-          STOP
-        </button>
-        {
-          /* <button
-          onClick={(e) => {
-            if (state) {
-              setState("");
-            } else {
-              setState("spin");
-              playSounds();
-            }
-          }}
-        >
-          Start
-        </button> */
-        }
+          children="Stoop"
+        />
       </details>
     </>
   );
