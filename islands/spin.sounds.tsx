@@ -79,7 +79,7 @@ function SpinSounds(
     // const totalRotations = 80;
 
     // playback rate
-    const RATE = Math.max(Math.min((totalRotations / totalTime) * 4, 4), .5);
+    const RATE = Math.max(Math.min((totalRotations / totalTime) * 4, 100), .05);
     // const RATE = Math.max(
     //   Math.min((totalRotations / totalTime) * 1.3, 10),
     //   .5,
