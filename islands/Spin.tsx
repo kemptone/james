@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import SpinSounds from "./spin.sounds.tsx";
 
 const Fans =
-  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg"
+  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp"
     .split(" ");
 
 export default (props: {}) => {
@@ -62,6 +62,7 @@ export default (props: {}) => {
       "--totalrotations",
       (360 * totalRotations) + "deg",
     );
+    setInstance((prev) => prev + 1);
     setState("");
   }, [totalTime, totalRotations]);
 
@@ -78,7 +79,7 @@ export default (props: {}) => {
             }, 100);
             setTimeout((e) => {
               setInstance((prev) => prev + 1);
-            }, 1000);
+            }, 1900);
           }}
           onClick={(e) => {
             if (state) {
