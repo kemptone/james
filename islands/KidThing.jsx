@@ -47,89 +47,18 @@ export default () => {
 
   return (
     <Dialog>
-      {(D) => (
-        <main class="colorthing">
-          <section class="readout">
-            {chosenNames.map((name, index) => (
-              // <span class="chosen" key={index} children={{ name }} />
-              <span class="chosen" children={name} />
-            ))}
-          </section>
-          <section class="colors">
-            {Primary.map((item, index) => (
-              <button
-                children={index + 1}
-                key={item + index}
-                onClick={(e) => {
-                  setChosenNames(
-                    [...chosenNames, item],
-                  );
-                }}
-              />
-            ))}
-
-            <button
-              children="⟵"
-              onClick={(e) => {
-                setChosenNames(
-                  [...chosenNames].slice(0, chosenNames.length - 1),
-                );
-              }}
-            />
-
-            {
-              /* <button
-              children="⏰"
-              onClick={(e) => {
-                setChosenNames(
-                  [...chosenNames, `Cierra`],
-                );
-              }}
-            /> */
-            }
-
-            <button
-              children="⏲"
-              onClick={(e) => {
-                setChosenNames(
-                  [...chosenNames, `Mia`],
-                );
-              }}
-            />
-
-            <button
-              children="🌗"
-              onClick={(e) => {
-                D.openDialog();
-                setShowingMissing(false);
-              }}
-            />
-
-            <button
-              children="♺"
-              onClick={(e) => {
-                setChosenNames([]);
-              }}
-            />
-          </section>
-          <D.Dialog ref={D.ref}>
-            <main className="colorthing">
-              {showingMissing
-                ? (
-                  <div className="readout">
-                    {Primary.filter((name) =>
-                      chosenNames.join("::").indexOf(name) === -1
-                    ).map((name) => <span className="chosen">{name}</span>)}
-                  </div>
-                )
-                : null}
-              <div class="colors">
-                <button
-                  onClick={(e) => setShowingMissing(!showingMissing)}
-                >
-                  ?
-                </button>
-                {Secondary.map((item, index) => (
+      {(D2) => (
+        <Dialog>
+          {(D) => (
+            <main class="colorthing">
+              <section class="readout">
+                {chosenNames.map((name, index) => (
+                  // <span class="chosen" key={index} children={{ name }} />
+                  <span class="chosen" children={name} />
+                ))}
+              </section>
+              <section class="colors">
+                {Primary.map((item, index) => (
                   <button
                     children={index + 1}
                     key={item + index}
@@ -140,10 +69,72 @@ export default () => {
                     }}
                   />
                 ))}
-              </div>
+
+                <button
+                  children="⟵"
+                  onClick={(e) => {
+                    setChosenNames(
+                      [...chosenNames].slice(0, chosenNames.length - 1),
+                    );
+                  }}
+                />
+
+                <button
+                  children="⏲"
+                  onClick={(e) => {
+                    D2.openDialog();
+                  }}
+                />
+
+                <button
+                  children="🌗"
+                  onClick={(e) => {
+                    D.openDialog();
+                  }}
+                />
+
+                <button
+                  children="♺"
+                  onClick={(e) => {
+                    setChosenNames([]);
+                  }}
+                />
+              </section>
+              <D2.Dialog ref={D2.ref}>
+                <main className="colorthing">
+                  <div className="readout">
+                    {Primary.filter((name) =>
+                      chosenNames.join("::").indexOf(name) === -1
+                    ).map((name) => <span className="chosen">{name}</span>)}
+                  </div>
+                </main>
+              </D2.Dialog>
+
+              <D.Dialog ref={D.ref}>
+                <main className="colorthing">
+                  <div class="colors">
+                    <button
+                      onClick={(e) => setShowingMissing(!showingMissing)}
+                    >
+                      ?
+                    </button>
+                    {Secondary.map((item, index) => (
+                      <button
+                        children={index + 1}
+                        key={item + index}
+                        onClick={(e) => {
+                          setChosenNames(
+                            [...chosenNames, item],
+                          );
+                        }}
+                      />
+                    ))}
+                  </div>
+                </main>
+              </D.Dialog>
             </main>
-          </D.Dialog>
-        </main>
+          )}
+        </Dialog>
       )}
     </Dialog>
   );
