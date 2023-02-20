@@ -13,12 +13,11 @@ export default (props: {}) => {
   const [darkmode, setDarkmode] = useState(false);
   const [darkmode2, setDarkmode2] = useState(false);
   const [whitemode, setWhitemode] = useState(false);
+  const [zoommode, setZoommode] = useState(false);
+  const [zoomlevel, setZoomlevel] = useState("8");
   const [playSounds, setPlaySounds] = useState<() => void>(() => {});
   const [stopSounds, setStopSounds] = useState<() => void>(() => {});
   const [instance, setInstance] = useState(0);
-  // const [context, setContext] = useState<AudioContext | undefined>();
-  // const [sourceSwoosh, setSourceSwoosh] = useState<AudioBufferSourceNode>();
-  // const [sourceMain, setSourceMain] = useState<AudioBufferSourceNode>();
 
   useEffect(() => {
     const audioContext =
@@ -51,7 +50,12 @@ export default (props: {}) => {
     } else {
       document?.body?.classList?.remove("whitemode");
     }
-  }, [darkmode, darkmode2, whitemode]);
+    if (zoommode) {
+      document?.body?.classList?.add("zoommode");
+    } else {
+      document?.body?.classList?.remove("zoommode");
+    }
+  }, [darkmode, darkmode2, whitemode, zoommode]);
 
   useEffect(() => {
     document?.body?.style?.setProperty?.(
@@ -65,6 +69,13 @@ export default (props: {}) => {
     setInstance((prev) => prev + 1);
     setState("");
   }, [totalTime, totalRotations]);
+
+  useEffect(() => {
+    document?.body?.style?.setProperty?.(
+      "--zoomlevel",
+      `${(5 * Number(zoomlevel))}%`,
+    );
+  }, [zoomlevel]);
 
   return (
     <>
@@ -91,7 +102,8 @@ export default (props: {}) => {
           }}
         />
       </div>
-      <div className="control">
+      <details className="control">
+        <summary>Spin Settings</summary>
         <fieldset className="modes">
           <legend>darkmode</legend>
           <input
@@ -105,6 +117,10 @@ export default (props: {}) => {
           <input
             type="checkbox"
             onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
+          />
+          <input
+            type="checkbox"
+            onChange={(e) => setZoommode(e?.currentTarget?.checked)}
           />
         </fieldset>
 
@@ -133,6 +149,14 @@ export default (props: {}) => {
             onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
           />
         </fieldset>
+        <fieldset>
+          <legend>Zoom</legend>
+          <input
+            type="range"
+            value={zoomlevel}
+            onChange={(e) => setZoomlevel(e.currentTarget.value)}
+          />
+        </fieldset>
         {
           /* <button
           onClick={(e) => {
@@ -147,7 +171,7 @@ export default (props: {}) => {
           Start
         </button> */
         }
-      </div>
+      </details>
     </>
   );
 };
