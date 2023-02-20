@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import SpinSounds from "./spin.sounds.tsx";
 
 const Fans =
-  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png"
+  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg"
     .split(" ");
 
 export default (props: {}) => {
@@ -12,6 +12,7 @@ export default (props: {}) => {
   const [currentFan, setCurrentFan] = useState("Dumpy.png");
   const [darkmode, setDarkmode] = useState(false);
   const [darkmode2, setDarkmode2] = useState(false);
+  const [whitemode, setWhitemode] = useState(false);
   const [playSounds, setPlaySounds] = useState<() => void>(() => {});
   const [stopSounds, setStopSounds] = useState<() => void>(() => {});
   const [instance, setInstance] = useState(0);
@@ -45,7 +46,12 @@ export default (props: {}) => {
     } else {
       document?.body?.classList?.remove("darkmode2");
     }
-  }, [darkmode, darkmode2]);
+    if (whitemode) {
+      document?.body?.classList?.add("whitemode");
+    } else {
+      document?.body?.classList?.remove("whitemode");
+    }
+  }, [darkmode, darkmode2, whitemode]);
 
   useEffect(() => {
     document?.body?.style?.setProperty?.(
@@ -72,7 +78,7 @@ export default (props: {}) => {
             }, 100);
             setTimeout((e) => {
               setInstance((prev) => prev + 1);
-            }, 3000);
+            }, 1000);
           }}
           onClick={(e) => {
             if (state) {
@@ -94,6 +100,10 @@ export default (props: {}) => {
           <input
             type="checkbox"
             onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
+          />
+          <input
+            type="checkbox"
+            onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
           />
         </fieldset>
 
