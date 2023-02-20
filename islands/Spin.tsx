@@ -92,7 +92,7 @@ export default (props: {}) => {
         />
       </div>
       <div className="control">
-        <fieldset>
+        <fieldset className="modes">
           <legend>darkmode</legend>
           <input
             type="checkbox"

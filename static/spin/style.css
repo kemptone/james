@@ -83,3 +83,12 @@ html:has( body.darkmode2 ) .spinner img {
   box-sizing: border-box;
   flex: 1;
 }
+
+.control .modes {
+
+}
+
+.control .modes input {
+  width: auto;
+
+}

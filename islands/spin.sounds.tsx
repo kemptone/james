@@ -10,15 +10,24 @@ function SpinSounds(
   let sound2: AudioBufferSourceNode | null = null;
 
   // load the sound files
-  loadSound("/spin/swoop_206.mp3", function (buffer: AudioBuffer) {
-    sound1 = createBufferSource(buffer);
-  });
-  loadSound("/spin/main_206.mp3", function (buffer: AudioBuffer) {
-    sound2 = createBufferSource(buffer);
-  });
+  loadSound(
+    "/spin/swoop_206.mp3",
+    function (buffer: AudioBuffer) {
+      sound1 = createBufferSource(buffer, false);
+    },
+  );
+  loadSound(
+    "/spin/main_206.mp3",
+    function (buffer: AudioBuffer) {
+      sound2 = createBufferSource(buffer, true);
+    },
+  );
 
   // connect the buffer source nodes in parallel
-  function createBufferSource(buffer: AudioBuffer) {
+  function createBufferSource(
+    buffer: AudioBuffer,
+    slower: boolean,
+  ) {
     const {
       sampleRate,
       numberOfChannels,
@@ -52,9 +61,18 @@ function SpinSounds(
     source.buffer = loopBuffer;
     source.loop = true;
 
+    // Create a gain node to control the volume of the looped section
+    const gainNode = context.createGain();
+
+    if (slower) {
+      gainNode.gain.value = 0.4; // set the initial volume to 50%
+    } else {
+      gainNode.gain.value = 0.7; // set the initial volume to 50%
+    }
+
     // Reverb
     const convolver = context.createConvolver();
-    const reverbTime = 1.5; // the duration of the reverb effect, in seconds
+    const reverbTime = 1.1; // the duration of the reverb effect, in seconds
     const reverbBufferLength = Math.ceil(reverbTime * context.sampleRate);
     const reverbBuffer = context.createBuffer(
       2,
@@ -73,28 +91,47 @@ function SpinSounds(
     convolver.buffer = reverbBuffer;
 
     source.connect(convolver);
-    convolver.connect(audioContext.destination);
+    convolver.connect(gainNode);
+    gainNode.connect(audioContext.destination);
 
     // const totalTime = 90;
     // const totalRotations = 80;
 
     // playback rate
-    const RATE = Math.max(Math.min((totalRotations / totalTime) * 4, 200), .05);
+    // const RATE = Math.max(Math.min((totalRotations / totalTime) * 4, 200), .05);
+    const RATE = slower
+      ? Math.max(Math.min((totalRotations / totalTime) * 1, 10), .05)
+      : (totalRotations / totalTime);
     // const RATE = Math.max(
     //   Math.min((totalRotations / totalTime) * 1.3, 10),
     //   .5,
     // );
 
-    source.playbackRate.setValueAtTime(0.0, context.currentTime);
-    source.playbackRate.linearRampToValueAtTime(RATE, totalTime / 8);
-    source.playbackRate.setValueAtTime(
-      RATE,
-      context.currentTime + ((totalTime / 2) - totalTime / 8),
-    );
-    source.playbackRate.linearRampToValueAtTime(
-      0,
-      totalTime,
-    );
+    if (slower) {
+      source.playbackRate.setValueAtTime(0.0, context.currentTime);
+      source.playbackRate.linearRampToValueAtTime(RATE, totalTime / 8);
+      source.playbackRate.setValueAtTime(
+        RATE,
+        context.currentTime + ((totalTime / 2) - totalTime / 3),
+      );
+      source.playbackRate.linearRampToValueAtTime(
+        0,
+        context.currentTime + ((totalTime / 2) - totalTime / 4) +
+          (totalTime / 8),
+      );
+    } else {
+      source.playbackRate.setValueAtTime(0.0, context.currentTime);
+      source.playbackRate.linearRampToValueAtTime(RATE, totalTime / 4);
+      source.playbackRate.setValueAtTime(
+        RATE,
+        // context.currentTime + (totalTime / 2) - totalTime / 8,
+        context.currentTime + ((totalTime / 2) - totalTime / 8),
+      );
+      source.playbackRate.linearRampToValueAtTime(
+        0,
+        totalTime,
+      );
+    }
 
     // source.playbackRate.setValueAtTime(0.0, context.currentTime);
     // source.playbackRate.linearRampToValueAtTime(RATE, totalTime / 8);
@@ -112,7 +149,10 @@ function SpinSounds(
     return source;
   }
 
-  function loadSound(url: string, callback: (buffer: AudioBuffer) => void) {
+  function loadSound(
+    url: string,
+    callback: (buffer: AudioBuffer) => void,
+  ) {
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";
