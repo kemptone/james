@@ -1,6 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import runSpinSound from "../sounds/spinsounds.tsx";
-import runSwooshSound from "../sounds/swooshsound.tsx";
+import SpinSounds from "./spin.sounds.tsx";
 
 const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png"
@@ -13,41 +12,27 @@ export default (props: {}) => {
   const [currentFan, setCurrentFan] = useState("Dumpy.png");
   const [darkmode, setDarkmode] = useState(false);
   const [darkmode2, setDarkmode2] = useState(false);
-  const [context, setContext] = useState<AudioContext | undefined>();
-  const [sourceSwoosh, setSourceSwoosh] = useState<AudioBufferSourceNode>();
-  const [sourceMain, setSourceMain] = useState<AudioBufferSourceNode>();
+  const [playSounds, setPlaySounds] = useState<() => void>(() => {});
+  const [stopSounds, setStopSounds] = useState<() => void>(() => {});
+  const [instance, setInstance] = useState(0);
+  // const [context, setContext] = useState<AudioContext | undefined>();
+  // const [sourceSwoosh, setSourceSwoosh] = useState<AudioBufferSourceNode>();
+  // const [sourceMain, setSourceMain] = useState<AudioBufferSourceNode>();
 
-  function startSound() {
-    const context = new AudioContext();
-    setContext(context);
-
-    fetch("/spin/swoop_206.mp3")
-      .then((response) => response.arrayBuffer())
-      .then((buffer) => context.decodeAudioData(buffer))
-      .then((audioBuffer) => {
-        const sourceSwoosh = runSpinSound(
-          totalTime,
-          totalRotations,
-          context,
-          audioBuffer,
-        );
-        setSourceSwoosh(sourceSwoosh);
-        sourceSwoosh.start();
-      });
-    fetch("/spin/main_206.mp3")
-      .then((response) => response.arrayBuffer())
-      .then((buffer) => context.decodeAudioData(buffer))
-      .then((audioBuffer) => {
-        const sourceMain = runSwooshSound(
-          totalTime,
-          totalRotations,
-          context,
-          audioBuffer,
-        );
-        sourceMain.start();
-        setSourceMain(sourceMain);
-      });
-  }
+  useEffect(() => {
+    const audioContext =
+      new (window.AudioContext || window.webkitAudioContext)();
+    const Spins = SpinSounds(audioContext, totalTime, totalRotations);
+    setPlaySounds(() => Spins.playSounds);
+    setStopSounds(() => Spins.stopSounds);
+    return () => {
+      audioContext.close();
+    };
+  }, [
+    totalRotations,
+    totalTime,
+    instance,
+  ]);
 
   useEffect(() => {
     if (darkmode) {
@@ -63,7 +48,10 @@ export default (props: {}) => {
   }, [darkmode, darkmode2]);
 
   useEffect(() => {
-    document?.body?.style?.setProperty?.("--spintimer", totalTime + "s");
+    document?.body?.style?.setProperty?.(
+      "--spintimer",
+      totalTime + "s",
+    );
     document?.body?.style?.setProperty?.(
       "--totalrotations",
       (360 * totalRotations) + "deg",
@@ -78,11 +66,10 @@ export default (props: {}) => {
           src={`/spin/${currentFan}`}
           onTransitionEnd={(e) => {
             setState("return");
-            sourceSwoosh?.stop();
-            sourceMain?.stop();
-            context?.close();
             setTimeout((e) => {
               setState("");
+              stopSounds();
+              setInstance((prev) => prev + 1);
             }, 100);
           }}
           onClick={(e) => {
@@ -90,7 +77,7 @@ export default (props: {}) => {
               setState("");
             } else {
               setState("spin");
-              startSound();
+              playSounds();
             }
           }}
         />
@@ -139,7 +126,7 @@ export default (props: {}) => {
               setState("");
             } else {
               setState("spin");
-              startSound();
+              playSounds();
             }
           }}
         >

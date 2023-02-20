@@ -29,8 +29,9 @@ import * as $$6 from "./islands/Music2.jsx";
 import * as $$7 from "./islands/NumberGame.jsx";
 import * as $$8 from "./islands/Spin.tsx";
 import * as $$9 from "./islands/VoiceMaker.jsx";
-import * as $$10 from "./islands/timer2.jsx";
-import * as $$11 from "./islands/timer3.jsx";
+import * as $$10 from "./islands/spin.sounds.tsx";
+import * as $$11 from "./islands/timer2.jsx";
+import * as $$12 from "./islands/timer3.jsx";
 
 const manifest = {
   routes: {
@@ -62,8 +63,9 @@ const manifest = {
     "./islands/NumberGame.jsx": $$7,
     "./islands/Spin.tsx": $$8,
     "./islands/VoiceMaker.jsx": $$9,
-    "./islands/timer2.jsx": $$10,
-    "./islands/timer3.jsx": $$11,
+    "./islands/spin.sounds.tsx": $$10,
+    "./islands/timer2.jsx": $$11,
+    "./islands/timer3.jsx": $$12,
   },
   baseUrl: import.meta.url,
   config,
