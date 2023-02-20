@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Web Audio API Example</title>
+</head>
+
+<body>
+  <h1>Web Audio API Example</h1>
+  <button onclick="playSounds()">Play Sound</button>
+
+  <script>
+
+    var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    var sound1 = null;
+    var sound2 = null;
+
+    // load the sound files
+    loadSound('/spin/swoop_206.mp3', function (buffer) {
+      sound1 = createBufferSource(buffer);
+    });
+    loadSound('/spin/main_206.mp3', function (buffer) {
+      sound2 = createBufferSource(buffer);
+    });
+
+    // connect the buffer source nodes in parallel
+    function createBufferSource(buffer) {
+
+      const {
+        sampleRate,
+        numberOfChannels,
+        length,
+        duration,
+      } = buffer;
+
+      // we build our samples perfect like this
+      const loopLength = Math.floor(length / 8);
+      // should be in the middle
+      const loopStart = loopLength * 2;
+
+      // Create a new AudioBuffer to hold the looped section
+      const loopBuffer = audioContext.createBuffer(
+        numberOfChannels,
+        loopLength,
+        sampleRate,
+      );
+
+      // Copy the looped section from the original audio buffer to the new buffer
+      for (let channel = 0; channel < numberOfChannels; channel++) {
+        const channelData = buffer.getChannelData(channel);
+        const loopData = loopBuffer.getChannelData(channel);
+        for (let i = 0; i < loopLength; i++) {
+          loopData[i] = channelData[Math.floor(loopStart) + i];
+        }
+      }
+
+      var source = audioContext.createBufferSource();
+      // source.buffer = buffer;
+      source.buffer = loopBuffer;
+
+      source.loop = true;
+
+      source.connect(audioContext.destination);
+      return source;
+    }
+
+    function loadSound(url, callback) {
+      var request = new XMLHttpRequest();
+      request.open('GET', url, true);
+      request.responseType = 'arraybuffer';
+      request.onload = function () {
+        audioContext.decodeAudioData(request.response, function (buffer) {
+          callback(buffer);
+        });
+      };
+      request.send();
+    }
+
+    // play the sounds at the same time
+    function playSounds() {
+      if (sound1 && sound2) {
+        sound1.start(0);
+        sound2.start(0);
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
