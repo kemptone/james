@@ -47,6 +47,7 @@ export default (args) => {
           <a href="/lasko">Lasko</a>
           <a href="/kids">Kids</a>
           <a href="/spin">Spin</a>
+          <a href="/recorder">Recorder</a>
           <NumberGameActions />
         </nav>
       </div>
