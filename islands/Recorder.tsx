@@ -58,35 +58,6 @@ const AudioRecorder = () => {
         );
       };
     };
-
-    // dbRequest.onsuccess = (event: any) => {
-    //   // this is the reference to the object store
-    //   const db = event.target.result;
-    //   // tx = transaction
-    //   const tx = db.transaction("recordings", "readonly");
-    //   // object store
-    //   const store = tx.objectStore("recordings");
-
-    //   // This creates an index based off of the timestamp itself
-    //   const index = store.index("timestamp");
-    //   // then it looks for that in the data store
-    //   const request = index.openCursor(null, "prev");
-
-    //   request.onsuccess = (event: any) => {
-    //     const cursor = event.target.result;
-    //     if (cursor) {
-    //       setAudioURL(URL.createObjectURL(cursor.value.blob));
-    //       cursor.continue();
-    //     }
-    //   };
-
-    //   tx.onerror = (event: any) => {
-    //     console.error(
-    //       "Failed to read recordings from IndexedDB:",
-    //       event.target.error,
-    //     );
-    //   };
-    // };
   }, []);
 
   const startRecording = () => {
