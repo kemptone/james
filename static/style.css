@@ -50,6 +50,10 @@ button:active {
     color: var(--color4);
 }
 
+button.icon {
+    border:none;
+}
+
 .main,
 .math-problems {
     margin: 0;

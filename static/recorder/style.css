@@ -111,3 +111,12 @@ html:has( body.darkmode2 ) .spinner img {
 details > summary {
   cursor: pointer;
 }
+
+.recording-items {
+  padding-top: 1rem;
+}
+
+.recording-item {
+  display: flex;
+  padding: .2rem 0;
+}

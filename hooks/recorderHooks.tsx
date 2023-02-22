@@ -1,7 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
-import RecordingItem from "../components/RecordingItem.tsx";
 
-const AudioRecorder = () => {
+export default () => {
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
   const [audioURLs, setAudioURLS] = useState<string[]>([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -110,26 +109,4 @@ const AudioRecorder = () => {
       };
     };
   };
-
-  return (
-    <div>
-      <button onClick={startRecording} disabled={isRecording}>
-        Start Recording
-      </button>
-      <button onClick={stopRecording} disabled={!isRecording}>
-        Stop Recording
-      </button>
-      <div className="recording-items">
-        {audioURLs.map((audioURL, index) => (
-          <RecordingItem
-            audioURL={audioURL}
-            setAsSound={() => {}}
-            deleteSound={() => {}}
-          />
-        ))}
-      </div>
-    </div>
-  );
 };
-
-export default AudioRecorder;
