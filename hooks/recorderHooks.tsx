@@ -1,9 +1,17 @@
 import { useEffect, useState } from "preact/hooks";
 
+interface Recording {
+  audioURL: string;
+  timestamp: number;
+  id: number;
+}
+
 export default () => {
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
   const [audioURLs, setAudioURLS] = useState<string[]>([]);
+  const [recordings, setRecordings] = useState<Recording[]>([]);
   const [isRecording, setIsRecording] = useState(false);
+  const [refreshId, refreshDB] = useState(1);
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
@@ -25,7 +33,8 @@ export default () => {
     // deno-lint-ignore no-explicit-any
     dbRequest.onsuccess = (event: any) => {
       // this is the reference to the object store
-      const db = event.currentTarget.result;
+      // const db = event.currentTarget.result;
+      const db = (event.currentTarget as IDBOpenDBRequest).result;
       // tx = transaction
       const tx = db.transaction("recordings", "readonly");
       // object store
@@ -33,18 +42,21 @@ export default () => {
 
       const request = store.openCursor();
 
-      const audios: string[] = [];
+      const audios: Recording[] = [];
       // deno-lint-ignore no-explicit-any
       request.onsuccess = (event: any) => {
         const cursor: IDBCursorWithValue = event.target.result;
         if (cursor) {
-          audios.push(URL.createObjectURL(cursor.value.blob));
+          audios.push({
+            audioURL: URL.createObjectURL(cursor.value.blob),
+            timestamp: cursor.value.timestamp,
+            id: cursor.value.id,
+          });
           cursor.continue();
         } else {
-          if (audios.length) {
-            setAudioURLS(audios);
-          }
+          setRecordings(audios);
         }
+        console.count("how many");
       };
 
       // deno-lint-ignore no-explicit-any
@@ -55,7 +67,7 @@ export default () => {
         );
       };
     };
-  }, []);
+  }, [refreshId]);
 
   const startRecording = () => {
     recorder?.start();
@@ -73,6 +85,35 @@ export default () => {
     saveAudio(blob);
   };
 
+  const deleteRecording = (id: number) => {
+    const dbRequest = window.indexedDB.open("audio", 1);
+
+    dbRequest.onerror = (event: any) => {
+      console.error("Failed to open IndexedDB:", event.currentTarget.error);
+    };
+
+    dbRequest.onsuccess = (event: Event) => {
+      const db = (event.target as IDBOpenDBRequest).result;
+      const tx = db.transaction("recordings", "readwrite");
+      const store = tx.objectStore("recordings");
+      const request = store.getKey(id);
+      request.onsuccess = (event: any) => {
+        const key = event.target.result;
+        if (key !== undefined) {
+          store.delete(key);
+        }
+
+        tx.oncomplete = () => {
+          refreshDB(Math.random());
+        };
+
+        tx.onerror = () => {
+          refreshDB(Math.random());
+        };
+      };
+    };
+  };
+
   const saveAudio = (blob: Blob) => {
     const dbRequest = window.indexedDB.open("audio", 1);
 
@@ -81,7 +122,7 @@ export default () => {
     };
 
     dbRequest.onupgradeneeded = (event: any) => {
-      const db = event.currentTarget.result;
+      const db = (event.currentTarget as IDBOpenDBRequest).result;
       const store = db.createObjectStore("recordings", {
         keyPath: "id",
         autoIncrement: true,
@@ -90,7 +131,7 @@ export default () => {
     };
 
     dbRequest.onsuccess = (event: any) => {
-      const db = event.currentTarget.result;
+      const db = (event.currentTarget as IDBOpenDBRequest).result;
       const tx = db.transaction("recordings", "readwrite");
       const store = tx.objectStore("recordings");
       const timestamp = Date.now();
@@ -100,6 +141,7 @@ export default () => {
 
       tx.oncomplete = () => {
         console.log("Audio saved to IndexedDB:", data);
+        refreshDB(Math.random());
       };
       tx.onerror = (event: any) => {
         console.error(
@@ -108,5 +150,21 @@ export default () => {
         );
       };
     };
+  };
+
+  return {
+    recorder,
+    setRecorder,
+    audioURLs,
+    recordings,
+    setRecordings,
+    setAudioURLS,
+    isRecording,
+    setIsRecording,
+    startRecording,
+    stopRecording,
+    handleDataAvailable,
+    saveAudio,
+    deleteRecording,
   };
 };
