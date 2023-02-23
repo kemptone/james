@@ -7,6 +7,9 @@ import {
 } from "../data/State.ts";
 import Dialog from "../components/Dialog.tsx";
 
+import _LS from "../helpers/localStorage.js";
+const LS = _LS("Game");
+
 export default () => {
   const factorPlus = (val, Num) => () => {
     Num.value += val;
@@ -75,6 +78,11 @@ export default () => {
                     id="reset-button"
                     onClick={(e) => {
                       localStorage.clear();
+                      LS.populate("Number1MultiplyBy", 1);
+                      LS.populate("Number2MultiplyBy", 10);
+                      LS.populate("Number1IsRandom", true);
+                      LS.populate("IsNum2DerivedFromNum1", true);
+                      LS.populate("Step", 0);
                       caches.delete("my-cache");
 
                       setTimeout(() => {
