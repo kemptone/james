@@ -8,7 +8,6 @@ interface Recording {
 
 export default () => {
   const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
-  const [audioURLs, setAudioURLS] = useState<string[]>([]);
   const [recordings, setRecordings] = useState<Recording[]>([]);
   const [isRecording, setIsRecording] = useState(false);
   const [refreshId, refreshDB] = useState(1);
@@ -141,7 +140,19 @@ export default () => {
 
       tx.oncomplete = () => {
         console.log("Audio saved to IndexedDB:", data);
-        refreshDB(Math.random());
+        setRecordings((prev) => {
+          const thing = {
+            audioURL: URL.createObjectURL(data.blob),
+            timestamp: data.timestamp,
+            id: Math.random(),
+          };
+
+          return [
+            ...prev,
+            thing,
+          ];
+        });
+        // refreshDB(Math.random());
       };
       tx.onerror = (event: any) => {
         console.error(
@@ -155,10 +166,8 @@ export default () => {
   return {
     recorder,
     setRecorder,
-    audioURLs,
     recordings,
     setRecordings,
-    setAudioURLS,
     isRecording,
     setIsRecording,
     startRecording,
