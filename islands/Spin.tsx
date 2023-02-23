@@ -1,9 +1,17 @@
 import { useEffect, useState } from "preact/hooks";
 import SpinSounds from "./spin.sounds.tsx";
+import Dialog from "../components/Dialog.tsx";
+import Recorder from "./Recorder.tsx";
 
 const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp cuaei.gif wheel.jpeg 2ff.gif circles.gif city.png cuaei.gif design.jpeg drawing-39.jpeg drawing2.jpeg drawing3.jpeg flower2.jpeg FUI.gif moving_wheel.gif radial.jpeg radial2.jpeg radial3.jpeg radial4.jpeg radial5.jpeg steer.jpeg symmetrical2.jpeg twist.gif wheel.jpeg"
     .split(" ");
+
+interface Recording {
+  audioURL: string;
+  timestamp: number;
+  id: number;
+}
 
 export default (props: {}) => {
   const [state, setState] = useState("");
@@ -19,19 +27,27 @@ export default (props: {}) => {
   const [stopSounds, setStopSounds] = useState<() => void>(() => {});
   const [instance, setInstance] = useState(0);
   const [allstop, setAllStop] = useState(0);
+  const [customAudio1, setCustomAudio1] = useState<string>();
+  const [customAudio2, setCustomAudio2] = useState<string>();
 
   useEffect(() => {
     setState("return");
     setTimeout((e) => {
       setState("");
-      stopSounds();
+      // stopSounds();
     }, 100);
   }, [allstop]);
 
   useEffect(() => {
     const audioContext =
       new (window.AudioContext || window.webkitAudioContext)();
-    const Spins = SpinSounds(audioContext, totalTime, totalRotations);
+    const Spins = SpinSounds(
+      audioContext,
+      totalTime,
+      totalRotations,
+      customAudio1,
+      customAudio2,
+    );
     setPlaySounds(() => Spins.playSounds);
     setStopSounds(() => Spins.stopSounds);
     return () => {
@@ -42,6 +58,8 @@ export default (props: {}) => {
     totalTime,
     instance,
     allstop,
+    customAudio1,
+    customAudio2,
   ]);
 
   useEffect(() => {
@@ -112,7 +130,7 @@ export default (props: {}) => {
           }}
         />
       </div>
-      <details className="control">
+      <details className="control" open>
         <summary>Settings</summary>
         <fieldset className="modes">
           <legend>modes</legend>
@@ -169,10 +187,26 @@ export default (props: {}) => {
             step="any"
           />
         </fieldset>
-        <button
-          onClick={(e) => setAllStop((prev) => prev + 1)}
-          children="Stoop"
-        />
+        <Dialog>
+          {(D) => (
+            <fieldset className="more-actions">
+              <button
+                onClick={(e) => setAllStop((prev) => prev + 1)}
+                children="Stop"
+              />
+              <button
+                onClick={D.openDialog}
+                children="Edit Sounds"
+              />
+              <D.Dialog ref={D.ref}>
+                <Recorder
+                  setAsSound={setCustomAudio1}
+                  setAsSound2={setCustomAudio2}
+                />
+              </D.Dialog>
+            </fieldset>
+          )}
+        </Dialog>
       </details>
     </>
   );

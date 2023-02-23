@@ -6,7 +6,7 @@ const Primary =
     .split("  ");
 
 const Secondary =
-  "Beau, Gianna, Makenzie, Blake, Merlin, Santa Claus, Tooth Fairy, Audry, Braxton, Adley, Crista, Jake, Makayla, Atticus, Presly P, Alexis, Sophie, Mikey, Davey Jack, Hazel, Oliver, Lucas, Presly, Jackson, Aubrey, Elliot, Dumpy, Kevin"
+  "Beau, Gianna, Makenzie, Blake, Merlin, Santa Claus, Tooth Fairy, Audry, Braxton, Adley, Crista, Jake, Makayla, Atticus, Presly P, Alexis, Sophie, Mikey, Davey Jack, Hazel, Oliver, Lucas, Presly, Jackson, Aubrey, Elliot, Dumpy, Kevin, Glinda, Dorothy, Scarecrow, Tin Man, The Lion"
     .split(", ");
 
 // const Primary = [
@@ -112,6 +112,15 @@ export default () => {
 
               <D.Dialog ref={D.ref}>
                 <main className="colorthing">
+                  <section className="inner-readout">
+                    {showingMissing
+                      ? chosenNames.map((name, index) => (
+                        // <span class="chosen" key={index} children={{ name }} />
+                        <span class="chosen" children={name} />
+                      ))
+                      : null}
+                  </section>
+
                   <div class="colors">
                     <button
                       onClick={(e) => setShowingMissing(!showingMissing)}

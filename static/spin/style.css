@@ -79,6 +79,7 @@ html:has( body.darkmode2 ) .spinner img {
 .control fieldset {
   margin: 1rem;
   padding: 1rem;
+
 }
 
 .control fieldset input {
@@ -93,6 +94,15 @@ html:has( body.darkmode2 ) .spinner img {
   padding: 1rem;
   box-sizing: border-box;
   flex: 1;
+}
+
+.control fieldset.more-actions {
+  display: flex;
+  gap:.4rem;
+}
+
+.control fieldset.more-actions button {
+  padding: 10px;
 }
 
 .control .modes {

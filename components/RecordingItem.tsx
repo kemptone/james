@@ -3,7 +3,8 @@ import preact from "preact";
 const RecordingItem: preact.FunctionalComponent<{
   audioURL: string;
   timestamp: number;
-  setAsSound: (timestamp: number) => void;
+  setAsSound: (audioURL: string) => void;
+  setAsSound2: (audioURL: string) => void;
   deleteRecording: (timestamp: number) => void;
   id: number;
 }> = (props) => {
@@ -12,10 +13,14 @@ const RecordingItem: preact.FunctionalComponent<{
       <audio
         src={props.audioURL}
         controls
-        loop
       />
       <button
-        onClick={() => props.setAsSound(props.timestamp)}
+        onClick={() => props.setAsSound(props.audioURL)}
+        children="✔"
+        className="icon"
+      />
+      <button
+        onClick={() => props.setAsSound2(props.audioURL)}
         children="✔"
         className="icon"
       />

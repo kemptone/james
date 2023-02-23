@@ -25,6 +25,15 @@ main.colorthing .readout {
   padding: 20px;
 }
 
+main.colorthing .inner-readout {
+  display: block;
+}
+
+main.colorthing .inner-readout .chosen {
+  display: inline-block;
+  padding: 10px;
+}
+
 main.colorthing .readout .chosen {
   width: 140px; 
   /* height:100px; */

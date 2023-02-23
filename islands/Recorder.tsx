@@ -2,7 +2,13 @@ import { useEffect, useState } from "preact/hooks";
 import RecordingItem from "../components/RecordingItem.tsx";
 import recorderHooks from "../hooks/recorderHooks.tsx";
 
-const AudioRecorder = () => {
+const AudioRecorder = ({
+  setAsSound,
+  setAsSound2,
+}: {
+  setAsSound: (str: string) => void;
+  setAsSound2: (str: string) => void;
+}) => {
   const {
     startRecording,
     setRecordings,
@@ -29,8 +35,9 @@ const AudioRecorder = () => {
               timestamp,
               deleteRecording,
               id,
+              setAsSound,
+              setAsSound2,
             }}
-            setAsSound={(timestamp) => {}}
           />
         ))}
       </div>
