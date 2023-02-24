@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import database, { DB_NAME, DB_STORE_NAME, DB_VERSION } from "./database.tsx";
 
 interface Recording {
   audioURL: string;
@@ -22,25 +23,12 @@ export default () => {
 
   useEffect(() => {
     // opens the connection to the IndexDB database
-    const dbRequest = window.indexedDB.open("audio", 1);
 
-    // deno-lint-ignore no-explicit-any
-    dbRequest.onerror = (event: any) => {
-      console.error("Failed to open IndexedDB:", event.currentTarget.error);
-    };
-
-    // deno-lint-ignore no-explicit-any
-    dbRequest.onsuccess = (event: any) => {
-      // this is the reference to the object store
-      // const db = event.currentTarget.result;
-      const db = (event.currentTarget as IDBOpenDBRequest).result;
-      // tx = transaction
-      const tx = db.transaction("recordings", "readonly");
+    database((db) => {
+      const tx = db.transaction(DB_STORE_NAME, "readonly");
       // object store
-      const store = tx.objectStore("recordings");
-
+      const store = tx.objectStore(DB_STORE_NAME);
       const request = store.openCursor();
-
       const audios: Recording[] = [];
       // deno-lint-ignore no-explicit-any
       request.onsuccess = (event: any) => {
@@ -65,7 +53,7 @@ export default () => {
           event.currentTarget.error,
         );
       };
-    };
+    });
   }, [refreshId]);
 
   const startRecording = () => {
@@ -85,16 +73,9 @@ export default () => {
   };
 
   const deleteRecording = (id: number) => {
-    const dbRequest = window.indexedDB.open("audio", 1);
-
-    dbRequest.onerror = (event: any) => {
-      console.error("Failed to open IndexedDB:", event.currentTarget.error);
-    };
-
-    dbRequest.onsuccess = (event: Event) => {
-      const db = (event.target as IDBOpenDBRequest).result;
-      const tx = db.transaction("recordings", "readwrite");
-      const store = tx.objectStore("recordings");
+    database((db) => {
+      const tx = db.transaction(DB_STORE_NAME, "readwrite");
+      const store = tx.objectStore(DB_STORE_NAME);
       const request = store.getKey(id);
       request.onsuccess = (event: any) => {
         const key = event.target.result;
@@ -110,29 +91,13 @@ export default () => {
           refreshDB(Math.random());
         };
       };
-    };
+    });
   };
 
   const saveAudio = (blob: Blob) => {
-    const dbRequest = window.indexedDB.open("audio", 1);
-
-    dbRequest.onerror = (event: any) => {
-      console.error("Failed to open IndexedDB:", event.currentTarget.error);
-    };
-
-    dbRequest.onupgradeneeded = (event: any) => {
-      const db = (event.currentTarget as IDBOpenDBRequest).result;
-      const store = db.createObjectStore("recordings", {
-        keyPath: "id",
-        autoIncrement: true,
-      });
-      store.createIndex("timestamp", "timestamp", { unique: false });
-    };
-
-    dbRequest.onsuccess = (event: any) => {
-      const db = (event.currentTarget as IDBOpenDBRequest).result;
-      const tx = db.transaction("recordings", "readwrite");
-      const store = tx.objectStore("recordings");
+    database((db) => {
+      const tx = db.transaction(DB_STORE_NAME, "readwrite");
+      const store = tx.objectStore(DB_STORE_NAME);
       const timestamp = Date.now();
       const data = { blob, timestamp };
 
@@ -160,7 +125,7 @@ export default () => {
           event.currentTarget.error,
         );
       };
-    };
+    });
   };
 
   return {
