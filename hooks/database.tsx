@@ -1,6 +1,6 @@
 export const DB_NAME = "audio";
-export const DB_VERSION = 1;
-export const DB_STORE_NAME = "recordings";
+export const DB_VERSION = 4;
+export const DB_STORE_NAME = "recordings2";
 
 // Open the database
 // let db;
