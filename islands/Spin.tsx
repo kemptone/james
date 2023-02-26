@@ -2,6 +2,9 @@ import { useEffect, useState } from "preact/hooks";
 import SpinSounds from "./spin.sounds.tsx";
 import Dialog from "../components/Dialog.tsx";
 import Recorder from "./Recorder.tsx";
+import _localStorage from "../helpers/localStorage.js";
+
+const { persist, populate } = _localStorage("spin");
 
 const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp cuaei.gif wheel.jpeg 2ff.gif circles.gif city.png cuaei.gif design.jpeg drawing-39.jpeg drawing2.jpeg drawing3.jpeg flower2.jpeg FUI.gif moving_wheel.gif radial.jpeg radial2.jpeg radial3.jpeg radial4.jpeg radial5.jpeg steer.jpeg symmetrical2.jpeg twist.gif wheel.jpeg Cowardly_lion2.jpeg dorothy.jpeg abstract-colorful.jpeg arrows.png circle-08.gif dewalt2.jpeg glinda.jpeg woz-group.jpeg tin-man.jpeg glinda2.avif"
@@ -13,24 +16,72 @@ interface Recording {
   id: number;
 }
 
+/*
+{
+    "transitionType": "ease-out",
+    "currentFan": "radial5.jpeg",
+    "darkmode": true,
+    "darkmode2": false,
+    "whitemode": true,
+    "zoomlevel": "13.3828362516837",
+    "zoommode": true,
+    "totalRotations": 34,
+    "totalTime": 38,
+    "rotationRatio": 26.8978247065615
+}
+*/
+
 export default (props: {}) => {
+  const p = populate("spin") || {};
+
   const [state, setState] = useState("");
-  const [totalTime, setTotalTime] = useState(10);
-  const [totalRotations, setTotalRotations] = useState(6);
-  const [transitionType, setTransitionType] = useState("ease");
-  const [currentFan, setCurrentFan] = useState("Fardo.png");
+  const [totalTime, setTotalTime] = useState(p.totalTime ?? 38);
+  const [totalRotations, setTotalRotations] = useState(p.totalRotations ?? 34);
+  const [rotationRatio, setRotationRatio] = useState(
+    p.rotationRatio ?? 26.8978247065615,
+  );
+  const [transitionType, setTransitionType] = useState(
+    p.transitionType ?? "ease-out",
+  );
+  const [currentFan, setCurrentFan] = useState(p.currentFan ?? "radial5.jpeg");
   const [volume, setVolume] = useState(50);
-  const [darkmode, setDarkmode] = useState(false);
-  const [darkmode2, setDarkmode2] = useState(false);
-  const [whitemode, setWhitemode] = useState(false);
-  const [zoommode, setZoommode] = useState(false);
-  const [zoomlevel, setZoomlevel] = useState("8");
+  const [darkmode, setDarkmode] = useState(p.darkmode ?? true);
+  const [darkmode2, setDarkmode2] = useState(p.darkmode2 ?? false);
+  const [whitemode, setWhitemode] = useState(p.whitemode ?? true);
+  const [zoommode, setZoommode] = useState(p.zoommode ?? true);
+  const [zoomlevel, setZoomlevel] = useState(p.zoomlevel ?? "13.38283");
   const [playSounds, setPlaySounds] = useState<() => void>(() => {});
   const [stopSounds, setStopSounds] = useState<() => void>(() => {});
   const [instance, setInstance] = useState(0);
   const [allstop, setAllStop] = useState(0);
   const [customAudio1, setCustomAudio1] = useState<string>();
   const [customAudio2, setCustomAudio2] = useState<string>();
+
+  useEffect(() => {
+    console.log(persist("spin", {
+      transitionType,
+      currentFan,
+      darkmode,
+      darkmode2,
+      whitemode,
+      zoomlevel,
+      zoommode,
+      totalRotations,
+      totalTime,
+      rotationRatio,
+    }));
+  }, [
+    transitionType,
+    currentFan,
+    darkmode,
+    darkmode2,
+    whitemode,
+    zoomlevel,
+    zoommode,
+    totalTime,
+    totalRotations,
+    rotationRatio,
+  ]);
 
   useEffect(() => {
     setState("return");
@@ -90,6 +141,11 @@ export default (props: {}) => {
   }, [darkmode, darkmode2, whitemode, zoommode]);
 
   useEffect(() => {
+    const num = Math.floor(totalTime * (rotationRatio / 30));
+    setTotalRotations(num);
+  }, [rotationRatio, totalTime]);
+
+  useEffect(() => {
     document?.body?.style?.setProperty?.(
       "--spintimer",
       totalTime + "s",
@@ -145,16 +201,19 @@ export default (props: {}) => {
           <input
             type="checkbox"
             title="dark mode"
+            checked={darkmode === true ? true : undefined}
             onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
           />
           <input
             type="checkbox"
             title="invert fan"
+            checked={darkmode2 === true ? true : undefined}
             onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
           />
           <input
             type="checkbox"
             title="white mode"
+            checked={whitemode === true ? true : undefined}
             onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
           />
           <input
@@ -184,11 +243,13 @@ export default (props: {}) => {
           />
         </fieldset>
         <fieldset>
-          <legend>Rotations</legend>
+          <legend>Speed</legend>
           <input
-            type="number"
-            value={totalRotations}
-            onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
+            type="range"
+            value={rotationRatio}
+            onChange={(e) => setRotationRatio(Number(e.currentTarget.value))}
+            min=".01"
+            step="any"
           />
         </fieldset>
 
@@ -196,13 +257,36 @@ export default (props: {}) => {
           <summary>More</summary>
 
           <fieldset>
+            <legend>Rotations</legend>
+            <input
+              type="number"
+              value={totalRotations}
+              onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
+            />
+          </fieldset>
+
+          <fieldset>
             <legend>Easing</legend>
 
             <select
               onChange={(e) => setTransitionType(e.currentTarget.value)}
-              defaultValue={currentFan}
+              defaultValue={transitionType}
             >
-              {"ease linear ease-in ease-out ease-in-out ".split(" ").map((
+              {[
+                "ease",
+                "linear",
+                "ease-in",
+                "ease-out",
+                "ease-in-out",
+                "cubic-bezier(0.075, 0.82, 0.165, 1)",
+                "cubic-bezier(0.23, 1, 0.320, 1)",
+                "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                "cubic-bezier(1, 0, 0, 1)",
+                "cubic-bezier(0.6, -0.28, 0.735, 0.045)",
+                "cubic-bezier(0.77, 0, 0.175, 1)",
+                "cubic-bezier(0.42, 0, 0.58, 1)",
+                "linear(1, .5, .4, .3, .2, .1, .01, 0)",
+              ].map((
                 type,
               ) => <option value={type}>{type}</option>)}
             </select>
