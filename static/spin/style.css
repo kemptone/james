@@ -118,3 +118,30 @@ html:has( body.darkmode2 ) .spinner img {
 details > summary {
   cursor: pointer;
 }
+
+/* Hide the default browser tooltip */
+input[title] {
+  position: relative;
+}
+
+input[title]:before {
+  content: attr(title);
+  position: absolute;
+  top: -300%;
+  left: 50%;
+  transform: translate(-50%, 5px);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s ease;
+  width: max-content;
+}
+
+input[title]:hover:before {
+  visibility: visible;
+  opacity: 1;
+}

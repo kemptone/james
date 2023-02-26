@@ -144,19 +144,25 @@ export default (props: {}) => {
           <legend>modes</legend>
           <input
             type="checkbox"
+            title="dark mode"
             onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
           />
           <input
             type="checkbox"
+            title="invert fan"
             onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
           />
           <input
             type="checkbox"
+            title="white mode"
             onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
           />
           <input
             type="checkbox"
+            title="zoom fan"
+            checked={zoommode === true ? true : undefined}
             onChange={(e) => setZoommode(e?.currentTarget?.checked)}
+            name="zoommode"
           />
         </fieldset>
 
@@ -206,7 +212,10 @@ export default (props: {}) => {
             <input
               type="range"
               value={zoomlevel}
-              onChange={(e) => setZoomlevel(e.currentTarget.value)}
+              onChange={(e) => {
+                setZoommode(true);
+                setZoomlevel(e.currentTarget.value);
+              }}
               min=".1"
               step="any"
             />
