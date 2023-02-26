@@ -13,13 +13,15 @@ function SpinSounds(
 
   // load the sound files
   loadSound(
-    customAudio2 ?? "/spin/swoop_206.mp3",
+    // customAudio2 ?? "/spin/swoop_206.mp3",
+    customAudio2 ?? "/spin/swoop_206.wav",
     function (buffer: AudioBuffer) {
       sound1 = createBufferSource(buffer, false);
     },
   );
   loadSound(
-    customAudio1 ?? "/spin/main_206.mp3",
+    // customAudio1 ?? "/spin/main_206.mp3",
+    customAudio1 ?? "/spin/main_206.wav",
     // "/spin/main_206.mp3",
     function (buffer: AudioBuffer) {
       sound2 = createBufferSource(buffer, customAudio1 ? false : true);
