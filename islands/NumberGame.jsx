@@ -23,13 +23,13 @@ export default function NumberGame() {
             {...CurrentMathProblem.value}
             step={Step.value}
             onSubmit={() => {
-              debugger;
+              // debugger;
               Step.value += 1;
             }}
             act="÷"
-            // onFocus={e => {
-            //   MenuOpen.value = false
-            // }}
+            onFocus={(e) => {
+              //   MenuOpen.value = false
+            }}
           />
         </section>
         <span id="divisible">
