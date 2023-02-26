@@ -9,8 +9,10 @@ export default function Home() {
     <>
       <Head>
         <title>Number Deno Dev</title>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
-        </script>
+        {
+          /* <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+        </script> */
+        }
       </Head>
       <NumberGame />
       <Menu is_deno={true} />

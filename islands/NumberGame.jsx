@@ -22,7 +22,10 @@ export default function NumberGame() {
           <Problem
             {...CurrentMathProblem.value}
             step={Step.value}
-            onSubmit={() => Step.value += 1}
+            onSubmit={() => {
+              debugger;
+              Step.value += 1;
+            }}
             act="÷"
             // onFocus={e => {
             //   MenuOpen.value = false

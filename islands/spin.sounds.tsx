@@ -1,4 +1,5 @@
 function SpinSounds(
+  volume = 50,
   audioContext: AudioContext,
   totalTime: number,
   totalRotations: number,
@@ -92,9 +93,9 @@ function SpinSounds(
     const gainNode = audioContext.createGain();
 
     if (slower) {
-      gainNode.gain.value = 1; // set the initial volume to 50%
+      gainNode.gain.value = volume / 50; // set the initial volume to 50%
     } else {
-      gainNode.gain.value = 1; // set the initial volume to 50%
+      gainNode.gain.value = volume / 50; // set the initial volume to 50%
     }
 
     // Reverb

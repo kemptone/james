@@ -17,7 +17,9 @@ export default (props: {}) => {
   const [state, setState] = useState("");
   const [totalTime, setTotalTime] = useState(10);
   const [totalRotations, setTotalRotations] = useState(6);
+  const [transitionType, setTransitionType] = useState("ease");
   const [currentFan, setCurrentFan] = useState("Fardo.png");
+  const [volume, setVolume] = useState(50);
   const [darkmode, setDarkmode] = useState(false);
   const [darkmode2, setDarkmode2] = useState(false);
   const [whitemode, setWhitemode] = useState(false);
@@ -42,6 +44,7 @@ export default (props: {}) => {
     const audioContext =
       new (window.AudioContext || window.webkitAudioContext)();
     const Spins = SpinSounds(
+      volume,
       audioContext,
       totalTime,
       totalRotations,
@@ -60,6 +63,7 @@ export default (props: {}) => {
     allstop,
     customAudio1,
     customAudio2,
+    volume,
   ]);
 
   useEffect(() => {
@@ -94,9 +98,13 @@ export default (props: {}) => {
       "--totalrotations",
       (360 * totalRotations) + "deg",
     );
+    document?.body?.style?.setProperty?.(
+      "--transitionType",
+      transitionType,
+    );
     setInstance((prev) => prev + 1);
     setState("");
-  }, [totalTime, totalRotations]);
+  }, [totalTime, totalRotations, transitionType]);
 
   useEffect(() => {
     document?.body?.style?.setProperty?.(
@@ -177,21 +185,55 @@ export default (props: {}) => {
             onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
           />
         </fieldset>
-        <fieldset>
-          <legend>Zoom</legend>
-          <input
-            type="range"
-            value={zoomlevel}
-            onChange={(e) => setZoomlevel(e.currentTarget.value)}
-            min=".1"
-            step="any"
-          />
-        </fieldset>
+
+        <details>
+          <summary>More</summary>
+
+          <fieldset>
+            <legend>Easing</legend>
+
+            <select
+              onChange={(e) => setTransitionType(e.currentTarget.value)}
+              defaultValue={currentFan}
+            >
+              {"ease linear ease-in ease-out ease-in-out ".split(" ").map((
+                type,
+              ) => <option value={type}>{type}</option>)}
+            </select>
+          </fieldset>
+          <fieldset>
+            <legend>Zoom</legend>
+            <input
+              type="range"
+              value={zoomlevel}
+              onChange={(e) => setZoomlevel(e.currentTarget.value)}
+              min=".1"
+              step="any"
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Volume ({(2 * volume).toFixed(2)}%)</legend>
+            <input
+              type="range"
+              value={volume}
+              onChange={(e) => setVolume(Number(e.currentTarget.value))}
+              min=".01"
+              step="any"
+            />
+          </fieldset>
+        </details>
+
         <Dialog>
           {(D) => (
             <fieldset className="more-actions">
               <button
-                onClick={(e) => setAllStop((prev) => prev + 1)}
+                onClick={(e) => {
+                  setAllStop((prev) => prev + 1);
+                  setState("return");
+                  setTimeout(() => {
+                    setState("");
+                  }, 100);
+                }}
                 children="Stop"
               />
               <button
