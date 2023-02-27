@@ -70,6 +70,12 @@ export default (props: {}) => {
       totalTime,
       rotationRatio,
     }));
+
+    const thing = document.querySelector("input[name='total-time']");
+    if (thing) {
+      thing.value = totalTime;
+    }
+    // thing?.value = totalTime;
   }, [
     transitionType,
     currentFan,
@@ -186,7 +192,7 @@ export default (props: {}) => {
           }}
           onClick={(e) => {
             if (state) {
-              setState("");
+              // setState("");
             } else {
               setState("spin");
               playSounds();
@@ -194,155 +200,169 @@ export default (props: {}) => {
           }}
         />
       </div>
-      <details className="control" open>
-        <summary>Settings</summary>
-        <fieldset className="modes">
-          <legend>modes</legend>
-          <input
-            type="checkbox"
-            title="dark mode"
-            checked={darkmode === true ? true : undefined}
-            onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
-          />
-          <input
-            type="checkbox"
-            title="invert fan"
-            checked={darkmode2 === true ? true : undefined}
-            onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
-          />
-          <input
-            type="checkbox"
-            title="white mode"
-            checked={whitemode === true ? true : undefined}
-            onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
-          />
-          <input
-            type="checkbox"
-            title="zoom fan"
-            checked={zoommode === true ? true : undefined}
-            onChange={(e) => setZoommode(e?.currentTarget?.checked)}
-            name="zoommode"
-          />
-        </fieldset>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setState("spin");
+          playSounds();
+        }}
+      >
+        <details className="control" open>
+          <summary>Settings</summary>
 
-        <fieldset>
-          <legend>Fan</legend>
-          <select
-            onChange={(e) => setCurrentFan(e.currentTarget.value)}
-            defaultValue={currentFan}
-          >
-            {Fans.map((fan) => <option value={fan}>{fan}</option>)}
-          </select>
-        </fieldset>
-        <fieldset>
-          <legend>Time, in seconds</legend>
-          <input
-            type="number"
-            value={totalTime}
-            onChange={(e) => setTotalTime(Number(e.currentTarget.value))}
-          />
-        </fieldset>
-        <fieldset>
-          <legend>Speed</legend>
-          <input
-            type="range"
-            value={rotationRatio}
-            onChange={(e) => setRotationRatio(Number(e.currentTarget.value))}
-            min=".01"
-            step="any"
-          />
-        </fieldset>
-
-        <details>
-          <summary>More</summary>
-
-          <fieldset>
-            <legend>Rotations</legend>
+          <fieldset className="modes">
+            <legend>modes</legend>
             <input
-              type="number"
-              value={totalRotations}
-              onChange={(e) => setTotalRotations(Number(e.currentTarget.value))}
+              type="checkbox"
+              title="dark mode"
+              checked={darkmode === true ? true : undefined}
+              onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
+            />
+            <input
+              type="checkbox"
+              title="invert fan"
+              checked={darkmode2 === true ? true : undefined}
+              onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
+            />
+            <input
+              type="checkbox"
+              title="white mode"
+              checked={whitemode === true ? true : undefined}
+              onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
+            />
+            <input
+              type="checkbox"
+              title="zoom fan"
+              checked={zoommode === true ? true : undefined}
+              onChange={(e) => setZoommode(e?.currentTarget?.checked)}
+              name="zoommode"
             />
           </fieldset>
 
           <fieldset>
-            <legend>Easing</legend>
-
+            <legend>Fan</legend>
             <select
-              onChange={(e) => setTransitionType(e.currentTarget.value)}
-              defaultValue={transitionType}
+              onChange={(e) => setCurrentFan(e.currentTarget.value)}
+              defaultValue={currentFan}
             >
-              {[
-                "ease",
-                "linear",
-                "ease-in",
-                "ease-out",
-                "ease-in-out",
-                "cubic-bezier(0.075, 0.82, 0.165, 1)",
-                "cubic-bezier(0.23, 1, 0.320, 1)",
-                "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                "cubic-bezier(1, 0, 0, 1)",
-                "cubic-bezier(0.6, -0.28, 0.735, 0.045)",
-                "cubic-bezier(0.77, 0, 0.175, 1)",
-                "cubic-bezier(0.42, 0, 0.58, 1)",
-                "linear(1, .5, .4, .3, .2, .1, .01, 0)",
-              ].map((
-                type,
-              ) => <option value={type}>{type}</option>)}
+              {Fans.map((fan) => <option value={fan}>{fan}</option>)}
             </select>
           </fieldset>
           <fieldset>
-            <legend>Zoom</legend>
+            <legend>Time, in seconds</legend>
             <input
-              type="range"
-              value={zoomlevel}
-              onChange={(e) => {
-                setZoommode(true);
-                setZoomlevel(e.currentTarget.value);
-              }}
-              min=".1"
-              step="any"
+              type="number"
+              defaultValue={totalTime}
+              onChange={(e) => setTotalTime(Number(e.currentTarget.value))}
+              name="total-time"
             />
           </fieldset>
           <fieldset>
-            <legend>Volume ({(2 * volume).toFixed(2)}%)</legend>
+            <legend>Speed</legend>
             <input
               type="range"
-              value={volume}
-              onChange={(e) => setVolume(Number(e.currentTarget.value))}
+              value={rotationRatio}
+              onChange={(e) => setRotationRatio(Number(e.currentTarget.value))}
               min=".01"
               step="any"
             />
           </fieldset>
-        </details>
 
-        <Dialog>
-          {(D) => (
-            <fieldset className="more-actions">
-              <button
-                onClick={(e) => {
-                  setAllStop((prev) => prev + 1);
-                  setState("return");
-                  setTimeout(() => {
-                    setState("");
-                  }, 100);
-                }}
-                children="Stop"
+          <details>
+            <summary>More</summary>
+
+            <fieldset>
+              <legend>Rotations</legend>
+              <input
+                type="number"
+                value={totalRotations}
+                onChange={(e) =>
+                  setTotalRotations(Number(e.currentTarget.value))}
               />
-              <button
-                onClick={D.openDialog}
-                children="Edit Sounds"
-              />
-              <D.Dialog ref={D.ref}>
-                <Recorder
-                  setAsSound={setCustomAudio1}
-                  setAsSound2={setCustomAudio2}
-                />
-              </D.Dialog>
             </fieldset>
-          )}
-        </Dialog>
-      </details>
+
+            <fieldset>
+              <legend>Easing</legend>
+
+              <select
+                onChange={(e) => setTransitionType(e.currentTarget.value)}
+                defaultValue={transitionType}
+              >
+                {[
+                  "ease",
+                  "linear",
+                  "ease-in",
+                  "ease-out",
+                  "ease-in-out",
+                  "cubic-bezier(0.075, 0.82, 0.165, 1)",
+                  "cubic-bezier(0.23, 1, 0.320, 1)",
+                  "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                  "cubic-bezier(1, 0, 0, 1)",
+                  "cubic-bezier(0.6, -0.28, 0.735, 0.045)",
+                  "cubic-bezier(0.77, 0, 0.175, 1)",
+                  "cubic-bezier(0.42, 0, 0.58, 1)",
+                  "linear(1, .5, .4, .3, .2, .1, .01, 0)",
+                ].map((
+                  type,
+                ) => <option value={type}>{type}</option>)}
+              </select>
+            </fieldset>
+            <fieldset>
+              <legend>Zoom</legend>
+              <input
+                type="range"
+                value={zoomlevel}
+                onChange={(e) => {
+                  setZoommode(true);
+                  setZoomlevel(e.currentTarget.value);
+                }}
+                min=".1"
+                step="any"
+              />
+            </fieldset>
+            <fieldset>
+              <legend>Volume ({(2 * volume).toFixed(2)}%)</legend>
+              <input
+                type="range"
+                value={volume}
+                onChange={(e) => setVolume(Number(e.currentTarget.value))}
+                min=".01"
+                step="any"
+              />
+            </fieldset>
+          </details>
+
+          <Dialog>
+            {(D) => (
+              <fieldset className="more-actions">
+                <button type="submit" children="Go" />
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    setAllStop((prev) => prev + 1);
+                    setState("return");
+                    setTimeout(() => {
+                      setState("");
+                    }, 100);
+                  }}
+                  children="Stop"
+                />
+                <button
+                  type="button"
+                  onClick={D.openDialog}
+                  children="Sounds"
+                />
+                <D.Dialog ref={D.ref}>
+                  <Recorder
+                    setAsSound={setCustomAudio1}
+                    setAsSound2={setCustomAudio2}
+                  />
+                </D.Dialog>
+              </fieldset>
+            )}
+          </Dialog>
+        </details>
+      </form>
     </>
   );
 };
