@@ -5,6 +5,8 @@ function SpinSounds(
   totalRotations: number,
   customAudio1?: string,
   customAudio2?: string,
+  defaultAudio1?: string = "/spin/main_206.wav",
+  defaultAudio2?: string = "/spin/swoop_206.wav",
 ) {
   const isCustomAudio = Boolean(customAudio1 || customAudio2);
 
@@ -14,14 +16,14 @@ function SpinSounds(
   // load the sound files
   loadSound(
     // customAudio2 ?? "/spin/swoop_206.mp3",
-    customAudio2 ?? "/spin/swoop_206.wav",
+    customAudio2 ?? defaultAudio2,
     function (buffer: AudioBuffer) {
       sound1 = createBufferSource(buffer, false);
     },
   );
   loadSound(
     // customAudio1 ?? "/spin/main_206.mp3",
-    customAudio1 ?? "/spin/main_206.wav",
+    customAudio1 ?? defaultAudio1,
     // "/spin/main_206.mp3",
     function (buffer: AudioBuffer) {
       sound2 = createBufferSource(buffer, customAudio1 ? false : true);

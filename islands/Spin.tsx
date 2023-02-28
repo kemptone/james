@@ -10,6 +10,25 @@ const Fans =
   "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp cuaei.gif wheel.jpeg 2ff.gif circles.gif city.png cuaei.gif design.jpeg drawing-39.jpeg drawing2.jpeg drawing3.jpeg flower2.jpeg FUI.gif moving_wheel.gif radial.jpeg radial2.jpeg radial3.jpeg radial4.jpeg radial5.jpeg steer.jpeg symmetrical2.jpeg twist.gif wheel.jpeg Cowardly_lion2.jpeg dorothy.jpeg abstract-colorful.jpeg arrows.png circle-08.gif dewalt2.jpeg glinda.jpeg woz-group.jpeg tin-man.jpeg glinda2.avif"
     .split(" ");
 
+const FanSounds = (function () {
+  let x = 0;
+  const LIMIT = 20;
+  const ret = [];
+
+  while (x < LIMIT) {
+    if (String(x).length > 1) {
+      ret.push(`${x}.wav`);
+    } else {
+      ret.push(`0${x}.wav`);
+    }
+    x++;
+  }
+
+  return ret;
+}());
+
+console.log({ FanSounds });
+
 interface Recording {
   audioURL: string;
   timestamp: number;
@@ -44,6 +63,12 @@ export default (props: {}) => {
     p.transitionType ?? "ease-out",
   );
   const [currentFan, setCurrentFan] = useState(p.currentFan ?? "radial5.jpeg");
+  const [currentSound, setCurrentSound] = useState(
+    p.currentSound ?? "01.wav",
+  );
+  const [currentSound2, setCurrentSound2] = useState(
+    p.currentSound2 ?? "00.wav",
+  );
   const [volume, setVolume] = useState(50);
   const [darkmode, setDarkmode] = useState(p.darkmode ?? true);
   const [darkmode2, setDarkmode2] = useState(p.darkmode2 ?? false);
@@ -61,6 +86,8 @@ export default (props: {}) => {
     console.log(persist("spin", {
       transitionType,
       currentFan,
+      currentSound,
+      currentSound2,
       darkmode,
       darkmode2,
       whitemode,
@@ -71,14 +98,26 @@ export default (props: {}) => {
       rotationRatio,
     }));
 
-    const thing = document.querySelector("input[name='total-time']");
-    if (thing) {
-      thing.value = totalTime;
-    }
+    (function () {
+      const thing = document.querySelector("input[name='total-time']");
+      if (thing) {
+        thing.value = totalTime;
+      }
+    })();
+
+    (function () {
+      const thing = document.querySelector("input[name='volume-number']");
+      if (thing) {
+        thing.value = volume;
+      }
+    })();
+
     // thing?.value = totalTime;
   }, [
     transitionType,
     currentFan,
+    currentSound,
+    currentSound2,
     darkmode,
     darkmode2,
     whitemode,
@@ -107,6 +146,7 @@ export default (props: {}) => {
       totalRotations,
       customAudio1,
       customAudio2,
+      "/spin/fans/" + currentSound,
     );
     setPlaySounds(() => Spins.playSounds);
     setStopSounds(() => Spins.stopSounds);
@@ -121,6 +161,7 @@ export default (props: {}) => {
     customAudio1,
     customAudio2,
     volume,
+    currentSound,
   ]);
 
   useEffect(() => {
@@ -249,6 +290,21 @@ export default (props: {}) => {
             </select>
           </fieldset>
           <fieldset>
+            <legend>Sounds</legend>
+            <select
+              onChange={(e) => setCurrentSound(e.currentTarget.value)}
+              defaultValue={currentSound}
+            >
+              {FanSounds.map((fan) => <option value={fan}>{fan}</option>)}
+            </select>
+            <select
+              onChange={(e) => setCurrentSound2(e.currentTarget.value)}
+              defaultValue={currentSound2}
+            >
+              {FanSounds.map((fan) => <option value={fan}>{fan}</option>)}
+            </select>
+          </fieldset>
+          <fieldset>
             <legend>Time, in seconds</legend>
             <input
               type="number"
@@ -324,6 +380,7 @@ export default (props: {}) => {
               <legend>Volume ({(2 * volume).toFixed(2)}%)</legend>
               <input
                 type="number"
+                name="volume-number"
                 defaultValue={`${volume}`}
                 onChange={(e) => setVolume(Number(e.currentTarget.value))}
                 min=".01"
