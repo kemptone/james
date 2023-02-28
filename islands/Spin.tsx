@@ -147,6 +147,7 @@ export default (props: {}) => {
       customAudio1,
       customAudio2,
       "/spin/fans/" + currentSound,
+      "/spin/fans/" + currentSound2,
     );
     setPlaySounds(() => Spins.playSounds);
     setStopSounds(() => Spins.stopSounds);
