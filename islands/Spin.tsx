@@ -101,7 +101,7 @@ export default (props: {}) => {
     const audioContext =
       new (window.AudioContext || window.webkitAudioContext)();
     const Spins = SpinSounds(
-      volume,
+      Math.min(2000, volume),
       audioContext,
       totalTime,
       totalRotations,
@@ -323,8 +323,8 @@ export default (props: {}) => {
             <fieldset>
               <legend>Volume ({(2 * volume).toFixed(2)}%)</legend>
               <input
-                type="range"
-                value={volume}
+                type="number"
+                defaultValue={`${volume}`}
                 onChange={(e) => setVolume(Number(e.currentTarget.value))}
                 min=".01"
                 step="any"
