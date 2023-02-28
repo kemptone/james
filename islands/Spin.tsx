@@ -252,35 +252,6 @@ export default (props: {}) => {
         <details className="control" open>
           <summary>Settings</summary>
 
-          <fieldset className="modes">
-            <legend>modes</legend>
-            <input
-              type="checkbox"
-              title="dark mode"
-              checked={darkmode === true ? true : undefined}
-              onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
-            />
-            <input
-              type="checkbox"
-              title="invert fan"
-              checked={darkmode2 === true ? true : undefined}
-              onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
-            />
-            <input
-              type="checkbox"
-              title="white mode"
-              checked={whitemode === true ? true : undefined}
-              onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
-            />
-            <input
-              type="checkbox"
-              title="zoom fan"
-              checked={zoommode === true ? true : undefined}
-              onChange={(e) => setZoommode(e?.currentTarget?.checked)}
-              name="zoommode"
-            />
-          </fieldset>
-
           <fieldset>
             <legend>Fan</legend>
             <select
@@ -327,6 +298,35 @@ export default (props: {}) => {
 
           <details>
             <summary>More</summary>
+
+            <fieldset className="modes">
+              <legend>modes</legend>
+              <input
+                type="checkbox"
+                title="dark mode"
+                checked={darkmode === true ? true : undefined}
+                onChange={(e) => setDarkmode(e?.currentTarget?.checked)}
+              />
+              <input
+                type="checkbox"
+                title="invert fan"
+                checked={darkmode2 === true ? true : undefined}
+                onChange={(e) => setDarkmode2(e?.currentTarget?.checked)}
+              />
+              <input
+                type="checkbox"
+                title="white mode"
+                checked={whitemode === true ? true : undefined}
+                onChange={(e) => setWhitemode(e?.currentTarget?.checked)}
+              />
+              <input
+                type="checkbox"
+                title="zoom fan"
+                checked={zoommode === true ? true : undefined}
+                onChange={(e) => setZoommode(e?.currentTarget?.checked)}
+                name="zoommode"
+              />
+            </fieldset>
 
             <fieldset>
               <legend>Rotations</legend>

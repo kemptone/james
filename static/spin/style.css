@@ -77,6 +77,9 @@ html:has( body.darkmode2 ) .spinner img {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  z-index: 99;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .control fieldset {
