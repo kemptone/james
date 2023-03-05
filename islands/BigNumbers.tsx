@@ -2,7 +2,7 @@ import { useState } from "preact/hooks";
 import { firstFive } from "../helpers/bignumbers/firstFive.js";
 import { buildCardinals } from "../helpers/bignumbers/buildCardinals.ts";
 import useVoices from "../effects/useVoices.ts";
-import type { JSXInternal } from "https://esm.sh/v95/preact@10.11.0/src/jsx";
+// import { ChangeEvent } from "preact/compat";
 
 const First = [
   {
@@ -80,8 +80,11 @@ export default () => {
           min="0"
           max="1e5"
           pattern="\d{1, 5}"
-          onChange={(e: JSXInternal.GenericEventHandler<HTMLInputElement>) => {
-            const key = Number(e.target.value);
+          // onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          onChange={(e: Event) => {
+            const target = e.target as HTMLInputElement;
+
+            const key = Number(target.value);
 
             if (key < 6) {
               setName(firstFive(key));
