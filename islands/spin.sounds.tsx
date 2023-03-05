@@ -54,10 +54,7 @@ function SpinSounds(
   convolver.connect(audioContext.destination);
 
   // connect the buffer source nodes in parallel
-  function createBufferSource(
-    buffer: AudioBuffer,
-    slower: boolean,
-  ) {
+  function createBufferSource(buffer: AudioBuffer, slower: boolean) {
     const {
       sampleRate,
       numberOfChannels,

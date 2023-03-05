@@ -1,11 +1,10 @@
 import { Head } from "$fresh/runtime.ts";
-import VoiceMaker from '../islands/VoiceMaker.jsx'
-import Menu from '../islands/Menu.jsx'
+import VoiceMaker from "../islands/VoiceMaker.tsx";
+import Menu from "../islands/Menu.jsx";
 
 // ÷ × + -
 
 export default function Home() {
-
   return (
     <>
       <Head>

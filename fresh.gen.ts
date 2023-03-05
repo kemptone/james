@@ -16,10 +16,10 @@ import * as $9 from "./routes/lasko.jsx";
 import * as $10 from "./routes/music.jsx";
 import * as $11 from "./routes/music2.jsx";
 import * as $12 from "./routes/recorder.tsx";
-import * as $13 from "./routes/sound.jsx";
-import * as $14 from "./routes/spin.tsx";
-import * as $15 from "./routes/timer2.jsx";
-import * as $16 from "./routes/timer3.jsx";
+import * as $13 from "./routes/spin.tsx";
+import * as $14 from "./routes/timer2.jsx";
+import * as $15 from "./routes/timer3.jsx";
+import * as $16 from "./routes/voice.jsx";
 import * as $$0 from "./islands/BigNumbers.jsx";
 import * as $$1 from "./islands/Calculator.tsx";
 import * as $$2 from "./islands/ColorFinder.jsx";
@@ -30,10 +30,11 @@ import * as $$6 from "./islands/Music2.jsx";
 import * as $$7 from "./islands/NumberGame.jsx";
 import * as $$8 from "./islands/Recorder.tsx";
 import * as $$9 from "./islands/Spin.tsx";
-import * as $$10 from "./islands/VoiceMaker.jsx";
+import * as $$10 from "./islands/VoiceMaker.tsx";
 import * as $$11 from "./islands/spin.sounds.tsx";
 import * as $$12 from "./islands/timer2.jsx";
 import * as $$13 from "./islands/timer3.jsx";
+import * as $$14 from "./islands/useLoopSounds.tsx";
 
 const manifest = {
   routes: {
@@ -50,10 +51,10 @@ const manifest = {
     "./routes/music.jsx": $10,
     "./routes/music2.jsx": $11,
     "./routes/recorder.tsx": $12,
-    "./routes/sound.jsx": $13,
-    "./routes/spin.tsx": $14,
-    "./routes/timer2.jsx": $15,
-    "./routes/timer3.jsx": $16,
+    "./routes/spin.tsx": $13,
+    "./routes/timer2.jsx": $14,
+    "./routes/timer3.jsx": $15,
+    "./routes/voice.jsx": $16,
   },
   islands: {
     "./islands/BigNumbers.jsx": $$0,
@@ -66,10 +67,11 @@ const manifest = {
     "./islands/NumberGame.jsx": $$7,
     "./islands/Recorder.tsx": $$8,
     "./islands/Spin.tsx": $$9,
-    "./islands/VoiceMaker.jsx": $$10,
+    "./islands/VoiceMaker.tsx": $$10,
     "./islands/spin.sounds.tsx": $$11,
     "./islands/timer2.jsx": $$12,
     "./islands/timer3.jsx": $$13,
+    "./islands/useLoopSounds.tsx": $$14,
   },
   baseUrl: import.meta.url,
   config,

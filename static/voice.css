@@ -1,15 +1,21 @@
 .voice-page {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap:9px;
+  /* display: grid; */
+  /* grid-template-columns: 1fr; */
+  /* grid-gap:9px; */
   /* min-height:500px; */
-  height: calc(100vh - 80px);
-  max-width: calc(100vw - 20px);
-  margin:auto;
+  /* height: calc(100vh - 80px); */
+  /* max-width: calc(100vw - 20px); */
+  /* margin:auto; */
+  padding-top:100px;
 }
 
 .voice-page label {
-    white-space: nowrap;
+    /* white-space: nowrap; */
+}
+
+.voice-maker {
+    max-width: 800px;
+    margin:0 auto;
 }
 
 .voice-page h1 {

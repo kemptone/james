@@ -1,4 +1,9 @@
-const Countries = [
+export type CountryType = {
+  name: string;
+  code: string;
+};
+
+const Countries: CountryType[] = [
   { "name": "Afghanistan", "code": "AF" },
   { "name": "Åland Islands", "code": "AX" },
   { "name": "Albania", "code": "AL" },
@@ -52,7 +57,7 @@ const Countries = [
   { "name": "Congo, The Democratic Republic of the", "code": "CD" },
   { "name": "Cook Islands", "code": "CK" },
   { "name": "Costa Rica", "code": "CR" },
-  { "name": "Cote D\"Ivoire", "code": "CI" },
+  { "name": 'Cote D"Ivoire', "code": "CI" },
   { "name": "Croatia", "code": "HR" },
   { "name": "Cuba", "code": "CU" },
   { "name": "Cyprus", "code": "CY" },
@@ -114,11 +119,11 @@ const Countries = [
   { "name": "Kazakhstan", "code": "KZ" },
   { "name": "Kenya", "code": "KE" },
   { "name": "Kiribati", "code": "KI" },
-  { "name": "Korea, Democratic People\"S Republic of", "code": "KP" },
+  { "name": 'Korea, Democratic People"S Republic of', "code": "KP" },
   { "name": "Korea, Republic of", "code": "KR" },
   { "name": "Kuwait", "code": "KW" },
   { "name": "Kyrgyzstan", "code": "KG" },
-  { "name": "Lao People\"S Democratic Republic", "code": "LA" },
+  { "name": 'Lao People"S Democratic Republic', "code": "LA" },
   { "name": "Latvia", "code": "LV" },
   { "name": "Lebanon", "code": "LB" },
   { "name": "Lesotho", "code": "LS" },
@@ -241,13 +246,13 @@ const Countries = [
   { "name": "Western Sahara", "code": "EH" },
   { "name": "Yemen", "code": "YE" },
   { "name": "Zambia", "code": "ZM" },
-  { "name": "Zimbabwe", "code": "ZW" }
-]
+  { "name": "Zimbabwe", "code": "ZW" },
+];
 
-const CountryKeys = {}
+const CountryKeys: { [key: string]: string } = {};
 
 Countries.forEach(({ name, code }) => {
-  CountryKeys[code] = name
-})
+  CountryKeys[code] = name;
+});
 
-export { CountryKeys }
+export { CountryKeys };
