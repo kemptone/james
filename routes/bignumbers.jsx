@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import Menu from "../islands/Menu.jsx";
-import BigNumbers from "../islands/BigNumbers.jsx";
+import BigNumbers from "../islands/BigNumbers.tsx";
 
 export default function Music() {
   return (

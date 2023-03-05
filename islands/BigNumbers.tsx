@@ -1,7 +1,7 @@
-import { Head } from "$fresh/runtime.ts";
 import { useState } from "preact/hooks";
 import { firstFive } from "../helpers/bignumbers/firstFive.js";
 import { buildCardinals } from "../helpers/bignumbers/buildCardinals.js";
+import useVoices from "../effects/useVoices.ts";
 
 const Cardinals = [null, null, null, null, null, null];
 buildCardinals(Cardinals);
@@ -9,6 +9,16 @@ buildCardinals(Cardinals);
 export default (args) => {
   const [name, setName] = useState("");
   const [pronounce, setPronounce] = useState("");
+
+  const {
+    synth,
+    voices,
+    englishOnly,
+    changeEnglishOnly,
+    voice_name,
+    read,
+    Speak,
+  } = useVoices();
 
   return (
     <main>
@@ -46,43 +56,48 @@ export default (args) => {
 
             const value = Cardinals[key];
 
-            setName(value.stringArray.join(""));
-            setPronounce(
-              value.stringArray.join(" ").replace(
-                /  /g,
-                " ",
-              ),
+            const name = value.stringArray.join("");
+            const pro = value.stringArray.join(" ").replace(
+              /  /g,
+              " ",
             );
 
-            // P.e_name.value = value.stringArray.join("");
-            // P.e_pronounce.value = value.stringArray.join(" ").replace(
-            //   /  /g,
-            //   " ",
-            // );
+            setName(name);
+            setPronounce(pro);
+
+            Speak({
+              read: pro,
+              voice_name,
+            });
           }}
         />
       </fieldset>
-      <fieldset>
+      <fieldset
+        onClick={(e) => {
+          Speak({
+            read: pronounce,
+            voice_name,
+          });
+        }}
+      >
         <legend>English name</legend>
         <textarea
           name="name"
           id="name"
-          cols="30"
-          rows="2"
+          cols={30}
+          rows={2}
           placeholder="ten"
           autocomplete="off"
           value={name}
-          // onClick="this.setSelectionRange(0, this.value.length)"
         >
         </textarea>
         <textarea
-          cols="30"
-          rows="2"
+          cols={30}
+          rows={2}
           placeholder="pronounce"
           id="pronounce"
           autocomplete="off"
           value={pronounce}
-          // onClick="this.setSelectionRange(0, this.value.length)"
         >
         </textarea>
       </fieldset>
