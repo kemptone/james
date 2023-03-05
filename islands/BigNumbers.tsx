@@ -1,12 +1,59 @@
 import { useState } from "preact/hooks";
 import { firstFive } from "../helpers/bignumbers/firstFive.js";
-import { buildCardinals } from "../helpers/bignumbers/buildCardinals.js";
+import { buildCardinals } from "../helpers/bignumbers/buildCardinals.ts";
 import useVoices from "../effects/useVoices.ts";
+import type { JSXInternal } from "https://esm.sh/v95/preact@10.11.0/src/jsx";
 
-const Cardinals = [null, null, null, null, null, null];
+const First = [
+  {
+    "builder": [1],
+    "y": 0,
+    "powerNumber": 0,
+    "stringArray": ["zero"],
+    "index": 0,
+  },
+  {
+    "builder": [1],
+    "y": 1,
+    "powerNumber": 0,
+    "stringArray": ["ten"],
+    "index": 1,
+  },
+  {
+    "builder": [1],
+    "y": 1,
+    "powerNumber": 0,
+    "stringArray": ["one", "hundred"],
+    "index": 2,
+  },
+  {
+    "builder": [1],
+    "y": 1,
+    "powerNumber": 1,
+    "stringArray": ["one", "thousand"],
+    "index": 3,
+  },
+  {
+    "builder": [1],
+    "y": 1,
+    "powerNumber": 1,
+    "stringArray": ["ten", "thousand"],
+    "index": 4,
+  },
+  {
+    "builder": [1],
+    "y": 1,
+    "powerNumber": 1,
+    "stringArray": ["one", "hundred", "thousand"],
+    "index": 5,
+  },
+];
+
+// const Cardinals = [null, null, null, null, null, null];
+const Cardinals = [...First];
 buildCardinals(Cardinals);
 
-export default (args) => {
+export default () => {
   const [name, setName] = useState("");
   const [pronounce, setPronounce] = useState("");
 
@@ -33,15 +80,12 @@ export default (args) => {
           min="0"
           max="1e5"
           pattern="\d{1, 5}"
-          // onClick="this.setSelectionRange(0, this.value.length)"
-          onChange={(e) => {
+          onChange={(e: JSXInternal.GenericEventHandler<HTMLInputElement>) => {
             const key = Number(e.target.value);
 
             if (key < 6) {
               setName(firstFive(key));
               setPronounce(firstFive(key));
-              // P.e_name.value = firstFive(key);
-              // P.e_pronounce.value = firstFive(key);
               return;
             }
 
@@ -49,8 +93,6 @@ export default (args) => {
               const msg = "😜 NUMBER TOO BIG! 😜";
               setName(msg);
               setPronounce(msg);
-              // P.e_name.value = msg;
-              // P.e_pronounce.value = msg;
               return alert(msg);
             }
 
