@@ -160,6 +160,16 @@ function SpinSounds(
     url: string,
     callback: (buffer: AudioBuffer) => void,
   ) {
+    fetch(url)
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => audioContext.decodeAudioData(buffer))
+      .then(callback);
+  }
+
+  function oldLoadSound(
+    url: string,
+    callback: (buffer: AudioBuffer) => void,
+  ) {
     const request = new XMLHttpRequest();
     request.open("GET", url, true);
     request.responseType = "arraybuffer";

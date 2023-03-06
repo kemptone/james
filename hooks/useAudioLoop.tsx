@@ -1,25 +1,29 @@
 import { MutableRef, useEffect, useRef, useState } from "preact/hooks";
 
+export type AudioCallback = {
+  source: AudioBufferSourceNode;
+};
+
 export type AudioThing = {
   audioFile: string;
   initialPlaybackRate: number;
   refSourceNode: MutableRef<AudioBufferSourceNode | null | undefined>;
-  refAudioContext: MutableRef<AudioContext | undefined>;
 };
 
 function useAudioLoop(
   audio: AudioThing,
-  callback: (a: AudioThing) => void,
+  audioContext: AudioContext,
+  callback: (a: AudioCallback) => void,
 ) {
   const {
     refSourceNode,
-    refAudioContext,
+    // refAudioContext,
     audioFile,
     initialPlaybackRate,
   } = audio;
 
-  const audioContext = refAudioContext.current ??
-    (refAudioContext.current = new AudioContext());
+  // const audioContext = refAudioContext.current ??
+  //   (refAudioContext.current = new AudioContext());
 
   fetch(audioFile)
     .then((response) => response.arrayBuffer())
@@ -59,30 +63,32 @@ function useAudioLoop(
         audioContext.currentTime,
       );
 
-      const rampUpDuration = 0.5;
-      const rampDownDuration = 0.5;
-      const rampUpStartTime = audioContext.currentTime;
-      const rampDownStartTime = audioContext.currentTime +
-        loopBuffer.duration - rampDownDuration;
+      // const rampUpDuration = 0.5;
+      // const rampDownDuration = 0.5;
+      // const rampUpStartTime = audioContext.currentTime;
+      // const rampDownStartTime = audioContext.currentTime +
+      //   loopBuffer.duration - rampDownDuration;
 
-      source.playbackRate.setValueAtTime(
-        initialPlaybackRate,
-        rampUpStartTime,
-      );
-      source.playbackRate.linearRampToValueAtTime(
-        initialPlaybackRate * 2,
-        rampUpStartTime + rampUpDuration,
-      );
-      source.playbackRate.linearRampToValueAtTime(
-        initialPlaybackRate * 2,
-        rampDownStartTime,
-      );
-      source.playbackRate.linearRampToValueAtTime(
-        initialPlaybackRate,
-        rampDownStartTime + rampDownDuration,
-      );
+      // source.playbackRate.setValueAtTime(
+      //   initialPlaybackRate,
+      //   rampUpStartTime,
+      // );
+      // source.playbackRate.linearRampToValueAtTime(
+      //   initialPlaybackRate * 2,
+      //   rampUpStartTime + rampUpDuration,
+      // );
+      // source.playbackRate.linearRampToValueAtTime(
+      //   initialPlaybackRate * 2,
+      //   rampDownStartTime,
+      // );
+      // source.playbackRate.linearRampToValueAtTime(
+      //   initialPlaybackRate,
+      //   rampDownStartTime + rampDownDuration,
+      // );
 
-      callback(audio);
+      callback({
+        source,
+      });
     });
 }
 

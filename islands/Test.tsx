@@ -10,7 +10,6 @@ const Test = () => {
     audioFile: "/spin/fans/00.wav",
     initialPlaybackRate: 1,
     refSourceNode: useRef<AudioBufferSourceNode | null>(),
-    refAudioContext: useRef<AudioContext | undefined>(),
   };
 
   return (
@@ -18,18 +17,40 @@ const Test = () => {
       <div style={{ height: "300px" }}></div>
       <button
         onClick={(e: Event) => {
-          // refAudioContext;
-          // refSourceNode;
+          const context =
+            new (window.AudioContext || window.webkitAudioContext)();
 
-          useAudioLoop(Sound1, () => {
-            if (
-              Sound1.refSourceNode.current && Sound1.refAudioContext.current
-            ) {
-              Sound1.refSourceNode.current.connect(
-                Sound1.refAudioContext.current.destination,
-              );
+          // context.addEventListener("statechange", (e: Event) => {
+          //   console.log("something");
+          // });
+          // source;
+          //   context;
+          //   debugger;
+          // });
 
-              Sound1.refSourceNode.current.start(0);
+          // console.log(context.state);
+
+          // This is fixing an issue that shows up on Safari
+          if (context.state === "suspended") {
+            context.resume();
+          }
+
+          useAudioLoop(Sound1, context, ({ source }) => {
+            // const context = Sound1.refAudioContext.current;
+            // const source = Sound1.refSourceNode.current;
+
+            // context.addEventListener("statechange", (e) => {
+            //   source;
+            //   context;
+            //   debugger;
+            // });
+
+            if (source && context) {
+              const gainNode = context.createGain();
+              gainNode.gain.value = 1;
+              source.connect(gainNode);
+              gainNode.connect(context.destination);
+              source.start(0);
             }
           });
         }}
