@@ -58,12 +58,12 @@ export default () => {
   const [pronounce, setPronounce] = useState("");
 
   const {
-    synth,
-    voices,
-    englishOnly,
-    changeEnglishOnly,
+    // synth,
+    // voices,
+    // englishOnly,
+    // changeEnglishOnly,
     voice_name,
-    read,
+    // read,
     Speak,
   } = useVoices();
 
@@ -80,7 +80,6 @@ export default () => {
           min="0"
           max="1e5"
           pattern="\d{1, 5}"
-          // onChange={(e: ChangeEvent<HTMLInputElement>) => {
           onChange={(e: Event) => {
             const target = e.target as HTMLInputElement;
 
@@ -118,7 +117,7 @@ export default () => {
         />
       </fieldset>
       <fieldset
-        onClick={(e) => {
+        onClick={() => {
           Speak({
             read: pronounce,
             voice_name,

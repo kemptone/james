@@ -48,6 +48,7 @@ export default (args) => {
           <a href="/kids">Kids</a>
           <a href="/spin">Spin</a>
           <a href="/recorder">Recorder</a>
+          <a href="https://smooth.talkrapp.com/#/">Talker</a>
           <NumberGameActions />
         </nav>
       </div>
