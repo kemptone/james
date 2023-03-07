@@ -1,4 +1,10 @@
-import { MutableRef, useEffect, useRef, useState } from "preact/hooks";
+import {
+  MutableRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "preact/hooks";
 
 export type AudioCallback = {
   source: AudioBufferSourceNode;
@@ -8,6 +14,10 @@ export type AudioThing = {
   audioFile: string;
   initialPlaybackRate: number;
   refSourceNode: MutableRef<AudioBufferSourceNode | null | undefined>;
+  refPlaying: MutableRef<boolean>;
+  refPlay: MutableRef<() => void>;
+  refStop: MutableRef<() => void>;
+  refLoaded: MutableRef<boolean>;
 };
 
 function useAudioLoop(
@@ -34,6 +44,8 @@ function useAudioLoop(
         numberOfChannels,
         length,
       } = audioBuffer;
+
+      audio.refLoaded.current = true;
 
       // we build our samples perfect like this
       const loopLength = Math.floor(length / 8);
@@ -62,6 +74,18 @@ function useAudioLoop(
         initialPlaybackRate,
         audioContext.currentTime,
       );
+
+      audio.refPlay.current = function play(): AudioBufferSourceNode {
+        source.start(0);
+        audio.refPlaying.current = true;
+        return source;
+      };
+
+      audio.refStop.current = function stop(): AudioBufferSourceNode {
+        source.stop();
+        audio.refPlaying.current = false;
+        return source;
+      };
 
       // const rampUpDuration = 0.5;
       // const rampDownDuration = 0.5;

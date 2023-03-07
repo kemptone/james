@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
+import useReverb from "../hooks/useReverb.tsx";
 
 const Test = () => {
   // const refSourceNode = useRef<AudioBufferSourceNode | null>();
-  // const refAudioContext = useRef<AudioContext | undefined>();
+  const refAudioContext = useRef<AudioContext | undefined>();
 
   const Sound1: AudioThing = {
     audioFile: "/spin/fans/00.wav",
     initialPlaybackRate: 1,
     refSourceNode: useRef<AudioBufferSourceNode | null>(),
+    refPlaying: useRef<boolean>(false),
+    refPlay: useRef(() => undefined),
+    refStop: useRef(() => undefined),
+    refLoaded: useRef(false),
   };
 
   return (
@@ -17,42 +22,70 @@ const Test = () => {
       <div style={{ height: "300px" }}></div>
       <button
         onClick={(e: Event) => {
-          const context =
-            new (window.AudioContext || window.webkitAudioContext)();
+          const target = e.target as HTMLButtonElement;
 
-          // context.addEventListener("statechange", (e: Event) => {
-          //   console.log("something");
-          // });
-          // source;
-          //   context;
-          //   debugger;
-          // });
+          let context = refAudioContext.current;
 
-          // console.log(context.state);
+          if (!context) {
+            context =
+              refAudioContext.current =
+                new (window.AudioContext || window.webkitAudioContext)();
+          }
+
+          if (Sound1.refPlaying.current) {
+            Sound1.refStop.current();
+            target.innerText = "Start Playing";
+            return;
+          }
 
           // This is fixing an issue that shows up on Safari
           if (context.state === "suspended") {
             context.resume();
           }
 
-          useAudioLoop(Sound1, context, ({ source }) => {
-            // const context = Sound1.refAudioContext.current;
-            // const source = Sound1.refSourceNode.current;
+          useReverb("/impulse/reaperblog/IRx125_03A.wav", context).then(
+            (reverb) => {
+              if (!context) {
+                return;
+              }
 
-            // context.addEventListener("statechange", (e) => {
-            //   source;
-            //   context;
-            //   debugger;
-            // });
+              useAudioLoop(Sound1, context, ({ source }) => {
+                const SPEED = 3;
 
-            if (source && context) {
-              const gainNode = context.createGain();
-              gainNode.gain.value = 1;
-              source.connect(gainNode);
-              gainNode.connect(context.destination);
-              source.start(0);
-            }
-          });
+                if (source && context) {
+                  const rampUp = 3;
+                  const run = 10;
+                  const slow = 15;
+
+                  source.playbackRate.setValueCurveAtTime(
+                    [0, .1, .3, .6, 1].map((i) => i * SPEED),
+                    context.currentTime,
+                    rampUp,
+                  );
+
+                  source.playbackRate.setTargetAtTime(
+                    1 * SPEED,
+                    context.currentTime + rampUp,
+                    run,
+                  );
+
+                  source.playbackRate.setValueCurveAtTime(
+                    [1, .9, .8, .7, .5, .3, .1, 0].map((i) => i * SPEED),
+                    context.currentTime + rampUp + run,
+                    slow,
+                  );
+
+                  source.connect(reverb);
+                  reverb.connect(context.destination);
+
+                  // source.connect(context.destination);
+
+                  Sound1.refPlay.current();
+                  target.innerText = "Stop Playing";
+                }
+              });
+            },
+          );
         }}
       >
         Start playing

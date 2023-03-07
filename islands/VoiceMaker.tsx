@@ -29,13 +29,15 @@ export default (args) => {
   return (
     <form
       class="voice-maker"
-      onSubmit={(e: JSXInternal.TargetedEvent<HTMLFormElement, Event>) => {
+      onSubmit={(e: Event) => {
         e.preventDefault();
+
+        const form = e.currentTarget as HTMLFormElement;
 
         const {
           read,
           voice_name,
-        } = Object.fromEntries(new FormData(e.currentTarget));
+        } = Object.fromEntries(new FormData(form));
 
         Speak({
           read: String(read),
