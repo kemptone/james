@@ -1,5 +1,5 @@
 import NumberGame from "../islands/NumberGame.jsx";
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 import { Head } from "$fresh/runtime.ts";
 
 // ÷ × + -

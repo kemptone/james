@@ -1,4 +1,4 @@
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 import Calculator from "../islands/Calculator.tsx";
 import { Head } from "$fresh/runtime.ts";
 

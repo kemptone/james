@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 import KidThing from "../islands/KidThing.jsx";
 
 export default function Home() {

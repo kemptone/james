@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 import Timer2 from "../islands/timer2.jsx";
 
 export default function Music() {

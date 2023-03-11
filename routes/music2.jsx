@@ -1,5 +1,5 @@
 import Music2 from "../islands/Music2.jsx";
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 import { Head } from "$fresh/runtime.ts";
 
 // ÷ × + -

@@ -1,42 +1,61 @@
-import { JSX } from 'preact'
-import { useRef, useEffect, useState } from 'preact/hooks'
-import { forwardRef } from 'preact/compat'
+import { FunctionalComponent, JSX } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { forwardRef } from "preact/compat";
 
-const Dialog = forwardRef<HTMLDialogElement>((args:JSX.HTMLAttributes<HTMLDialogElement>, ref) => {
-  return (
-    <dialog {...args} ref={ref}>
-      {args.children}
-      <form method="dialog"><button>✕</button></form>
-    </dialog>
-  )
-})
+const Dialog = forwardRef<HTMLDialogElement>(
+  (args: JSX.HTMLAttributes<HTMLDialogElement>, ref) => {
+    return (
+      <dialog {...args} ref={ref}>
+        {args.children}
+        <form method="dialog">
+          <button>✕</button>
+        </form>
+      </dialog>
+    );
+  },
+);
 
-export default (args: JSX.HTMLAttributes<HTMLDialogElement>) => {
-
-  const ref_dialog = useRef<HTMLDialogElement>(null)
+export default (args: {
+  children: (D: {
+    openDialog: () => void;
+    closeDialog: () => void;
+    ref: Ref<HTMLDialogElement>;
+    Dialog: FunctionalComponent<{
+      ref: Ref<HTMLDialogElement>;
+    }>;
+  }) => JSX.Element;
+}) => {
+  const ref_dialog = useRef<HTMLDialogElement>(null);
 
   const openDialog = () => {
-    ref_dialog?.current?.showModal()
-  }
+    ref_dialog?.current?.showModal();
+  };
 
   const closeDialog = () => {
-    ref_dialog?.current?.close()
-  }
+    ref_dialog?.current?.close();
+  };
 
   useEffect(() => {
-    ref_dialog?.current?.addEventListener('click', (ev) => {
-      if (ev.offsetX < 0 || ev.offsetX > ev.target.offsetWidth ||
-        ev.offsetY < 0 || ev.offsetY > ev.target.offsetHeight) {
-        closeDialog()
-      }
-    });
-  })
+    ref_dialog?.current?.addEventListener(
+      "click",
+      (ev: PointerEvent) => {
+        ev.stopPropagation();
+
+        const target = ev.target as HTMLDialogElement;
+        if (
+          ev.offsetX < 0 || ev.offsetX > target.offsetWidth ||
+          ev.offsetY < 0 || ev.offsetY > target.offsetHeight
+        ) {
+          closeDialog();
+        }
+      },
+    );
+  });
 
   return args.children({
-    Dialog
-    , openDialog
-    , closeDialog
-    , ref: ref_dialog
-  })
-
-}
+    Dialog,
+    openDialog,
+    closeDialog,
+    ref: ref_dialog,
+  });
+};

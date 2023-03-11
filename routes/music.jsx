@@ -1,8 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
-import Menu from '../islands/Menu.jsx'
+import Menu from "../islands/Menu.tsx";
 
-export default function Music () {
-
+export default function Music() {
   return (
     <>
       <Head>
@@ -82,12 +81,12 @@ export default function Music () {
             </li>
           </ul>
           <p class="sourced">
-            All tracks sourced from <a href="http://jplayer.org/">jplayer.org</a>
+            All tracks sourced from{" "}
+            <a href="http://jplayer.org/">jplayer.org</a>
           </p>
         </section>
       </div>
       <Menu is_deno={false} />
     </>
-  )
-
+  );
 }

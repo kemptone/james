@@ -26,7 +26,7 @@ import * as $$1 from "./islands/Calculator.tsx";
 import * as $$2 from "./islands/ColorFinder.jsx";
 import * as $$3 from "./islands/ColorThing.jsx";
 import * as $$4 from "./islands/KidThing.jsx";
-import * as $$5 from "./islands/Menu.jsx";
+import * as $$5 from "./islands/Menu.tsx";
 import * as $$6 from "./islands/Music2.jsx";
 import * as $$7 from "./islands/NumberGame.jsx";
 import * as $$8 from "./islands/Recorder.tsx";
@@ -65,7 +65,7 @@ const manifest = {
     "./islands/ColorFinder.jsx": $$2,
     "./islands/ColorThing.jsx": $$3,
     "./islands/KidThing.jsx": $$4,
-    "./islands/Menu.jsx": $$5,
+    "./islands/Menu.tsx": $$5,
     "./islands/Music2.jsx": $$6,
     "./islands/NumberGame.jsx": $$7,
     "./islands/Recorder.tsx": $$8,

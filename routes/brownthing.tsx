@@ -1,8 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
-import Menu from '../islands/Menu.jsx'
+import Menu from "../islands/Menu.tsx";
 
 export default function Home() {
-
   return (
     <>
       <Head>
@@ -21,6 +20,5 @@ export default function Home() {
     </>
   );
 }
-
 
 // <textarea id="readout" onClick="this.setSelectionRange(0, this.value.length)"></textarea>

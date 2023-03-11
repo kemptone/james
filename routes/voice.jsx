@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import VoiceMaker from "../islands/VoiceMaker.tsx";
-import Menu from "../islands/Menu.jsx";
+import Menu from "../islands/Menu.tsx";
 
 // ÷ × + -
 

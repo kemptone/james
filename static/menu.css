@@ -175,10 +175,14 @@ header nav {
     font-size: 22px;
     padding: 2.5rem;
     text-align: right;
+    width: fit-content;
+    float: right;
 }
 
 header nav > span,
 header nav > a {
   display: block;
   line-height: 2rem;
+  width: fit-content;
+  text-align: right;
 }

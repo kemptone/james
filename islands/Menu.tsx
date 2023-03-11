@@ -1,7 +1,7 @@
-import NumberGameActions from "../components/numberGame.actions.jsx";
-import { useState } from "preact/hooks";
+import AllSettings from "../components/AllSettings.tsx";
+import { useEffect, useState } from "preact/hooks";
 
-export default (args) => {
+export default () => {
   const [MenuOpen, open] = useState(false);
 
   const $menu = (
@@ -20,10 +20,22 @@ export default (args) => {
     </div>
   );
 
+  useEffect(() => {
+    document.querySelectorAll("#main-header a").forEach((Element) => {
+      Element.addEventListener("click", (e: Event) => {
+        // e.preventDefault()
+        e.stopPropagation();
+      });
+    });
+  }, []);
+
   return (
-    <header>
+    <header id="main-header">
       {$menu}
-      <div class={`navigation ${MenuOpen ? "open" : ""}`}>
+      <div
+        class={`navigation ${MenuOpen ? "open" : ""}`}
+        onClick={(e) => open(false)}
+      >
         <nav>
           <a href="/">Home</a>
           <a href="/calculator">Calculator</a>
@@ -50,7 +62,7 @@ export default (args) => {
           <a href="/spin">Spin</a>
           <a href="/recorder">Recorder</a>
           <a href="https://smooth.talkrapp.com/#/">Talker</a>
-          <NumberGameActions />
+          <AllSettings />
         </nav>
       </div>
     </header>

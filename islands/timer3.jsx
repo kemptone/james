@@ -1,6 +1,4 @@
-import Menu from "../islands/Menu.jsx";
 import { useEffect, useRef, useState } from "preact/hooks";
-// import { buildTimeleftHtml, max } from "../helpers/timer.js";
 
 function constantRateReduction(rate, time, finalRate) {
   return -Math.log(finalRate / rate) / time;
