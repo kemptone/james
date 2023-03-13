@@ -10,6 +10,7 @@ export default function App({ Component }: AppProps) {
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="dialog.css" />
         <link rel="stylesheet" href="fonts.css" />
+        <link rel="stylesheet" href="/allSettings/style.css" />
         <script src="loadserviceworker.js"></script>
         <script src="externalEval.js"></script>
         <meta

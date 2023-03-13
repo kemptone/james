@@ -1,8 +1,26 @@
+import { FunctionalComponent, JSX } from "preact";
 import Dialog from "../components/Dialog.tsx";
 import NumberGameActions from "./numberGame.actions.jsx";
 
 import _LS from "../helpers/localStorage.js";
+import JamesSettings from "./jamesSettings.jsx";
 const LS = _LS("Game");
+
+export const SettingItem = (
+  props: {
+    $label: JSX.Element;
+    $inner: JSX.Element;
+  },
+) => {
+  return (
+    <label>
+      {props.$label}
+      <div>
+        {props.$inner}
+      </div>
+    </label>
+  );
+};
 
 export default () => {
   const factorPlus = (val, Num) => () => {
@@ -20,12 +38,16 @@ export default () => {
       {(D) => (
         <>
           <a onClick={D.openDialog}>settings</a>
-          <D.Dialog ref={D.ref}>
-            <form
+          <D.Dialog ref={D.ref} open>
+            {
+              /* <form
               onSubmit={(e) => {
                 e.preventDefault();
               }}
-            >
+            > */
+            }
+            <div className="allSettings">
+              <div style={{ height: "70px" }}></div>
               <dfl>
                 <NumberGameActions />
                 <dt></dt>
@@ -60,7 +82,8 @@ export default () => {
                   </button>
                 </dd>
               </dfl>
-            </form>
+            </div>
+            {/* </form> */}
           </D.Dialog>
         </>
       )}

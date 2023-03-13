@@ -42,11 +42,14 @@ export default (args: {
         ev.stopPropagation();
 
         const target = ev.target as HTMLDialogElement;
-        if (
-          ev.offsetX < 0 || ev.offsetX > target.offsetWidth ||
-          ev.offsetY < 0 || ev.offsetY > target.offsetHeight
-        ) {
-          closeDialog();
+
+        if (target.nodeName === "DIALOG" || target.nodeName === "BUTTON") {
+          if (
+            ev.offsetX < 0 || ev.offsetX > target.offsetWidth ||
+            ev.offsetY < 0 || ev.offsetY > target.offsetHeight
+          ) {
+            closeDialog();
+          }
         }
       },
     );
