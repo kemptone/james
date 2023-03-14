@@ -50,7 +50,6 @@ export default () => {
             <span>&nbsp;&nbsp;</span>
             <a href="/brownthing?countby=10">10</a>
           </span>
-          <a href="/test">Test</a>
           <a href="/voice">Voice</a>
           <a href="/music2">Music</a>
           <a href="/colorthing">Color Thing</a>
