@@ -1,6 +1,4 @@
-import { useCallback } from "https://esm.sh/v95/preact@10.11.0/hooks/src/index";
-import { useEffect } from "https://esm.sh/v95/preact@10.11.0/hooks/src/index";
-import { useRef } from "https://esm.sh/v95/preact@10.11.0/hooks/src/index";
+import { useCallback, useEffect, useRef } from "preact/hooks";
 
 function useLoopSounds() {
   const ref_audioContext = useRef<AudioContext | null>(null);

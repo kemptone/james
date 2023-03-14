@@ -4,23 +4,23 @@ import _LS from "../helpers/localStorage.js";
 import { useEffect, useRef, useState } from "preact/hooks";
 const LS = _LS("James");
 
-interface IQuestion {
-  name: string;
-  type: "range" | "text" | "select" | "number";
-}
+// interface IQuestion {
+//   name: string;
+//   type: "range" | "text" | "select" | "number";
+// }
 
-interface IRange extends IQuestion {
-  min?: number;
-  max?: number;
-}
+// interface IRange extends IQuestion {
+//   min?: number;
+//   max?: number;
+// }
 
-interface ISelect extends IQuestion {
-  options: string[];
-}
+// interface ISelect extends IQuestion {
+//   options: string[];
+// }
 
-interface IText extends IQuestion {
-  validation(): void;
-}
+// interface IText extends IQuestion {
+//   validation(): void;
+// }
 
 type QuestionItem = {
   name: string;

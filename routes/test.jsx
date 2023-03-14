@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="stylesheet" href="/spin/style.css" />
+        <link rel="stylesheet" href="/timernew/style.css" />
       </Head>
       <div className="voice-page">
         <span></span>

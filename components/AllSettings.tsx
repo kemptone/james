@@ -38,7 +38,7 @@ export default () => {
       {(D) => (
         <>
           <a onClick={D.openDialog}>settings</a>
-          <D.Dialog ref={D.ref} open>
+          <D.Dialog ref={D.ref}>
             {
               /* <form
               onSubmit={(e) => {

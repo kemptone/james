@@ -1,22 +1,119 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { buildReverb, loadReverb } from "../hooks/useReverb.tsx";
 // import Tunajs from "tunajs";
 
 const Test = () => {
-  // const refSourceNode = useRef<AudioBufferSourceNode | null>();
   const refAudioContext = useRef<AudioContext | undefined>();
+  const e_speedUp = useRef<HTMLInputElement | null>(null);
+  const e_runTime = useRef<HTMLInputElement | null>(null);
+  const e_slowDown = useRef<HTMLInputElement | null>(null);
+  const e_outer = useRef<HTMLElement | null>(null);
+  const e_spinner = useRef<HTMLImageElement | null>(null);
+  const e_button = useRef<HTMLButtonElement | null>(null);
+  const timerState = useRef<number>(0);
 
-  // const Sound1: AudioThing = {
-  //   audioFile: "/spin/fans/00.wav",
-  //   initialPlaybackRate: 1,
-  //   refSourceNode: useRef<AudioBufferSourceNode | null>(),
-  //   refPlaying: useRef<boolean>(false),
-  //   refPlay: useRef(() => undefined),
-  //   refStop: useRef(() => undefined),
-  //   refLoaded: useRef(false),
-  // };
+  useEffect(() => {
+    if (e_runTime.current && e_slowDown.current && e_speedUp.current) {
+      e_runTime.current.value = "8";
+      e_slowDown.current.value = "8";
+      e_speedUp.current.value = "8";
+    }
+  }, []);
+
+  const startFan = useCallback(() => {
+    if (
+      e_runTime.current && e_slowDown.current && e_speedUp.current &&
+      e_spinner.current
+    ) {
+      e_outer?.current?.classList.remove("started");
+      e_outer?.current?.classList.remove("middle");
+      e_outer?.current?.classList.remove("ending");
+
+      const FACTOR = .666; // Magic number
+      const RATE = 1.5; // How many spins per second
+
+      const [
+        rotations_speedup,
+        rotations_slowdown,
+        rotations_runtime,
+      ] = [
+        Number(e_speedUp.current.value) * FACTOR * RATE,
+        Number(e_slowDown.current.value) * FACTOR * RATE,
+        Number(e_runTime.current.value) * RATE,
+      ];
+
+      document?.body?.style?.setProperty?.(
+        "--speedup",
+        e_speedUp.current.value + "s",
+      );
+      document?.body?.style?.setProperty?.(
+        "--slowdown",
+        e_slowDown.current.value + "s",
+      );
+      document?.body?.style?.setProperty?.(
+        "--runtime",
+        e_runTime.current.value + "s",
+      );
+
+      document?.body?.style?.setProperty?.(
+        "--rotations_speedup",
+        (360 * rotations_speedup) + "deg",
+      );
+
+      document?.body?.style?.setProperty?.(
+        "--rotations_runtime",
+        (360 * (rotations_runtime + rotations_speedup)) + "deg",
+      );
+
+      document?.body?.style?.setProperty?.(
+        "--rotations_slowdown",
+        (360 *
+          Math.ceil(
+            rotations_slowdown + rotations_runtime + rotations_speedup,
+          )) +
+          "deg",
+      );
+
+      timerState.current = 1;
+      e_outer?.current?.classList.add("started");
+    }
+  }, [
+    e_runTime.current,
+    e_slowDown.current,
+    e_speedUp.current,
+  ]);
+
+  useEffect(() => {
+    e_spinner?.current?.addEventListener(
+      "transitionend",
+      (e: TransitionEvent) => {
+        console.log(timerState.current);
+
+        if (timerState.current === 1) {
+          e_outer?.current?.classList.remove("started");
+          e_outer?.current?.classList.add("middle");
+          timerState.current = 2;
+          return;
+        } else if (timerState.current === 2) {
+          e_outer?.current?.classList.remove("middle");
+          e_outer?.current?.classList.add("ending");
+          timerState.current = 3;
+          return;
+        } else if (timerState.current === 3) {
+          e_outer?.current?.classList.remove("started");
+          e_outer?.current?.classList.remove("middle");
+          e_outer?.current?.classList.remove("ending");
+          timerState.current = 0;
+          if (e_button.current) {
+            e_button.current.innerText = "Start";
+          }
+          return;
+        }
+      },
+    );
+  }, []);
 
   const Sounds: AudioThing[] = [
     {
@@ -49,124 +146,158 @@ const Test = () => {
   ];
 
   return (
-    <div>
-      <div style={{ height: "300px" }}></div>
-      <button
-        onClick={(e) => {
-          const target = e.target as HTMLButtonElement;
+    <>
+      <main id="jamestimer" ref={e_outer}>
+        <header>
+          <div class="controls">
+            <img
+              id="spinner"
+              src="/timer/spinners/25428-200.png"
+              ref={e_spinner}
+            />
+            <div>
+            </div>
+          </div>
+        </header>
+        <footer>
+          <div className="new-timer-section">
+            <div>
+              <div>Time to speed up</div>
+              <input
+                type="text"
+                ref={e_speedUp}
+              />
+            </div>
 
-          let context = refAudioContext.current;
+            <div>
+              <div>Time for Motor:</div>
+              <input
+                type="text"
+                ref={e_runTime}
+              />
+            </div>
 
-          if (!context) {
-            context =
-              refAudioContext.current =
-                new (window.AudioContext || window.webkitAudioContext)();
-          }
+            <div>
+              <div>Time to Slow Down:</div>
+              <input
+                type="text"
+                ref={e_slowDown}
+              />
+            </div>
 
-          if (Sounds[0].refPlaying.current) {
-            Sounds.forEach((s) => {
-              s.refStop.current();
-            });
-            target.innerText = "Start Playing";
-            return;
-          }
+            <button
+              ref={e_button}
+              onClick={(e) => {
+                const target = e.target as HTMLButtonElement;
 
-          // This is fixing an issue that shows up on Safari
-          if (context.state === "suspended") {
-            context.resume();
-          }
+                startFan();
 
-          loadReverb("/impulse/reaperblog/IRx500_03C.wav", context).then(
-            (reverb) => {
-              if (!context) {
-                context =
-                  refAudioContext.current =
-                    new (window.AudioContext || window.webkitAudioContext)();
-              }
+                let context = refAudioContext.current;
 
-              const gain = new GainNode(context);
-              gain.gain.value = .125;
-
-              // const tunajs = Tunajs(context);
-
-              // const chorus = new tunajs.Chorus({
-              //   rate: 1.5,
-              //   feedback: 0.4,
-              //   delay: 0.0045,
-              //   bypass: false,
-              // });
-
-              // chorus.connect(context.destination);
-
-              reverb.connect(context.destination);
-              // reverb.connect(chorus);
-
-              gain.connect(reverb);
-
-              Sounds.forEach((s) => {
                 if (!context) {
-                  return;
+                  context =
+                    refAudioContext.current =
+                      new (window.AudioContext || window.webkitAudioContext)();
                 }
 
-                useAudioLoop(s, context, ({ source }) => {
-                  const SPEED = 4;
+                // if (Sounds[0].refPlaying.current) {
+                //   Sounds.forEach((s) => {
+                //     s.refStop.current();
+                //   });
+                //   target.innerText = "Start Playing";
+                //   return;
+                // }
 
-                  if (source && context) {
-                    const rampUp = 3;
-                    const run = 4;
-                    const slow = 5;
+                // This is fixing an issue that shows up on Safari
+                if (context.state === "suspended") {
+                  context.resume();
+                }
 
-                    source.playbackRate.setValueCurveAtTime(
-                      [0, .1, .3, .6, 1].map((i) => i * s.initialPlaybackRate),
-                      context.currentTime,
-                      rampUp,
-                    );
+                loadReverb("/impulse/reaperblog/IRx500_03C.wav", context).then(
+                  (reverb) => {
+                    if (!context) {
+                      context =
+                        refAudioContext.current =
+                          new (window.AudioContext ||
+                            window.webkitAudioContext)();
+                    }
 
-                    source.playbackRate.setTargetAtTime(
-                      1 * s.initialPlaybackRate,
-                      context.currentTime + rampUp,
-                      run,
-                    );
+                    const gain = new GainNode(context);
+                    gain.gain.value = .125;
 
-                    source.playbackRate.setValueCurveAtTime(
-                      [1, .9, .8, .7, .5, .3, .1, 0].map((i) =>
-                        i * s.initialPlaybackRate
-                      ),
-                      context.currentTime + rampUp + run,
-                      slow,
-                    );
+                    reverb.connect(context.destination);
 
-                    source.addEventListener("ended", (listener) => {
-                      debugger;
+                    gain.connect(reverb);
+
+                    Sounds.forEach((s) => {
+                      if (!context) {
+                        return;
+                      }
+
+                      useAudioLoop(s, context, ({ source }) => {
+                        const SPEED = 4;
+
+                        if (source && context) {
+                          const rampUp = Number(e_speedUp?.current?.value);
+                          const run = Number(e_runTime?.current?.value);
+                          const slow = Number(e_slowDown?.current?.value);
+
+                          source.playbackRate.setValueCurveAtTime(
+                            [0, .1, .3, .6, 1].map((i) =>
+                              i * s.initialPlaybackRate
+                            ),
+                            context.currentTime,
+                            rampUp,
+                          );
+
+                          source.playbackRate.setTargetAtTime(
+                            1 * s.initialPlaybackRate,
+                            context.currentTime + rampUp,
+                            run,
+                          );
+
+                          source.playbackRate.setValueCurveAtTime(
+                            [1, .9, .8, .7, .5, .3, .1, 0].map((i) =>
+                              i * s.initialPlaybackRate
+                            ),
+                            context.currentTime + rampUp + run,
+                            slow,
+                          );
+
+                          source.addEventListener("ended", (listener) => {
+                            // debugger;
+                          });
+
+                          // source.detune.setValueCurveAtTime(
+                          //   [1, .9, .8, .7, .5, .3, .1, 0].map((i) => i * 1000),
+                          //   context.currentTime,
+                          //   slow + rampUp + run,
+                          // );
+
+                          source.connect(gain);
+
+                          // source.connect(context.destination);
+
+                          s.refPlay.current();
+
+                          source.stop(
+                            context.currentTime + rampUp + run + slow + 2,
+                          );
+
+                          target.innerText = "Stop Playing";
+                        }
+                      });
                     });
-
-                    // source.detune.setValueCurveAtTime(
-                    //   [1, .9, .8, .7, .5, .3, .1, 0].map((i) => i * 1000),
-                    //   context.currentTime,
-                    //   slow + rampUp + run,
-                    // );
-
-                    source.connect(gain);
-
-                    // source.connect(context.destination);
-
-                    s.refPlay.current();
-
-                    source.stop(
-                      context.currentTime + rampUp + run + slow + 2,
-                    );
-
-                    target.innerText = "Stop Playing";
-                  }
-                });
-              });
-            },
-          );
-        }}
-      >
-        Start playing
-      </button>
-    </div>
+                  },
+                );
+              }}
+            >
+              Start playing
+            </button>
+          </div>
+        </footer>
+      </main>
+    </>
   );
 };
 

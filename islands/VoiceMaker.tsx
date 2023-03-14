@@ -1,6 +1,5 @@
 import useVoices from "../effects/useVoices.ts";
 import { persist, populate } from "../helpers/localStorage.js";
-import type { JSXInternal } from "https://esm.sh/v95/preact@10.11.0/src/jsx";
 
 export default (args) => {
   const {
