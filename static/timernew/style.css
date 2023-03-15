@@ -32,14 +32,20 @@ footer > div.new-timer-section {
   align-items: center;
 }
 
+footer > div.new-timer-section > div {
+  width: 100%;
+}
+
 footer > div.new-timer-section input {
   padding: 10px;
   font-size: 20px;
-  min-width: 7em;
+  display: block;
+  width:120px;
 }
 
 footer > div.new-timer-section button {
   padding: 20px;
+  width: 290px;
 }
 
 footer > div > input {

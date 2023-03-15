@@ -17,7 +17,8 @@ const Test = () => {
 
   useEffect(() => {
     if (
-      e_runTime.current && e_slowDown.current && e_speedUp.current && e_wait
+      e_runTime.current && e_slowDown.current && e_speedUp.current &&
+      e_wait.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
@@ -120,18 +121,20 @@ const Test = () => {
   }, []);
 
   function runSpin(e: Event) {
-    if (timerState.current === 0) {
+    if (timerState.current === 0 && e_wait.current && e_button.current) {
       if (e_wait?.current?.value) {
+        const wait = Number(e_wait?.current?.value ?? "1");
+
         e_button.current.innerText = "Waiting";
 
         setTimeout(
           run.bind(undefined, e),
-          e_wait.current.value * 1000,
+          wait * 1000,
         );
       } else {
         run(e);
       }
-    } else {
+    } else if (e_button.current) {
       e_outer?.current?.classList.remove("started");
       e_outer?.current?.classList.remove("middle");
       e_outer?.current?.classList.remove("ending");
@@ -280,7 +283,7 @@ const Test = () => {
               <div>Wait:</div>
               <input
                 type="number"
-                step="0.01"
+                step="0.1"
                 ref={e_wait}
               />
             </div>
@@ -289,7 +292,7 @@ const Test = () => {
               <div>Speed up:</div>
               <input
                 type="number"
-                step="0.01"
+                step="0.1"
                 ref={e_speedUp}
               />
             </div>
@@ -298,7 +301,7 @@ const Test = () => {
               <div>Full speed:</div>
               <input
                 type="number"
-                step="0.01"
+                step="0.1"
                 ref={e_runTime}
               />
             </div>
@@ -307,7 +310,7 @@ const Test = () => {
               <div>Slow Down:</div>
               <input
                 type="number"
-                step="0.01"
+                step="0.1"
                 ref={e_slowDown}
               />
             </div>
