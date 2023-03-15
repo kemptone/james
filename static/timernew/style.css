@@ -35,6 +35,7 @@ footer > div.new-timer-section {
 footer > div.new-timer-section input {
   padding: 10px;
   font-size: 20px;
+  min-width: 7em;
 }
 
 footer > div.new-timer-section button {
