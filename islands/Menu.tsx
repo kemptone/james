@@ -61,6 +61,7 @@ export default () => {
           <a href="/spin">Spin</a>
           <a href="/recorder">Recorder</a>
           <a href="https://smooth.talkrapp.com/#/">Talker</a>
+          <a href="/blades">Blades</a>
           <AllSettings />
         </nav>
       </div>
