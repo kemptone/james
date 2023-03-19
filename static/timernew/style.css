@@ -13,10 +13,25 @@ main {
   flex-direction: column;
 }
 
-header svg,
-header img {
+.innerwrap  {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* height: calc(100vh - 100px); */
+  /* align-items: center; */
+  /* position: absolute; */
+  /* width: 100vw; */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -200px -150px;
+}
+
+.innerwrap .blades-wrap {
+  transform: scale(2);
+}
+
+.innerwrap svg {
   display:block;
-  margin:30% auto;
 }
 
 footer {
@@ -67,32 +82,31 @@ footer select {
   font-size: 17px;
 }
 
-header svg,
-header img {
-  position: fixed;
-  top: 100px;
+.innerwrap svg {
+  /* position: fixed; */
+  /* top: 100px;
   left: 50%;
   width: 400px;
-  height: 400px;
-  margin:0 0 0 -200px;
+  height: 400px; */
+  /* margin:0 0 0 -200px; */
 }
 
-.started header svg,
-.started header img {
+.started .innerwrap svg,
+.started .innerwrap img {
   transform: rotate(var(--rotations_speedup));
   transition: transform ease-in;
   transition-duration: var(--speedup);
 }
 
-.middle header svg,
-.middle header img {
+.middle .innerwrap svg,
+.middle .innerwrap img {
   transform: rotate(var(--rotations_runtime));
   transition: transform linear;
   transition-duration: var(--runtime);
 }
 
-.ending header svg,
-.ending header img {
+.ending .innerwrap svg,
+.ending .innerwrap img {
   transform: rotate(var(--rotations_slowdown));
   transition: transform ease-out;
   transition-duration: var(--slowdown);

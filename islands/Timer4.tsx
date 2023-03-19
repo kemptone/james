@@ -20,7 +20,7 @@ const Test = () => {
   useEffect(() => {
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
-      e_wait.current
+      e_wait.current && e_blades.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
@@ -216,10 +216,6 @@ const Test = () => {
                 slow,
               );
 
-              // source.addEventListener("ended", (listener) => {
-              //   // debugger;
-              // });
-
               source.connect(gain);
 
               s.refPlay.current();
@@ -269,20 +265,11 @@ const Test = () => {
   return (
     <>
       <main id="jamestimer" ref={e_outer}>
-        <header>
+        <div className="innerwrap">
           <div className="blades-wrap" ref={e_spinner}>
             <AdjustableBlades bladeCount={bladeCount} />
           </div>
-          {
-            /* <div class="controls">
-            <img
-              id="spinner"
-              src="/timer/spinners/25428-200.png"
-              ref={e_spinner}
-            />
-          </div> */
-          }
-        </header>
+        </div>
         <footer>
           <div className="new-timer-section">
             <div>

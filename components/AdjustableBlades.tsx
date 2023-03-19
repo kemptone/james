@@ -12,14 +12,14 @@ function Blade1({
   return (
     <>
       <path
-        d="M 180 310
+        d="M 130 260
         c 0 30, 50 32, 40 0
         l -10 -110
         h -20
         Z
         "
         fill="black"
-        transform={`rotate(${rotation}, 200, 200)`}
+        transform={`rotate(${rotation}, 150, 150)`}
       />
     </>
   );
@@ -37,15 +37,15 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
   return (
     // <div className="blades-wrap">
     <svg
-      width="400"
-      height="400"
+      width="300"
+      height="300"
       className="blades"
     >
       {Arr.map((r) => {
         return <Blade1 rotation={r} key={r} />;
       })}
-      <circle r="31" cx="200" cy="200" fill="black" />
-      <circle r="30" cx="200" cy="200" fill="white" />
+      <circle r="31" cx="150" cy="150" fill="black" />
+      <circle r="30" cx="150" cy="150" fill="white" />
     </svg>
     // </div>
   );
