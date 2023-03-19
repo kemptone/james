@@ -6,15 +6,11 @@
   align-items: center;
 }
 
-.blades-wrap {
-}
-
-.blades {
+.blades-wrap .blades {
   transition: all 959s;
-  /* outline: 1px solid red; */
 }
 
-.blades.rotate {
+.rotate .blades {
   transform: rotate(200000deg);
 }
 

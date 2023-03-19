@@ -13,6 +13,7 @@ main {
   flex-direction: column;
 }
 
+header svg,
 header img {
   display:block;
   margin:30% auto;
@@ -66,70 +67,45 @@ footer select {
   font-size: 17px;
 }
 
+header svg,
 header img {
   position: fixed;
   top: 100px;
   left: 50%;
-  width: 300px;
-  height: 300px;
-  margin:0 0 0 -150px;
+  width: 400px;
+  height: 400px;
+  margin:0 0 0 -200px;
 }
 
+.started header svg,
 .started header img {
   transform: rotate(var(--rotations_speedup));
   transition: transform ease-in;
   transition-duration: var(--speedup);
 }
 
+.middle header svg,
 .middle header img {
   transform: rotate(var(--rotations_runtime));
   transition: transform linear;
   transition-duration: var(--runtime);
 }
 
+.ending header svg,
 .ending header img {
   transform: rotate(var(--rotations_slowdown));
   transition: transform ease-out;
   transition-duration: var(--slowdown);
 }
 
-.start header img {
-  /* animation:start 1.3s ease-in; */
-  /* transition-duration: var(--offtimer); */
-}
-
-.end header img {
-  /* animation:end 2s ease-out; */
-  /* animation-name: end; */
-  /* animation-duration: var(--offtimer); */
-}
-
-.spin-end header img {
-  /* animation:spin 1s linear infinite; */
-  /* animation-duration: var(--offtimer); */
-}
-
-.spin header img {
-  /* animation:spin .5s linear infinite; */
-  /* animation-duration: var(--spintimer); */
-}
-
 .controls {
-  padding:10px;
+  /* padding:10px; */
   /* display: flex; */
   /* justify-content: space-between; */
-  font-size: 30px;
-  font-family: monospace;
+  /* font-size: 30px; */
+  /* font-family: monospace; */
 }
 
-
-.controls button {
-  font-size:24px;
-  background-color:greenyellow;
-  border: none;
-  border-radius: 8px;
-  padding:8px;
-}
 
 @keyframes start {
   0% {

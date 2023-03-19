@@ -2,18 +2,20 @@ import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { buildReverb, loadReverb } from "../hooks/useReverb.tsx";
-// import Tunajs from "tunajs";
+import AdjustableBlades from "../components/AdjustableBlades.tsx";
 
 const Test = () => {
   const refAudioContext = useRef<AudioContext | undefined>();
+  const e_blades = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
   const e_runTime = useRef<HTMLInputElement | null>(null);
   const e_slowDown = useRef<HTMLInputElement | null>(null);
   const e_outer = useRef<HTMLElement | null>(null);
-  const e_spinner = useRef<HTMLImageElement | null>(null);
+  const e_spinner = useRef<HTMLDivElement | null>(null);
   const e_button = useRef<HTMLButtonElement | null>(null);
   const timerState = useRef<number>(0);
+  const [bladeCount, setBladeCount] = useState(5);
 
   useEffect(() => {
     if (
@@ -24,6 +26,7 @@ const Test = () => {
       e_slowDown.current.value = "8";
       e_speedUp.current.value = "8";
       e_wait.current.value = "0";
+      e_blades.current.value = "5";
     }
   }, []);
 
@@ -267,18 +270,34 @@ const Test = () => {
     <>
       <main id="jamestimer" ref={e_outer}>
         <header>
-          <div class="controls">
+          <div className="blades-wrap" ref={e_spinner}>
+            <AdjustableBlades bladeCount={bladeCount} />
+          </div>
+          {
+            /* <div class="controls">
             <img
               id="spinner"
               src="/timer/spinners/25428-200.png"
               ref={e_spinner}
             />
-            <div>
-            </div>
-          </div>
+          </div> */
+          }
         </header>
         <footer>
           <div className="new-timer-section">
+            <div>
+              <div>Blades:</div>
+              <input
+                type="number"
+                step="1"
+                ref={e_blades}
+                onChange={(e: Event) => {
+                  const target = e.target as HTMLInputElement;
+                  setBladeCount(Number(target.value));
+                }}
+              />
+            </div>
+
             <div>
               <div>Wait:</div>
               <input
