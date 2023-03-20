@@ -280,7 +280,7 @@ const Test = () => {
                 ref={e_blades}
                 onChange={(e: Event) => {
                   const target = e.target as HTMLInputElement;
-                  setBladeCount(Number(target.value));
+                  setBladeCount(Math.min(Number(target.value), 750));
                 }}
               />
             </div>

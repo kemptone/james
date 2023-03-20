@@ -2,6 +2,8 @@ import { FunctionComponent } from "preact/compat";
 
 interface FanProps {
   bladeCount: number;
+  stroke?: string;
+  fill?: string;
 }
 
 function Blade1({
@@ -13,12 +15,13 @@ function Blade1({
     <>
       <path
         d="M 130 260
-        c 0 30, 50 32, 40 0
+        c -10 30, 50 30, 40 0
         l -10 -110
         h -20
         Z
         "
         fill="black"
+        stroke="white"
         transform={`rotate(${rotation}, 150, 150)`}
       />
     </>
