@@ -1,10 +1,47 @@
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import type { FunctionalComponent } from "preact/compat";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { buildReverb, loadReverb } from "../hooks/useReverb.tsx";
 import AdjustableBlades from "../components/AdjustableBlades.tsx";
 
-const Test = () => {
+const OuterWrap = () => {
+  const Sounds: AudioThing[] = [
+    {
+      audioFile: "/spin/fans/00.wav",
+      initialPlaybackRate: .5,
+      refSourceNode: useRef<AudioBufferSourceNode | null>(),
+      refPlaying: useRef(false),
+      refPlay: useRef(() => undefined),
+      refStop: useRef(() => undefined),
+      refLoaded: useRef(false),
+    },
+    {
+      audioFile: "/spin/fans/01.wav",
+      initialPlaybackRate: 1,
+      refSourceNode: useRef<AudioBufferSourceNode | null>(),
+      refPlaying: useRef(false),
+      refPlay: useRef(() => undefined),
+      refStop: useRef(() => undefined),
+      refLoaded: useRef(false),
+    },
+    {
+      audioFile: "/spin/fans/08.wav",
+      initialPlaybackRate: .25,
+      refSourceNode: useRef<AudioBufferSourceNode | null>(),
+      refPlaying: useRef(false),
+      refPlay: useRef(() => undefined),
+      refStop: useRef(() => undefined),
+      refLoaded: useRef(false),
+    },
+  ];
+
+  return <InnerCore {...{ Sounds }} />;
+};
+
+const InnerCore = ({
+  Sounds,
+}: { Sounds: AudioThing[] }) => {
   const refAudioContext = useRef<AudioContext | undefined>();
   const e_blades = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
@@ -232,36 +269,6 @@ const Test = () => {
     );
   }
 
-  const Sounds: AudioThing[] = [
-    {
-      audioFile: "/spin/fans/00.wav",
-      initialPlaybackRate: .5,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-    {
-      audioFile: "/spin/fans/01.wav",
-      initialPlaybackRate: 1,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-    {
-      audioFile: "/spin/fans/08.wav",
-      initialPlaybackRate: .25,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-  ];
-
   return (
     <>
       <main id="jamestimer" ref={e_outer}>
@@ -334,4 +341,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default OuterWrap;
