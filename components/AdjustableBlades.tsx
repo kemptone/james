@@ -64,6 +64,9 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
       {Arr.map((r) => {
         return <Blade1 rotation={r} key={r} stroke={stroke} fill={fill} />;
       })}
+      {Arr.map((r) => {
+        return <Blade1 rotation={r} key={r} stroke={"white"} fill={"none"} />;
+      })}
       <circle r="31" cx="150" cy="150" fill="black" />
       <circle r="30" cx="150" cy="150" fill="white" />
     </svg>
