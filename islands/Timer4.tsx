@@ -3,6 +3,7 @@ import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { loadReverb } from "../hooks/useReverb.tsx";
 import AdjustableBlades from "../components/AdjustableBlades.tsx";
+import Dialog from "../components/Dialog.tsx";
 
 const OuterWrap = () => {
   const Sounds: AudioThing[] = [
@@ -41,8 +42,9 @@ const OuterWrap = () => {
 const InnerCore = ({
   Sounds,
 }: { Sounds: AudioThing[] }) => {
-  const refAudioContext = useRef<AudioContext  undefined>();
+  const refAudioContext = useRef<AudioContext | undefined>();
   const e_blades = useRef<HTMLInputElement | null>(null);
+  const e_bladeScale = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
   const e_runTime = useRef<HTMLInputElement | null>(null);
@@ -52,17 +54,19 @@ const InnerCore = ({
   const e_button = useRef<HTMLButtonElement | null>(null);
   const timerState = useRef<number>(0);
   const [bladeCount, setBladeCount] = useState(5);
+  const [strokeWidth, setStrokeWidth] = useState<number>(.02);
 
   useEffect(() => {
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
-      e_wait.current && e_blades.current
+      e_wait.current && e_blades.current && e_bladeScale.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
       e_speedUp.current.value = "8";
       e_wait.current.value = "0";
       e_blades.current.value = "5";
+      e_bladeScale.current.value = "30";
     }
   }, []);
 
@@ -270,76 +274,215 @@ const InnerCore = ({
 
   return (
     <>
-      <main id="jamestimer" ref={e_outer}>
-        <div className="innerwrap">
-          <div className="blades-wrap" ref={e_spinner}>
-            <AdjustableBlades bladeCount={bladeCount} addedLines={true} />
-          </div>
-        </div>
-        <footer>
-          <div className="new-timer-section">
-            <div>
-              <div>Blades:</div>
-              <input
-                type="number"
-                step="1"
-                ref={e_blades}
-                onInput={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  setBladeCount(Math.min(Number(target.value), 750));
+      <Dialog>
+        {(D) => (
+          <main id="jamestimer" ref={e_outer}>
+            <div className="innerwrap">
+              <div className="blades-wrap" ref={e_spinner}>
+                <AdjustableBlades
+                  bladeCount={bladeCount}
+                  addedLines={true}
+                  strokeWidth={strokeWidth}
+                  // fill={"rgba(0,0,0,.6)"}
+                />
+              </div>
+            </div>
+            <footer>
+              <div className="new-timer-section">
+                <div>
+                  <div>Blades:</div>
+                  <input
+                    type="number"
+                    step="1"
+                    ref={e_blades}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      setBladeCount(Math.min(Number(target.value), 750));
+                    }}
+                    // onChange={(e: Event) => {
+                    //   const target = e.target as HTMLInputElement;
+                    //   setBladeCount(Math.min(Number(target.value), 750));
+                    // }}
+                  />
+                </div>
+
+                <div>
+                  <div>Wait:</div>
+                  <input
+                    type="number"
+                    step="0.1"
+                    ref={e_wait}
+                  />
+                </div>
+
+                <div>
+                  <div>Speed up:</div>
+                  <input
+                    type="number"
+                    step="0.1"
+                    ref={e_speedUp}
+                  />
+                </div>
+
+                <div>
+                  <div>Full speed:</div>
+                  <input
+                    type="number"
+                    step="0.1"
+                    ref={e_runTime}
+                  />
+                </div>
+
+                <div>
+                  <div>Slow Down:</div>
+                  <input
+                    type="number"
+                    step="0.1"
+                    ref={e_slowDown}
+                  />
+                </div>
+
+                <button
+                  ref={e_button}
+                  onClick={runSpin}
+                >
+                  Start
+                </button>
+              </div>
+            </footer>
+            <div id="timersettings" style={{ zIndex: 1000 }}>
+              <button
+                style={{ margin: "10px" }}
+                onClick={() => {
+                  D.openDialog();
                 }}
-                // onChange={(e: Event) => {
-                //   const target = e.target as HTMLInputElement;
-                //   setBladeCount(Math.min(Number(target.value), 750));
-                // }}
-              />
+              >
+                Settings
+              </button>
             </div>
+            <D.Dialog ref={D.ref}>
+              <form>
+                <fieldset style={{ marginTop: "40px" }}>
+                  <legend>
+                    Scale of Fan Blades
+                  </legend>
+                  <input
+                    type="range"
+                    id="temp"
+                    name="temp"
+                    list="markers"
+                    style={{ width: "100%" }}
+                    ref={e_bladeScale}
+                    onInput={(e: Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      document?.body?.style?.setProperty?.(
+                        "--blade-scale",
+                        String(Number(target.value) * 3),
+                      );
+                    }}
+                  />
+                  <datalist id="markers">
+                    <option value="0"></option>
+                    <option value="25"></option>
+                    <option value="50"></option>
+                    <option value="75"></option>
+                    <option value="100"></option>
+                  </datalist>
+                </fieldset>
+                <fieldset>
+                  <legend>
+                    Line width
+                  </legend>
+                  <input
+                    type="range"
+                    id="temp"
+                    name="temp"
+                    list="markers"
+                    style={{ width: "100%" }}
+                    onInput={(e: Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      document?.body?.style?.setProperty?.(
+                        "--stroke-width",
+                        String(Number(target.value) / 800),
+                      );
+                    }}
+                  />
+                  <datalist id="markers">
+                    <option value="0"></option>
+                    <option value="25"></option>
+                    <option value="50"></option>
+                    <option value="75"></option>
+                    <option value="100"></option>
+                  </datalist>
+                </fieldset>
+                <fieldset>
+                  <legend>
+                    Opacity
+                  </legend>
+                  <input
+                    type="range"
+                    id="temp"
+                    name="temp"
+                    list="markers"
+                    style={{ width: "100%" }}
+                    onInput={(e: Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      document?.body?.style?.setProperty?.(
+                        "--opacity",
+                        String(Number(target.value) / 100),
+                      );
+                    }}
+                  />
+                  <datalist id="markers">
+                    <option value="0"></option>
+                    <option value="25"></option>
+                    <option value="50"></option>
+                    <option value="75"></option>
+                    <option value="100"></option>
+                  </datalist>
+                </fieldset>
+                <fieldset>
+                  <input 
+                  type="checkbox" 
+                  onInput={ (e : Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      if (target.checked) {
+                        document.body.classList.add( "darkmode" )
+                      } else {
+                        document.body.classList.remove( "darkmode" )
+                      }
+                  }}
+                  />
+                  <input 
+                  type="checkbox" 
+                  onInput={ (e : Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      if (target.checked) {
+                        document.body.classList.add( "darkmode2" )
+                      } else {
+                        document.body.classList.remove( "darkmode2" )
+                      }
+                  }}
+                  />
 
-            <div>
-              <div>Wait:</div>
-              <input
-                type="number"
-                step="0.1"
-                ref={e_wait}
-              />
-            </div>
+                  <input 
+                  type="checkbox" 
+                  onInput={ (e : Event) => {
+                      const target = e.currentTarget as HTMLInputElement;
+                      if (target.checked) {
+                        document.body.classList.add( "whitemode" )
+                      } else {
+                        document.body.classList.remove( "whitemode" )
+                      }
+                  }}
+                  />
 
-            <div>
-              <div>Speed up:</div>
-              <input
-                type="number"
-                step="0.1"
-                ref={e_speedUp}
-              />
-            </div>
-
-            <div>
-              <div>Full speed:</div>
-              <input
-                type="number"
-                step="0.1"
-                ref={e_runTime}
-              />
-            </div>
-
-            <div>
-              <div>Slow Down:</div>
-              <input
-                type="number"
-                step="0.1"
-                ref={e_slowDown}
-              />
-            </div>
-
-            <button
-              ref={e_button}
-              onClick={runSpin}
-            >
-              Start
-            </button>
-          </div>
-        </footer>
-      </main>
+                </fieldset>
+              </form>
+            </D.Dialog>
+          </main>
+        )}
+      </Dialog>
     </>
   );
 };
