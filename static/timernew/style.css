@@ -171,3 +171,15 @@ html:has( body.darkmode2 ) .spinner img {
   color:white;
   border-color: white;
 }
+
+.darkmode #hamburgermenu span {
+  background-color: white;;
+}
+
+.darkmode header nav > a {
+  color: white;
+}
+
+.darkmode dialog {
+  color: black;
+}
