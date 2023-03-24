@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
-import type { FunctionalComponent } from "preact/compat";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
-import { buildReverb, loadReverb } from "../hooks/useReverb.tsx";
+import { loadReverb } from "../hooks/useReverb.tsx";
 import AdjustableBlades from "../components/AdjustableBlades.tsx";
 
 const OuterWrap = () => {
@@ -42,7 +41,7 @@ const OuterWrap = () => {
 const InnerCore = ({
   Sounds,
 }: { Sounds: AudioThing[] }) => {
-  const refAudioContext = useRef<AudioContext | undefined>();
+  const refAudioContext = useRef<AudioContext  undefined>();
   const e_blades = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
@@ -274,7 +273,7 @@ const InnerCore = ({
       <main id="jamestimer" ref={e_outer}>
         <div className="innerwrap">
           <div className="blades-wrap" ref={e_spinner}>
-            <AdjustableBlades bladeCount={bladeCount} />
+            <AdjustableBlades bladeCount={bladeCount} addedLines={true} />
           </div>
         </div>
         <footer>
@@ -285,10 +284,14 @@ const InnerCore = ({
                 type="number"
                 step="1"
                 ref={e_blades}
-                onChange={(e: Event) => {
+                onInput={(e) => {
                   const target = e.target as HTMLInputElement;
                   setBladeCount(Math.min(Number(target.value), 750));
                 }}
+                // onChange={(e: Event) => {
+                //   const target = e.target as HTMLInputElement;
+                //   setBladeCount(Math.min(Number(target.value), 750));
+                // }}
               />
             </div>
 
