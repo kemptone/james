@@ -1,20 +1,7 @@
 import { FunctionComponent } from "preact/compat";
 
-interface FanProps {
-  bladeCount: number;
-  stroke?: string;
-  fill?: string;
-}
-
 export const CurveTypes = {
-  "Bulb": "c -10 30, 50 30, 40 0",
-  "Flat": "c 0 30, 40 30, 40 0",
-  "Flat2": "c 0 10, 40 30, 10 0",
-};
-
-export const WidthTypes = {
-  "Main": "h -20",
-  "Skinny": "h -10",
+  "funk": "m 172 192 l -24 118 q 31 15 64 0 l -24 -118 z"
 };
 
 function Blade1({
@@ -29,24 +16,28 @@ function Blade1({
   return (
     <>
       <path
-        d={`M 130 260
-        ${CurveTypes.Flat}
-        l -10 -110
-        ${WidthTypes.Main}
-        Z
-        `}
+        d={CurveTypes.funk}
         fill={fill}
         stroke={stroke}
-        transform={`rotate(${rotation}, 150, 150)`}
+        strokeWidth=".5"
+        transform={`rotate(${rotation}, 180, 180)`}
       />
     </>
   );
 }
 
+interface FanProps {
+  bladeCount: number;
+  stroke?: string;
+  fill?: string;
+  addedLines?: boolean;
+}
+
 const AdjustableBlades: FunctionComponent<FanProps> = ({
   bladeCount = 5,
-  stroke,
-  fill,
+  stroke = "white",
+  fill = "black",
+  addedLines,
 }) => {
   const Arr: number[] = [];
 
@@ -57,18 +48,39 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
   return (
     // <div className="blades-wrap">
     <svg
-      width="300"
-      height="300"
+      width="360"
+      height="360"
       className="blades"
     >
-      {Arr.map((r) => {
-        return <Blade1 rotation={r} key={r} stroke={stroke} fill={fill} />;
+      {Arr.map((r, index, arr) => {
+        return (
+          <Blade1
+            rotation={r}
+            key={r}
+            stroke={addedLines ? "none" : stroke}
+            fill={fill}
+          />
+        );
       })}
-      {Arr.map((r) => {
-        return <Blade1 rotation={r} key={r} stroke={"white"} fill={"none"} />;
-      })}
-      <circle r="31" cx="150" cy="150" fill="black" />
-      <circle r="30" cx="150" cy="150" fill="white" />
+      {Arr[Arr.length - 1]
+        ? (
+          <Blade1
+            rotation={Arr[Arr.length - 1]}
+            key={"extra"}
+            stroke={stroke}
+            fill={"none"}
+          />
+        )
+        : null}
+
+      {addedLines
+        ? Arr.map((r) => {
+          return <Blade1 rotation={r} key={r} stroke={"white"} fill={"none"} />;
+        })
+        : null}
+
+      {/* <circle r="31" cx="150" cy="150" fill="black" /> */}
+      {/* <circle r="30" cx="150" cy="150" fill="white" /> */}
     </svg>
     // </div>
   );
