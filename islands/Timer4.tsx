@@ -4,40 +4,8 @@ import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { loadReverb } from "../hooks/useReverb.tsx";
 import AdjustableBlades from "../components/AdjustableBlades.tsx";
 import Dialog from "../components/Dialog.tsx";
-
-const OuterWrap = () => {
-  const Sounds: AudioThing[] = [
-    {
-      audioFile: "/spin/fans/00.wav",
-      initialPlaybackRate: .5,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-    {
-      audioFile: "/spin/fans/01.wav",
-      initialPlaybackRate: 1,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-    {
-      audioFile: "/spin/fans/08.wav",
-      initialPlaybackRate: .25,
-      refSourceNode: useRef<AudioBufferSourceNode | null>(),
-      refPlaying: useRef(false),
-      refPlay: useRef(() => undefined),
-      refStop: useRef(() => undefined),
-      refLoaded: useRef(false),
-    },
-  ];
-
-  return <InnerCore {...{ Sounds }} />;
-};
+import OuterWrap from "../components/Timer/OuterWrap.tsx";
+import RangeWithTicks from "../components/RangeWithTicks.tsx";
 
 const InnerCore = ({
   Sounds,
@@ -52,21 +20,26 @@ const InnerCore = ({
   const e_outer = useRef<HTMLElement | null>(null);
   const e_spinner = useRef<HTMLDivElement | null>(null);
   const e_button = useRef<HTMLButtonElement | null>(null);
+  const e_rate = useRef<HTMLInputElement | null>(null);
   const timerState = useRef<number>(0);
   const [bladeCount, setBladeCount] = useState(5);
   const [strokeWidth, setStrokeWidth] = useState<number>(.02);
+  const [rate, setRate] = useState(1.5);
 
   useEffect(() => {
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
-      e_wait.current && e_blades.current && e_bladeScale.current
+      e_wait.current && e_blades.current && e_bladeScale.current &&
+      e_rate.current
     ) {
+      debugger
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
       e_speedUp.current.value = "8";
       e_wait.current.value = "0";
       e_blades.current.value = "5";
       e_bladeScale.current.value = "30";
+      e_rate.current.value = String(1.5 * 20);
     }
   }, []);
 
@@ -87,9 +60,9 @@ const InnerCore = ({
         rotations_slowdown,
         rotations_runtime,
       ] = [
-        Number(e_speedUp.current.value) * FACTOR * RATE,
-        Number(e_slowDown.current.value) * FACTOR * RATE,
-        Number(e_runTime.current.value) * RATE,
+        Number(e_speedUp.current.value) * FACTOR * rate,
+        Number(e_slowDown.current.value) * FACTOR * rate,
+        Number(e_runTime.current.value) * rate,
       ];
 
       document?.body?.style?.setProperty?.(
@@ -131,6 +104,7 @@ const InnerCore = ({
     e_runTime.current,
     e_slowDown.current,
     e_speedUp.current,
+    rate,
   ]);
 
   useEffect(() => {
@@ -237,20 +211,20 @@ const InnerCore = ({
               const slow = Number(e_slowDown?.current?.value);
 
               source.playbackRate.setValueCurveAtTime(
-                [0, .1, .3, .6, 1].map((i) => i * s.initialPlaybackRate),
+                [0, .1, .3, .6, 1].map((i) => i * s.initialPlaybackRate * rate),
                 context.currentTime,
                 rampUp,
               );
 
               source.playbackRate.setTargetAtTime(
-                1 * s.initialPlaybackRate,
+                1 * s.initialPlaybackRate * rate,
                 context.currentTime + rampUp,
                 run,
               );
 
               source.playbackRate.setValueCurveAtTime(
                 [1, .9, .8, .7, .5, .3, .1, 0].map((i) =>
-                  i * s.initialPlaybackRate
+                  i * s.initialPlaybackRate * rate
                 ),
                 context.currentTime + rampUp + run,
                 slow,
@@ -279,12 +253,7 @@ const InnerCore = ({
           <main id="jamestimer" ref={e_outer}>
             <div className="innerwrap">
               <div className="blades-wrap" ref={e_spinner}>
-                <AdjustableBlades
-                  bladeCount={bladeCount}
-                  addedLines={true}
-                  strokeWidth={strokeWidth}
-                  // fill={"rgba(0,0,0,.6)"}
-                />
+                <AdjustableBlades bladeCount={bladeCount} />
               </div>
             </div>
             <footer>
@@ -297,7 +266,14 @@ const InnerCore = ({
                     ref={e_blades}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;
-                      setBladeCount(Math.min(Number(target.value), 750));
+
+                      const bladeCount = Math.min(Number(target.value), 7500);
+
+                      if (bladeCount > 500) {
+                        document.body.classList.add("darkmode2");
+                      }
+
+                      setBladeCount(bladeCount);
                     }}
                     // onChange={(e: Event) => {
                     //   const target = e.target as HTMLInputElement;
@@ -362,121 +338,89 @@ const InnerCore = ({
             </div>
             <D.Dialog ref={D.ref}>
               <form>
-                <fieldset style={{ marginTop: "40px" }}>
-                  <legend>
-                    Scale of Fan Blades
-                  </legend>
-                  <input
-                    type="range"
-                    id="temp"
-                    name="temp"
-                    list="markers"
-                    style={{ width: "100%" }}
-                    ref={e_bladeScale}
-                    onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      document?.body?.style?.setProperty?.(
-                        "--blade-scale",
-                        String(Number(target.value) * 3),
-                      );
-                    }}
-                  />
-                  <datalist id="markers">
-                    <option value="0"></option>
-                    <option value="25"></option>
-                    <option value="50"></option>
-                    <option value="75"></option>
-                    <option value="100"></option>
-                  </datalist>
-                </fieldset>
+                <RangeWithTicks
+                  legendText="Size of Fan"
+                  inputRef={e_bladeScale}
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    document?.body?.style?.setProperty?.(
+                      "--blade-scale",
+                      String(Number(target.value) * 20),
+                    );
+                  }}
+                />
+
+                <RangeWithTicks
+                  legendText="Line width"
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    document?.body?.style?.setProperty?.(
+                      "--stroke-width",
+                      String(Number(target.value) / 800),
+                    );
+                  }}
+                />
+
+                <RangeWithTicks
+                  legendText="Opacity"
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    document?.body?.style?.setProperty?.(
+                      "--opacity",
+                      String(Number(target.value) / 100),
+                    );
+                  }}
+                />
+
+                <RangeWithTicks
+                  legendText="Speed"
+                  inputRef={ e_rate}
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    // document?.body?.style?.setProperty?.(
+                    //   "--opacity",
+                    //   String(Number(target.value) / 100),
+                    // );
+                    setRate(Number(target.value) / 20);
+                  }}
+                />
+
                 <fieldset>
-                  <legend>
-                    Line width
-                  </legend>
+                  <legend>More Mystery Settings</legend>
                   <input
-                    type="range"
-                    id="temp"
-                    name="temp"
-                    list="markers"
-                    style={{ width: "100%" }}
+                    type="checkbox"
                     onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      document?.body?.style?.setProperty?.(
-                        "--stroke-width",
-                        String(Number(target.value) / 800),
-                      );
-                    }}
-                  />
-                  <datalist id="markers">
-                    <option value="0"></option>
-                    <option value="25"></option>
-                    <option value="50"></option>
-                    <option value="75"></option>
-                    <option value="100"></option>
-                  </datalist>
-                </fieldset>
-                <fieldset>
-                  <legend>
-                    Opacity
-                  </legend>
-                  <input
-                    type="range"
-                    id="temp"
-                    name="temp"
-                    list="markers"
-                    style={{ width: "100%" }}
-                    onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      document?.body?.style?.setProperty?.(
-                        "--opacity",
-                        String(Number(target.value) / 100),
-                      );
-                    }}
-                  />
-                  <datalist id="markers">
-                    <option value="0"></option>
-                    <option value="25"></option>
-                    <option value="50"></option>
-                    <option value="75"></option>
-                    <option value="100"></option>
-                  </datalist>
-                </fieldset>
-                <fieldset>
-                  <input 
-                  type="checkbox" 
-                  onInput={ (e : Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add( "darkmode" )
+                        document.body.classList.add("darkmode");
                       } else {
-                        document.body.classList.remove( "darkmode" )
+                        document.body.classList.remove("darkmode");
                       }
-                  }}
+                    }}
                   />
-                  <input 
-                  type="checkbox" 
-                  onInput={ (e : Event) => {
+                  <input
+                    type="checkbox"
+                    onInput={(e: Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add( "darkmode2" )
+                        document.body.classList.add("darkmode2");
                       } else {
-                        document.body.classList.remove( "darkmode2" )
+                        document.body.classList.remove("darkmode2");
                       }
-                  }}
+                    }}
                   />
 
-                  <input 
-                  type="checkbox" 
-                  onInput={ (e : Event) => {
+                  <input
+                    type="checkbox"
+                    onInput={(e: Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add( "whitemode" )
+                        document.body.classList.add("whitemode");
                       } else {
-                        document.body.classList.remove( "whitemode" )
+                        document.body.classList.remove("whitemode");
                       }
-                  }}
+                    }}
                   />
-
                 </fieldset>
               </form>
             </D.Dialog>
@@ -487,4 +431,4 @@ const InnerCore = ({
   );
 };
 
-export default OuterWrap;
+export default OuterWrap({ InnerCore });

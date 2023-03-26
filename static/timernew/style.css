@@ -1,3 +1,7 @@
+:root {
+  --stroke-color:white;
+}
+
 #jamestimer {
   /* border:10px solid red; */
   box-sizing: border-box;
@@ -26,11 +30,27 @@ main {
   display:block;
 }
 
-.innerwrap svg path {
+.innerwrap svg path.background-blade {
+  opacity: var(--opacity, 1);
+  stroke: none;
+}
+
+.innerwrap svg path.forground-blade {
   stroke-width: var(--stroke-width, 0.02);
   opacity: var(--opacity, 1);
-  /* stroke: var(--stroke-color, "white"); */
+  /* stroke: white; */
+  fill: none;
+  stroke: ;
+  stroke: var(--stroke-color, white);
   /* fill: var(--fill, rgba(0,0,0,.6)); */
+}
+
+body.darkmode2 .innerwrap svg path.background-blade {
+  display: none;
+}
+
+body.darkmode2 .innerwrap svg path.forground-blade {
+  stroke: black;
 }
 
 footer {
@@ -163,9 +183,6 @@ html:has( body.whitemode.darkmode ) {
   color: white;
 }
 
-html:has( body.darkmode2 ) .spinner img {
-  filter: invert(100%);
-}
 
 .darkmode button {
   color:white;
@@ -183,3 +200,11 @@ html:has( body.darkmode2 ) .spinner img {
 .darkmode dialog {
   color: black;
 }
+
+form > fieldset:first-of-type {
+  margin-top:50px;
+}
+
+.range-with-ticks { }
+.range-with-ticks legend { }
+.range-with-ticks input[type="range"] {width: 100%;}
