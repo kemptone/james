@@ -32,7 +32,6 @@ const InnerCore = ({
       e_wait.current && e_blades.current && e_bladeScale.current &&
       e_rate.current
     ) {
-      debugger
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
       e_speedUp.current.value = "8";

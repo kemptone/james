@@ -41,6 +41,7 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
       width="30"
       height="30"
       className="blades"
+      viewBox="0 0 30 30"
     >
       { bladeCount > 500 ? null :
       Arr.map((r, index, arr) => {
