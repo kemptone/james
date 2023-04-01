@@ -7,7 +7,7 @@ import _localStorage from "../helpers/localStorage.js";
 const { persist, populate } = _localStorage("spin");
 
 const Fans =
-  "Dumpy.png Fardo.png Lark.png Orange.png Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.jpeg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp cuaei.gif wheel.jpeg 2ff.gif circles.gif city.png cuaei.gif design.jpeg drawing-39.jpeg drawing2.jpeg drawing3.jpeg flower2.jpeg FUI.gif moving_wheel.gif radial.jpeg radial2.jpeg radial3.jpeg radial4.jpeg radial5.jpeg steer.jpeg symmetrical2.jpeg twist.gif wheel.jpeg Cowardly_lion2.jpeg dorothy.jpeg abstract-colorful.jpeg arrows.png circle-08.gif dewalt2.jpeg glinda.jpeg woz-group.jpeg tin-man.jpeg glinda2.avif IMG_1334.jpeg IMG_5390.JPG original.svg"
+  "Dumpy.png Fardo.png Lark.svg Orange.svg Cross.png Rat.png Metal_Girl.png colorfull.png dewalt.jpeg hote.jpeg makita1.jpg saw123.svg specialized.jpeg cactus.png flower.jpeg rose-glass.jpg triangles.webp cuaei.gif wheel.jpeg 2ff.gif circles.gif city.png cuaei.gif design.svg drawing-39.jpeg drawing2.jpeg drawing3.jpeg flower2.svg FUI.gif moving_wheel.gif radial.jpeg radial2.jpeg radial3.jpeg radial4.jpeg radial5.jpeg steer.svg symmetrical2.jpeg twist.gif wheel.jpeg Cowardly_lion2.jpeg dorothy.jpeg abstract-colorful.jpeg arrows.png circle-08.svg dewalt2.jpeg glinda.jpeg woz-group.jpeg tin-man.jpeg glinda2.avif IMG_1334.jpeg IMG_5390.JPG original.svg"
     .split(" ");
 
 const FanSounds = (function () {
