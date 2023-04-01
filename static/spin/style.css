@@ -11,7 +11,6 @@ html:has( body.darkmode ) {
   background-color:black;
   color: white;
 }
-
 html:has( body.whitemode ) {
   background-color:white;
   color: black;
@@ -49,16 +48,18 @@ html:has( body.darkmode2 ) .spinner img {
   /* transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275) */
   /* transition-timing-function: cubic-bezier(1, 0, 0, 1) cubic-bezier(0.6, -0.28, 0.735, 0.045) cubic-bezier(0.77, 0, 0.175, 1); */
 
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  /* max-width: 100%; */
+  /* max-height: 100%; */
+  /* width: auto; */
+  /* height: auto; */
 }
 
 .zoommode .spinner img {
-  max-width:initial;
-  max-height: initial;
-  zoom: var(--zoomlevel);
+  /* max-width:initial; */
+  /* max-height: initial; */
+  /* zoom: var(--zoomlevel); */
+  width: calc(var(--zoomlevel) * 20px);
+  height: calc(var(--zoomlevel) * 20px);
 }
 
 .spinner.spin img {
