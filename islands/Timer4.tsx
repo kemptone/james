@@ -340,47 +340,39 @@ const InnerCore = ({
                 <RangeWithTicks
                   legendText="Size of Fan"
                   inputRef={e_bladeScale}
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
+                  onInput={({ currentTarget }) => {
                     document?.body?.style?.setProperty?.(
                       "--blade-scale",
-                      String(Number(target.value) * 20),
+                      String(Number(currentTarget.value) * 20),
                     );
                   }}
                 />
 
                 <RangeWithTicks
                   legendText="Line width"
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
+                  onInput={({ currentTarget }) => {
                     document?.body?.style?.setProperty?.(
                       "--stroke-width",
-                      String(Number(target.value) / 800),
+                      String(Number(currentTarget.value) / 800),
                     );
                   }}
                 />
 
                 <RangeWithTicks
                   legendText="Opacity"
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
+                  onInput={({ currentTarget }) => {
                     document?.body?.style?.setProperty?.(
                       "--opacity",
-                      String(Number(target.value) / 100),
+                      String(Number(currentTarget.value) / 100),
                     );
                   }}
                 />
 
                 <RangeWithTicks
                   legendText="Speed"
-                  inputRef={ e_rate}
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
-                    // document?.body?.style?.setProperty?.(
-                    //   "--opacity",
-                    //   String(Number(target.value) / 100),
-                    // );
-                    setRate(Number(target.value) / 20);
+                  inputRef={e_rate}
+                  onInput={({ currentTarget }) => {
+                    setRate(Number(currentTarget.value) / 20);
                   }}
                 />
 
