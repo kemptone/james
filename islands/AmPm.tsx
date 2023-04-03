@@ -3,7 +3,7 @@ import Dialog from "../components/Dialog.tsx";
 
 // Creates a range of times that has ranges that correspond to times
 const Times = [
-  [60, (60 * 4) + 30, "dark night"],
+  [0, (60 * 4) + 30, "dark night"],
   [(60 * 4) + 31, 60 * 5, "early-sunrise"],
   [(60 * 5) + 1, 60 * 6, "sunrise"],
   [(60 * 6) + 1, 60 * 7, "sunrise-early-morning"],
@@ -46,7 +46,22 @@ export default () => {
           const minute = Number(formData.get("minute"));
           // const seconds = Number(formData.get("seconds"));
           const ampm = Number(formData.get("ampm"));
-          const time = (hour + ampm) * 60 + minute;
+
+          let time = 0;
+
+          if (hour === 12) {
+            if (ampm === 0) {
+              time = minute;
+            } else {
+              time = hour * 60 + minute;
+            }
+          } else {
+            time = (hour + ampm) * 60 + minute;
+          }
+
+          // const time = (hour === 12 && ampm === 0)
+          //   ? minute
+          //   : (hour + ampm) * 60 + minute;
 
           const [start, end, name] = Times.find(([start, end]) => {
             return time >= start && time <= end;
