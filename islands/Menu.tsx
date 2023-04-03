@@ -58,6 +58,7 @@ export default () => {
           <a href="/timer3">Timer</a>
           <a href="https://number-ry8ams9hd2p0.deno.dev/timer3">Old Timer</a>
           <a href="/lasko">Lasko</a>
+          <a href="/ampm">AM PM</a>
           <a href="/kids">Kids</a>
           <a href="/spin">Spin</a>
           <a href="/recorder">Recorder</a>

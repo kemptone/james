@@ -23,7 +23,7 @@ import * as $16 from "./routes/testsettings.tsx";
 import * as $17 from "./routes/timer2.jsx";
 import * as $18 from "./routes/timer3.jsx";
 import * as $19 from "./routes/voice.jsx";
-import * as $$0 from "./islands/AmPm.jsx";
+import * as $$0 from "./islands/AmPm.tsx";
 import * as $$1 from "./islands/BigNumbers.tsx";
 import * as $$2 from "./islands/Blades.tsx";
 import * as $$3 from "./islands/Calculator.tsx";
@@ -67,7 +67,7 @@ const manifest = {
     "./routes/voice.jsx": $19,
   },
   islands: {
-    "./islands/AmPm.jsx": $$0,
+    "./islands/AmPm.tsx": $$0,
     "./islands/BigNumbers.tsx": $$1,
     "./islands/Blades.tsx": $$2,
     "./islands/Calculator.tsx": $$3,

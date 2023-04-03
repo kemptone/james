@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import Menu from "../islands/Menu.tsx";
-import KidThing from "../islands/KidThing.jsx";
+import AmPm from "../islands/AmPm.tsx";
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <Head>
         <link rel="stylesheet" href="/ampm/style.css"></link>
       </Head>
+      <AmPm />
       <Menu />
     </>
   );
