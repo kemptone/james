@@ -29,6 +29,8 @@ add("https://www.youtube.com/watch?v=2uabwdYMzVk");
 add("https://www.youtube.com/watch?v=1-iS7LArMPA");
 add("https://www.youtube.com/watch?v=pXe8MpU7uzk");
 add("https://www.youtube.com/watch?v=gcDWT-mTCOI");
+add("https://www.youtube.com/watch?v=fFj4wnSTYtM");
+add("https://www.youtube.com/watch?v=1lPnLBUIlko");
 
 export default () => {
   const e_players: MutableRef<HTMLDivElement | null>[] = [];
