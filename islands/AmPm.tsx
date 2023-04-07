@@ -94,6 +94,22 @@ export default () => {
         </select>
         <button type="submit">SET</button>
       </form>
+      <Dialog>
+        {(D) => (
+          <>
+            <button onClick={D.openDialog}>☕</button>
+            <D.Dialog ref={D.ref}>
+              <ol>
+                <li>
+                  <a href="https://pacificaview.net/livecam/sharp_triptych.php">
+                    Beach Cam
+                  </a>
+                </li>
+              </ol>
+            </D.Dialog>
+          </>
+        )}
+      </Dialog>
     </main>
   );
 };

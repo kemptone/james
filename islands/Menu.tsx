@@ -39,6 +39,7 @@ export default () => {
         <nav>
           <a href="/">Home</a>
           <a href="/calculator">Calculator</a>
+          <a href="/kids">Kids</a>
           <span>
             <a href="/brownthing">Brown Thing</a>
             <span>&nbsp;&nbsp;</span>
@@ -50,18 +51,29 @@ export default () => {
             <span>&nbsp;&nbsp;</span>
             <a href="/brownthing?countby=10">10</a>
           </span>
-          <a href="/voice">Voice</a>
-          <a href="/music2">Music</a>
-          <a href="/colorthing">Color Thing</a>
-          <a href="/colorfinder">Color Finder</a>
+          <span>
+            <a href="/voice">Voice</a>
+            <span>&nbsp;&&nbsp;</span>
+            <a href="/music2">Music</a>
+            <span>&nbsp;&&nbsp;</span>
+            <a href="/recorder">Recorder</a>
+          </span>
+          <span>
+            <a href="/colorthing">Color Thing</a>
+            <span>&nbsp;&&nbsp;</span>
+            <a href="/colorfinder">Finder</a>
+          </span>
           <a href="/bignumbers">Big Numbers</a>
-          <a href="/timer3">Timer</a>
-          <a href="https://number-ry8ams9hd2p0.deno.dev/timer3">Old Timer</a>
+          <span>
+            <a href="/timer3">Timer</a>
+            <span>&nbsp;&&nbsp;</span>
+            <a href="/spin">Spin</a>
+            <span>&nbsp;&&nbsp;</span>
+            <a href="https://number-ry8ams9hd2p0.deno.dev/timer3">Old Timer</a>
+          </span>
           <a href="/lasko">Lasko</a>
+          <a href="/live">Cameras</a>
           <a href="/ampm">AM PM</a>
-          <a href="/kids">Kids</a>
-          <a href="/spin">Spin</a>
-          <a href="/recorder">Recorder</a>
           <a href="https://smooth.talkrapp.com/#/">Talker</a>
           <AllSettings />
         </nav>
