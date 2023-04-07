@@ -30,7 +30,7 @@ add("https://www.youtube.com/watch?v=1-iS7LArMPA");
 add("https://www.youtube.com/watch?v=pXe8MpU7uzk");
 add("https://www.youtube.com/watch?v=gcDWT-mTCOI");
 // add("https://www.youtube.com/watch?v=fFj4wnSTYtM");
-add("https://www.youtube.com/watch?v=-HxJYZI9AMk");
+// add("https://www.youtube.com/watch?v=-HxJYZI9AMk");
 add("https://www.youtube.com/watch?v=1lPnLBUIlko");
 
 export default () => {
@@ -67,7 +67,7 @@ export default () => {
               "color": "white",
               "iv_load_policy": 3,
               "rel": 0,
-              "origin": origin,
+              // "origin": origin,
             },
             events: {
               "onReady": onPlayerReady(index),
