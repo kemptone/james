@@ -1,5 +1,5 @@
 :root {
-  --buttton-width:5em;
+  --buttton-width: 5em;
 }
 
 body {
@@ -7,7 +7,7 @@ body {
   margin: 0;
   height: 100vh;
   background-color: rgba(174, 144, 123, 0.484);
-  background-image:url(/noise-texture-100x100-b.png);
+  background-image: url(/noise-texture-100x100-b.png);
 }
 
 
@@ -20,7 +20,7 @@ main {
 }
 
 #wrap {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   align-self: center;
   margin: auto;
@@ -31,7 +31,7 @@ main {
 }
 
 #letters {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
@@ -47,9 +47,9 @@ main {
   background-color:white; */
   flex: 1;
   /* margin: 8px; */
-  user-select:none;
+  user-select: none;
   touch-action: manipulation;
-  font-family: Short_Stack;
+  /* font-family: Short_Stack; */
   border-width: .07rem;
   color: var(--color3);
 }
@@ -67,8 +67,8 @@ main {
 }
 
 .letters button.control.space {
-  min-width: calc( var(--buttton-width) * 1 );
-  flex:1;
+  min-width: calc(var(--buttton-width) * 1);
+  flex: 1;
 }
 
 .letters button i {
@@ -76,15 +76,15 @@ main {
 }
 
 .letters .control {
-  flex:1;
+  flex: 1;
 }
 
 .letters.show-numbers button b {
-  display:none;
+  display: none;
 }
 
 .letters.show-letters button i {
-  display:none;
+  display: none;
 }
 
 .letters.show-numbers .toggle-numbers {
@@ -102,9 +102,9 @@ main {
   flex: 1;
   /* border:0; */
   border: 2px solid black;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   margin-bottom: 8px;
   border: none;
   background-color: transparent;
-  font-family: Short_Stack;
+  /* font-family: Short_Stack; */
 }

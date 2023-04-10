@@ -23,15 +23,14 @@ function add(url: string) {
 }
 
 add("https://www.youtube.com/embed/EgIZ7abXpUE?autoplay=1&mute=1");
-add("https://www.youtube.com/embed/1HuXun1vURc?autoplay=1&mute=1");
-add("https://www.youtube.com/embed/mLhR80JlLY8?autoplay=1&mute=1");
-add("https://www.youtube.com/watch?v=2uabwdYMzVk");
-add("https://www.youtube.com/watch?v=1-iS7LArMPA");
-add("https://www.youtube.com/watch?v=pXe8MpU7uzk");
-add("https://www.youtube.com/watch?v=gcDWT-mTCOI");
-// add("https://www.youtube.com/watch?v=fFj4wnSTYtM");
-add("https://www.youtube.com/watch?v=-HxJYZI9AMk");
-add("https://www.youtube.com/watch?v=1lPnLBUIlko");
+// add("https://www.youtube.com/embed/1HuXun1vURc?autoplay=1&mute=1");
+// add("https://www.youtube.com/embed/mLhR80JlLY8?autoplay=1&mute=1");
+// add("https://www.youtube.com/watch?v=2uabwdYMzVk");
+// add("https://www.youtube.com/watch?v=1-iS7LArMPA");
+// add("https://www.youtube.com/watch?v=pXe8MpU7uzk");
+// add("https://www.youtube.com/watch?v=gcDWT-mTCOI");
+// add("https://www.youtube.com/watch?v=-HxJYZI9AMk");
+// add("https://www.youtube.com/watch?v=1lPnLBUIlko");
 
 export default () => {
   const e_players: MutableRef<HTMLDivElement | null>[] = [];
