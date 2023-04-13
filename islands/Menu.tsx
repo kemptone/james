@@ -65,6 +65,8 @@ export default () => {
           </span>
           <a href="/bignumbers">Big Numbers</a>
           <span>
+            <a href="/speedup">Speed Up</a>
+            <span>&nbsp;&&nbsp;</span>
             <a href="/timer3">Timer</a>
             <span>&nbsp;&&nbsp;</span>
             <a href="/spin">Spin</a>
