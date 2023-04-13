@@ -72,9 +72,10 @@ main.speedup .setting-item>span {
   position: absolute;
   font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
   text-transform: uppercase;
-  margin: 3px 5px;
+  margin: 20px -32px;
   font-style: italic;
   opacity: .5;
+  transform: rotate(-90deg);
 }
 
 html.ampm-game {
