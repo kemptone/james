@@ -4,9 +4,27 @@
   --background-color: #fed469;
 }
 
+html,
 body {
   padding: 0;
   margin: 0;
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  html,
+  body {
+    font-size: 12px;
+  }
 }
 
 main.speedup>form {
@@ -64,20 +82,23 @@ main.speedup button[type="reset"] {
   border: none;
 }
 
+main.speedup>form button {
+  color: var(--color);
+  background-color: var(--background-color);
+}
+
 main.speedup button {
   font-size: 3rem;
   margin: 0.5rem 0;
   border: none;
   border-radius: 0.125rem;
-  color: var(--color);
-  background-color: var(--background-color);
   cursor: pointer;
   padding: 0.180rem 0.8rem;
   font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
   line-height: 4rem;
 }
 
-main.speedup button:hover {
+main.speedup>form button:hover {
   color: var(--background-color);
   background-color: var(--color);
 }
@@ -89,8 +110,6 @@ main.speedup section:has(.setting-item) {
   justify-content: center;
   margin: 0.5rem;
 }
-
-main.speedup .setting-item {}
 
 main.speedup .setting-item>span {
   position: absolute;
