@@ -27,7 +27,7 @@ main.speedup form {
 }
 
 main.speedup .timer {
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-family: 'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace;
   margin: 0.5rem;
   border: none;
@@ -37,6 +37,7 @@ main.speedup .timer {
   cursor: pointer;
   padding: 0.180rem 0.8rem;
   font-weight: 900;
+  margin-bottom: 70px;
 }
 
 main.speedup input[type="number"] {
@@ -44,6 +45,10 @@ main.speedup input[type="number"] {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: .5rem;
   text-align: center;
+}
+
+main.speedup.delay.running input[type="number"] {
+  color: green;
 }
 
 main.speedup button[type="reset"] {
@@ -68,14 +73,25 @@ main.speedup button:hover {
   background-color: var(--color);
 }
 
+main.speedup section:has(.setting-item) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem;
+}
+
+main.speedup .setting-item {}
+
 main.speedup .setting-item>span {
   position: absolute;
   font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
   text-transform: uppercase;
-  margin: 20px -32px;
+  /* margin: 20px -32px; */
   font-style: italic;
-  opacity: .5;
+  /* opacity: .5; */
   transform: rotate(-90deg);
+  transform: matrix3d(1, -0.8, 1, 0.01, 2.4, 2.5, 0.1, 0.06, 0, -0.9, 1, 0, -11, 0, 0, 1.1);
 }
 
 html.ampm-game {

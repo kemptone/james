@@ -1,8 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from "preact/hooks";
-import Dialog from "../components/Dialog.tsx";
+import { useCallback, useRef, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
+import useAudioSoundLoop from "../hooks/useAudioSoundLoop.tsx";
 
-const SettingItem = ({ name, type = "number" }: {
+// frequency of middle c is 261.63
+// frequency of C# 3 octaves higher is 261.63 * 2^3 = 2093.00
+// frequency of C# 3 octaves lower is 261.63 / 2^3 = 32.70
+// frequency of C# 2 octaves lower is 32.70 / 2^2 = 8.18
+const Cs = 32.70;
+const C = 261.63;
+
+const SettingItem = ({
+  name,
+  type = "number",
+}: {
   name: string;
   type?: "number" | "text";
 }) => {
@@ -42,16 +52,32 @@ const formatTimer = (timer: number) => {
 export default () => {
   const [running, setRunning] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(0);
+  const [delay, setDelay] = useState<number>(0);
   const r_timeout = useRef<number>();
+  const CounterSound = useAudioSoundLoop({
+    frequency: Cs * 3,
+    length: 0.5,
+  });
+
+  const StartSound = useAudioSoundLoop({
+    frequency: C * 3,
+    length: 1,
+  });
 
   // formats a number as a timer string, with hours, minutes, and seconds
 
   const onFormSubmit = useCallback(
     (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
       e.preventDefault();
+
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
       const form = e.target as HTMLFormElement;
       const formData = new FormData(form);
-      const delay = Number(formData.get("delay"));
+      const _delay = Number(formData.get("delay"));
+      const _length = Number(formData.get("length"));
+
+      setDelay(_delay);
 
       clearInterval(r_timeout.current);
 
@@ -60,25 +86,38 @@ export default () => {
         return;
       }
 
-      // form.querySelectorAll("input").forEach((i) => {
-      //   i.value = "";
-      // });
-
       setRunning(true);
 
       setTimeout(() => {
         const startTime = Date.now();
+        let lastSecond = 0;
         r_timeout.current = setInterval(function () {
           const elapsedTime = Date.now() - startTime;
           setTimer(elapsedTime);
+          const rounded = Math.floor(elapsedTime / 1000);
+          if (rounded !== lastSecond) {
+            lastSecond = rounded;
+            // console.log(lastSecond);
+            CounterSound.start(audioCtx);
+          }
         }, 0);
-      }, delay * 1000);
+
+        if (_length) {
+          setTimeout(() => {
+            clearInterval(r_timeout.current);
+            setRunning(false);
+            setTimer(_length * 1000);
+            // CounterSound.stop();
+          }, _length * 1000);
+        }
+        StartSound.start(audioCtx);
+      }, _delay * 1000);
     },
     [running],
   );
 
   return (
-    <main class={"speedup"}>
+    <main class={`speedup ${running ? "running" : ""} ${delay ? "delay" : ""}`}>
       <form
         action="javascript:void(0)"
         onSubmit={onFormSubmit}
@@ -87,6 +126,9 @@ export default () => {
           {formatTimer(timer)}
         </div>
 
+        <section>
+          <SettingItem name="length" />
+        </section>
         <section>
           <SettingItem name="delay" />
         </section>
@@ -100,29 +142,12 @@ export default () => {
             onClick={() => {
               setTimer(0);
               setRunning(false);
+              setDelay(0);
               clearInterval(r_timeout.current);
             }}
           />
         </section>
       </form>
-      {
-        /* <Dialog>
-        {(D) => (
-          <>
-            <button onClick={D.openDialog}>☕</button>
-            <D.Dialog ref={D.ref}>
-              <ol>
-                <li>
-                  <a href="https://pacificaview.net/livecam/sharp_triptych.php">
-                    Beach Cam
-                  </a>
-                </li>
-              </ol>
-            </D.Dialog>
-          </>
-        )}
-      </Dialog> */
-      }
     </main>
   );
 };
