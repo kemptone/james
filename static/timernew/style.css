@@ -1,5 +1,5 @@
 :root {
-  --stroke-color:white;
+  --stroke-color: white;
 }
 
 #jamestimer {
@@ -8,12 +8,12 @@
 }
 
 body {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 main {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -27,7 +27,7 @@ main {
 }
 
 .innerwrap svg {
-  display:block;
+  display: block;
 }
 
 .innerwrap svg path.background-blade {
@@ -54,40 +54,40 @@ body.darkmode2 .innerwrap svg path.forground-blade {
 }
 
 footer {
-  position:fixed;
-  bottom:0;
-  width:calc(100% - 36px);
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 36px);
 
 }
 
-footer > div.new-timer-section {
+footer>div.new-timer-section {
   padding: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-footer > div.new-timer-section > div {
+footer>div.new-timer-section>div {
   width: 100%;
 }
 
-footer > div.new-timer-section input {
+footer>div.new-timer-section input {
   padding: 10px;
   font-size: 20px;
   display: block;
-  width:120px;
+  width: 120px;
 }
 
-footer > div.new-timer-section button {
+footer>div.new-timer-section button {
   padding: 20px;
   width: 290px;
 }
 
-footer > div > input {
+footer>div>input {
   padding: 20px;
 }
 
-footer > div {
+footer>div {
   padding: 18px;
   display: flex;
   justify-content: space-between;
@@ -95,8 +95,8 @@ footer > div {
 
 footer select {
   padding: 10px 6px;
-  flex:1;
-  border: 1px solid rgba(0,0,0,.2);
+  flex: 1;
+  border: 1px solid rgba(0, 0, 0, .2);
   height: 90px;
   font-size: 17px;
 }
@@ -148,25 +148,27 @@ footer select {
 
 @keyframes start {
   0% {
-    transform:rotate(0deg); 
+    transform: rotate(0deg);
   }
+
   100% {
-    transform:rotate(360deg); 
+    transform: rotate(360deg);
   }
 }
 
-@keyframes spin { 
-  100% { 
-      transform:rotate(360deg); 
-  } 
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes end {
   0% {
-    transform:rotate(0deg); 
+    transform: rotate(0deg);
   }
+
   100% {
-    transform:rotate(360deg); 
+    transform: rotate(360deg);
   }
 }
 
@@ -174,32 +176,33 @@ fieldset {
   margin: 20px;
 }
 
-html:has( body.darkmode ) {
-  background-color:black;
+html:has(body.darkmode) {
+  background-color: black;
   color: white;
 }
 
-html:has( body.whitemode ) {
-  background-color:white;
+html:has(body.whitemode) {
+  background-color: white;
   color: black;
 }
 
-html:has( body.whitemode.darkmode ) {
-  background-color:gray;
+html:has(body.whitemode.darkmode) {
+  background-color: gray;
   color: white;
 }
 
 
 .darkmode button {
-  color:white;
+  color: white;
   border-color: white;
 }
 
 .darkmode #hamburgermenu span {
-  background-color: white;;
+  background-color: white;
+  ;
 }
 
-.darkmode header nav > a {
+.darkmode header nav>a {
   color: white;
 }
 
@@ -207,10 +210,19 @@ html:has( body.whitemode.darkmode ) {
   color: black;
 }
 
-form > fieldset:first-of-type {
-  margin-top:50px;
+form>fieldset:first-of-type {
+  margin-top: 50px;
 }
 
-.range-with-ticks { }
-.range-with-ticks legend { }
-.range-with-ticks input[type="range"] {width: 100%;}
+.range-with-ticks {}
+
+.range-with-ticks legend {}
+
+.range-with-ticks input[type="range"] {
+  width: 100%;
+}
+
+#timersettings {
+  padding-top: max(env(safe-area-inset-top), 8px);
+  font-size: 21px;
+}

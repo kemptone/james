@@ -19,11 +19,19 @@ body {
   }
 }
 
+@media (max-width: 580px) {
+
+  html,
+  body {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 500px) {
 
   html,
   body {
-    font-size: 12px;
+    font-size: 10px;
   }
 }
 
@@ -55,7 +63,8 @@ main.speedup>form {
 
 main.speedup .timer {
   font-size: 4.5rem;
-  font-family: 'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace;
+  /* font-family: 'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace; */
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   margin: 0.5rem;
   border: none;
   border-radius: 0.125rem;
@@ -113,7 +122,8 @@ main.speedup section:has(.setting-item) {
 
 main.speedup .setting-item>span {
   position: absolute;
-  font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+  /* font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif; */
+  font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
   /* text-transform: uppercase; */
   margin: 15px -40px;
   /* font-style: italic; */
@@ -122,9 +132,15 @@ main.speedup .setting-item>span {
   transform: matrix3d(1, -0.8, 1, 0.01, 2.4, 2.5, 0.1, 0.06, 0, -0.9, 1, 0, -11, 0, 0, 1.1);
   font-weight: 900;
   letter-spacing: 1px;
+  text-transform: capitalize;
 }
 
 html.ampm-game {
   /* background-color: var(--background-color); */
   /* color: var(--color); */
+}
+
+main.speedup dialog .change-note button {
+  font-size: 1rem;
+  line-height: 2rem;
 }

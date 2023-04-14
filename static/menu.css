@@ -1,12 +1,14 @@
-body:has( .navigation.open ) {
+body:has(.navigation.open) {
   overflow: hidden;
 }
 
-header:has( .navigation.open ) {
+header:has(.navigation.open) {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: .2s all;
   height: 100vh;
+  /* background-color: #fed469c2 !important; */
+  background-color: #fed46966;
 }
 
 .navigation {
@@ -25,10 +27,10 @@ header:has( .navigation.open ) {
 }
 
 .navigation button {
-  margin:0 5px 0 0;
+  margin: 0 5px 0 0;
   padding: 6px;
-  font-size:1.2rem;
-  color:var(--color3);
+  font-size: 1.2rem;
+  color: var(--color3);
 }
 
 .menu-wrap {
@@ -123,8 +125,7 @@ header:has( .navigation.open ) {
 
 
 @media (max-width:450px) {
-    header {
-    }
+  header {}
 }
 
 header {
@@ -145,26 +146,25 @@ header nav ul li {
 }
 
 header nav a {
-  cursor:pointer;
-  user-select:none;
+  cursor: pointer;
+  user-select: none;
   font-size: 1.7rem;
-  margin-bottom:.8rem;
+  margin-bottom: .8rem;
 }
 
-header nav > span {
+header nav>span {
   font-size: 1.7rem;
-  margin-bottom:.8rem;
+  margin-bottom: .8rem;
 }
 
-header dt {
+header dt {}
+
+header dd+dt {
+  margin-top: 2rem;
 }
 
-header dd + dt {
-  margin-top:2rem;
-}
-
-header dt + dd {
-  margin-inline-start:0;
+header dt+dd {
+  margin-inline-start: 0;
 }
 
 header code {
@@ -172,15 +172,15 @@ header code {
 }
 
 header nav {
-    font-size: 22px;
-    padding: 2.5rem;
-    text-align: right;
-    width: fit-content;
-    float: right;
+  font-size: 22px;
+  padding: 2.5rem;
+  text-align: right;
+  width: fit-content;
+  float: right;
 }
 
-header nav > span,
-header nav > a {
+header nav>span,
+header nav>a {
   display: block;
   line-height: 2rem;
   width: fit-content;

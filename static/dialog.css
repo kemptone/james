@@ -5,7 +5,10 @@ dialog:not([open]) {
 
 dialog {
   position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -16,34 +19,36 @@ dialog {
   margin-right: auto;
   overflow: hidden;
   border-radius: 0.875rem;
-  box-shadow: 0 2px 8px 1px rgba(0,0,0,.2);
+  box-shadow: 0 2px 8px 1px rgba(0, 0, 0, .2);
   /* display: flex;
   flex-direction: column; */
   border: 0 solid #e5e7eb;
-  padding-top:1em;
+  padding-top: 1em;
 }
 
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.05);
+  /* background: rgba(0, 0, 0, 0.05); */
+  /* background: --background-color: #fed469; */
+  background-color: #fed469c2 !important;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
 
-dialog > form {
+dialog>form {
   text-align: left;
 }
 
-dialog > form[method=dialog] {
+dialog>form[method=dialog] {
   text-align: right;
   /* margin-bottom: -1em; */
   position: absolute;
-  top:1em;
+  top: 1em;
   padding: 0;
-  margin:0;
-  right:1em;
+  margin: 0;
+  right: 1em;
 }
 
-dialog > form[method=dialog] > button {
+dialog>form[method=dialog]>button {
   border: none;
   background-color: transparent;
   outline: transparent;
@@ -53,18 +58,18 @@ dialog > form[method=dialog] > button {
   margin: 0;
   vertical-align: top;
   text-align: right;
-  color:black;
+  color: black;
 }
 
 @media (max-width:750px) {
   dialog {
-    max-height:none;
+    max-height: none;
     max-width: none;
     border-radius: 0;
-    padding-top:max(env(safe-area-inset-top, 0), 1em);
+    padding-top: max(env(safe-area-inset-top, 0), 1em);
   }
 
-  dialog > form[method=dialog] {
+  dialog>form[method=dialog] {
     top: max(calc(env(safe-area-inset-top, 0px)), 1em);
   }
 

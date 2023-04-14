@@ -2,52 +2,15 @@ import { useCallback, useRef, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
 import useAudioSoundLoop from "../hooks/useAudioSoundLoop.tsx";
 import Dialog from "../components/Dialog.tsx";
+import { SettingItem } from "../components/SettingItem.tsx";
+import { formatTimer } from "../helpers/number.helpers.ts";
+import SpeedUpChangeFrequency from "../components/SpeedUpChangeFrequency.tsx";
+// SpeedUpChangeFrequency
 
 const Cs = 32.70;
 const C = 261.63;
 
 let LastContext: AudioContext;
-let allStop: () => void;
-
-const SettingItem = ({
-  name,
-  type = "number",
-}: {
-  name: string;
-  type?: "number" | "text";
-}) => {
-  return (
-    <label class="setting-item">
-      <span>{name}</span>
-      <input
-        name={name}
-        type={type}
-        step={type === "number" ? "0.001" : undefined}
-      />
-    </label>
-  );
-};
-
-// formats number with leading zeros
-function formatNumber(n: number) {
-  return n < 10 ? `0${n}` : n;
-}
-
-// formats a number with up to 2 leading zeros
-function formatNumber2(n: number) {
-  return n < 10 ? `00${n}` : n < 100 ? `0${n}` : n;
-}
-
-// formats a number, which is in miliseconds as a timer string, with hours, minutes, and seconds, and milliseconds
-const formatTimer = (timer: number) => {
-  const hours = Math.floor(timer / 3600000);
-  const minutes = Math.floor((timer % 3600000) / 60000);
-  const seconds = Math.floor((timer % 60000) / 1000);
-  const ms = Math.floor(timer % 1000);
-  return `${formatNumber(hours)}:${formatNumber(minutes)}:${
-    formatNumber(seconds)
-  }.${formatNumber2(ms)}`;
-};
 
 export default () => {
   const [running, setRunning] = useState<boolean>(false);
@@ -57,6 +20,7 @@ export default () => {
   const r_timeout = useRef<number>();
   const r_delay = useRef<number>();
   const r_length = useRef<number>();
+  const e_frequency = useRef<HTMLInputElement | null>(null);
 
   const WaitingSound = useAudioSoundLoop({
     frequency: r_frequency.current * 1,
@@ -71,17 +35,15 @@ export default () => {
   });
 
   const CounterSound = useAudioSoundLoop({
-    // frequency: Cs * 3,
     frequency: r_frequency.current * 3,
     length: 0.5,
     type: "sine",
   });
 
   const StartSound = useAudioSoundLoop({
-    // frequency: Cs * 2,
     frequency: r_frequency.current * 2,
     length: 1,
-    type: "triange",
+    type: "sine",
   });
 
   const EndingSound = useAudioSoundLoop({
@@ -213,43 +175,19 @@ export default () => {
                   const formData = new FormData(form);
                   const _frequency = Number(formData.get("frequency"));
                   r_frequency.current = _frequency;
-                  D.closeDialog();
+                  // D.closeDialog();
                 }}
                 style={{ marginTop: "130px" }}
               >
                 <section>
-                  <pre>
-                    Frequencies of notes in the C major scale
-                    <br/>
-                    Speed of Sound = 345 m/s = 1130 ft/s = 770 miles/hr
-                    <br/>
-                    const C = 261.63;
-                    <br/>
-                    const Cs = 277.18;
-                    <br/>
-                    const D = 293.66;
-                    <br/>
-                    const Ds = 311.13;
-                    <br/>
-                    const E = 329.63;
-                    <br/>
-                    const F = 349.23;
-                    <br/>
-                    const Fs = 369.99;
-                    <br/>
-                    const G = 392.00;
-                    <br/>
-                    const Gs = 415.30;
-                    <br/>
-                    const A = 440.00;
-                    <br/>
-                    const As = 466.16;
-                    <br/>
-                    const B = 493.88;
-                    <br/>
-                  </pre>
+                  <SpeedUpChangeFrequency
+                    {...{
+                      e_frequency,
+                      r_frequency,
+                    }}
+                  />
                 </section>
-                <SettingItem name="frequency" />
+                <SettingItem inputRef={e_frequency} name="frequency" />
                 <section>
                   <button children="Set" />
                   <button
