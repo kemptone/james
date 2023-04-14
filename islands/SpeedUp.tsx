@@ -9,6 +9,8 @@ import useAudioSoundLoop from "../hooks/useAudioSoundLoop.tsx";
 const Cs = 32.70;
 const C = 261.63;
 
+let LastContext: AudioContext;
+
 const SettingItem = ({
   name,
   type = "number",
@@ -54,6 +56,14 @@ export default () => {
   const [timer, setTimer] = useState<number>(0);
   const [delay, setDelay] = useState<number>(0);
   const r_timeout = useRef<number>();
+  const r_delay = useRef<number>();
+  const r_length = useRef<number>();
+
+  const WaitingSound = useAudioSoundLoop({
+    frequency: Cs * 2,
+    length: 5,
+  });
+
   const CounterSound = useAudioSoundLoop({
     frequency: Cs * 3,
     length: 0.5,
@@ -70,7 +80,12 @@ export default () => {
     (e: JSX.TargetedEvent<HTMLFormElement, Event>) => {
       e.preventDefault();
 
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (LastContext?.state === "running") {
+        LastContext?.close();
+      }
+
+      const audioCtx = LastContext =
+        new (window.AudioContext || window.webkitAudioContext)();
 
       const form = e.target as HTMLFormElement;
       const formData = new FormData(form);
@@ -80,6 +95,8 @@ export default () => {
       setDelay(_delay);
 
       clearInterval(r_timeout.current);
+      clearInterval(r_delay.current);
+      clearInterval(r_length.current);
 
       if (running) {
         setRunning(false);
@@ -88,7 +105,11 @@ export default () => {
 
       setRunning(true);
 
-      setTimeout(() => {
+      if (_delay) {
+        WaitingSound.start(audioCtx, _delay);
+      }
+
+      r_delay.current = setTimeout(() => {
         const startTime = Date.now();
         let lastSecond = 0;
         r_timeout.current = setInterval(function () {
@@ -103,7 +124,7 @@ export default () => {
         }, 0);
 
         if (_length) {
-          setTimeout(() => {
+          r_length.current = setTimeout(() => {
             clearInterval(r_timeout.current);
             setRunning(false);
             setTimer(_length * 1000);
@@ -143,6 +164,7 @@ export default () => {
               setTimer(0);
               setRunning(false);
               setDelay(0);
+              LastContext?.close();
               clearInterval(r_timeout.current);
             }}
           />

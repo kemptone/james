@@ -30,7 +30,7 @@ export default ({
   function play(audioCtx: AudioContext) {
   }
 
-  const start = useCallback((audioCtx: AudioContext) => {
+  const start = useCallback((audioCtx: AudioContext, tweakLength?: number) => {
     // const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     const gain = audioCtx.createGain();
     gain.connect(audioCtx.destination);
@@ -44,11 +44,11 @@ export default ({
     gain.gain.setValueCurveAtTime(
       [0, .25, .35, .3, .2, .35, .1, .2, .2, 0],
       audioCtx.currentTime,
-      length,
+      tweakLength || length,
     );
     // gain.gain.setValueAtTime(0, audioCtx.currentTime + 0.5);
     oscillator.start();
-    oscillator.stop(audioCtx.currentTime + length);
+    oscillator.stop(audioCtx.currentTime + (tweakLength || length));
   }, []);
 
   const stop = useCallback(() => {
