@@ -9,7 +9,7 @@ body {
   margin: 0;
 }
 
-main.speedup form {
+main.speedup>form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,16 @@ main.speedup form {
   font-family: 'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace;
 }
 
-main.speedup form {
+main.speedup-dialog>form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50dvh;
+  font-family: 'Nimbus Mono PS', 'Courier New', 'Cutive Mono', monospace;
+}
+
+main.speedup>form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +43,7 @@ main.speedup .timer {
   border-radius: 0.125rem;
   color: var(--color);
   background-color: var(--background-color);
-  cursor: pointer;
+  /* cursor: pointer; */
   padding: 0.180rem 0.8rem;
   font-weight: 900;
   margin-bottom: 70px;
@@ -86,12 +95,14 @@ main.speedup .setting-item {}
 main.speedup .setting-item>span {
   position: absolute;
   font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
-  text-transform: uppercase;
-  /* margin: 20px -32px; */
-  font-style: italic;
+  /* text-transform: uppercase; */
+  margin: 15px -40px;
+  /* font-style: italic; */
   /* opacity: .5; */
   transform: rotate(-90deg);
   transform: matrix3d(1, -0.8, 1, 0.01, 2.4, 2.5, 0.1, 0.06, 0, -0.9, 1, 0, -11, 0, 0, 1.1);
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 html.ampm-game {

@@ -1,15 +1,13 @@
 import { useCallback, useRef, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
 import useAudioSoundLoop from "../hooks/useAudioSoundLoop.tsx";
+import Dialog from "../components/Dialog.tsx";
 
-// frequency of middle c is 261.63
-// frequency of C# 3 octaves higher is 261.63 * 2^3 = 2093.00
-// frequency of C# 3 octaves lower is 261.63 / 2^3 = 32.70
-// frequency of C# 2 octaves lower is 32.70 / 2^2 = 8.18
 const Cs = 32.70;
 const C = 261.63;
 
 let LastContext: AudioContext;
+let allStop: () => void;
 
 const SettingItem = ({
   name,
@@ -55,23 +53,30 @@ export default () => {
   const [running, setRunning] = useState<boolean>(false);
   const [timer, setTimer] = useState<number>(0);
   const [delay, setDelay] = useState<number>(0);
+  const r_frequency = useRef<number>(Cs);
   const r_timeout = useRef<number>();
   const r_delay = useRef<number>();
   const r_length = useRef<number>();
 
   const WaitingSound = useAudioSoundLoop({
-    frequency: Cs * 2,
+    // frequency: Cs * 2,
+    frequency: r_frequency.current * 1,
     length: 5,
+    type: "sine",
   });
 
   const CounterSound = useAudioSoundLoop({
-    frequency: Cs * 3,
+    // frequency: Cs * 3,
+    frequency: r_frequency.current * 3,
     length: 0.5,
+    type: "sine",
   });
 
   const StartSound = useAudioSoundLoop({
-    frequency: C * 3,
+    // frequency: Cs * 2,
+    frequency: r_frequency.current * 2,
     length: 1,
+    type: "triange",
   });
 
   // formats a number as a timer string, with hours, minutes, and seconds
@@ -106,7 +111,7 @@ export default () => {
       setRunning(true);
 
       if (_delay) {
-        WaitingSound.start(audioCtx, _delay);
+        WaitingSound.start(audioCtx, _delay, r_frequency.current * 1);
       }
 
       r_delay.current = setTimeout(() => {
@@ -119,7 +124,7 @@ export default () => {
           if (rounded !== lastSecond) {
             lastSecond = rounded;
             // console.log(lastSecond);
-            CounterSound.start(audioCtx);
+            CounterSound.start(audioCtx, undefined, r_frequency.current * 3);
           }
         }, 0);
 
@@ -131,45 +136,83 @@ export default () => {
             // CounterSound.stop();
           }, _length * 1000);
         }
-        StartSound.start(audioCtx);
+        StartSound.start(audioCtx, undefined, r_frequency.current * 2);
       }, _delay * 1000);
     },
     [running],
   );
 
   return (
-    <main class={`speedup ${running ? "running" : ""} ${delay ? "delay" : ""}`}>
-      <form
-        action="javascript:void(0)"
-        onSubmit={onFormSubmit}
-      >
-        <div className="timer">
-          {formatTimer(timer)}
-        </div>
+    <Dialog>
+      {(D) => (
+        <main
+          class={`speedup ${running ? "running" : ""} ${delay ? "delay" : ""}`}
+        >
+          <form
+            action="javascript:void(0)"
+            onSubmit={onFormSubmit}
+          >
+            <div className="timer">
+              {formatTimer(timer)}
+            </div>
 
-        <section>
-          <SettingItem name="length" />
-        </section>
-        <section>
-          <SettingItem name="delay" />
-        </section>
-        <section>
-          <button
-            children={running ? "⏱ Stop" : "⏰ Start"}
-          />
-          <button
-            type="reset"
-            children="♻"
-            onClick={() => {
-              setTimer(0);
-              setRunning(false);
-              setDelay(0);
-              LastContext?.close();
-              clearInterval(r_timeout.current);
-            }}
-          />
-        </section>
-      </form>
-    </main>
+            <section>
+              <SettingItem name="length" />
+            </section>
+            <section>
+              <SettingItem name="delay" />
+            </section>
+            <section>
+              <button
+                children={running ? "⏱ Stop" : "⏰ Start"}
+              />
+              <button
+                type="reset"
+                children="♻"
+                onClick={() => {
+                  setTimer(0);
+                  setRunning(false);
+                  setDelay(0);
+                  LastContext?.close();
+                  clearInterval(r_timeout.current);
+                }}
+              />
+              <button
+                type={"button"}
+                onClick={D.openDialog}
+                children="✺"
+              />
+            </section>
+          </form>
+          <D.Dialog ref={D.ref}>
+            <main class="speedup-dialog">
+              <form
+                action="javascript:void(0)"
+                onSubmit={(e) => {
+                  const form = e.target as HTMLFormElement;
+                  const formData = new FormData(form);
+                  const _frequency = Number(formData.get("frequency"));
+                  r_frequency.current = _frequency;
+                  D.closeDialog();
+                }}
+                style={{ marginTop: "130px" }}
+              >
+                <SettingItem name="frequency" />
+                <section>
+                  <button children="Set" />
+                  <button
+                    type="reset"
+                    children="♻"
+                    onClick={() => {
+                      r_frequency.current = Cs;
+                    }}
+                  />
+                </section>
+              </form>
+            </main>
+          </D.Dialog>
+        </main>
+      )}
+    </Dialog>
   );
 };
