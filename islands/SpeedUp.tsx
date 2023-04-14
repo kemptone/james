@@ -59,8 +59,13 @@ export default () => {
   const r_length = useRef<number>();
 
   const WaitingSound = useAudioSoundLoop({
-    // frequency: Cs * 2,
     frequency: r_frequency.current * 1,
+    length: 5,
+    type: "sine",
+  });
+
+  const WaitingSound2 = useAudioSoundLoop({
+    frequency: r_frequency.current * 1.5,
     length: 5,
     type: "sine",
   });
@@ -77,6 +82,18 @@ export default () => {
     frequency: r_frequency.current * 2,
     length: 1,
     type: "triange",
+  });
+
+  const EndingSound = useAudioSoundLoop({
+    frequency: r_frequency.current * 1,
+    length: 1,
+    type: "sine",
+  });
+
+  const EndingSound2 = useAudioSoundLoop({
+    frequency: r_frequency.current * 1.5,
+    length: 1,
+    type: "sine",
   });
 
   // formats a number as a timer string, with hours, minutes, and seconds
@@ -112,6 +129,7 @@ export default () => {
 
       if (_delay) {
         WaitingSound.start(audioCtx, _delay, r_frequency.current * 1);
+        WaitingSound2.start(audioCtx, _delay, r_frequency.current * 1.5);
       }
 
       r_delay.current = setTimeout(() => {
@@ -134,6 +152,8 @@ export default () => {
             setRunning(false);
             setTimer(_length * 1000);
             // CounterSound.stop();
+            EndingSound.start(audioCtx, undefined, r_frequency.current * 1);
+            EndingSound2.start(audioCtx, undefined, r_frequency.current * 1.5);
           }, _length * 1000);
         }
         StartSound.start(audioCtx, undefined, r_frequency.current * 2);
@@ -197,6 +217,38 @@ export default () => {
                 }}
                 style={{ marginTop: "130px" }}
               >
+                <section>
+                  <pre>
+                    Frequencies of notes in the C major scale
+                    <br/>
+                    Speed of Sound = 345 m/s = 1130 ft/s = 770 miles/hr
+                    <br/>
+                    const C = 261.63;
+                    <br/>
+                    const Cs = 277.18;
+                    <br/>
+                    const D = 293.66;
+                    <br/>
+                    const Ds = 311.13;
+                    <br/>
+                    const E = 329.63;
+                    <br/>
+                    const F = 349.23;
+                    <br/>
+                    const Fs = 369.99;
+                    <br/>
+                    const G = 392.00;
+                    <br/>
+                    const Gs = 415.30;
+                    <br/>
+                    const A = 440.00;
+                    <br/>
+                    const As = 466.16;
+                    <br/>
+                    const B = 493.88;
+                    <br/>
+                  </pre>
+                </section>
                 <SettingItem name="frequency" />
                 <section>
                   <button children="Set" />
