@@ -6,12 +6,14 @@ import AdjustableBlades from "../components/AdjustableBlades.tsx";
 import Dialog from "../components/Dialog.tsx";
 import OuterWrap from "../components/Timer/OuterWrap.tsx";
 import RangeWithTicks from "../components/RangeWithTicks.tsx";
+import { SettingItem } from "../components/SettingItem.tsx";
 
 const InnerCore = ({
   Sounds,
 }: { Sounds: AudioThing[] }) => {
   const refAudioContext = useRef<AudioContext | undefined>();
   const e_blades = useRef<HTMLInputElement | null>(null);
+  const e_rate = useRef<HTMLInputElement | null>(null);
   const e_bladeScale = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
@@ -20,7 +22,7 @@ const InnerCore = ({
   const e_outer = useRef<HTMLElement | null>(null);
   const e_spinner = useRef<HTMLDivElement | null>(null);
   const e_button = useRef<HTMLButtonElement | null>(null);
-  const e_rate = useRef<HTMLInputElement | null>(null);
+  // const e_rate = useRef<HTMLInputElement | null>(null);
   const timerState = useRef<number>(0);
   const [bladeCount, setBladeCount] = useState(5);
   const [strokeWidth, setStrokeWidth] = useState<number>(.02);
@@ -257,65 +259,52 @@ const InnerCore = ({
             </div>
             <footer>
               <div className="new-timer-section">
-                <div>
-                  <div>Blades:</div>
-                  <input
-                    type="number"
-                    step="1"
-                    ref={e_blades}
-                    onInput={(e) => {
-                      const target = e.target as HTMLInputElement;
+                <SettingItem
+                  name="speed"
+                  type="number"
+                  inputRef={e_rate}
+                  onInput={(e) => {
+                    const currentTarget = e.currentTarget as HTMLInputElement;
+                    if (currentTarget && currentTarget.value) {
+                      setRate(Number(currentTarget.value) / 20);
+                    }
+                  }}
+                />
 
-                      const bladeCount = Math.min(Number(target.value), 7500);
+                <SettingItem
+                  name="blades"
+                  type="number"
+                  inputRef={e_blades}
+                  onInput={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    const bladeCount = Math.min(Number(target.value), 7500);
 
-                      if (bladeCount > 500) {
-                        document.body.classList.add("darkmode2");
-                      }
+                    if (bladeCount > 500) {
+                      document.body.classList.add("darkmode2");
+                    }
+                    setBladeCount(bladeCount);
+                  }}
+                />
 
-                      setBladeCount(bladeCount);
-                    }}
-                    // onChange={(e: Event) => {
-                    //   const target = e.target as HTMLInputElement;
-                    //   setBladeCount(Math.min(Number(target.value), 750));
-                    // }}
-                  />
-                </div>
+                <SettingItem
+                  name="wait"
+                  inputRef={e_wait}
+                />
 
-                <div>
-                  <div>Wait:</div>
-                  <input
-                    type="number"
-                    step="0.1"
-                    ref={e_wait}
-                  />
-                </div>
+                <SettingItem
+                  name="speed_up"
+                  inputRef={e_speedUp}
+                />
 
-                <div>
-                  <div>Speed up:</div>
-                  <input
-                    type="number"
-                    step="0.1"
-                    ref={e_speedUp}
-                  />
-                </div>
+                <SettingItem
+                  name="full_speed"
+                  inputRef={e_runTime}
+                />
 
-                <div>
-                  <div>Full speed:</div>
-                  <input
-                    type="number"
-                    step="0.1"
-                    ref={e_runTime}
-                  />
-                </div>
-
-                <div>
-                  <div>Slow Down:</div>
-                  <input
-                    type="number"
-                    step="0.1"
-                    ref={e_slowDown}
-                  />
-                </div>
+                <SettingItem
+                  name="slow_down"
+                  inputRef={e_slowDown}
+                />
 
                 <button
                   ref={e_button}
@@ -365,14 +354,6 @@ const InnerCore = ({
                       "--opacity",
                       String(Number(currentTarget.value) / 100),
                     );
-                  }}
-                />
-
-                <RangeWithTicks
-                  legendText="Speed"
-                  inputRef={e_rate}
-                  onInput={({ currentTarget }) => {
-                    setRate(Number(currentTarget.value) / 20);
                   }}
                 />
 

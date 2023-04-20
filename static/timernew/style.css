@@ -67,6 +67,7 @@ footer>div.new-timer-section {
   align-items: center;
 }
 
+footer>div.new-timer-section>label,
 footer>div.new-timer-section>div {
   width: 100%;
 }
