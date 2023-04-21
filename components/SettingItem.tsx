@@ -15,16 +15,17 @@ export const SettingItem = ({
   onInput,
   defaultChecked,
   defaultValue,
+  step: _step,
 }:
   & Pick<
     HTMLAttributes<HTMLInputElement>,
-    "onInput" | "type" | "defaultValue" | "defaultChecked"
+    "onInput" | "type" | "defaultValue" | "defaultChecked" | "step"
   >
   & {
     inputRef?: MutableRef<HTMLInputElement | null>;
     name: string;
   }) => {
-  const step = type === "number" ? "0.001" : undefined;
+  const step = _step ? _step : type === "number" ? "0.001" : undefined;
   const clean_name = name.replace(/_/g, " ");
   return (
     <label class="setting-item">

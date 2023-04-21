@@ -7,6 +7,11 @@ import Dialog from "../components/Dialog.tsx";
 import OuterWrap from "../components/Timer/OuterWrap.tsx";
 import RangeWithTicks from "../components/RangeWithTicks.tsx";
 import { SettingItem } from "../components/SettingItem.tsx";
+import {
+  removeClassListItem,
+  setBodyStyleProp,
+  setClassListItem,
+} from "../helpers/setBodyStyleProp.ts";
 
 const InnerCore = ({
   Sounds,
@@ -14,6 +19,7 @@ const InnerCore = ({
   const refAudioContext = useRef<AudioContext | undefined>();
   const e_blades = useRef<HTMLInputElement | null>(null);
   const e_rate = useRef<HTMLInputElement | null>(null);
+  const e_audioRate = useRef<HTMLInputElement | null>(null);
   const e_bladeScale = useRef<HTMLInputElement | null>(null);
   const e_opacity = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
@@ -23,17 +29,18 @@ const InnerCore = ({
   const e_outer = useRef<HTMLElement | null>(null);
   const e_spinner = useRef<HTMLDivElement | null>(null);
   const e_button = useRef<HTMLButtonElement | null>(null);
-  // const e_rate = useRef<HTMLInputElement | null>(null);
   const timerState = useRef<number>(0);
   const [bladeCount, setBladeCount] = useState(5);
   const [strokeWidth, setStrokeWidth] = useState<number>(.02);
   const [rate, setRate] = useState(1.5);
+  const [audioRate, setAudioRate] = useState(1);
+  const [buttonStatus, setButtonStatus] = useState("Start");
 
   useEffect(() => {
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
       e_wait.current && e_blades.current && e_bladeScale.current &&
-      e_rate.current && e_opacity.current
+      e_rate.current && e_opacity.current && e_audioRate.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
@@ -43,6 +50,7 @@ const InnerCore = ({
       e_bladeScale.current.value = String(30 / 20);
       e_opacity.current.value = String(100);
       e_rate.current.value = String(1.5 * 20);
+      e_audioRate.current.value = String(1 * 50);
     }
   }, []);
 
@@ -51,9 +59,9 @@ const InnerCore = ({
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
       e_spinner.current && e_wait.current
     ) {
-      e_outer?.current?.classList.remove("started");
-      e_outer?.current?.classList.remove("middle");
-      e_outer?.current?.classList.remove("ending");
+      removeClassListItem("started", e_outer);
+      removeClassListItem("middle", e_outer);
+      removeClassListItem("ending", e_outer);
 
       const FACTOR = .666; // Magic number
       const RATE = 1.5; // How many spins per second
@@ -68,30 +76,30 @@ const InnerCore = ({
         Number(e_runTime.current.value) * rate,
       ];
 
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--speedup",
         e_speedUp.current.value + "s",
       );
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--slowdown",
         e_slowDown.current.value + "s",
       );
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--runtime",
         e_runTime.current.value + "s",
       );
 
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--rotations_speedup",
         (360 * rotations_speedup) + "deg",
       );
 
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--rotations_runtime",
         (360 * (rotations_runtime + rotations_speedup)) + "deg",
       );
 
-      document?.body?.style?.setProperty?.(
+      setBodyStyleProp(
         "--rotations_slowdown",
         (360 *
           Math.ceil(
@@ -101,7 +109,7 @@ const InnerCore = ({
       );
 
       timerState.current = 1;
-      e_outer?.current?.classList.add("started");
+      setClassListItem("started", e_outer);
     }
   }, [
     e_runTime.current,
@@ -117,23 +125,21 @@ const InnerCore = ({
         console.log(timerState.current);
 
         if (timerState.current === 1) {
-          e_outer?.current?.classList.remove("started");
-          e_outer?.current?.classList.add("middle");
+          removeClassListItem("started", e_outer);
+          setClassListItem("middle", e_outer);
           timerState.current = 2;
           return;
         } else if (timerState.current === 2) {
-          e_outer?.current?.classList.remove("middle");
-          e_outer?.current?.classList.add("ending");
+          setClassListItem("ending", e_outer);
+          removeClassListItem("middle", e_outer);
           timerState.current = 3;
           return;
         } else if (timerState.current === 3) {
-          e_outer?.current?.classList.remove("started");
-          e_outer?.current?.classList.remove("middle");
-          e_outer?.current?.classList.remove("ending");
+          removeClassListItem("started", e_outer);
+          removeClassListItem("middle", e_outer);
+          removeClassListItem("ending", e_outer);
           timerState.current = 0;
-          if (e_button.current) {
-            e_button.current.innerHTML = "Start";
-          }
+          setButtonStatus("Start");
           return;
         }
       },
@@ -145,7 +151,7 @@ const InnerCore = ({
       if (e_wait?.current?.value) {
         const wait = Number(e_wait?.current?.value ?? "1");
 
-        e_button.current.innerText = "Waiting";
+        setButtonStatus("Waiting");
 
         setTimeout(
           run,
@@ -155,11 +161,11 @@ const InnerCore = ({
         run();
       }
     } else if (e_button.current) {
-      e_outer?.current?.classList.remove("started");
-      e_outer?.current?.classList.remove("middle");
-      e_outer?.current?.classList.remove("ending");
+      removeClassListItem("started", e_outer);
+      removeClassListItem("middle", e_outer);
+      removeClassListItem("ending", e_outer);
       timerState.current = 0;
-      e_button.current.innerHTML = "Start";
+      setButtonStatus("Start");
       Sounds.forEach((item) => {
         item.refStop.current();
       });
@@ -167,8 +173,6 @@ const InnerCore = ({
   }
 
   function run() {
-    // const target = e.target as HTMLButtonElement;
-
     startFan();
 
     let context = refAudioContext.current;
@@ -206,28 +210,28 @@ const InnerCore = ({
           }
 
           useAudioLoop(s, context, ({ source }) => {
-            const SPEED = 4;
-
             if (source && context) {
               const rampUp = Number(e_speedUp?.current?.value);
               const run = Number(e_runTime?.current?.value);
               const slow = Number(e_slowDown?.current?.value);
 
               source.playbackRate.setValueCurveAtTime(
-                [0, .1, .3, .6, 1].map((i) => i * s.initialPlaybackRate * rate),
+                [0, .1, .3, .6, 1].map((i) =>
+                  i * s.initialPlaybackRate * (rate * audioRate)
+                ),
                 context.currentTime,
                 rampUp,
               );
 
               source.playbackRate.setTargetAtTime(
-                1 * s.initialPlaybackRate * rate,
+                1 * s.initialPlaybackRate * (rate * audioRate),
                 context.currentTime + rampUp,
                 run,
               );
 
               source.playbackRate.setValueCurveAtTime(
                 [1, .9, .8, .7, .5, .3, .1, 0].map((i) =>
-                  i * s.initialPlaybackRate * rate
+                  i * s.initialPlaybackRate * (rate * audioRate)
                 ),
                 context.currentTime + rampUp + run,
                 slow,
@@ -241,15 +245,15 @@ const InnerCore = ({
                 context.currentTime + rampUp + run + slow + 2,
               );
 
-              if (e_button.current) {
-                e_button.current.innerHTML = "Stop";
-              }
+              setButtonStatus("Stop");
             }
           });
         });
       },
     );
   }
+
+  console.count("render");
 
   return (
     <>
@@ -287,13 +291,14 @@ const InnerCore = ({
                   <SettingItem
                     name="blades"
                     type="number"
+                    step={1}
                     inputRef={e_blades}
                     onInput={(e) => {
                       const target = e.currentTarget; // as HTMLInputElement;
                       const bladeCount = Math.min(Number(target.value), 7500);
 
                       if (bladeCount > 500) {
-                        document.body.classList.add("darkmode2");
+                        setClassListItem("darkmode2");
                       }
                       setBladeCount(bladeCount);
                     }}
@@ -322,10 +327,8 @@ const InnerCore = ({
                   <button
                     ref={e_button}
                     type={"submit"}
-                    // onClick={runSpin}
-                  >
-                    Start
-                  </button>
+                    children={buttonStatus}
+                  />
                 </div>
               </footer>
             </form>
@@ -342,10 +345,18 @@ const InnerCore = ({
             <D.Dialog ref={D.ref}>
               <form>
                 <RangeWithTicks
+                  legendText="Audio Rate"
+                  inputRef={e_audioRate}
+                  onInput={({ currentTarget }) => {
+                    setAudioRate(Number(currentTarget.value) / 50);
+                  }}
+                />
+
+                <RangeWithTicks
                   legendText="Size of Fan"
                   inputRef={e_bladeScale}
                   onInput={({ currentTarget }) => {
-                    document?.body?.style?.setProperty?.(
+                    setBodyStyleProp(
                       "--blade-scale",
                       String(Number(currentTarget.value) * 20),
                     );
@@ -355,7 +366,7 @@ const InnerCore = ({
                 <RangeWithTicks
                   legendText="Line width"
                   onInput={({ currentTarget }) => {
-                    document?.body?.style?.setProperty?.(
+                    setBodyStyleProp(
                       "--stroke-width",
                       String(Number(currentTarget.value) / 800),
                     );
@@ -366,7 +377,7 @@ const InnerCore = ({
                   legendText="Opacity"
                   inputRef={e_opacity}
                   onInput={({ currentTarget }) => {
-                    document?.body?.style?.setProperty?.(
+                    setBodyStyleProp(
                       "--opacity",
                       String(Number(currentTarget.value) / 100),
                     );
@@ -380,9 +391,9 @@ const InnerCore = ({
                     onInput={(e: Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add("darkmode");
+                        setClassListItem("darkmode");
                       } else {
-                        document.body.classList.remove("darkmode");
+                        removeClassListItem("darkmode");
                       }
                     }}
                   />
@@ -391,9 +402,9 @@ const InnerCore = ({
                     onInput={(e: Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add("darkmode2");
+                        setClassListItem("darkmode2");
                       } else {
-                        document.body.classList.remove("darkmode2");
+                        removeClassListItem("darkmode2");
                       }
                     }}
                   />
@@ -403,9 +414,9 @@ const InnerCore = ({
                     onInput={(e: Event) => {
                       const target = e.currentTarget as HTMLInputElement;
                       if (target.checked) {
-                        document.body.classList.add("whitemode");
+                        setClassListItem("whitemode");
                       } else {
-                        document.body.classList.remove("whitemode");
+                        removeClassListItem("whitemode");
                       }
                     }}
                   />
