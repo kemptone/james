@@ -224,6 +224,7 @@ form>fieldset:first-of-type {
 }
 
 #timersettings {
-  padding-top: max(env(safe-area-inset-top), 8px);
+  padding-top: max(env(safe-area-inset-top), 13px);
   font-size: 21px;
+  padding-left: 10px;
 }

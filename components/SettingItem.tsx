@@ -1,25 +1,37 @@
 import { MutableRef } from "preact/hooks";
+import { HTMLAttributes } from "preact/compat";
+
+// NOTES on Event Handlers
+// the onInput event handler type can also be created this way
+// import { ChangeEventHandler, forwardRef, Ref } from "preact/compat";
+// onInput?: ChangeEventHandler<HTMLInputElement>; // it also works
+// Using Ref instead of MutableRef also works
+// inputRef?: Ref<HTMLInputElement>; // also works
 
 export const SettingItem = ({
-  name,
+  name = "",
   type = "number",
   inputRef,
   onInput,
-}: {
-  name: string;
-  type?: "number" | "text";
-  inputRef?: MutableRef<HTMLInputElement | null>;
-  onInput?: (e: InputEvent) => void;
-}) => {
+  defaultChecked,
+  defaultValue,
+}:
+  & Pick<
+    HTMLAttributes<HTMLInputElement>,
+    "onInput" | "type" | "defaultValue" | "defaultChecked"
+  >
+  & {
+    inputRef?: MutableRef<HTMLInputElement | null>;
+    name: string;
+  }) => {
+  const step = type === "number" ? "0.001" : undefined;
+  const clean_name = name.replace(/_/g, " ");
   return (
     <label class="setting-item">
-      <span>{name}</span>
+      <span>{clean_name}</span>
       <input
-        name={name}
-        type={type}
-        step={type === "number" ? "0.001" : undefined}
+        {...{ name, type, onInput, step, defaultChecked, defaultValue }}
         ref={inputRef}
-        onInput={onInput}
       />
     </label>
   );

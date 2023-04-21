@@ -1,17 +1,23 @@
-import { useId, useRef } from "preact/hooks";
-import { forwardRef, Ref } from "preact/compat";
+import { MutableRef, useId, useRef } from "preact/hooks";
+import { HTMLAttributes } from "preact/compat";
+
+// NOTES on Event Handlers
+// the onInput event handler type can also be created this way
+// import { ChangeEventHandler, forwardRef, Ref } from "preact/compat";
+// onInput?: ChangeEventHandler<HTMLInputElement>; // also works
+
+// Using Ref instead of MutableRef also works
+// inputRef?: Ref<HTMLInputElement>; // also works
 
 // creates as simple array from 1 to 10
 const range = Array.from({ length: 10 }, (_, i) => i);
 
-type OnInputType = Event & { currentTarget: HTMLInputElement };
-
-export default (props: {
-  // onInput: (e: Event & { currentTarget: HTMLInputElement }) => void;
-  onInput: (e: OnInputType) => void;
-  inputRef?: Ref<HTMLInputElement>;
-  legendText: string;
-}) => {
+export default (
+  props: Pick<HTMLAttributes<HTMLInputElement>, "onInput" | "defaultValue"> & {
+    inputRef?: MutableRef<HTMLInputElement | null>;
+    legendText: string;
+  },
+) => {
   const markersId = useId();
   const r_value = useRef<HTMLElement | null>(null);
 
@@ -25,13 +31,14 @@ export default (props: {
         type="range"
         list={markersId}
         ref={props.inputRef}
-        onInput={(e: OnInputType) => {
-          props.onInput(e);
+        onInput={(e) => {
+          props.onInput && props.onInput(e);
           if (r_value.current) {
             r_value.current.innerText = e.currentTarget.value;
           }
         }}
         step="0.001"
+        defaultValue={props.defaultValue}
       />
       <datalist id={markersId}>
         {range.map((i) => <option key={i} value={i * 10} />)}

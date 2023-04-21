@@ -266,6 +266,7 @@
     "https://esm.sh/stable/preact@10.11.3/deno/hooks.js": "535e2fd07e4273ba7db7955102733412c10975a0c1f57e5e18966f612a022b69",
     "https://esm.sh/stable/preact@10.11.3/deno/preact.js": "d17d6b3217ccb0352f68bbd47930aa25d260c1a544f45bcbcf4cd1ded9d630bb",
     "https://esm.sh/stable/preact@10.13.2/deno/compat.js": "3151a948abd84aa75dfc9e57733da7e1a45fff7a25de58c7b6025b923874b508",
+    "https://esm.sh/stable/preact@10.13.2/deno/compat/src.js": "bd20cb8d192bdf2f7a33c149d36bc11be76218fb55b1a7b936baa257c6fc7851",
     "https://esm.sh/stable/preact@10.13.2/deno/hooks.js": "c7a8e703bcbc6a05949f329b618c33d5d1ea5fee113ddcea44ff0f527af8556f",
     "https://esm.sh/stable/preact@10.13.2/deno/hooks/src/index.js": "29aaa9737475a47d9a1875faac74638fb88db374552e87e25d4a53a00a6c006d",
     "https://esm.sh/stable/preact@10.13.2/deno/jsx-runtime.js": "dd40c5bdfe7b277bf51009fb950c550dfb554b6d56a1b3a4cb9bc12bde84bcd1",
@@ -280,6 +281,7 @@
     "https://esm.sh/v111/tunajs@1.0.15": "639823526b104a1b939498ab603866bcb3042e97e4900a8e3e1ceaabb37e7d94",
     "https://esm.sh/v111/tunajs@1.0.15/deno/tunajs.js": "d57967fe5105a43d0b53c444e752f48df1d9a5afab1ab616558aab52283eb0b8",
     "https://esm.sh/v113/preact@10.13.2/compat/src/index.d.ts": "d02f015638a40e32649151e011cfda7b520d66f7fbd3c12a28fa03de2a5e1421",
+    "https://esm.sh/v113/preact@10.13.2/compat/src/index.js": "04f78abe69aedc07ebd754073396f7de9d8337e52deee5e468be93324ca43383",
     "https://esm.sh/v113/preact@10.13.2/compat/src/suspense-list.d.ts": "b8e274324392157ce476ef3a48ae215c9f7003b08525d140645f19eab20d1948",
     "https://esm.sh/v113/preact@10.13.2/compat/src/suspense.d.ts": "81f5266e0977a94347505d11b8103024211f2b4f3b2eb2aa276a10d8fd169e65",
     "https://esm.sh/v113/preact@10.13.2/hooks/src/index": "ff5292cfeeb2aa1dcf0da9e08ee8f892ff3472186390117e1ebee15ec2364639",
@@ -298,6 +300,12 @@
     "https://esm.sh/v114/ms@2.1.2/deno/ms.mjs": "12e0ed0385da6806a776add03106d70a9ef4d0c6f97f1155640f250aacc6d90c",
     "https://esm.sh/v114/sister@3.0.2/deno/sister.mjs": "961be2974ae0994f3104f21fa73cf905282b9d13ed450558a5d61e6574fbb753",
     "https://esm.sh/v114/youtube-player@5.6.0/deno/youtube-player.mjs": "ab854a9a2c3f7ba281b0da83bb4ab2743a67e584b420f02515a1242a296899b1",
+    "https://esm.sh/v116/preact@10.13.2/compat/src/index.d.ts": "d02f015638a40e32649151e011cfda7b520d66f7fbd3c12a28fa03de2a5e1421",
+    "https://esm.sh/v116/preact@10.13.2/compat/src/suspense-list.d.ts": "b8e274324392157ce476ef3a48ae215c9f7003b08525d140645f19eab20d1948",
+    "https://esm.sh/v116/preact@10.13.2/compat/src/suspense.d.ts": "81f5266e0977a94347505d11b8103024211f2b4f3b2eb2aa276a10d8fd169e65",
+    "https://esm.sh/v116/preact@10.13.2/hooks/src/index.d.ts": "5c29febb624fc25d71cb0e125848c9b711e233337a08f7eacfade38fd4c14cc3",
+    "https://esm.sh/v116/preact@10.13.2/src/index.d.ts": "65398710de6aa0a07412da79784e05e6e96763f51c7c91b77344d2d0af06385c",
+    "https://esm.sh/v116/preact@10.13.2/src/jsx.d.ts": "9ac9b82c199fa7b04748807d750eba1a106c0be52041b8617416f88d6fc0a257",
     "https://esm.sh/v95/preact@10.11.0/compat/src/index.d.ts": "c1f8da0c5666e296510cab41732743d593d71642ea55f57fbd19c6abae4e0192",
     "https://esm.sh/v95/preact@10.11.0/compat/src/suspense-list.d.ts": "b8e274324392157ce476ef3a48ae215c9f7003b08525d140645f19eab20d1948",
     "https://esm.sh/v95/preact@10.11.0/compat/src/suspense.d.ts": "81f5266e0977a94347505d11b8103024211f2b4f3b2eb2aa276a10d8fd169e65",
@@ -317,7 +325,9 @@
     "https://esm.sh/youtube-player@5.6.0": "79c439842e505e29c19e4605db535b1feaf7aca342e0ec5c42de3c57d37c72e0"
   },
   "npm": {
-    "specifiers": { "aws-sdk": "aws-sdk@2.1272.0" },
+    "specifiers": {
+      "aws-sdk": "aws-sdk@2.1272.0"
+    },
     "packages": {
       "available-typed-arrays@1.0.5": {
         "integrity": "sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==",
@@ -363,7 +373,9 @@
       },
       "for-each@0.3.3": {
         "integrity": "sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==",
-        "dependencies": { "is-callable": "is-callable@1.2.7" }
+        "dependencies": {
+          "is-callable": "is-callable@1.2.7"
+        }
       },
       "function-bind@1.1.1": {
         "integrity": "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==",
@@ -379,7 +391,9 @@
       },
       "gopd@1.0.1": {
         "integrity": "sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==",
-        "dependencies": { "get-intrinsic": "get-intrinsic@1.1.3" }
+        "dependencies": {
+          "get-intrinsic": "get-intrinsic@1.1.3"
+        }
       },
       "has-symbols@1.0.3": {
         "integrity": "sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==",
@@ -387,11 +401,15 @@
       },
       "has-tostringtag@1.0.0": {
         "integrity": "sha512-kFjcSNhnlGV1kyoGk7OXKSawH5JOb/LzUc5w9B02hOTO0dfFRjbHQKvg1d6cf3HbeUmtU9VbbV3qzZ2Teh97WQ==",
-        "dependencies": { "has-symbols": "has-symbols@1.0.3" }
+        "dependencies": {
+          "has-symbols": "has-symbols@1.0.3"
+        }
       },
       "has@1.0.3": {
         "integrity": "sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==",
-        "dependencies": { "function-bind": "function-bind@1.1.1" }
+        "dependencies": {
+          "function-bind": "function-bind@1.1.1"
+        }
       },
       "ieee754@1.1.13": {
         "integrity": "sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==",
@@ -414,7 +432,9 @@
       },
       "is-generator-function@1.0.10": {
         "integrity": "sha512-jsEjy9l3yiXEQ+PsXdmBwEPcOxaXWLspKdplFUVI9vq1iZgIekeC0L167qeu86czQaxed3q/Uzuw0swL0irL8A==",
-        "dependencies": { "has-tostringtag": "has-tostringtag@1.0.0" }
+        "dependencies": {
+          "has-tostringtag": "has-tostringtag@1.0.0"
+        }
       },
       "is-typed-array@1.1.10": {
         "integrity": "sha512-PJqgEHiWZvMpaFZ3uTc8kHPM4+4ADTlDniuQL7cU/UDA0Ql7F70yGfHph3cLNe+c9toaigv+DFzTJKhc2CtO6A==",
@@ -480,7 +500,10 @@
       },
       "xml2js@0.4.19": {
         "integrity": "sha512-esZnJZJOiJR9wWKMyuvSE1y6Dq5LCuJanqhxslH2bxM6duahNZ+HMpCLhBQGZkbX6xRf8x1Y2eJlgt2q3qo49Q==",
-        "dependencies": { "sax": "sax@1.2.1", "xmlbuilder": "xmlbuilder@9.0.7" }
+        "dependencies": {
+          "sax": "sax@1.2.1",
+          "xmlbuilder": "xmlbuilder@9.0.7"
+        }
       },
       "xmlbuilder@9.0.7": {
         "integrity": "sha512-7YXTQc3P2l9+0rjaUbLwMKRhtmwg1M1eDf6nag7urC7pIPYLD9W/jmzQ4ptRSUbodw5S0jfoGTflLemQibSpeQ==",

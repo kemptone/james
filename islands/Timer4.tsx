@@ -15,6 +15,7 @@ const InnerCore = ({
   const e_blades = useRef<HTMLInputElement | null>(null);
   const e_rate = useRef<HTMLInputElement | null>(null);
   const e_bladeScale = useRef<HTMLInputElement | null>(null);
+  const e_opacity = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
   const e_runTime = useRef<HTMLInputElement | null>(null);
@@ -32,14 +33,15 @@ const InnerCore = ({
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
       e_wait.current && e_blades.current && e_bladeScale.current &&
-      e_rate.current
+      e_rate.current && e_opacity.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
       e_speedUp.current.value = "8";
       e_wait.current.value = "0";
       e_blades.current.value = "5";
-      e_bladeScale.current.value = "30";
+      e_bladeScale.current.value = String(30 / 20);
+      e_opacity.current.value = String(100);
       e_rate.current.value = String(1.5 * 20);
     }
   }, []);
@@ -130,7 +132,7 @@ const InnerCore = ({
           e_outer?.current?.classList.remove("ending");
           timerState.current = 0;
           if (e_button.current) {
-            e_button.current.innerText = "Start";
+            e_button.current.innerHTML = "Start";
           }
           return;
         }
@@ -138,7 +140,7 @@ const InnerCore = ({
     );
   }, []);
 
-  function runSpin(e: Event) {
+  function runSpin() {
     if (timerState.current === 0 && e_wait.current && e_button.current) {
       if (e_wait?.current?.value) {
         const wait = Number(e_wait?.current?.value ?? "1");
@@ -146,26 +148,26 @@ const InnerCore = ({
         e_button.current.innerText = "Waiting";
 
         setTimeout(
-          run.bind(undefined, e),
+          run,
           wait * 1000,
         );
       } else {
-        run(e);
+        run();
       }
     } else if (e_button.current) {
       e_outer?.current?.classList.remove("started");
       e_outer?.current?.classList.remove("middle");
       e_outer?.current?.classList.remove("ending");
       timerState.current = 0;
-      e_button.current.innerText = "Start";
+      e_button.current.innerHTML = "Start";
       Sounds.forEach((item) => {
         item.refStop.current();
       });
     }
   }
 
-  function run(e: Event) {
-    const target = e.target as HTMLButtonElement;
+  function run() {
+    // const target = e.target as HTMLButtonElement;
 
     startFan();
 
@@ -239,7 +241,9 @@ const InnerCore = ({
                 context.currentTime + rampUp + run + slow + 2,
               );
 
-              target.innerText = "Stop";
+              if (e_button.current) {
+                e_button.current.innerHTML = "Stop";
+              }
             }
           });
         });
@@ -257,63 +261,74 @@ const InnerCore = ({
                 <AdjustableBlades bladeCount={bladeCount} />
               </div>
             </div>
-            <footer>
-              <div className="new-timer-section">
-                <SettingItem
-                  name="speed"
-                  type="number"
-                  inputRef={e_rate}
-                  onInput={(e) => {
-                    const currentTarget = e.currentTarget as HTMLInputElement;
-                    if (currentTarget && currentTarget.value) {
-                      setRate(Number(currentTarget.value) / 20);
-                    }
-                  }}
-                />
+            <form
+              action="javascript:void(0)"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                const formData = new FormData(form);
+                runSpin(e);
+              }}
+            >
+              <footer>
+                <div className="new-timer-section">
+                  <SettingItem
+                    name="speed"
+                    type="number"
+                    inputRef={e_rate}
+                    onInput={(e) => {
+                      const currentTarget = e.currentTarget; //  as HTMLInputElement;
+                      if (currentTarget && currentTarget.value) {
+                        setRate(Number(currentTarget.value) / 20);
+                      }
+                    }}
+                  />
 
-                <SettingItem
-                  name="blades"
-                  type="number"
-                  inputRef={e_blades}
-                  onInput={(e) => {
-                    const target = e.target as HTMLInputElement;
-                    const bladeCount = Math.min(Number(target.value), 7500);
+                  <SettingItem
+                    name="blades"
+                    type="number"
+                    inputRef={e_blades}
+                    onInput={(e) => {
+                      const target = e.currentTarget; // as HTMLInputElement;
+                      const bladeCount = Math.min(Number(target.value), 7500);
 
-                    if (bladeCount > 500) {
-                      document.body.classList.add("darkmode2");
-                    }
-                    setBladeCount(bladeCount);
-                  }}
-                />
+                      if (bladeCount > 500) {
+                        document.body.classList.add("darkmode2");
+                      }
+                      setBladeCount(bladeCount);
+                    }}
+                  />
 
-                <SettingItem
-                  name="wait"
-                  inputRef={e_wait}
-                />
+                  <SettingItem
+                    name="wait"
+                    inputRef={e_wait}
+                  />
 
-                <SettingItem
-                  name="speed_up"
-                  inputRef={e_speedUp}
-                />
+                  <SettingItem
+                    name="speed_up"
+                    inputRef={e_speedUp}
+                  />
 
-                <SettingItem
-                  name="full_speed"
-                  inputRef={e_runTime}
-                />
+                  <SettingItem
+                    name="full_speed"
+                    inputRef={e_runTime}
+                  />
 
-                <SettingItem
-                  name="slow_down"
-                  inputRef={e_slowDown}
-                />
+                  <SettingItem
+                    name="slow_down"
+                    inputRef={e_slowDown}
+                  />
 
-                <button
-                  ref={e_button}
-                  onClick={runSpin}
-                >
-                  Start
-                </button>
-              </div>
-            </footer>
+                  <button
+                    ref={e_button}
+                    type={"submit"}
+                    // onClick={runSpin}
+                  >
+                    Start
+                  </button>
+                </div>
+              </footer>
+            </form>
             <div id="timersettings" style={{ zIndex: 1000 }}>
               <button
                 style={{ margin: "10px" }}
@@ -349,6 +364,7 @@ const InnerCore = ({
 
                 <RangeWithTicks
                   legendText="Opacity"
+                  inputRef={e_opacity}
                   onInput={({ currentTarget }) => {
                     document?.body?.style?.setProperty?.(
                       "--opacity",
