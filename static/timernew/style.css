@@ -18,6 +18,9 @@ main {
 }
 
 .innerwrap .blades-wrap {
+  display: block;
+  all: unset;
+  cursor: pointer;
   /* transform: scale(var(--blade-scale, 30)); */
   /* position: fixed; */
   /* top: 50%; */

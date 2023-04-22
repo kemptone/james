@@ -24,3 +24,13 @@ export const removeClassListItem = (
   }
   (element || document.body).classList.remove(className);
 };
+
+export const getValueFromRef = (
+  element: MutableRef<HTMLInputElement | null>,
+  def: string,
+) => {
+  if (element && typeof element === "object" && "current" in element) {
+    return element?.current?.value || def;
+  }
+  return def;
+};

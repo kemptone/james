@@ -8,6 +8,7 @@ import OuterWrap from "../components/Timer/OuterWrap.tsx";
 import RangeWithTicks from "../components/RangeWithTicks.tsx";
 import { SettingItem } from "../components/SettingItem.tsx";
 import {
+  getValueFromRef,
   removeClassListItem,
   setBodyStyleProp,
   setClassListItem,
@@ -21,6 +22,7 @@ const InnerCore = ({
   const e_rate = useRef<HTMLInputElement | null>(null);
   const e_audioRate = useRef<HTMLInputElement | null>(null);
   const e_bladeScale = useRef<HTMLInputElement | null>(null);
+  const e_bladeLineWidth = useRef<HTMLInputElement | null>(null);
   const e_opacity = useRef<HTMLInputElement | null>(null);
   const e_wait = useRef<HTMLInputElement | null>(null);
   const e_speedUp = useRef<HTMLInputElement | null>(null);
@@ -31,7 +33,6 @@ const InnerCore = ({
   const e_button = useRef<HTMLButtonElement | null>(null);
   const timerState = useRef<number>(0);
   const [bladeCount, setBladeCount] = useState(5);
-  const [strokeWidth, setStrokeWidth] = useState<number>(.02);
   const [rate, setRate] = useState(1.5);
   const [audioRate, setAudioRate] = useState(1);
   const [buttonStatus, setButtonStatus] = useState("Start");
@@ -40,7 +41,8 @@ const InnerCore = ({
     if (
       e_runTime.current && e_slowDown.current && e_speedUp.current &&
       e_wait.current && e_blades.current && e_bladeScale.current &&
-      e_rate.current && e_opacity.current && e_audioRate.current
+      e_rate.current && e_opacity.current && e_audioRate.current &&
+      e_bladeLineWidth.current
     ) {
       e_runTime.current.value = "8";
       e_slowDown.current.value = "8";
@@ -51,6 +53,7 @@ const InnerCore = ({
       e_opacity.current.value = String(100);
       e_rate.current.value = String(1.5 * 20);
       e_audioRate.current.value = String(1 * 50);
+      e_bladeLineWidth.current.value = String(20);
     }
   }, []);
 
@@ -74,19 +77,21 @@ const InnerCore = ({
         Number(e_speedUp.current.value) * FACTOR * rate,
         Number(e_slowDown.current.value) * FACTOR * rate,
         Number(e_runTime.current.value) * rate,
+        // Number(e_slowDown.current.value) * FACTOR * rate,
+        // Number(e_runTime.current.value) * rate,
       ];
 
       setBodyStyleProp(
         "--speedup",
-        e_speedUp.current.value + "s",
+        String(Number(e_speedUp.current.value) || 0.01) + "s",
       );
       setBodyStyleProp(
         "--slowdown",
-        e_slowDown.current.value + "s",
+        String(Number(e_slowDown.current.value) || 0.01) + "s",
       );
       setBodyStyleProp(
         "--runtime",
-        e_runTime.current.value + "s",
+        String(Number(e_runTime.current.value) || 0.01) + "s",
       );
 
       setBodyStyleProp(
@@ -211,22 +216,22 @@ const InnerCore = ({
 
           useAudioLoop(s, context, ({ source }) => {
             if (source && context) {
-              const rampUp = Number(e_speedUp?.current?.value);
-              const run = Number(e_runTime?.current?.value);
-              const slow = Number(e_slowDown?.current?.value);
+              const rampUp = Number(getValueFromRef(e_speedUp, ".01"));
+              const run = Number(getValueFromRef(e_runTime, ".01"));
+              const slow = Number(getValueFromRef(e_slowDown, ".01"));
 
               source.playbackRate.setValueCurveAtTime(
                 [0, .1, .3, .6, 1].map((i) =>
                   i * s.initialPlaybackRate * (rate * audioRate)
                 ),
                 context.currentTime,
-                rampUp,
+                rampUp || 1,
               );
 
               source.playbackRate.setTargetAtTime(
                 1 * s.initialPlaybackRate * (rate * audioRate),
                 context.currentTime + rampUp,
-                run,
+                run || 1,
               );
 
               source.playbackRate.setValueCurveAtTime(
@@ -234,7 +239,7 @@ const InnerCore = ({
                   i * s.initialPlaybackRate * (rate * audioRate)
                 ),
                 context.currentTime + rampUp + run,
-                slow,
+                slow || 1,
               );
 
               source.connect(gain);
@@ -256,24 +261,24 @@ const InnerCore = ({
   console.count("render");
 
   return (
-    <>
-      <Dialog>
-        {(D) => (
-          <main id="jamestimer" ref={e_outer}>
-            <div className="innerwrap">
-              <div className="blades-wrap" ref={e_spinner}>
-                <AdjustableBlades bladeCount={bladeCount} />
+    <Dialog>
+      {(D) => (
+        <>
+          <form
+            action="javascript:void(0)"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.target as HTMLFormElement;
+              const formData = new FormData(form);
+              runSpin(e);
+            }}
+          >
+            <main id="jamestimer" ref={e_outer}>
+              <div className="innerwrap">
+                <button type="submit" className="blades-wrap" ref={e_spinner}>
+                  <AdjustableBlades bladeCount={bladeCount} />
+                </button>
               </div>
-            </div>
-            <form
-              action="javascript:void(0)"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const form = e.target as HTMLFormElement;
-                const formData = new FormData(form);
-                runSpin(e);
-              }}
-            >
               <footer>
                 <div className="new-timer-section">
                   <SettingItem
@@ -331,102 +336,104 @@ const InnerCore = ({
                   />
                 </div>
               </footer>
-            </form>
-            <div id="timersettings" style={{ zIndex: 1000 }}>
-              <button
-                style={{ margin: "10px" }}
-                onClick={() => {
-                  D.openDialog();
+              <div id="timersettings" style={{ zIndex: 1000 }}>
+                <button
+                  style={{ margin: "10px" }}
+                  type={"button"}
+                  onClick={() => {
+                    D.openDialog();
+                  }}
+                >
+                  Settings
+                </button>
+              </div>
+            </main>
+          </form>
+          <D.Dialog ref={D.ref}>
+            <form>
+              <RangeWithTicks
+                legendText="Base Audio Frequency"
+                inputRef={e_audioRate}
+                onInput={({ currentTarget }) => {
+                  setAudioRate(Number(currentTarget.value) / 50);
                 }}
-              >
-                Settings
-              </button>
-            </div>
-            <D.Dialog ref={D.ref}>
-              <form>
-                <RangeWithTicks
-                  legendText="Audio Rate"
-                  inputRef={e_audioRate}
-                  onInput={({ currentTarget }) => {
-                    setAudioRate(Number(currentTarget.value) / 50);
+              />
+
+              <RangeWithTicks
+                legendText="Size of Fan"
+                inputRef={e_bladeScale}
+                onInput={({ currentTarget }) => {
+                  setBodyStyleProp(
+                    "--blade-scale",
+                    String(Number(currentTarget.value) * 20),
+                  );
+                }}
+              />
+
+              <RangeWithTicks
+                legendText="Line width"
+                inputRef={e_bladeLineWidth}
+                onInput={({ currentTarget }) => {
+                  setBodyStyleProp(
+                    "--stroke-width",
+                    String(Number(currentTarget.value) / 1000),
+                  );
+                }}
+              />
+
+              <RangeWithTicks
+                legendText="Opacity"
+                inputRef={e_opacity}
+                onInput={({ currentTarget }) => {
+                  setBodyStyleProp(
+                    "--opacity",
+                    String(Number(currentTarget.value) / 100),
+                  );
+                }}
+              />
+
+              <fieldset>
+                <legend>More Mystery Settings</legend>
+                <input
+                  type="checkbox"
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    if (target.checked) {
+                      setClassListItem("darkmode");
+                    } else {
+                      removeClassListItem("darkmode");
+                    }
+                  }}
+                />
+                <input
+                  type="checkbox"
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    if (target.checked) {
+                      setClassListItem("darkmode2");
+                    } else {
+                      removeClassListItem("darkmode2");
+                    }
                   }}
                 />
 
-                <RangeWithTicks
-                  legendText="Size of Fan"
-                  inputRef={e_bladeScale}
-                  onInput={({ currentTarget }) => {
-                    setBodyStyleProp(
-                      "--blade-scale",
-                      String(Number(currentTarget.value) * 20),
-                    );
+                <input
+                  type="checkbox"
+                  onInput={(e: Event) => {
+                    const target = e.currentTarget as HTMLInputElement;
+                    if (target.checked) {
+                      setClassListItem("whitemode");
+                    } else {
+                      removeClassListItem("whitemode");
+                    }
                   }}
                 />
-
-                <RangeWithTicks
-                  legendText="Line width"
-                  onInput={({ currentTarget }) => {
-                    setBodyStyleProp(
-                      "--stroke-width",
-                      String(Number(currentTarget.value) / 800),
-                    );
-                  }}
-                />
-
-                <RangeWithTicks
-                  legendText="Opacity"
-                  inputRef={e_opacity}
-                  onInput={({ currentTarget }) => {
-                    setBodyStyleProp(
-                      "--opacity",
-                      String(Number(currentTarget.value) / 100),
-                    );
-                  }}
-                />
-
-                <fieldset>
-                  <legend>More Mystery Settings</legend>
-                  <input
-                    type="checkbox"
-                    onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      if (target.checked) {
-                        setClassListItem("darkmode");
-                      } else {
-                        removeClassListItem("darkmode");
-                      }
-                    }}
-                  />
-                  <input
-                    type="checkbox"
-                    onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      if (target.checked) {
-                        setClassListItem("darkmode2");
-                      } else {
-                        removeClassListItem("darkmode2");
-                      }
-                    }}
-                  />
-
-                  <input
-                    type="checkbox"
-                    onInput={(e: Event) => {
-                      const target = e.currentTarget as HTMLInputElement;
-                      if (target.checked) {
-                        setClassListItem("whitemode");
-                      } else {
-                        removeClassListItem("whitemode");
-                      }
-                    }}
-                  />
-                </fieldset>
-              </form>
-            </D.Dialog>
-          </main>
-        )}
-      </Dialog>
-    </>
+              </fieldset>
+            </form>
+          </D.Dialog>
+        </>
+      )}
+    </Dialog>
   );
 };
 
