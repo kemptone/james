@@ -15,19 +15,21 @@ export const CurveTypes = {
   paddle: "m 14.75 15 q -1 5 -0.75 10 q 1 0.5 2 0 q 0.25 -5 -0.75 -10 z",
 } as const;
 
+export type TCurveType = keyof typeof CurveTypes;
+
 function Blade1({
   rotation = 0,
   backgroundBlade,
-  cureType = "normal",
+  curveType = "normal",
 }: {
   rotation: number;
   backgroundBlade: boolean;
-  cureType?: keyof typeof CurveTypes;
+  curveType?: TCurveType;
 }) {
   return (
     <>
       <path
-        d={CurveTypes[cureType]}
+        d={CurveTypes[curveType]}
         class={backgroundBlade ? "background-blade" : "forground-blade"}
         transform={`rotate(${rotation}, 15, 15)`}
       />
@@ -37,7 +39,7 @@ function Blade1({
 
 interface FanProps {
   bladeCount: number;
-  curveType?: keyof typeof CurveTypes;
+  curveType?: TCurveType;
 }
 
 const AdjustableBlades: FunctionComponent<FanProps> = ({
@@ -63,7 +65,7 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
             rotation={r}
             key={r}
             backgroundBlade={true}
-            cureType={curveType}
+            curveType={curveType}
           />
         );
       })}
@@ -74,7 +76,7 @@ const AdjustableBlades: FunctionComponent<FanProps> = ({
             rotation={r}
             key={"added" + r}
             backgroundBlade={false}
-            cureType={curveType}
+            curveType={curveType}
           />
         );
       })}

@@ -15,6 +15,7 @@ import {
   setBodyStyleProp,
   setClassListItem,
 } from "../helpers/setBodyStyleProp.ts";
+import { TCurveType } from "../components/AdjustableBlades.tsx";
 
 const InnerCore = ({
   Sounds,
@@ -38,7 +39,9 @@ const InnerCore = ({
   const [rate, setRate] = useState(1.5);
   const [audioRate, setAudioRate] = useState(1);
   const [buttonStatus, setButtonStatus] = useState("Start");
-  const [curveType, setCurveType] = useState("bybygone");
+  const [curveType, setCurveType] = useState<TCurveType>(
+    "paddle",
+  );
 
   useEffect(() => {
     if (
@@ -405,11 +408,15 @@ const InnerCore = ({
                 <select
                   onInput={(e) => {
                     const target = e.currentTarget as HTMLSelectElement;
-                    setCurveType(target.value);
+                    setCurveType(target.value as TCurveType);
                   }}
                 >
                   {Object.keys(CurveTypes).map((key) => {
-                    return <option>{key}</option>; //  key={key)}
+                    return (
+                      <option selected={key === curveType ? true : undefined}>
+                        {key}
+                      </option>
+                    ); //  key={key)}
                   })}
                 </select>
               </fieldset>
