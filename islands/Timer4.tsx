@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import useAudioLoop from "../hooks/useAudioLoop.tsx";
 import type { AudioThing } from "../hooks/useAudioLoop.tsx";
 import { loadReverb } from "../hooks/useReverb.tsx";
-import AdjustableBlades from "../components/AdjustableBlades.tsx";
+import AdjustableBlades, {
+  CurveTypes,
+} from "../components/AdjustableBlades.tsx";
 import Dialog from "../components/Dialog.tsx";
 import OuterWrap from "../components/Timer/OuterWrap.tsx";
 import RangeWithTicks from "../components/RangeWithTicks.tsx";
@@ -36,6 +38,7 @@ const InnerCore = ({
   const [rate, setRate] = useState(1.5);
   const [audioRate, setAudioRate] = useState(1);
   const [buttonStatus, setButtonStatus] = useState("Start");
+  const [curveType, setCurveType] = useState("bybygone");
 
   useEffect(() => {
     if (
@@ -276,7 +279,10 @@ const InnerCore = ({
             <main id="jamestimer" ref={e_outer}>
               <div className="innerwrap">
                 <button type="submit" className="blades-wrap" ref={e_spinner}>
-                  <AdjustableBlades bladeCount={bladeCount} />
+                  <AdjustableBlades
+                    bladeCount={bladeCount}
+                    curveType={curveType}
+                  />
                 </button>
               </div>
               <footer>
@@ -391,6 +397,22 @@ const InnerCore = ({
                   );
                 }}
               />
+
+              <fieldset>
+                <legend>
+                  Change the blades
+                </legend>
+                <select
+                  onInput={(e) => {
+                    const target = e.currentTarget as HTMLSelectElement;
+                    setCurveType(target.value);
+                  }}
+                >
+                  {Object.keys(CurveTypes).map((key) => {
+                    return <option>{key}</option>; //  key={key)}
+                  })}
+                </select>
+              </fieldset>
 
               <fieldset>
                 <legend>More Mystery Settings</legend>

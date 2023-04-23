@@ -230,4 +230,5 @@ form>fieldset:first-of-type {
   padding-top: max(env(safe-area-inset-top), 13px);
   font-size: 21px;
   padding-left: 10px;
+  position: fixed;
 }
