@@ -1,5 +1,6 @@
 import { MutableRef, useId, useRef } from "preact/hooks";
 import { HTMLAttributes } from "preact/compat";
+import { persist, populate } from "../helpers/localStorage.ts";
 
 // NOTES on Event Handlers
 // the onInput event handler type can also be created this way
@@ -16,6 +17,9 @@ export default (
   props: Pick<HTMLAttributes<HTMLInputElement>, "onInput" | "defaultValue"> & {
     inputRef?: MutableRef<HTMLInputElement | null>;
     legendText: string;
+    // This is the key to use for localStorage
+    // if it's here, then it will store the value of the input in localStorage
+    lskey?: string;
   },
 ) => {
   const markersId = useId();
@@ -33,6 +37,9 @@ export default (
         ref={props.inputRef}
         onInput={(e) => {
           props.onInput && props.onInput(e);
+          if (props.lskey) {
+            persist(props.lskey, e.currentTarget.value);
+          }
           if (r_value.current) {
             r_value.current.innerText = e.currentTarget.value;
           }

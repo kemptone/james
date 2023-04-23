@@ -13,6 +13,8 @@ export const CurveTypes = {
   skinny4: "m 14.5 15 q 0 5 -2 10 q 2.5 2 5 0 q -2 -5 -2 -10 z",
   bybygone: "m 14.5 15 q -1.5 5 -2 10 q 2.5 1 5 0 q -0.5 -5 -2 -10 z",
   paddle: "m 14.75 15 q -1 5 -0.75 10 q 1 0.5 2 0 q 0.25 -5 -0.75 -10 z",
+  paddleSpacer:
+    "m 14.75 15.5 q -1 5 -0.75 10 q 1 0.5 2 0 q 0.25 -5 -0.75 -10 z",
 } as const;
 
 export type TCurveType = keyof typeof CurveTypes;

@@ -1,7 +1,7 @@
-function localStorageWrap(KEY) {
+function localStorageWrap(KEY: string) {
   const hasLS = typeof window !== "undefined" && window.localStorage;
 
-  function persist(key, s) {
+  function persist(key: string, s: any) {
     const state = getState();
     let save;
 
@@ -19,7 +19,7 @@ function localStorageWrap(KEY) {
     return s;
   }
 
-  function populate(key) {
+  function populate(key: string) {
     return getState()[key];
 
     // timelimit = timelimit || Infinity
@@ -35,7 +35,7 @@ function localStorageWrap(KEY) {
     let state;
 
     try {
-      state = JSON.parse(localStorage.getItem(KEY));
+      state = JSON.parse(localStorage.getItem(KEY) || "{}");
 
       if (!state) {
         localStorage.setItem(KEY, "{}");
@@ -55,7 +55,7 @@ function localStorageWrap(KEY) {
     };
   } else {
     return {
-      persist: function (a, b) {
+      persist: function (a: string, b: any) {
         return b;
       },
       populate: function () {

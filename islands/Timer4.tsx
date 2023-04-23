@@ -16,6 +16,20 @@ import {
   setClassListItem,
 } from "../helpers/setBodyStyleProp.ts";
 import { TCurveType } from "../components/AdjustableBlades.tsx";
+import Select from "../components/Select.tsx";
+import { getState, populate } from "../helpers/localStorage.ts";
+
+const TimerState = {
+  Stopped: 0,
+  Started: 1,
+  Middle: 2,
+  Ending: 3,
+} as const;
+
+type TButtonStatus = "Start" | "Stop" | "Waiting";
+type TTimerState = 0 | 1 | 2 | 3;
+
+const values = getState();
 
 const InnerCore = ({
   Sounds,
@@ -34,13 +48,13 @@ const InnerCore = ({
   const e_outer = useRef<HTMLElement | null>(null);
   const e_spinner = useRef<HTMLDivElement | null>(null);
   const e_button = useRef<HTMLButtonElement | null>(null);
-  const timerState = useRef<number>(0);
-  const [bladeCount, setBladeCount] = useState(5);
+  const timerState = useRef<TTimerState>(0);
+  const [bladeCount, setBladeCount] = useState(values.blades || 5);
   const [rate, setRate] = useState(1.5);
   const [audioRate, setAudioRate] = useState(1);
-  const [buttonStatus, setButtonStatus] = useState("Start");
+  const [buttonStatus, setButtonStatus] = useState<TButtonStatus>("Start");
   const [curveType, setCurveType] = useState<TCurveType>(
-    "paddle",
+    values.curveType || "paddle",
   );
 
   useEffect(() => {
@@ -50,16 +64,50 @@ const InnerCore = ({
       e_rate.current && e_opacity.current && e_audioRate.current &&
       e_bladeLineWidth.current
     ) {
-      e_runTime.current.value = "8";
-      e_slowDown.current.value = "8";
-      e_speedUp.current.value = "8";
-      e_wait.current.value = "0";
-      e_blades.current.value = "5";
-      e_bladeScale.current.value = String(30 / 20);
-      e_opacity.current.value = String(100);
-      e_rate.current.value = String(1.5 * 20);
-      e_audioRate.current.value = String(1 * 50);
-      e_bladeLineWidth.current.value = String(20);
+      const bs = values.bladeScale as string || String(30 / 20);
+      const r = values.rate as string || String(1.5 * 20);
+      const ar = values.audioRate as string || String(1 * 50);
+      const o = values.opacity as string || String(100);
+      const lw = values.bladesLineWidth as string || String(20);
+
+      e_runTime.current.value = values.runTime || "8";
+      e_slowDown.current.value = values.slowDown || "8";
+      e_speedUp.current.value = values.speedUp || "8";
+      e_wait.current.value = values.wait || "0";
+      e_blades.current.value = values.blades || "5";
+      e_bladeScale.current.value = bs; // values.bladeScale || String(30 / 20);
+
+      setBodyStyleProp(
+        "--blade-scale",
+        String(Number(bs) * 20),
+      );
+
+      setBodyStyleProp(
+        "--opacity",
+        String(Number(o) / 100),
+      );
+
+      setBodyStyleProp(
+        "--stroke-width",
+        String(Number(lw) / 1000),
+      );
+
+      if (values.darkmode) {
+        setClassListItem("darkmode");
+      }
+
+      if (values.darkmode2) {
+        setClassListItem("darkmode2");
+      }
+
+      if (values.whitemode) {
+        setClassListItem("whitemode");
+      }
+
+      e_opacity.current.value = o;
+      e_rate.current.value = r;
+      e_audioRate.current.value = ar;
+      e_bladeLineWidth.current.value = lw;
     }
   }, []);
 
@@ -133,7 +181,7 @@ const InnerCore = ({
     e_spinner?.current?.addEventListener(
       "transitionend",
       (e: TransitionEvent) => {
-        console.log(timerState.current);
+        // console.log(timerState.current);
 
         if (timerState.current === 1) {
           removeClassListItem("started", e_outer);
@@ -264,8 +312,6 @@ const InnerCore = ({
     );
   }
 
-  console.count("render");
-
   return (
     <Dialog>
       {(D) => (
@@ -276,7 +322,7 @@ const InnerCore = ({
               e.preventDefault();
               const form = e.target as HTMLFormElement;
               const formData = new FormData(form);
-              runSpin(e);
+              runSpin();
             }}
           >
             <main id="jamestimer" ref={e_outer}>
@@ -293,6 +339,7 @@ const InnerCore = ({
                   <SettingItem
                     name="speed"
                     type="number"
+                    lskey="rate"
                     inputRef={e_rate}
                     onInput={(e) => {
                       const currentTarget = e.currentTarget; //  as HTMLInputElement;
@@ -305,6 +352,7 @@ const InnerCore = ({
                   <SettingItem
                     name="blades"
                     type="number"
+                    lskey="blades"
                     step={1}
                     inputRef={e_blades}
                     onInput={(e) => {
@@ -321,21 +369,25 @@ const InnerCore = ({
                   <SettingItem
                     name="wait"
                     inputRef={e_wait}
+                    lskey="wait"
                   />
 
                   <SettingItem
                     name="speed_up"
                     inputRef={e_speedUp}
+                    lskey="speedUp"
                   />
 
                   <SettingItem
                     name="full_speed"
                     inputRef={e_runTime}
+                    lskey="runTime"
                   />
 
                   <SettingItem
                     name="slow_down"
                     inputRef={e_slowDown}
+                    lskey="slowDown"
                   />
 
                   <button
@@ -362,6 +414,7 @@ const InnerCore = ({
             <form>
               <RangeWithTicks
                 legendText="Base Audio Frequency"
+                lskey="audioRate"
                 inputRef={e_audioRate}
                 onInput={({ currentTarget }) => {
                   setAudioRate(Number(currentTarget.value) / 50);
@@ -370,6 +423,7 @@ const InnerCore = ({
 
               <RangeWithTicks
                 legendText="Size of Fan"
+                lskey="bladeScale"
                 inputRef={e_bladeScale}
                 onInput={({ currentTarget }) => {
                   setBodyStyleProp(
@@ -381,6 +435,7 @@ const InnerCore = ({
 
               <RangeWithTicks
                 legendText="Line width"
+                lskey="bladesLineWidth"
                 inputRef={e_bladeLineWidth}
                 onInput={({ currentTarget }) => {
                   setBodyStyleProp(
@@ -393,6 +448,7 @@ const InnerCore = ({
               <RangeWithTicks
                 legendText="Opacity"
                 inputRef={e_opacity}
+                lskey="opacity"
                 onInput={({ currentTarget }) => {
                   setBodyStyleProp(
                     "--opacity",
@@ -401,44 +457,43 @@ const InnerCore = ({
                 }}
               />
 
-              <fieldset>
-                <legend>
-                  Change the blades
-                </legend>
-                <select
-                  onInput={(e) => {
-                    const target = e.currentTarget as HTMLSelectElement;
-                    setCurveType(target.value as TCurveType);
-                  }}
-                >
-                  {Object.keys(CurveTypes).map((key) => {
-                    return (
-                      <option selected={key === curveType ? true : undefined}>
-                        {key}
-                      </option>
-                    ); //  key={key)}
-                  })}
-                </select>
-              </fieldset>
+              <Select
+                options={Object.keys(CurveTypes)}
+                legendText="Change the blades"
+                selected={curveType}
+                lskey="curveType"
+                onInput={(e) => {
+                  const target = e.currentTarget as HTMLSelectElement;
+                  setCurveType(target.value as TCurveType);
+                }}
+              />
 
               <fieldset>
                 <legend>More Mystery Settings</legend>
-                <input
-                  type="checkbox"
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
-                    if (target.checked) {
+
+                <SettingItem
+                  type={"checkbox"}
+                  name="dark_mode"
+                  lskey="darkmode"
+                  defaultChecked={values.darkmode ?? undefined}
+                  isNameAfter={true}
+                  onInput={(e) => {
+                    if (e.currentTarget.checked) {
                       setClassListItem("darkmode");
                     } else {
                       removeClassListItem("darkmode");
                     }
                   }}
                 />
-                <input
-                  type="checkbox"
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
-                    if (target.checked) {
+
+                <SettingItem
+                  type={"checkbox"}
+                  name="other_dark_mode"
+                  lskey="darkmode2"
+                  defaultChecked={values.darkmode2 ?? undefined}
+                  isNameAfter={true}
+                  onInput={(e) => {
+                    if (e.currentTarget.checked) {
                       setClassListItem("darkmode2");
                     } else {
                       removeClassListItem("darkmode2");
@@ -446,11 +501,14 @@ const InnerCore = ({
                   }}
                 />
 
-                <input
-                  type="checkbox"
-                  onInput={(e: Event) => {
-                    const target = e.currentTarget as HTMLInputElement;
-                    if (target.checked) {
+                <SettingItem
+                  type={"checkbox"}
+                  name="white_mode"
+                  lskey="whitemode"
+                  defaultChecked={values.whitemode ?? undefined}
+                  isNameAfter={true}
+                  onInput={(e) => {
+                    if (e.currentTarget.checked) {
                       setClassListItem("whitemode");
                     } else {
                       removeClassListItem("whitemode");
