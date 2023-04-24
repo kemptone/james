@@ -1,5 +1,6 @@
 import { AppProps } from "$fresh/server.ts";
 import { Head } from "$fresh/runtime.ts";
+import GlobalSettings from "../islands/GlobalSettings.tsx";
 
 export default function App({ Component }: AppProps) {
   return (
@@ -25,6 +26,7 @@ export default function App({ Component }: AppProps) {
         </script>
       </Head>
       <Component />
+      <GlobalSettings />
     </>
   );
 }

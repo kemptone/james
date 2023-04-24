@@ -18,6 +18,7 @@ import {
 import { TCurveType } from "../components/AdjustableBlades.tsx";
 import Select from "../components/Select.tsx";
 import { getState, populate } from "../helpers/localStorage.ts";
+import ModeItem from "../components/ModeItem.tsx";
 
 const TimerState = {
   Stopped: 0,
@@ -92,18 +93,6 @@ const InnerCore = ({
         String(Number(lw) / 1000),
       );
 
-      if (values.darkmode) {
-        setClassListItem("darkmode");
-      }
-
-      if (values.darkmode2) {
-        setClassListItem("darkmode2");
-      }
-
-      if (values.whitemode) {
-        setClassListItem("whitemode");
-      }
-
       e_opacity.current.value = o;
       e_rate.current.value = r;
       e_audioRate.current.value = ar;
@@ -131,8 +120,6 @@ const InnerCore = ({
         Number(e_speedUp.current.value) * FACTOR * rate,
         Number(e_slowDown.current.value) * FACTOR * rate,
         Number(e_runTime.current.value) * rate,
-        // Number(e_slowDown.current.value) * FACTOR * rate,
-        // Number(e_runTime.current.value) * rate,
       ];
 
       setBodyStyleProp(
@@ -470,51 +457,9 @@ const InnerCore = ({
 
               <fieldset>
                 <legend>More Mystery Settings</legend>
-
-                <SettingItem
-                  type={"checkbox"}
-                  name="dark_mode"
-                  lskey="darkmode"
-                  defaultChecked={values.darkmode ?? undefined}
-                  isNameAfter={true}
-                  onInput={(e) => {
-                    if (e.currentTarget.checked) {
-                      setClassListItem("darkmode");
-                    } else {
-                      removeClassListItem("darkmode");
-                    }
-                  }}
-                />
-
-                <SettingItem
-                  type={"checkbox"}
-                  name="other_dark_mode"
-                  lskey="darkmode2"
-                  defaultChecked={values.darkmode2 ?? undefined}
-                  isNameAfter={true}
-                  onInput={(e) => {
-                    if (e.currentTarget.checked) {
-                      setClassListItem("darkmode2");
-                    } else {
-                      removeClassListItem("darkmode2");
-                    }
-                  }}
-                />
-
-                <SettingItem
-                  type={"checkbox"}
-                  name="white_mode"
-                  lskey="whitemode"
-                  defaultChecked={values.whitemode ?? undefined}
-                  isNameAfter={true}
-                  onInput={(e) => {
-                    if (e.currentTarget.checked) {
-                      setClassListItem("whitemode");
-                    } else {
-                      removeClassListItem("whitemode");
-                    }
-                  }}
-                />
+                <ModeItem name="dark_mode" lskey="darkmode" />
+                <ModeItem name="other_dark_mode" lskey="darkmode2" />
+                <ModeItem name="white_mode" lskey="whitemode" />
               </fieldset>
             </form>
           </D.Dialog>
