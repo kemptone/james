@@ -1,5 +1,5 @@
 :root {
-  --buttton-width:5em;
+  --buttton-width: 5em;
 }
 
 body {
@@ -7,7 +7,7 @@ body {
   margin: 0;
   height: 100vh;
   background-color: rgba(174, 144, 123, 0.484);
-  background-image:url(/noise-texture-100x100-b.png);
+  background-image: url(/noise-texture-100x100-b.png);
 }
 
 main.colorthing {
@@ -26,7 +26,7 @@ main.colorthing .readout {
 }
 
 main.colorthing .readout .chosen {
-  width: 140px; 
+  width: 140px;
   /* height:100px; */
 }
 
@@ -39,6 +39,8 @@ main.colorthing .colors {
 
 main.colorthing .colors button {
   padding: 20px 0;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 main.colorthing .readout .chosen,
@@ -56,8 +58,8 @@ main.colorthing .colors button {
   }
 
   main.colorthing .readout .chosen {
-    width: 60px; 
-    height:60px;
+    width: 60px;
+    height: 60px;
   }
 
 }

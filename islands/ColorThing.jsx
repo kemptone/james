@@ -27,12 +27,22 @@ export default () => {
         {Primary.map((item, index) => (
           <button
             children={index + 1}
-            key={ item }
-            onClick={(e) => {
+            key={item}
+            onTouchStart={(e) => {
               setChosenColors(
                 [...chosenColors, `#${item}`],
               );
             }}
+            onMouseDown={(e) => {
+              setChosenColors(
+                [...chosenColors, `#${item}`],
+              );
+            }}
+            // onClick={(e) => {
+            //   setChosenColors(
+            //     [...chosenColors, `#${item}`],
+            //   );
+            // }}
           />
         ))}
 
@@ -40,8 +50,8 @@ export default () => {
           children="⟵"
           onClick={(e) => {
             setChosenColors(
-              [ ...chosenColors].slice(0, chosenColors.length - 1)
-            )
+              [...chosenColors].slice(0, chosenColors.length - 1),
+            );
           }}
         />
 
@@ -49,18 +59,17 @@ export default () => {
           children=" "
           onClick={(e) => {
             setChosenColors(
-                [...chosenColors, `transparent`]
-            )
+              [...chosenColors, `transparent`],
+            );
           }}
         />
 
         <button
           children="♺"
           onClick={(e) => {
-            setChosenColors([])
+            setChosenColors([]);
           }}
         />
-
       </section>
     </main>
   );
