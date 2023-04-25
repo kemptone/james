@@ -28,11 +28,11 @@ export default () => {
           <button
             children={index + 1}
             key={item}
-            onTouchStart={(e) => {
-              setChosenColors(
-                [...chosenColors, `#${item}`],
-              );
-            }}
+            // onTouchStart={(e) => {
+            //   setChosenColors(
+            //     [...chosenColors, `#${item}`],
+            //   );
+            // }}
             onMouseDown={(e) => {
               setChosenColors(
                 [...chosenColors, `#${item}`],
