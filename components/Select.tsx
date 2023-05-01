@@ -13,7 +13,6 @@ import { persist, populate } from "../helpers/localStorage.ts";
 export default (
   props: Pick<HTMLAttributes<HTMLSelectElement>, "onInput"> & {
     inputRef?: MutableRef<HTMLSelectElement | null>;
-    legendText?: string;
     options: string[];
     optionValues?: string[];
     selected: string;
@@ -23,36 +22,33 @@ export default (
   },
 ) => {
   return (
-    <fieldset className="select">
-      {props.legendText && <legend>{props.legendText}</legend>}
-      <select
-        ref={props.inputRef}
-        onInput={(e) => {
-          props.onInput && props.onInput(e);
-          if (props.lskey) {
-            persist(props.lskey, e.currentTarget.value);
-          }
-        }}
-      >
-        {props.options.map((key, index) => {
-          return props.optionValues
-            ? (
-              <option
-                value={props.optionValues[index]}
-                selected={props.optionValues[index] === props.selected
-                  ? true
-                  : undefined}
-              >
-                {key}
-              </option>
-            )
-            : (
-              <option selected={key === props.selected ? true : undefined}>
-                {key}
-              </option>
-            );
-        })}
-      </select>
-    </fieldset>
+    <select
+      ref={props.inputRef}
+      onInput={(e) => {
+        props.onInput && props.onInput(e);
+        if (props.lskey) {
+          persist(props.lskey, e.currentTarget.value);
+        }
+      }}
+    >
+      {props.options.map((key, index) => {
+        return props.optionValues
+          ? (
+            <option
+              value={props.optionValues[index]}
+              selected={props.optionValues[index] === props.selected
+                ? true
+                : undefined}
+            >
+              {key}
+            </option>
+          )
+          : (
+            <option selected={key === props.selected ? true : undefined}>
+              {key}
+            </option>
+          );
+      })}
+    </select>
   );
 };

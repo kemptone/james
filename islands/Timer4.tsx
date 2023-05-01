@@ -16,7 +16,7 @@ import {
   setClassListItem,
 } from "../helpers/setBodyStyleProp.ts";
 import { TCurveType } from "../components/AdjustableBlades.tsx";
-import Select from "../components/Select.tsx";
+import Select from "../components/SelectWithFieldset.tsx";
 import { getState, populate } from "../helpers/localStorage.ts";
 import ModeItem from "../components/ModeItem.tsx";
 

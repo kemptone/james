@@ -179,15 +179,17 @@ export default () => {
                 }}
                 style={{ marginTop: "130px" }}
               >
-                <section>
-                  <SpeedUpChangeFrequency
-                    {...{
-                      e_frequency,
-                      r_frequency,
-                    }}
-                  />
-                </section>
-                <SettingItem inputRef={e_frequency} name="frequency" />
+                <SpeedUpChangeFrequency
+                  {...{
+                    e_frequency,
+                    r_frequency,
+                  }}
+                />
+                <SettingItem
+                  inputRef={e_frequency}
+                  name="frequency"
+                  type="text"
+                />
                 <section>
                   <button children="Set" />
                   <button

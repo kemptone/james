@@ -76,11 +76,15 @@ main.speedup .timer {
   margin-bottom: 70px;
 }
 
+main.speedup select,
+main.speedup input[type="text"],
 main.speedup input[type="number"] {
   font-size: 2rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: .5rem;
   text-align: center;
+  min-width: 24rem;
+  box-sizing: border-box;
 }
 
 main.speedup.delay.running input[type="number"] {
@@ -120,19 +124,27 @@ main.speedup section:has(.setting-item) {
   margin: 0.5rem;
 }
 
+main.speedup .setting-item {
+  display: block;
+}
+
 main.speedup .setting-item>span {
-  position: absolute;
+  /* position: absolute; */
   /* font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif; */
   font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
   /* text-transform: uppercase; */
-  margin: 15px -40px;
+  /* margin: 15px -40px; */
   /* font-style: italic; */
   /* opacity: .5; */
-  transform: rotate(-90deg);
-  transform: matrix3d(1, -0.8, 1, 0.01, 2.4, 2.5, 0.1, 0.06, 0, -0.9, 1, 0, -11, 0, 0, 1.1);
+  /* transform: rotate(-90deg); */
+  /* transform: matrix3d(1, -0.8, 1, 0.01, 2.4, 2.5, 0.1, 0.06, 0, -0.9, 1, 0, -11, 0, 0, 1.1); */
   font-weight: 900;
   letter-spacing: 1px;
   text-transform: capitalize;
+  /* transform: translate(-50%, -100%); */
+  text-align: left;
+  display: block;
+  margin: .5rem 0 0;
 }
 
 html.ampm-game {
@@ -144,3 +156,5 @@ main.speedup dialog .change-note button {
   font-size: 1rem;
   line-height: 2rem;
 }
+
+main.speedup dialog .change-note table {}
