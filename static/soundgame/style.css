@@ -1,0 +1,16 @@
+.draggable-audio-box {
+    z-index: 99;
+}
+
+.draggable-audio-box.dragging {
+    opacity: 0;
+}
+
+.night-night {
+    z-index: 99;
+}
+
+.night-night button {
+    z-index: 9999;
+    font-size: 28px;
+}

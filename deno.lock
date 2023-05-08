@@ -234,6 +234,10 @@
     "https://deno.land/x/fresh@1.1.4/src/server/types.ts": "dde992ab4ee635df71a7fc96fe4cd85943c1a9286ea8eb586563d5f5ca154955",
     "https://deno.land/x/importmap@0.2.1/_util.ts": "ada9a9618b537e6c0316c048a898352396c882b9f2de38aba18fd3f2950ede89",
     "https://deno.land/x/importmap@0.2.1/mod.ts": "ae3d1cd7eabd18c01a4960d57db471126b020f23b37ef14e1359bbb949227ade",
+    "https://deno.land/x/react_icons@0.2.3/ai/mod.ts": "66825b230d778fa8ac84a89e19fdfcb9b50ba23151c3de06c34731995834155d",
+    "https://deno.land/x/react_icons@0.2.3/lib/iconBase.tsx": "d1e0874730fefa788897f98b05da75ce9a43edcb7f4d32a033a56f96d79f0cc4",
+    "https://deno.land/x/react_icons@0.2.3/lib/iconContext.tsx": "064c0e8b0c50fa774f53c2ccf02001d79fa7853c4bdb39006eb627f81d4cd38f",
+    "https://deno.land/x/react_icons@0.2.3/lib/mod.tsx": "18b62460922a9e0cbb1c141d3d3e24b19b4e480f1a72d235ed95f301b82eb7fb",
     "https://deno.land/x/rutt@0.0.13/mod.ts": "af981cfb95131152bf50fc9140fc00cb3efb6563df2eded1d408361d8577df20",
     "https://deno.land/x/rutt@0.0.14/mod.ts": "5027b8e8b12acca48b396a25aee74ad7ee94a25c24cda75571d7839cbd41113c",
     "https://deno.land/x/ts_morph@16.0.0/common/DenoRuntime.ts": "537800e840d0994f9055164e11bf33eadf96419246af0d3c453793c3ae67bdb3",
@@ -331,7 +335,8 @@
   },
   "npm": {
     "specifiers": {
-      "aws-sdk": "aws-sdk@2.1272.0"
+      "aws-sdk": "aws-sdk@2.1272.0",
+      "react-icons": "react-icons@4.8.0_react@18.2.0"
     },
     "packages": {
       "available-typed-arrays@1.0.5": {
@@ -459,6 +464,16 @@
         "integrity": "sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==",
         "dependencies": {}
       },
+      "js-tokens@4.0.0": {
+        "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+        "dependencies": {}
+      },
+      "loose-envify@1.4.0": {
+        "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+        "dependencies": {
+          "js-tokens": "js-tokens@4.0.0"
+        }
+      },
       "punycode@1.3.2": {
         "integrity": "sha512-RofWgt/7fL5wP1Y7fxE7/EmTLzQVnB0ycyibJ0OOHIlJqTNzglYFxVwETOcIoJqJmpDXJ9xImDv+Fq34F/d4Dw==",
         "dependencies": {}
@@ -466,6 +481,18 @@
       "querystring@0.2.0": {
         "integrity": "sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==",
         "dependencies": {}
+      },
+      "react-icons@4.8.0_react@18.2.0": {
+        "integrity": "sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==",
+        "dependencies": {
+          "react": "react@18.2.0"
+        }
+      },
+      "react@18.2.0": {
+        "integrity": "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==",
+        "dependencies": {
+          "loose-envify": "loose-envify@1.4.0"
+        }
       },
       "sax@1.2.1": {
         "integrity": "sha512-8I2a3LovHTOpm7NV5yOyO8IHqgVsfK4+UuySrXU8YXkSRX7k6hCV9b3HrkKCr3nMpgj+0bmocaJJWpvp1oc7ZA==",
