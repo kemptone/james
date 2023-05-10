@@ -14,3 +14,32 @@
     z-index: 9999;
     font-size: 28px;
 }
+
+
+.night-night .playBox2,
+.night-night .playBox {
+    position: fixed;
+    top: 300px;
+    height: 100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border: 1px solid #000;
+    border-inline: 0;
+}
+
+.night-night .playBox2 {
+    top: 400px;
+    height: 100px;
+    border-top: 0;
+}
+
+.night-night .game-button {
+    position: absolute;
+    top: 500px;
+}
+
+.night-night .game-button button {
+    padding: 2rem;
+    padding-inline: 4rem;
+}
