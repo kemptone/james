@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 import { loadSoundFile } from "../utils/loadSoundFile.tsx"; // A helper function to load the sound file using Web Audio API
 import { AudioBox } from "../components/AudioBox.tsx";
 
@@ -47,6 +47,11 @@ const AllSounds = `
 
 export default function SoundGamePage() {
   const [sounds, setSounds] = useState<SoundItem[]>([]);
+  const [allOn, setAllOn] = useState(false);
+
+  const setAllOnCallback = useCallback(() => {
+    setAllOn(!allOn);
+  }, [allOn]);
 
   // Load the sound files when the component mounts
   useEffect(() => {
@@ -57,6 +62,7 @@ export default function SoundGamePage() {
         soundUrls.map((url) => loadSoundFile(audioContext, url)),
       );
 
+      const yOffset = allOn ? 208 : 10;
       let jogger = 0;
       let yjogger = 1;
 
@@ -65,12 +71,12 @@ export default function SoundGamePage() {
         const { outerHeight, outerWidth } = window;
 
         // const x = ((Math.random() * window.outerWidth) - 100) + 100;
-        const y = yjogger * 100;
+        const y = allOn ? (yjogger * 100) + yOffset : (yjogger * 80) + yOffset;
         // const y = (Math.random() * (window.outerHeight - 240)) + 100;
         const x = (index - jogger) * width;
 
         if (x > outerWidth - width) {
-          jogger = index;
+          jogger = index + 1;
           yjogger++;
         }
 
@@ -85,7 +91,7 @@ export default function SoundGamePage() {
       setSounds(newSounds);
     };
     loadSounds();
-  }, []);
+  }, [allOn]);
 
   function handleBoxMove(index: number, newX: number, newY: number) {
     setSounds((prevSounds) =>
@@ -118,7 +124,7 @@ export default function SoundGamePage() {
           />
         ))}
       </div>
-      <PlayButton sounds={sounds} />
+      <PlayButton {...{ sounds, setAllOnCallback }} />
       <div className="playBox"></div>
       <div className="playBox2"></div>
     </div>
@@ -127,9 +133,10 @@ export default function SoundGamePage() {
 
 type PlayButtonProps = {
   sounds: SoundItem[];
+  setAllOnCallback: () => void;
 };
 
-function PlayButton({ sounds }: PlayButtonProps) {
+function PlayButton({ sounds, setAllOnCallback }: PlayButtonProps) {
   const audioContextRef = useRef<AudioContext | null>(null);
   const sourceNodesRef = useRef<AudioBufferSourceNode[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -173,25 +180,36 @@ function PlayButton({ sounds }: PlayButtonProps) {
     });
 
     // Schedule each buffer source node to play in sequence
-    sourceNodesRef.current.reduce((prevNode, curNode) => {
-      prevNode.onended = () => {
-        debugger;
-        if (curNode) {
-          curNode.start();
-        } else {
+    sourceNodesRef.current.forEach((current, index, arr) => {
+      const next = arr[index + 1];
+      if (next) {
+        current.onended = () => {
+          next.start();
+        };
+      } else {
+        current.onended = () => {
           handleStop();
-        }
-      };
-      return curNode;
+        };
+      }
     });
+    // sourceNodesRef.current.reduce((prevNode, curNode) => {
+    //   prevNode.onended = () => {
+    //     debugger;
+    //     if (curNode) {
+    //       curNode.start();
+    //     } else {
+    //       handleStop();
+    //     }
+    //   };
+    //   return curNode;
+    // });
 
     sourceNodesRef.current[0].start();
   }
 
   function handleStop() {
-    if (!isPlaying) return;
-
     setIsPlaying(false);
+    if (!isPlaying) return;
 
     // Stop all buffer source nodes
     sourceNodesRef.current.forEach((node) => {
@@ -206,6 +224,7 @@ function PlayButton({ sounds }: PlayButtonProps) {
         {isPlaying
           ? <button onClick={handleStop}>Stop</button>
           : <button onClick={handlePlay}>Play</button>}
+        <button onClick={setAllOnCallback}>All On</button>
       </div>
     </div>
   );
