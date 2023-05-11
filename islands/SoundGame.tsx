@@ -13,6 +13,7 @@ import { AllSounds } from "../utils/AllNightNightSounds.ts";
 import NightNightButton from "../components/nightNight/NightNightButton.tsx";
 import NightNightItem from "../components/nightNight/NightNightItem.tsx";
 import { ClassAttributes } from "https://esm.sh/v113/preact@10.13.2/src/index.js";
+import { isDarkHexColor } from "../helpers/helpers.ts";
 
 type ItemsType = {
   [key: string]: ClassAttributes<HTMLDivElement>["ref"] | undefined;
@@ -90,11 +91,14 @@ export default function SoundGamePage() {
           yjogger++;
         }
 
+        const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`; // Generate a random color for each box
+
         return ({
           buffer,
           x,
           y,
-          color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // Generate a random color for each box
+          color,
+          textColor: isDarkHexColor(color) ? "#fff" : "#000",
           name: String(index + 1),
         });
       });
@@ -128,7 +132,13 @@ export default function SoundGamePage() {
             onMove={(newX, newY) => handleBoxMove(i, newX, newY)}
             wrapRef={saveRef(String(i))}
           >
-            <NightNightItem {...{ symbol: sound.name, color: sound.color }} />
+            <NightNightItem
+              {...{
+                symbol: sound.name,
+                color: sound.color,
+                textColor: sound.textColor,
+              }}
+            />
           </Draggable>
         ))}
       </div>

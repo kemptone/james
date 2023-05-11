@@ -1,15 +1,17 @@
 export default ({
   symbol,
   color,
+  textColor,
 }: {
   symbol: string;
   color: string;
+  textColor: string;
 }) => {
   return (
     <div
       style={{
         backgroundColor: color,
-        color: color === "#000" ? "#fff" : "#000",
+        color: color ? textColor : "black",
         cursor: "move",
         display: "flex",
         justifyContent: "center",

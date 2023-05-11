@@ -5,5 +5,6 @@ export type SoundItem = {
   x: number;
   y: number;
   color: string;
+  textColor: string;
   name: string;
 };
