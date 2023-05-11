@@ -88,6 +88,9 @@ export function AudioBox(props: {
       className="draggable-audio-box"
       draggable={true}
       onMouseDown={dragMouseDown}
+      onTouchStart={dragMouseDown}
+      onTouchMove={dragMouseDown}
+      onTouchEnd={dragMouseDown}
     >
       <div style={{ fontSize: "30px" }}>{symbol}</div>
       {/* <AiFillCloseCircle /> */}

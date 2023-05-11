@@ -262,6 +262,7 @@
     "https://esm.sh/preact@10.13.2/compat": "1cf68e0c8c6c84b60d42f30665403b67229c16ff5206824709b19df60ba9cdc3",
     "https://esm.sh/preact@10.13.2/hooks": "884334b1560448cf16b4f14841fffdb8707615373a3c76c676a6f9e5c77e43b2",
     "https://esm.sh/preact@10.13.2/jsx-runtime": "210358188111aff4c83f9bcba94304819b89e565d07430c5655d0ac720f22f03",
+    "https://esm.sh/react-draggable@4.4.5": "7f8ef10e27a6f6a74bcf24d8b99fc7306880788b7aac4aeb7fd302504e49d458",
     "https://esm.sh/stable/preact@10.11.0/deno/compat.js": "1a121f6e6dd7f0a2b8f01bac821b8336304f3935306528e005279da77777989f",
     "https://esm.sh/stable/preact@10.11.0/deno/hooks.js": "48b7674c1f0c2a0f8a0f758b786f5bc15ba0f7a4f3a356ecc783848f1e4a1c55",
     "https://esm.sh/stable/preact@10.11.0/deno/hooks/src/index.js": "0c84ac173ff6ec23bc19fd74c566192e9a35c001db2df6aae1f76b6fe57d98cf",
@@ -276,6 +277,7 @@
     "https://esm.sh/stable/preact@10.13.2/deno/hooks/src/index.js": "29aaa9737475a47d9a1875faac74638fb88db374552e87e25d4a53a00a6c006d",
     "https://esm.sh/stable/preact@10.13.2/deno/jsx-runtime.js": "dd40c5bdfe7b277bf51009fb950c550dfb554b6d56a1b3a4cb9bc12bde84bcd1",
     "https://esm.sh/stable/preact@10.13.2/deno/preact.mjs": "365fab897381f4f403f859c5d12939084560545567108cc90dae901bbe892578",
+    "https://esm.sh/stable/react@18.2.0/deno/react.mjs": "a5a73ee24acca4744ee22c51d9357f31968d1f684ce253bde222b4e26d09f49f",
     "https://esm.sh/v102/@preact/signals-core@1.2.3/deno/signals-core.js": "af506f66822cccbd5e317ed343958ed89a814b71a2e771dfcda983a09868b4a4",
     "https://esm.sh/v102/@preact/signals-core@1.2.3/dist/signals-core.d.ts": "e39c59670049b772b2c7748907af01f4fb5d5706b88fa8266d9135925ca5baf7",
     "https://esm.sh/v102/@preact/signals@1.1.3/deno/signals.js": "a328b80bb85e51ba5eeeb5069735a19c7cd1e32ed4b894bd7a218ccbb10bcc2e",
@@ -328,6 +330,11 @@
     "https://esm.sh/v117/preact@10.13.2/hooks/src/index.d.ts": "5c29febb624fc25d71cb0e125848c9b711e233337a08f7eacfade38fd4c14cc3",
     "https://esm.sh/v117/preact@10.13.2/src/index.d.ts": "65398710de6aa0a07412da79784e05e6e96763f51c7c91b77344d2d0af06385c",
     "https://esm.sh/v117/preact@10.13.2/src/jsx.d.ts": "9ac9b82c199fa7b04748807d750eba1a106c0be52041b8617416f88d6fc0a257",
+    "https://esm.sh/v118/@types/prop-types@15.7.5/index.d.ts": "6a386ff939f180ae8ef064699d8b7b6e62bc2731a62d7fbf5e02589383838dea",
+    "https://esm.sh/v118/@types/react@18.2.6/global.d.ts": "549df62b64a71004aee17685b445a8289013daf96246ce4d9b087d13d7a27a61",
+    "https://esm.sh/v118/@types/react@18.2.6/index.d.ts": "2ef11908f0e5f1cae0a42694e5e38852c976ca99a5d7eecfb71ed6a1187736c7",
+    "https://esm.sh/v118/@types/scheduler@0.16.3/tracing.d.ts": "f5a8b384f182b3851cec3596ccc96cb7464f8d3469f48c74bf2befb782a19de5",
+    "https://esm.sh/v118/csstype@3.1.2/index.d.ts": "4c68749a564a6facdf675416d75789ee5a557afda8960e0803cf6711fa569288",
     "https://esm.sh/v118/preact@10.13.2/compat/src/index.d.ts": "d02f015638a40e32649151e011cfda7b520d66f7fbd3c12a28fa03de2a5e1421",
     "https://esm.sh/v118/preact@10.13.2/compat/src/suspense-list.d.ts": "b8e274324392157ce476ef3a48ae215c9f7003b08525d140645f19eab20d1948",
     "https://esm.sh/v118/preact@10.13.2/compat/src/suspense.d.ts": "81f5266e0977a94347505d11b8103024211f2b4f3b2eb2aa276a10d8fd169e65",
@@ -335,6 +342,12 @@
     "https://esm.sh/v118/preact@10.13.2/jsx-runtime/src/index.d.ts": "e153460ed2b3fe2ad8b93696ecd48fbf73cd628b0b0ea6692b71804a3af69dfd",
     "https://esm.sh/v118/preact@10.13.2/src/index.d.ts": "65398710de6aa0a07412da79784e05e6e96763f51c7c91b77344d2d0af06385c",
     "https://esm.sh/v118/preact@10.13.2/src/jsx.d.ts": "9ac9b82c199fa7b04748807d750eba1a106c0be52041b8617416f88d6fc0a257",
+    "https://esm.sh/v120/clsx@1.2.1/deno/clsx.mjs": "5354fcc909076ea4d01c2bc3210fa7a5ab37eae1a046f531a78b49efc2e4885c",
+    "https://esm.sh/v120/prop-types@15.8.1/deno/prop-types.mjs": "2e34c5ad17795818b1cf2021949733b26fed32f9831fbd35750564a2f02fcb2e",
+    "https://esm.sh/v120/react-dom@18.2.0/deno/react-dom.mjs": "3dba0126b1efdf50b5325da769cdbd5864dca771baea8b385478b692c8c1d17a",
+    "https://esm.sh/v120/react-draggable@4.4.5/deno/react-draggable.mjs": "aaa8f2a98c95c9105262896f1a06ac21ada67fc9a178b7db865f2054d5d6d8f7",
+    "https://esm.sh/v120/react-draggable@4.4.5/typings/index.d.ts": "412662897f661ab7471f88254852d49daa911a452792a88372cbc786f77ef2ae",
+    "https://esm.sh/v120/scheduler@0.23.0/deno/scheduler.mjs": "585bd99e523275a2447f9d1c29f36b43be0a20123e7c7915f6f4d5405ecc2884",
     "https://esm.sh/v95/preact@10.11.0/compat/src/index.d.ts": "c1f8da0c5666e296510cab41732743d593d71642ea55f57fbd19c6abae4e0192",
     "https://esm.sh/v95/preact@10.11.0/compat/src/suspense-list.d.ts": "b8e274324392157ce476ef3a48ae215c9f7003b08525d140645f19eab20d1948",
     "https://esm.sh/v95/preact@10.11.0/compat/src/suspense.d.ts": "81f5266e0977a94347505d11b8103024211f2b4f3b2eb2aa276a10d8fd169e65",
@@ -358,6 +371,7 @@
       "aws-sdk": "aws-sdk@2.1272.0",
       "react-aria": "react-aria@3.24.0_react@18.2.0_react-dom@18.2.0__react@18.2.0",
       "react-aria-components": "react-aria-components@1.0.0-alpha.3_react@18.2.0_react-dom@18.2.0__react@18.2.0",
+      "react-draggable": "react-draggable@4.4.5_react@18.2.0_react-dom@18.2.0__react@18.2.0",
       "react-icons": "react-icons@4.8.0_react@18.2.0"
     },
     "packages": {
@@ -1583,6 +1597,18 @@
           "js-tokens": "js-tokens@4.0.0"
         }
       },
+      "object-assign@4.1.1": {
+        "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+        "dependencies": {}
+      },
+      "prop-types@15.8.1": {
+        "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",
+        "dependencies": {
+          "loose-envify": "loose-envify@1.4.0",
+          "object-assign": "object-assign@4.1.1",
+          "react-is": "react-is@16.13.1"
+        }
+      },
       "punycode@1.3.2": {
         "integrity": "sha512-RofWgt/7fL5wP1Y7fxE7/EmTLzQVnB0ycyibJ0OOHIlJqTNzglYFxVwETOcIoJqJmpDXJ9xImDv+Fq34F/d4Dw==",
         "dependencies": {}
@@ -1659,11 +1685,24 @@
           "scheduler": "scheduler@0.23.0"
         }
       },
+      "react-draggable@4.4.5_react@18.2.0_react-dom@18.2.0__react@18.2.0": {
+        "integrity": "sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==",
+        "dependencies": {
+          "clsx": "clsx@1.2.1",
+          "prop-types": "prop-types@15.8.1",
+          "react": "react@18.2.0",
+          "react-dom": "react-dom@18.2.0_react@18.2.0"
+        }
+      },
       "react-icons@4.8.0_react@18.2.0": {
         "integrity": "sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==",
         "dependencies": {
           "react": "react@18.2.0"
         }
+      },
+      "react-is@16.13.1": {
+        "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",
+        "dependencies": {}
       },
       "react-stately@3.22.0_react@18.2.0": {
         "integrity": "sha512-w5itlPtjfUpxy+195LxRbaCNaGN1NVfPHelhYXuoPoKNgUvmy54uKXvP1Ek1ETZ9e55BaXuMs83yXv94wIMdpQ==",
