@@ -1,20 +1,71 @@
-import { useCallback, useEffect, useId, useRef, useState } from "preact/hooks";
+import {
+  MutableRef,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "preact/hooks";
 import { loadSoundFile } from "../utils/loadSoundFile.tsx"; // A helper function to load the sound file using Web Audio API
 import Draggable from "../components/CustomDraggable.tsx";
 import type { SoundItem } from "../types/NightNight.ts";
 import { AllSounds } from "../utils/AllNightNightSounds.ts";
 import NightNightButton from "../components/nightNight/NightNightButton.tsx";
 import NightNightItem from "../components/nightNight/NightNightItem.tsx";
+import { ClassAttributes } from "https://esm.sh/v113/preact@10.13.2/src/index.js";
+
+type ItemsType = {
+  [key: string]: ClassAttributes<HTMLDivElement>["ref"] | undefined;
+};
 
 export default function SoundGamePage() {
   const [sounds, setSounds] = useState<SoundItem[]>([]);
   const [allOn, setAllOn] = useState(false);
   const [pageKey, setPageKey] = useState(123);
+  const items = useRef<ItemsType>({});
+  const saveRef =
+    (key: string) => (r: ClassAttributes<HTMLDivElement>["ref"]) => {
+      items.current[key] = r;
+    };
 
-  const setAllOnCallback = useCallback(() => {
+  const setAllOnCallback = () => {
     setAllOn(!allOn);
+
     setPageKey(pageKey + 1);
-  }, [allOn]);
+
+    const yOffset = !allOn ? 208 : 10;
+    let jogger = 0;
+    let yjogger = 1;
+
+    debugger;
+
+    const newSounds = [...sounds];
+
+    Object.keys(items.current).forEach((key, index) => {
+      const width = 80;
+      const item: HTMLDivElement = items.current[key];
+
+      if (!item) {
+        return;
+      }
+
+      const x = (index - jogger) * width;
+      const y = !allOn ? (yjogger * 100) + yOffset : (yjogger * 80) + yOffset;
+
+      newSounds[index].x = x;
+      newSounds[index].y = y;
+
+      item.style.top = `${y}px`;
+      item.style.left = `${x}px`;
+
+      if (x > outerWidth - width) {
+        jogger = index + 1;
+        yjogger++;
+      }
+    });
+
+    setSounds(newSounds);
+  }; // , [allOn, sounds]);
 
   // Load the sound files when the component mounts
   useEffect(() => {
@@ -25,7 +76,7 @@ export default function SoundGamePage() {
         soundUrls.map((url) => loadSoundFile(audioContext, url)),
       );
 
-      const yOffset = allOn ? 208 : 10;
+      const yOffset = 10;
       let jogger = 0;
       let yjogger = 1;
 
@@ -33,9 +84,7 @@ export default function SoundGamePage() {
         const width = 80;
         const { outerHeight, outerWidth } = window;
 
-        // const x = ((Math.random() * window.outerWidth) - 100) + 100;
-        const y = allOn ? (yjogger * 100) + yOffset : (yjogger * 80) + yOffset;
-        // const y = (Math.random() * (window.outerHeight - 240)) + 100;
+        const y = (yjogger * 80) + yOffset;
         const x = (index - jogger) * width;
 
         if (x > outerWidth - width) {
@@ -54,7 +103,7 @@ export default function SoundGamePage() {
       setSounds(newSounds);
     };
     loadSounds();
-  }, [allOn]);
+  }, []);
 
   function handleBoxMove(index: number, newX: number, newY: number) {
     setSounds((prevSounds) =>
@@ -64,31 +113,28 @@ export default function SoundGamePage() {
     );
   }
 
-  function handleBoxDelete(index: number) {
-    setSounds((prevSounds) => prevSounds.filter((_, i) => i !== index));
-  }
-
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       className="night-night"
     >
       <h1>Night Night, Sleep Tight</h1>
-      <div key={pageKey}>
+      <div className="playBox"></div>
+      <div className="playBox2"></div>
+      <div>
         {sounds.map((sound, i) => (
           <Draggable
             key={i}
             positionX={sound.x}
             positionY={sound.y}
             onMove={(newX, newY) => handleBoxMove(i, newX, newY)}
+            wrapRef={saveRef(String(i))}
           >
             <NightNightItem {...{ symbol: sound.name, color: sound.color }} />
           </Draggable>
         ))}
       </div>
       <NightNightButton {...{ sounds, setAllOnCallback }} />
-      <div className="playBox"></div>
-      <div className="playBox2"></div>
     </div>
   );
 }

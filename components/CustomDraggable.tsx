@@ -1,10 +1,12 @@
-import { Component, h } from "preact";
+import { ClassAttributes, Component, h } from "preact";
+import { MutableRef } from "preact/hooks";
 
 interface DraggableProps {
   positionX: number;
   positionY: number;
   children: h.JSX.Element;
   onMove: (newX: number, newY: number) => void;
+  wrapRef?: ClassAttributes<HTMLDivElement>["ref"];
 }
 
 interface DraggableState {
@@ -33,6 +35,22 @@ class Draggable extends Component<DraggableProps, DraggableState> {
     this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
+  }
+
+  componentDidUpdate(
+    previousProps: Readonly<DraggableProps>,
+    previousState: Readonly<DraggableState>,
+    snapshot: any,
+  ): void {
+    if (
+      previousProps.positionX !== this.props.positionX ||
+      previousProps.positionY !== this.props.positionY
+    ) {
+      this.setState({
+        positionX: this.props.positionX,
+        positionY: this.props.positionY,
+      });
+    }
   }
 
   handleMouseDown(event: MouseEvent) {
@@ -115,7 +133,7 @@ class Draggable extends Component<DraggableProps, DraggableState> {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, wrapRef } = this.props;
     const { positionX, positionY } = this.state;
 
     return (
@@ -123,6 +141,7 @@ class Draggable extends Component<DraggableProps, DraggableState> {
         style={{ position: "absolute", left: positionX, top: positionY }}
         onMouseDown={this.handleMouseDown}
         onTouchStart={this.handleTouchStart}
+        ref={wrapRef}
       >
         {children}
       </div>

@@ -19,7 +19,6 @@ export default function ({ sounds, setAllOnCallback }: PlayButtonProps) {
   function handlePlay() {
     if (isPlaying) return;
 
-    setIsPlaying(true);
     sourceNodesRef.current = [];
 
     // Create a new buffer source node for each sound and connect it to the audio context
@@ -63,7 +62,11 @@ export default function ({ sounds, setAllOnCallback }: PlayButtonProps) {
       }
     });
 
-    sourceNodesRef.current[0].start();
+    sourceNodesRef.current[0]?.start?.();
+
+    if (sourceNodesRef.current[0]) {
+      setIsPlaying(true);
+    }
   }
 
   function handleStop() {
