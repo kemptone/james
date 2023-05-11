@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useId, useRef, useState } from "preact/hooks";
 import { loadSoundFile } from "../utils/loadSoundFile.tsx"; // A helper function to load the sound file using Web Audio API
 import Draggable from "../components/CustomDraggable.tsx";
 import type { SoundItem } from "../types/NightNight.ts";
@@ -9,9 +9,11 @@ import NightNightItem from "../components/nightNight/NightNightItem.tsx";
 export default function SoundGamePage() {
   const [sounds, setSounds] = useState<SoundItem[]>([]);
   const [allOn, setAllOn] = useState(false);
+  const [pageKey, setPageKey] = useState(123);
 
   const setAllOnCallback = useCallback(() => {
     setAllOn(!allOn);
+    setPageKey(pageKey + 1);
   }, [allOn]);
 
   // Load the sound files when the component mounts
@@ -72,7 +74,7 @@ export default function SoundGamePage() {
       className="night-night"
     >
       <h1>Night Night, Sleep Tight</h1>
-      <div>
+      <div key={pageKey}>
         {sounds.map((sound, i) => (
           <Draggable
             key={i}
