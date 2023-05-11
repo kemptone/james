@@ -1,5 +1,14 @@
+html, body {
+    background-color: #fff3b0;
+    opacity: 1;
+    background-image: linear-gradient(30deg, #f3df71 12%, transparent 12.5%, transparent 87%, #f3df71 87.5%, #f3df71), linear-gradient(150deg, #f3df71 12%, transparent 12.5%, transparent 87%, #f3df71 87.5%, #f3df71), linear-gradient(30deg, #f3df71 12%, transparent 12.5%, transparent 87%, #f3df71 87.5%, #f3df71), linear-gradient(150deg, #f3df71 12%, transparent 12.5%, transparent 87%, #f3df71 87.5%, #f3df71), linear-gradient(60deg, #f3df7177 25%, transparent 25.5%, transparent 75%, #f3df7177 75%, #f3df7177), linear-gradient(60deg, #f3df7177 25%, transparent 25.5%, transparent 75%, #f3df7177 75%, #f3df7177);
+    background-size: 60px 105px;
+    background-position: 0 0, 0 0, 30px 53px, 30px 53px, 0 0, 30px 53px;
+}
+
 .draggable-audio-box {
     z-index: 99;
+    background-color: white;
 }
 
 .draggable-audio-box.dragging {
@@ -11,7 +20,7 @@
 }
 
 .night-night button {
-    z-index: 9999;
+    k z-index: 9999;
     font-size: 28px;
 }
 
@@ -42,4 +51,7 @@
 .night-night .game-button button {
     padding: 2rem;
     padding-inline: 4rem;
+    border-radius: 9px;
+    margin-inline: 8px;
+    background-color: #f3df71;
 }
