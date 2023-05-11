@@ -142,7 +142,7 @@ export default function SoundGamePage() {
           </Draggable>
         ))}
       </div>
-      <NightNightButton {...{ sounds, setAllOnCallback }} />
+      <NightNightButton {...{ sounds, setAllOnCallback, allOn }} />
     </div>
   );
 }

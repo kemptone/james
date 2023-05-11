@@ -4,9 +4,10 @@ import type { SoundItem } from "../../types/NightNight.ts";
 type PlayButtonProps = {
   sounds: SoundItem[];
   setAllOnCallback: () => void;
+  allOn: boolean;
 };
 
-export default function ({ sounds, setAllOnCallback }: PlayButtonProps) {
+export default function ({ sounds, setAllOnCallback, allOn }: PlayButtonProps) {
   const audioContextRef = useRef<AudioContext | null>(null);
   const sourceNodesRef = useRef<AudioBufferSourceNode[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -84,9 +85,12 @@ export default function ({ sounds, setAllOnCallback }: PlayButtonProps) {
     <div className="game-button">
       <div style={{ marginTop: "1em" }}>
         {isPlaying
-          ? <button onClick={handleStop}>Stop</button>
-          : <button onClick={handlePlay}>Play</button>}
-        <button onClick={setAllOnCallback}>All On</button>
+          ? <button onClick={handleStop}>Stop 🕳</button>
+          : <button onClick={handlePlay}>Play 🗣</button>}
+        <button
+          onClick={setAllOnCallback}
+          children={allOn ? `All Off 🕳` : `All On 😎`}
+        />
       </div>
     </div>
   );
