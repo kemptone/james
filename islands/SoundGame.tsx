@@ -37,8 +37,6 @@ export default function SoundGamePage() {
     let jogger = 0;
     let yjogger = 1;
 
-    debugger;
-
     const newSounds = [...sounds];
 
     Object.keys(items.current).forEach((key, index) => {
