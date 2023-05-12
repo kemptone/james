@@ -1,58 +1,70 @@
-import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import {
+  MutableRef,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "preact/hooks";
 import { loadSoundFile } from "../utils/loadSoundFile.tsx"; // A helper function to load the sound file using Web Audio API
-import { AudioBox } from "../components/AudioBox.tsx";
 import Draggable from "../components/CustomDraggable.tsx";
+import type { SoundItem } from "../types/NightNight.ts";
+import { AllSounds } from "../utils/AllNightNightSounds.ts";
+import NightNightButton from "../components/nightNight/NightNightButton.tsx";
+import NightNightItem from "../components/nightNight/NightNightItem.tsx";
+import { ClassAttributes } from "https://esm.sh/v113/preact@10.13.2/src/index.js";
+import { isDarkHexColor } from "../helpers/helpers.ts";
 
-type SoundItem = {
-  buffer: AudioBuffer;
-  x: number;
-  y: number;
-  color: string;
-  name: string;
+type ItemsType = {
+  [key: string]: ClassAttributes<HTMLDivElement>["ref"] | undefined;
 };
 
-const AllSounds = `
-001_night_night.wav
-002_sleep_tight.wav
-003_dont_let_the_bed_bugs_bite.wav
-004_see_you_later.wav
-005_see_you_later_aligator.wav
-006_in_a_while_crockodile.wav
-007_not_if_I_dont_see_you_first.wav
-008_ok.wav
-009_I_love_you.wav
-010_I_sawsue.wav
-011_vasbedonia.wav
-012_adios.wav
-013_adios_muchachos.wav
-014_ok2.wav
-015_pleasant_dreams.wav
-016_goodnight_pebbels.wav
-017_goodnight_roxie.wav
-018_goodnight_skip.wav
-019_goodnight_turkey.wav
-020_goodnight_mommy.wav
-021_goodnight_daddy.wav
-022_goodnight_grandma_and_grandpa.wav
-023_goodnight_my_love.wav
-024_goodnight_sweet_prince.wav
-025_ok_then.wav
-026_pleasant_dreams_I_love_you.wav
-027_good_night.wav
-028_pleasant_dreams_b.wav
-029_good_day_sir.wav
-030_I_said_good_day_sir.wav
-`.replaceAll(" ", "").replaceAll("\n", "").split(".wav").filter((s) =>
-  s !== ""
-);
-
-export default function SoundGamePage() {
+export default function () {
   const [sounds, setSounds] = useState<SoundItem[]>([]);
   const [allOn, setAllOn] = useState(false);
+  const [pageKey, setPageKey] = useState(123);
+  const items = useRef<ItemsType>({});
+  const saveRef =
+    (key: string) => (r: ClassAttributes<HTMLDivElement>["ref"]) => {
+      items.current[key] = r;
+    };
 
-  const setAllOnCallback = useCallback(() => {
+  const setAllOnCallback = () => {
     setAllOn(!allOn);
-  }, [allOn]);
+
+    setPageKey(pageKey + 1);
+
+    const yOffset = !allOn ? 208 : 10;
+    let jogger = 0;
+    let yjogger = 1;
+
+    const newSounds = [...sounds];
+
+    Object.keys(items.current).forEach((key, index) => {
+      const width = 80;
+      const item: HTMLDivElement = items.current[key];
+
+      if (!item) {
+        return;
+      }
+
+      const x = (index - jogger) * width;
+      const y = !allOn ? (yjogger * 100) + yOffset : (yjogger * 80) + yOffset;
+
+      newSounds[index].x = x;
+      newSounds[index].y = y;
+
+      item.style.top = `${y}px`;
+      item.style.left = `${x}px`;
+
+      if (x > outerWidth - width) {
+        jogger = index + 1;
+        yjogger++;
+      }
+    });
+
+    setSounds(newSounds);
+  }; // , [allOn, sounds]);
 
   // Load the sound files when the component mounts
   useEffect(() => {
@@ -63,7 +75,7 @@ export default function SoundGamePage() {
         soundUrls.map((url) => loadSoundFile(audioContext, url)),
       );
 
-      const yOffset = allOn ? 208 : 10;
+      const yOffset = 10;
       let jogger = 0;
       let yjogger = 1;
 
@@ -71,9 +83,7 @@ export default function SoundGamePage() {
         const width = 80;
         const { outerHeight, outerWidth } = window;
 
-        // const x = ((Math.random() * window.outerWidth) - 100) + 100;
-        const y = allOn ? (yjogger * 100) + yOffset : (yjogger * 80) + yOffset;
-        // const y = (Math.random() * (window.outerHeight - 240)) + 100;
+        const y = (yjogger * 80) + yOffset;
         const x = (index - jogger) * width;
 
         if (x > outerWidth - width) {
@@ -81,18 +91,21 @@ export default function SoundGamePage() {
           yjogger++;
         }
 
+        const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`; // Generate a random color for each box
+
         return ({
           buffer,
           x,
           y,
-          color: `#${Math.floor(Math.random() * 16777215).toString(16)}`, // Generate a random color for each box
+          color,
+          textColor: isDarkHexColor(color) ? "#fff" : "#000",
           name: String(index + 1),
         });
       });
       setSounds(newSounds);
     };
     loadSounds();
-  }, [allOn]);
+  }, []);
 
   function handleBoxMove(index: number, newX: number, newY: number) {
     setSounds((prevSounds) =>
@@ -102,132 +115,34 @@ export default function SoundGamePage() {
     );
   }
 
-  function handleBoxDelete(index: number) {
-    setSounds((prevSounds) => prevSounds.filter((_, i) => i !== index));
-  }
-
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       className="night-night"
     >
       <h1>Night Night, Sleep Tight</h1>
+      <div className="playBox"></div>
+      <div className="playBox2"></div>
       <div>
         {sounds.map((sound, i) => (
           <Draggable
             key={i}
-            color={sound.color}
-            symbol={`${sound.name}`} // Use the index as the symbol for now, but you can change this as needed
             positionX={sound.x}
             positionY={sound.y}
             onMove={(newX, newY) => handleBoxMove(i, newX, newY)}
-            onDelete={() => handleBoxDelete(i)}
-            children={`${sound.name}`} // Use the index as the symbol for now, but you can change this as needed
-          />
+            wrapRef={saveRef(String(i))}
+          >
+            <NightNightItem
+              {...{
+                symbol: sound.name,
+                color: sound.color,
+                textColor: sound.textColor,
+              }}
+            />
+          </Draggable>
         ))}
       </div>
-      {/* <PlayButton {...{ sounds, setAllOnCallback }} /> */}
-      {/* <div className="playBox"></div> */}
-      {/* <div className="playBox2"></div> */}
-    </div>
-  );
-}
-
-type PlayButtonProps = {
-  sounds: SoundItem[];
-  setAllOnCallback: () => void;
-};
-
-function PlayButton({ sounds, setAllOnCallback }: PlayButtonProps) {
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const sourceNodesRef = useRef<AudioBufferSourceNode[]>([]);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  // Create the audio context when the component mounts
-  useEffect(() => {
-    audioContextRef.current = new AudioContext();
-  }, []);
-
-  function handlePlay() {
-    if (isPlaying) return;
-
-    setIsPlaying(true);
-    sourceNodesRef.current = [];
-
-    // Create a new buffer source node for each sound and connect it to the audio context
-
-    const chunky1 = sounds.filter((a) => {
-      return a.y > 300 && a.y < 400;
-    }).sort((a, b) => {
-      return a.x - b.x;
-    });
-
-    const chunky2 = sounds.filter((a) => {
-      return a.y > 400 && a.y < 500;
-    }).sort((a, b) => {
-      return a.x - b.x;
-    });
-
-    [...chunky1, ...chunky2].forEach((sound) => {
-      // sounds.forEach((sound) => {
-      const sourceNode = audioContextRef.current?.createBufferSource();
-      if (!sourceNode) return;
-
-      sourceNode.buffer = sound.buffer;
-
-      if (audioContextRef.current?.destination) {
-        sourceNode.connect(audioContextRef.current?.destination);
-        sourceNodesRef.current.push(sourceNode);
-      }
-    });
-
-    // Schedule each buffer source node to play in sequence
-    sourceNodesRef.current.forEach((current, index, arr) => {
-      const next = arr[index + 1];
-      if (next) {
-        current.onended = () => {
-          next.start();
-        };
-      } else {
-        current.onended = () => {
-          handleStop();
-        };
-      }
-    });
-    // sourceNodesRef.current.reduce((prevNode, curNode) => {
-    //   prevNode.onended = () => {
-    //     debugger;
-    //     if (curNode) {
-    //       curNode.start();
-    //     } else {
-    //       handleStop();
-    //     }
-    //   };
-    //   return curNode;
-    // });
-
-    sourceNodesRef.current[0].start();
-  }
-
-  function handleStop() {
-    setIsPlaying(false);
-    if (!isPlaying) return;
-
-    // Stop all buffer source nodes
-    sourceNodesRef.current.forEach((node) => {
-      // node?.stop?.();
-      node?.disconnect?.();
-    });
-  }
-
-  return (
-    <div className="game-button">
-      <div style={{ marginTop: "1em" }}>
-        {isPlaying
-          ? <button onClick={handleStop}>Stop</button>
-          : <button onClick={handlePlay}>Play</button>}
-        <button onClick={setAllOnCallback}>All On</button>
-      </div>
+      <NightNightButton {...{ sounds, setAllOnCallback, allOn }} />
     </div>
   );
 }

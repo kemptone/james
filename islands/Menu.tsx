@@ -58,7 +58,7 @@ export default () => {
             <span>&nbsp;&&nbsp;</span>
             <a href="/recorder">Recorder</a>
             <span>&nbsp;&&nbsp;</span>
-            <a href="/soundgame">Sleep tight</a>
+            <a href="/nightnight">night night</a>
           </span>
           <span>
             <a href="/colorthing">Color Thing</a>

@@ -18,8 +18,8 @@ import * as $11 from "./routes/lasko.jsx";
 import * as $12 from "./routes/live.tsx";
 import * as $13 from "./routes/music.jsx";
 import * as $14 from "./routes/music2.jsx";
-import * as $15 from "./routes/recorder.tsx";
-import * as $16 from "./routes/soundgame.tsx";
+import * as $15 from "./routes/nightnight.tsx";
+import * as $16 from "./routes/recorder.tsx";
 import * as $17 from "./routes/speedup.tsx";
 import * as $18 from "./routes/spin.tsx";
 import * as $19 from "./routes/testsettings.tsx";
@@ -41,15 +41,14 @@ import * as $$11 from "./islands/Music2.jsx";
 import * as $$12 from "./islands/NightNight.tsx";
 import * as $$13 from "./islands/NumberGame.jsx";
 import * as $$14 from "./islands/Recorder.tsx";
-import * as $$15 from "./islands/SoundGame.tsx";
-import * as $$16 from "./islands/SpeedUp.tsx";
-import * as $$17 from "./islands/Spin.tsx";
-import * as $$18 from "./islands/Timer4.tsx";
-import * as $$19 from "./islands/VoiceMaker.tsx";
-import * as $$20 from "./islands/spin.sounds.tsx";
-import * as $$21 from "./islands/timer2.jsx";
-import * as $$22 from "./islands/timer3.jsx";
-import * as $$23 from "./islands/useLoopSounds.tsx";
+import * as $$15 from "./islands/SpeedUp.tsx";
+import * as $$16 from "./islands/Spin.tsx";
+import * as $$17 from "./islands/Timer4.tsx";
+import * as $$18 from "./islands/VoiceMaker.tsx";
+import * as $$19 from "./islands/spin.sounds.tsx";
+import * as $$20 from "./islands/timer2.jsx";
+import * as $$21 from "./islands/timer3.jsx";
+import * as $$22 from "./islands/useLoopSounds.tsx";
 
 const manifest = {
   routes: {
@@ -68,8 +67,8 @@ const manifest = {
     "./routes/live.tsx": $12,
     "./routes/music.jsx": $13,
     "./routes/music2.jsx": $14,
-    "./routes/recorder.tsx": $15,
-    "./routes/soundgame.tsx": $16,
+    "./routes/nightnight.tsx": $15,
+    "./routes/recorder.tsx": $16,
     "./routes/speedup.tsx": $17,
     "./routes/spin.tsx": $18,
     "./routes/testsettings.tsx": $19,
@@ -93,15 +92,14 @@ const manifest = {
     "./islands/NightNight.tsx": $$12,
     "./islands/NumberGame.jsx": $$13,
     "./islands/Recorder.tsx": $$14,
-    "./islands/SoundGame.tsx": $$15,
-    "./islands/SpeedUp.tsx": $$16,
-    "./islands/Spin.tsx": $$17,
-    "./islands/Timer4.tsx": $$18,
-    "./islands/VoiceMaker.tsx": $$19,
-    "./islands/spin.sounds.tsx": $$20,
-    "./islands/timer2.jsx": $$21,
-    "./islands/timer3.jsx": $$22,
-    "./islands/useLoopSounds.tsx": $$23,
+    "./islands/SpeedUp.tsx": $$15,
+    "./islands/Spin.tsx": $$16,
+    "./islands/Timer4.tsx": $$17,
+    "./islands/VoiceMaker.tsx": $$18,
+    "./islands/spin.sounds.tsx": $$19,
+    "./islands/timer2.jsx": $$20,
+    "./islands/timer3.jsx": $$21,
+    "./islands/useLoopSounds.tsx": $$22,
   },
   baseUrl: import.meta.url,
   config,
